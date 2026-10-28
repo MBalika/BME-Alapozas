@@ -30,7 +30,7 @@ $('#themeBtn').addEventListener('click', () => {
   r.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('alap-theme', r.dataset.theme); } catch (e) {}
 });
 { const d = $('#drawer'), b = $('#menuBtn');
-  const items = [['#bevezetes', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#felev', 'A félév'], ['#video', 'Bevezető videó']];
+  const items = [['#bevezetes', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#video', 'Bevezető videó']];
   items.forEach(([hh, t]) => el('a', { href: hh }, d, `<i style="background:#2b3440">→</i>${t}`));
   S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? U(a.u) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? ' ↗' : ''}`); });
   b.addEventListener('click', () => { const o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
@@ -399,32 +399,6 @@ const XS = (() => {
   S.forEach(s => s.apps.forEach(a => { if (a.here) return; const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); })); }
-
-/* ================= FÉLÉV ================= */
-{ const Y = 2026; const M = { 'szept.': 8, 'okt.': 9, 'nov.': 10, 'dec.': 11 };
-  const W = [
-    [1, [['szept. 9.', [1, 2], 'A félévi követelmények és a program. Az alapozás szerepe, feladata. Talajfelderítés.'], ['szept. 10.', [2], 'Talajfelderítés.']]],
-    [2, [['szept. 16.', [3], 'Síkalapok fajtái. A síkalap tervezése, folyamata, tervezési eljárások. Határállapotok.']]],
-    [3, [['szept. 23.', [3], 'Alapok tönkremeneteli mechanizmusa. Síkalapok teherbírásának számítása.', 'ED1'], ['szept. 24.', [4], 'Síkalapok állékonyságának vizsgálata.']]],
-    [4, [['szept. 30.', [3], 'Síkalapok teherbírásának számítása. 1. házi feladat kiadása.', 'HF']]],
-    [5, [['okt. 7.', [3], 'Síkalapok teherbírásának számítása. Síkalapok magassági méretezése.', 'ED2'], ['okt. 8.', [3, 4], 'Síkalapok teherbírásának és stabilitásának számítása.']]],
-    [6, [['okt. 14.', [3, 4], 'Síkalapok teherbírásának és stabilitásának számítása.'], ['okt. 18.', [], '1. házi feladat beadása.', 'HF']]],
-    [7, [['okt. 21.', [3], 'Síkalapok teherbírásának számítása.', '1. ZH'], ['okt. 22.', [5], 'Feszültség- és süllyedésszámítás.'], ['okt. 25.', [], '1. házi feladat pótbeadása.']]],
-    [8, [['okt. 28.', [5], 'Feszültség- és süllyedésszámítás.']]],
-    [9, [['nov. 4.', [5], 'Süllyedések mérése, az egyenlőtlen süllyedések okai, védekezés ellenük.'], ['nov. 5.', [6, 7], 'Alapozás kedvezőtlen talajon. Síkalapokat érő hatások.']]],
-    [10, [['nov. 11.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása. 2. házi feladat kiadása.', 'ED3']]],
-    [11, [['nov. 18.', [], 'Az óra a TDK miatt elmarad.'], ['nov. 19.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása.']]],
-    [12, [['nov. 25.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása.'], ['nov. 29.', [], '2. házi feladat beadása.', 'HF']]],
-    [13, [['dec. 2.', [8], 'Mélyalapozások.'], ['dec. 3.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása.', '2. ZH'], ['dec. 6.', [], '2. házi feladat pótbeadása.']]],
-    [14, [['dec. 9.', [9], 'Munkagödör-határolások. Talajhorgonyzás.']]]];
-  const box = $('#weeks'); const now = new Date();
-  const dt = (s) => { const [m, d] = s.split(' '); return new Date(Y, M[m], parseInt(d)); };
-  W.forEach(([w, items]) => { const d0 = dt(items[0][0]); const d1 = new Date(d0); d1.setDate(d0.getDate() + 7); const cur = now >= new Date(d0.getTime() - 2 * 864e5) && now < new Date(d1.getTime() - 2 * 864e5);
-    const c = el('div', { cls: 'wk', style: cur ? 'border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent)' : '' }, box, `<div class="wn"><span>hét</span><b>${w}</b>${cur ? '<span style="color:var(--accent-ink); font-weight:700">most</span>' : ''}</div>`);
-    const ul = el('ul', {}, c); items.forEach(([d, st, t, b]) => { const dots = st.length ? st.map(n => `<i style="--c:${cv(n)}" title="${n}. állomás">${n}</i>`).join('') : '<i class="x">·</i>';
-      el('li', {}, ul, `<span class="d">${d}</span>${dots}<span>${t}${b ? ` <span class="bdg ${b.includes('ZH') ? 'zh' : b.startsWith('ED') ? 'ed' : 'hf'}">${b === 'HF' ? 'házi' : b}</span>` : ''}</span>`); }); });
-  const parts = [['ZH1', 15, 'var(--c3)'], ['ZH2', 15, 'var(--c4)'], ['ED1', 5, 'var(--c5)'], ['ED2', 5, 'var(--c6)'], ['ED3', 5, 'var(--c7)'], ['HF', 15, 'var(--c8)'], ['vizsga', 40, '#3a424c']];
-  const wb = $('#wbar'), lg = $('#wleg'); parts.forEach(([n, p, c]) => { el('div', { style: `flex:${p}; background:${c}` }, wb, p >= 15 ? `<span class="nm">${n}&nbsp;</span>${p}&nbsp;%` : `${p}`); el('span', {}, lg, `<i style="background:${c}"></i>${n === 'HF' ? 'házi feladat' : n === 'vizsga' ? 'írásbeli vizsga' : n} – ${p} %`); }); }
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;

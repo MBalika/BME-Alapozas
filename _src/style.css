@@ -364,39 +364,6 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .ac .tx em{margin-top:auto; padding-top:8px; font:700 13px/1 var(--fb); font-style:normal; color:var(--accent-ink)}
 .ac.x .im i{background:#2b3440}
 
-/* ===== félév ===== */
-.weeks{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px}
-.wk{display:grid; grid-template-columns:62px 1fr; gap:14px; padding:14px 16px; border-radius:16px; background:var(--card); border:1px solid var(--line)}
-.wk .wn{display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:12px; background:var(--paper2); padding:8px 4px}
-.wk .wn b{font:800 22px/1 var(--fd)}
-.wk .wn span{font:500 10.5px/1.2 var(--fm); color:var(--muted); letter-spacing:.05em}
-.wk ul{margin:0; padding:0; list-style:none; display:grid; gap:7px}
-.wk li{display:flex; gap:9px; align-items:flex-start; font-size:14.5px; line-height:1.45; text-align:left}
-.wk li .d{font:500 11.5px/1.45 var(--fm); color:var(--muted); width:70px; flex:none; padding-top:1px; white-space:nowrap}
-.wk li i{width:20px; height:20px; border-radius:50%; background:var(--c); color:#fff; font:700 10.5px/20px var(--fm); text-align:center; font-style:normal; flex:none; margin-top:1px}
-.wk li i.x{background:transparent; border:1.5px dashed var(--line2); color:var(--muted); line-height:17px}
-.bdg{display:inline-block; font:700 10.5px/1 var(--fm); padding:4px 6px; border-radius:5px; margin-left:4px; vertical-align:1px; letter-spacing:.04em}
-.bdg.ed{background:#ffe066; color:#3b2e00}
-.bdg.zh{background:var(--bad); color:#fff}
-.bdg.hf{background:var(--ok); color:#fff}
-.req{display:grid; grid-template-columns:1.25fr .75fr; gap:22px; margin-top:26px}
-.req .card{padding:22px}
-.req h4{font:700 18px/1.25 var(--fd); margin:0 0 14px}
-.wbar{display:flex; height:46px; border-radius:12px; overflow:hidden; border:1px solid var(--line2)}
-.wbar > div{display:flex; align-items:center; justify-content:center; font:700 12.5px/1 var(--fm); color:#fff; border-right:2px solid var(--card); min-width:0; white-space:nowrap}
-.wbar > div:last-child{border-right:0}
-.wlab{display:flex; justify-content:space-between; margin-top:8px; font:500 12px/1.3 var(--fm); color:var(--muted)}
-.wleg{display:grid; grid-template-columns:repeat(3, auto); gap:6px 18px; margin-top:14px; font-size:14px; justify-content:start}
-.wleg span{display:flex; align-items:center; gap:8px}
-.wleg i{width:12px; height:12px; border-radius:3px; display:inline-block}
-.grades{width:100%; border-collapse:collapse; font-size:15px}
-.grades td{padding:9px 6px; border-bottom:1px solid var(--line)}
-.grades td:last-child{text-align:right; font:700 14px/1 var(--fm)}
-.grades tr:last-child td{border-bottom:0}
-.rules{margin:18px 0 0; padding:0; list-style:none; display:grid; gap:8px}
-.rules li{position:relative; padding-left:24px; font-size:15px; line-height:1.55}
-.rules li::before{content:"!"; position:absolute; left:0; top:2px; width:16px; height:16px; border-radius:50%; background:var(--accent); color:#1b1206; font:800 11px/16px var(--fb); text-align:center}
-
 /* ===== videó-szakasz ===== */
 .vsec .vgrid{display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:center}
 .vsec .vgrid p{color:#c9cdd2}
@@ -443,12 +410,11 @@ footer .fb{max-width:46ch}
 @media (max-width: 880px){
   .nav{display:none}
   .menu-btn{display:grid; margin-left:auto}
-  .cols, .cols.r55, .strata-w, .poll, .pisa, .req, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
+  .cols, .cols.r55, .strata-w, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
   .ls, .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}
   .qz{grid-template-columns:1fr}
-  .weeks{grid-template-columns:1fr}
   .rail{display:flex; overflow-x:auto; gap:4px; scroll-snap-type:x mandatory; padding-bottom:10px; margin:0 calc(-1 * var(--pad)); padding-left:var(--pad); padding-right:var(--pad); scrollbar-width:thin}
   .rail::before{left:calc(var(--pad) + 40px); right:auto; width:calc(9 * 112px - 80px)}
   .stn{flex:0 0 108px; scroll-snap-align:start}
@@ -485,17 +451,10 @@ footer .fb{max-width:46ch}
   .vs .vs-t{border-left:0}
   .quote{padding:26px 22px}
   .stp{padding:20px 18px 18px}
-  .wbar > div{font-size:10.5px}
-  .wbar .nm{display:none}
-  .wk{grid-template-columns:48px 1fr; gap:10px; padding:12px}
-  .wk li{flex-wrap:wrap; gap:3px 8px}
-  .wk li .d{width:100%}
-  .wk li > span:last-child{flex:1 1 0; min-width:0}
   .vs .vh{display:none}
   .vs .vs-s::before, .vs .vs-t::before{display:block; font:700 11px/1.4 var(--fm); letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; color:var(--muted)}
   .vs .vs-s::before{content:'Acél, beton, fa'}
   .vs .vs-t::before{content:'Talaj'; color:var(--accent-ink)}
-  .wleg{grid-template-columns:repeat(2, auto)}
   footer ol{columns:1}
   .ctl{grid-template-columns:1fr auto}
   .ctl label{grid-column:1 / -1}

@@ -383,39 +383,6 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .ac .tx em{margin-top:auto; padding-top:8px; font:700 13px/1 var(--fb); font-style:normal; color:var(--accent-ink)}
 .ac.x .im i{background:#2b3440}
 
-/* ===== félév ===== */
-.weeks{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px}
-.wk{display:grid; grid-template-columns:62px 1fr; gap:14px; padding:14px 16px; border-radius:16px; background:var(--card); border:1px solid var(--line)}
-.wk .wn{display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:12px; background:var(--paper2); padding:8px 4px}
-.wk .wn b{font:800 22px/1 var(--fd)}
-.wk .wn span{font:500 10.5px/1.2 var(--fm); color:var(--muted); letter-spacing:.05em}
-.wk ul{margin:0; padding:0; list-style:none; display:grid; gap:7px}
-.wk li{display:flex; gap:9px; align-items:flex-start; font-size:14.5px; line-height:1.45; text-align:left}
-.wk li .d{font:500 11.5px/1.45 var(--fm); color:var(--muted); width:70px; flex:none; padding-top:1px; white-space:nowrap}
-.wk li i{width:20px; height:20px; border-radius:50%; background:var(--c); color:#fff; font:700 10.5px/20px var(--fm); text-align:center; font-style:normal; flex:none; margin-top:1px}
-.wk li i.x{background:transparent; border:1.5px dashed var(--line2); color:var(--muted); line-height:17px}
-.bdg{display:inline-block; font:700 10.5px/1 var(--fm); padding:4px 6px; border-radius:5px; margin-left:4px; vertical-align:1px; letter-spacing:.04em}
-.bdg.ed{background:#ffe066; color:#3b2e00}
-.bdg.zh{background:var(--bad); color:#fff}
-.bdg.hf{background:var(--ok); color:#fff}
-.req{display:grid; grid-template-columns:1.25fr .75fr; gap:22px; margin-top:26px}
-.req .card{padding:22px}
-.req h4{font:700 18px/1.25 var(--fd); margin:0 0 14px}
-.wbar{display:flex; height:46px; border-radius:12px; overflow:hidden; border:1px solid var(--line2)}
-.wbar > div{display:flex; align-items:center; justify-content:center; font:700 12.5px/1 var(--fm); color:#fff; border-right:2px solid var(--card); min-width:0; white-space:nowrap}
-.wbar > div:last-child{border-right:0}
-.wlab{display:flex; justify-content:space-between; margin-top:8px; font:500 12px/1.3 var(--fm); color:var(--muted)}
-.wleg{display:grid; grid-template-columns:repeat(3, auto); gap:6px 18px; margin-top:14px; font-size:14px; justify-content:start}
-.wleg span{display:flex; align-items:center; gap:8px}
-.wleg i{width:12px; height:12px; border-radius:3px; display:inline-block}
-.grades{width:100%; border-collapse:collapse; font-size:15px}
-.grades td{padding:9px 6px; border-bottom:1px solid var(--line)}
-.grades td:last-child{text-align:right; font:700 14px/1 var(--fm)}
-.grades tr:last-child td{border-bottom:0}
-.rules{margin:18px 0 0; padding:0; list-style:none; display:grid; gap:8px}
-.rules li{position:relative; padding-left:24px; font-size:15px; line-height:1.55}
-.rules li::before{content:"!"; position:absolute; left:0; top:2px; width:16px; height:16px; border-radius:50%; background:var(--accent); color:#1b1206; font:800 11px/16px var(--fb); text-align:center}
-
 /* ===== videó-szakasz ===== */
 .vsec .vgrid{display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:center}
 .vsec .vgrid p{color:#c9cdd2}
@@ -462,12 +429,11 @@ footer .fb{max-width:46ch}
 @media (max-width: 880px){
   .nav{display:none}
   .menu-btn{display:grid; margin-left:auto}
-  .cols, .cols.r55, .strata-w, .poll, .pisa, .req, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
+  .cols, .cols.r55, .strata-w, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
   .ls, .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}
   .qz{grid-template-columns:1fr}
-  .weeks{grid-template-columns:1fr}
   .rail{display:flex; overflow-x:auto; gap:4px; scroll-snap-type:x mandatory; padding-bottom:10px; margin:0 calc(-1 * var(--pad)); padding-left:var(--pad); padding-right:var(--pad); scrollbar-width:thin}
   .rail::before{left:calc(var(--pad) + 40px); right:auto; width:calc(9 * 112px - 80px)}
   .stn{flex:0 0 108px; scroll-snap-align:start}
@@ -504,17 +470,10 @@ footer .fb{max-width:46ch}
   .vs .vs-t{border-left:0}
   .quote{padding:26px 22px}
   .stp{padding:20px 18px 18px}
-  .wbar > div{font-size:10.5px}
-  .wbar .nm{display:none}
-  .wk{grid-template-columns:48px 1fr; gap:10px; padding:12px}
-  .wk li{flex-wrap:wrap; gap:3px 8px}
-  .wk li .d{width:100%}
-  .wk li > span:last-child{flex:1 1 0; min-width:0}
   .vs .vh{display:none}
   .vs .vs-s::before, .vs .vs-t::before{display:block; font:700 11px/1.4 var(--fm); letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; color:var(--muted)}
   .vs .vs-s::before{content:'Acél, beton, fa'}
   .vs .vs-t::before{content:'Talaj'; color:var(--accent-ink)}
-  .wleg{grid-template-columns:repeat(2, auto)}
   footer ol{columns:1}
   .ctl{grid-template-columns:1fr auto}
   .ctl label{grid-column:1 / -1}
@@ -535,7 +494,6 @@ footer .fb{max-width:46ch}
       <a href="#bevezetes">Bevezetés</a>
       <a href="#utvonal">A tárgy útja</a>
       <a href="#temakorok">Tananyagok</a>
-      <a href="#felev">A félév</a>
       <a href="#video">Videó</a>
     </nav>
     <button class="tbtn menu-btn" id="menuBtn" aria-label="Menü" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -804,48 +762,6 @@ footer .fb{max-width:46ch}
   </div>
 </section>
 
-<!-- ================= A FÉLÉV ================= -->
-<section class="sec" id="felev">
-  <div class="wrap">
-    <div class="shead" style="--c:var(--c5)">
-      <div class="num">14</div>
-      <div class="kick">A félév menete</div>
-      <h2>Tizennégy hét, kilenc állomás</h2>
-    </div>
-    <p class="lead" style="margin:-20px 0 30px">Az előadások sorrendje követi az állomásokat. A színes jel mutatja, melyik tananyaghoz tartozik az adott óra; a jelvények az évközi számonkéréseket jelölik.</p>
-    <div class="weeks" id="weeks"></div>
-    <div class="req">
-      <div class="card">
-        <h4>Hogyan áll össze a jegy?</h4>
-        <div class="wbar" id="wbar" role="img" aria-label="A pontszám összetétele: 1. zárthelyi 15 %, 2. zárthelyi 15 %, ED1, ED2 és ED3 5–5 %, házi feladat 15 %, írásbeli vizsga 40 %"></div>
-        <div class="wlab"><span>szorgalmi időszak: 60 %</span><span>vizsga: 40 %</span></div>
-        <div class="wleg" id="wleg"></div>
-        <ul class="rules">
-          <li>A két zárthelyi eredménytelen, ha bármelyiken nem éred el külön-külön az elérhető pontszám 50 %-át.</li>
-          <li>A három ED közül legalább kettőn részt kell venni, és mindegyiken külön-külön el kell érni a 30 %-ot.</li>
-          <li>A házi feladatot 100 %-osan kell teljesíteni: addig kerül vissza, amíg minden végeredmény hibátlan. A (rész)határidőkhöz képest egy-egy hét pótbeadási lehetőség van; ennek elmulasztása az aláírás megtagadását vonja maga után.</li>
-          <li>Az elérhető pontszám 50 %-ánál gyengébb vizsgaeredmény elégtelen vizsgajegyet eredményez, a zárthelyik eredményétől függetlenül.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h4>Érdemjegy</h4>
-        <table class="grades">
-          <tr><td>jeles (5)</td><td>80 % ≤ P</td></tr>
-          <tr><td>jó (4)</td><td>70 % ≤ P &lt; 80 %</td></tr>
-          <tr><td>közepes (3)</td><td>60 % ≤ P &lt; 70 %</td></tr>
-          <tr><td>elégséges (2)</td><td>50 % ≤ P &lt; 60 %</td></tr>
-          <tr><td>elégtelen (1)</td><td>P &lt; 50 %</td></tr>
-        </table>
-        <p class="note" style="margin:16px 0 0">P: a szorgalmi időszak és a vizsga súlyozott pontszáma, százalékban.</p>
-        <div style="margin-top:18px; padding-top:16px; border-top:1px solid var(--line)">
-          <div class="kick" style="margin-bottom:6px">Előadók</div>
-          <p style="margin:0; text-align:left">Dr. Móczár Balázs<br>Dr. Kádár István</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= VIDEÓ ================= -->
 <section class="sec dark vsec" id="video">
   <div class="wrap vgrid">
@@ -918,7 +834,7 @@ $('#themeBtn').addEventListener('click', () => {
   r.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('alap-theme', r.dataset.theme); } catch (e) {}
 });
 { const d = $('#drawer'), b = $('#menuBtn');
-  const items = [['#bevezetes', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#felev', 'A félév'], ['#video', 'Bevezető videó']];
+  const items = [['#bevezetes', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#video', 'Bevezető videó']];
   items.forEach(([hh, t]) => el('a', { href: hh }, d, `<i style="background:#2b3440">→</i>${t}`));
   S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? U(a.u) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? ' ↗' : ''}`); });
   b.addEventListener('click', () => { const o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
@@ -1287,32 +1203,6 @@ const XS = (() => {
   S.forEach(s => s.apps.forEach(a => { if (a.here) return; const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); })); }
-
-/* ================= FÉLÉV ================= */
-{ const Y = 2026; const M = { 'szept.': 8, 'okt.': 9, 'nov.': 10, 'dec.': 11 };
-  const W = [
-    [1, [['szept. 9.', [1, 2], 'A félévi követelmények és a program. Az alapozás szerepe, feladata. Talajfelderítés.'], ['szept. 10.', [2], 'Talajfelderítés.']]],
-    [2, [['szept. 16.', [3], 'Síkalapok fajtái. A síkalap tervezése, folyamata, tervezési eljárások. Határállapotok.']]],
-    [3, [['szept. 23.', [3], 'Alapok tönkremeneteli mechanizmusa. Síkalapok teherbírásának számítása.', 'ED1'], ['szept. 24.', [4], 'Síkalapok állékonyságának vizsgálata.']]],
-    [4, [['szept. 30.', [3], 'Síkalapok teherbírásának számítása. 1. házi feladat kiadása.', 'HF']]],
-    [5, [['okt. 7.', [3], 'Síkalapok teherbírásának számítása. Síkalapok magassági méretezése.', 'ED2'], ['okt. 8.', [3, 4], 'Síkalapok teherbírásának és stabilitásának számítása.']]],
-    [6, [['okt. 14.', [3, 4], 'Síkalapok teherbírásának és stabilitásának számítása.'], ['okt. 18.', [], '1. házi feladat beadása.', 'HF']]],
-    [7, [['okt. 21.', [3], 'Síkalapok teherbírásának számítása.', '1. ZH'], ['okt. 22.', [5], 'Feszültség- és süllyedésszámítás.'], ['okt. 25.', [], '1. házi feladat pótbeadása.']]],
-    [8, [['okt. 28.', [5], 'Feszültség- és süllyedésszámítás.']]],
-    [9, [['nov. 4.', [5], 'Süllyedések mérése, az egyenlőtlen süllyedések okai, védekezés ellenük.'], ['nov. 5.', [6, 7], 'Alapozás kedvezőtlen talajon. Síkalapokat érő hatások.']]],
-    [10, [['nov. 11.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása. 2. házi feladat kiadása.', 'ED3']]],
-    [11, [['nov. 18.', [], 'Az óra a TDK miatt elmarad.'], ['nov. 19.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása.']]],
-    [12, [['nov. 25.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása.'], ['nov. 29.', [], '2. házi feladat beadása.', 'HF']]],
-    [13, [['dec. 2.', [8], 'Mélyalapozások.'], ['dec. 3.', [5], 'Síkalapok alatti feszültségek, síkalapok süllyedésének számítása.', '2. ZH'], ['dec. 6.', [], '2. házi feladat pótbeadása.']]],
-    [14, [['dec. 9.', [9], 'Munkagödör-határolások. Talajhorgonyzás.']]]];
-  const box = $('#weeks'); const now = new Date();
-  const dt = (s) => { const [m, d] = s.split(' '); return new Date(Y, M[m], parseInt(d)); };
-  W.forEach(([w, items]) => { const d0 = dt(items[0][0]); const d1 = new Date(d0); d1.setDate(d0.getDate() + 7); const cur = now >= new Date(d0.getTime() - 2 * 864e5) && now < new Date(d1.getTime() - 2 * 864e5);
-    const c = el('div', { cls: 'wk', style: cur ? 'border-color:var(--accent); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent)' : '' }, box, `<div class="wn"><span>hét</span><b>${w}</b>${cur ? '<span style="color:var(--accent-ink); font-weight:700">most</span>' : ''}</div>`);
-    const ul = el('ul', {}, c); items.forEach(([d, st, t, b]) => { const dots = st.length ? st.map(n => `<i style="--c:${cv(n)}" title="${n}. állomás">${n}</i>`).join('') : '<i class="x">·</i>';
-      el('li', {}, ul, `<span class="d">${d}</span>${dots}<span>${t}${b ? ` <span class="bdg ${b.includes('ZH') ? 'zh' : b.startsWith('ED') ? 'ed' : 'hf'}">${b === 'HF' ? 'házi' : b}</span>` : ''}</span>`); }); });
-  const parts = [['ZH1', 15, 'var(--c3)'], ['ZH2', 15, 'var(--c4)'], ['ED1', 5, 'var(--c5)'], ['ED2', 5, 'var(--c6)'], ['ED3', 5, 'var(--c7)'], ['HF', 15, 'var(--c8)'], ['vizsga', 40, '#3a424c']];
-  const wb = $('#wbar'), lg = $('#wleg'); parts.forEach(([n, p, c]) => { el('div', { style: `flex:${p}; background:${c}` }, wb, p >= 15 ? `<span class="nm">${n}&nbsp;</span>${p}&nbsp;%` : `${p}`); el('span', {}, lg, `<i style="background:${c}"></i>${n === 'HF' ? 'házi feladat' : n === 'vizsga' ? 'írásbeli vizsga' : n} – ${p} %`); }); }
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;
