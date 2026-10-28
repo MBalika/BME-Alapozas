@@ -85,6 +85,7 @@ main .rag, footer .rag{text-align:left!important}
 main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:balance}
 .tagline em{font-style:normal; color:var(--accent-2)}
 .hero-lead{color:#c9cdd2; max-width:58ch; margin:0 0 26px}
+.hero-lead.hl1{margin-bottom:12px}
 .ctas{display:flex; flex-wrap:wrap; gap:12px}
 .btn{display:inline-flex; align-items:center; gap:10px; padding:13px 20px; border-radius:999px; font:700 15px/1 var(--fb); text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform .15s, background .2s, border-color .2s}
 .btn:hover{transform:translateY(-1px)}
