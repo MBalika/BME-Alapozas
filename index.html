@@ -423,6 +423,11 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .ac .tx span{font:500 11.5px/1.35 var(--fm); color:var(--muted); word-break:break-all}
 .ac .tx em{margin-top:auto; padding-top:8px; font:700 13px/1 var(--fb); font-style:normal; color:var(--accent-ink)}
 .ac.x .im i{background:#2b3440}
+.ac.here{grid-column:span 2; flex-direction:row}
+.ac.here .im{flex:0 0 calc(50% - 8px); aspect-ratio:auto; min-height:100%}
+.ac.here .tx{justify-content:center; padding:18px 20px}
+.ac.here .tx b{font-size:18px}
+.ac .acd{margin:6px 0 0; font-size:14.5px; line-height:1.5; color:var(--ink2)}
 
 /* ===== videó-szakasz ===== */
 .vsec .vgrid{display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:center}
@@ -501,6 +506,8 @@ footer .fb{max-width:46ch}
   .ac .tx{padding:10px 12px 12px}
   .ac .tx b{font-size:14px}
   .ac .tx span{display:none}
+  .ac.here{flex-direction:column}
+  .ac.here .im{flex:none; aspect-ratio:16/10}
   .tiles{grid-template-columns:1fr}
   .sites{grid-template-columns:1fr 1fr; gap:10px}
   .site .st{padding:10px 12px 12px}
@@ -897,7 +904,7 @@ const S = [
   { n: 5, title: 'Síkalapok süllyedés\u00ADszámítása', rail: 'Süllyedés', q: 'Mennyit és mennyire egyenlőtlenül süllyed?', p: 'Feszültségeloszlás az alap alatt, határmélység, rétegenkénti összenyomódás – majd az, hogy mit tehetünk, ha a számított süllyedés nem engedhető meg: kisebb talpnyomás, mélyebb alapsík, talajjavítás vagy szerkezeti megoldás.', li: ['feszültséghagyma és szuperpozíció', 'süllyedéstűrés és süllyedésmérés', 'védekezés: talajcsere, tömörítés, előterhelés'], apps: [{ t: 'Síkalapok süllyedésszámítása', u: 'sikalapok-sullyedesszamitasa.vercel.app', img: 'sullyedes' }, { t: 'Védekezés a káros süllyedések ellen', u: 'vedekezesakarossullyedesekellen.vercel.app', img: 'vedekezes', sub: '5b' }], meta: ['mintapéldák, kalkulátor', '3D süllyedés-szimulátor', 'BME-felvételek'] },
   { n: 6, title: 'Alapozás kedvezőtlen altalajon', rail: 'Kedvezőtlen talaj', q: 'Mi van, ha a talaj a legnagyobb ellenfél?', p: 'Négy talaj, amelyre nem lehet „csak úgy” alapozni: a duzzadó-zsugorodó agyag, a vízzel összeroskadó lösz, a feltöltés és az összenyomódó szerves talaj. Hogyan ismerjük fel őket, és hogyan alapozzunk rajtuk?', li: ['térfogatváltozó és roskadékony talajok', 'feltöltések', 'szerves talajok, tőzeg'], apps: [{ t: 'Alapozás kedvezőtlen altalajon', u: 'kedvezotlen-altalaj.vercel.app', img: 'kedvezotlen' }], meta: ['4 animációs videó', '4 × 3D szimulátor', 'talajdetektív'] },
   { n: 7, title: 'Síkalapokat érő hatások', rail: 'Külső hatások', q: 'Mi éri még az alapot?', p: 'A statikus teher okozta süllyedést ki tudjuk számítani – de rezeghet alatta a talaj, megmozdulhat a föld, üreg nyílhat alatta, kimoshatja a víz, vagy felemelheti a fagy. Ezeket nem kiszámítani, hanem felismerni és megelőzni kell.', li: ['dinamikus hatások, földrengés', 'földalatti üregek, kimosás', 'fagyhatás'], apps: [{ t: 'Síkalapokat érő hatások', u: 'sikalapokaterohatasok.vercel.app', img: 'hatasok' }], meta: ['6 animációs videó', '20 valós eset', 'hatásdetektív'] },
-  { n: 8, title: 'Mélyalapozások', rail: 'Mély\u00ADalapozás', q: 'Mikor nem elég a síkalap?', p: 'Ha a teherbíró réteg mélyen van, ha a süllyedést korlátozni kell, vagy ha a víz kimoshatja az alapot, a terhet mélyebbre visszük: cölöpökkel, résfalakkal, kút- és szekrényalapokkal. A cölöp a terhet a talpán és a palástján adja át.', li: ['cölöpözési technológiák', 'résfal, mikrocölöp, jet grouting, mélykeverés', 'kút-, szekrény- és keszonalapozás'], apps: [{ t: 'Mélyalapozások', u: 'melyalapozasok.vercel.app', img: 'melyalapozasok' }, { t: 'CFA cölöp – 3D animáció', u: 'cfa-colop-3d.vercel.app', img: 'cfa3d', sub: 'extra' }], meta: ['3D cölöpépítő', '13 BME-felvétel', 'magyarázó animációk'] },
+  { n: 8, title: 'Mélyalapozások', rail: 'Mély\u00ADalapozás', q: 'Mikor nem elég a síkalap?', p: 'Ha a teherbíró réteg mélyen van, ha a süllyedést korlátozni kell, vagy ha a víz kimoshatja az alapot, a terhet mélyebbre visszük: cölöpökkel, résfalakkal, kút- és szekrényalapokkal. A cölöp a terhet a talpán és a palástján adja át.', li: ['cölöpözési technológiák', 'résfal, mikrocölöp, jet grouting, mélykeverés', 'kút-, szekrény- és keszonalapozás'], apps: [{ t: 'Mélyalapozások', u: 'melyalapozasok.vercel.app', img: 'melyalapozasok' }], meta: ['3D cölöpépítő', '13 BME-felvétel', 'magyarázó animációk'] },
   { n: 9, title: 'Munkatér\u00ADhatárolások', rail: 'Munkatér\u00ADhatárolás', q: 'Hogyan jutunk le biztonságosan?', p: 'Minden pince, mélygarázs és közműárok úgy kezdődik, hogy a talajt ki kell emelni – és a gödör falát meg kell tartani. A dúcolástól a szádfalon, a résfalon és a talajhorgonyon át a fagyasztott falig.', li: ['dúcolások, szádfalak, cölöpfalak', 'talajszegezés, talajhorgonyok', 'támaszfödém, víz alatti alaplemez'], apps: [{ t: 'Munkatérhatárolások', u: 'munkaterhatarolasok.vercel.app', img: 'munkater' }], meta: ['13 animációs videó', '3D gödörtervező', '100+ kérdés és állítás'] },
 ];
 const cv = (n) => `var(--c${n})`;
@@ -1324,7 +1331,7 @@ const XS = (() => {
 
 /* ================= GYŰJTŐRÁCS, LÁBLÉC ================= */
 { const box = $('#gridApps'), fl = $('#footList');
-  S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
+  S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><p class="acd">A tárgy felépítése, a kilenc állomás és az összes tananyag egy helyen – innen indul az út.</p><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); })); }
 

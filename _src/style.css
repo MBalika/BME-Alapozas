@@ -404,6 +404,11 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .ac .tx span{font:500 11.5px/1.35 var(--fm); color:var(--muted); word-break:break-all}
 .ac .tx em{margin-top:auto; padding-top:8px; font:700 13px/1 var(--fb); font-style:normal; color:var(--accent-ink)}
 .ac.x .im i{background:#2b3440}
+.ac.here{grid-column:span 2; flex-direction:row}
+.ac.here .im{flex:0 0 calc(50% - 8px); aspect-ratio:auto; min-height:100%}
+.ac.here .tx{justify-content:center; padding:18px 20px}
+.ac.here .tx b{font-size:18px}
+.ac .acd{margin:6px 0 0; font-size:14.5px; line-height:1.5; color:var(--ink2)}
 
 /* ===== videó-szakasz ===== */
 .vsec .vgrid{display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:center}
@@ -482,6 +487,8 @@ footer .fb{max-width:46ch}
   .ac .tx{padding:10px 12px 12px}
   .ac .tx b{font-size:14px}
   .ac .tx span{display:none}
+  .ac.here{flex-direction:column}
+  .ac.here .im{flex:none; aspect-ratio:16/10}
   .tiles{grid-template-columns:1fr}
   .sites{grid-template-columns:1fr 1fr; gap:10px}
   .site .st{padding:10px 12px 12px}
