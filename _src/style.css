@@ -151,21 +151,48 @@ section{position:relative}
 .mut{color:var(--muted)}
 
 /* fogalom-rétegek */
-.strata-w{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:stretch}
-.layers{display:flex; flex-direction:column; border-radius:var(--r); overflow:hidden; border:1px solid var(--line2); box-shadow:var(--shadow)}
-.layer{position:relative; text-align:left; border:0; cursor:pointer; padding:20px 22px 20px 64px; background:var(--lc); color:#1d1a15; display:flex; flex-direction:column; gap:2px; transition:filter .2s, padding .25s}
-.layer:hover{filter:brightness(1.05)}
-.layer b{font:700 17px/1.2 var(--fd)}
-.layer span{font:500 12.5px/1.3 var(--fm); opacity:.78}
-.layer::before{content:attr(data-n); position:absolute; left:20px; top:50%; transform:translateY(-50%); width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,.18); color:#fff; display:grid; place-items:center; font:700 13px/1 var(--fm)}
-.layer.on{padding-top:26px; padding-bottom:26px; box-shadow:inset 6px 0 0 #1d1a15}
-.layer[data-k="geo"]{--lc:#e2d3b3; background-image:radial-gradient(circle at 20% 30%, rgba(0,0,0,.06) 1.5px, transparent 2px); background-size:14px 14px}
-.layer[data-k="tm"]{--lc:#cfb88c; background-image:radial-gradient(circle at 60% 60%, rgba(0,0,0,.08) 1.5px, transparent 2px); background-size:11px 11px}
-.layer[data-k="tf"]{--lc:#b49b70; background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 2px, transparent 2px 9px)}
-.layer[data-k="al"]{--lc:var(--c1); background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 2px, transparent 2px 22px)}
-.ldef{padding:26px 28px; display:flex; flex-direction:column; justify-content:center}
-.ldef h4{font:700 20px/1.25 var(--fd); margin:6px 0 10px}
-.ldef p{margin:0}
+/* kőzetből talaj */
+.rk{--rk-sky:color-mix(in srgb, #8fb6d4 24%, var(--card)); --rk-rock:color-mix(in srgb, #7b828b 88%, var(--card)); --rk-water:color-mix(in srgb, #4f93c4 62%, var(--card))}
+.rk .wg-h{padding-top:12px; padding-bottom:12px}
+.rk-play{border:1px solid var(--line2); background:transparent; color:var(--ink); border-radius:999px; padding:7px 13px; font:600 12.5px/1 var(--fb); cursor:pointer}
+.rk-play:hover{background:var(--paper2)}
+#rkSvg{margin-top:14px; border-radius:14px; overflow:hidden}
+#rkSvg [data-s]{opacity:0; transition:opacity .7s ease var(--d, 0s)}
+#rkSvg [data-s].vis{opacity:1}
+.rk-sky{fill:var(--rk-sky)}
+.rk-rock{fill:var(--rk-rock); stroke:color-mix(in srgb, var(--rk-rock) 70%, #000); stroke-width:1.2}
+.rk-water{fill:var(--rk-water)}
+.rk-jt path{fill:none; stroke:rgba(0,0,0,.2); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round}
+.rk-crk path{fill:none; stroke:rgba(0,0,0,.5); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.rk-scree path{fill:color-mix(in srgb, var(--rk-rock) 85%, #000); stroke:rgba(0,0,0,.35); stroke-width:1}
+.rk-sun{fill:#f2b84b}
+.rk-ray path{stroke:#f2b84b; stroke-width:3; stroke-linecap:round}
+.rk-rain path{stroke:#4f93c4; stroke-width:2; stroke-linecap:round}
+.rk-snow path{stroke:var(--ink2); stroke-width:1.6; stroke-linecap:round; fill:none}
+.rk-lead{fill:none; stroke:var(--muted); stroke-width:1.2; stroke-dasharray:3 3}
+.rk-river{fill:none; stroke:#4f93c4; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; opacity:.9}
+.rk-gr circle{stroke:rgba(0,0,0,.35); stroke-width:.8}
+.rk-t{font:600 15px/1 var(--fb); fill:var(--ink); paint-order:stroke; stroke:var(--rk-sky); stroke-width:4px; stroke-linejoin:round}
+.rk-t.w, .rk-lab text{fill:#fff; stroke:rgba(0,0,0,.45); stroke-width:3px}
+.rk-lab text{font:700 13.5px/1 var(--fm); paint-order:stroke; stroke-linejoin:round}
+.rk-bld rect, .rk-bld path{fill:#ece5d6; stroke:#3b3f45; stroke-width:1.4; stroke-linejoin:round}
+.rk-bld path{fill:#c4663a}
+.rk-bld .rk-win path{fill:#6f93b3; stroke:none}
+.rk-fnd{fill:#9aa0a6; stroke:#3b3f45; stroke-width:1.2}
+.rk-bulb path{fill:none; stroke:var(--accent); stroke-width:1.7; stroke-dasharray:5 4}
+.rk-cap{margin-top:16px; min-height:11.5em}
+.rk-cap h4{font:700 19px/1.25 var(--fd); margin:6px 0 8px}
+.rk-cap p{margin:0}
+.rk .seg i{font-style:normal; font-family:var(--fm); font-weight:700; opacity:.65}
+.rk .seg i::after{content:" · "}
+@media (max-width: 640px){
+  .rk .seg{display:grid; grid-template-columns:repeat(4, 1fr); width:100%; box-sizing:border-box}
+  .rk .seg button{display:flex; flex-direction:column; align-items:center; gap:3px; padding:7px 2px; font-size:12px}
+  .rk .seg i::after{content:none}
+  .rk-t{font-size:23px; stroke-width:5px}
+  .rk-lab text{font-size:19px}
+  .rk-cap{min-height:0}
+}
 
 /* kölcsönhatás-labor, alaptípusok, pisa – közös widget */
 .wg{background:var(--card); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); overflow:hidden}
@@ -412,7 +439,7 @@ footer .fb{max-width:46ch}
 @media (max-width: 880px){
   .nav{display:none}
   .menu-btn{display:grid; margin-left:auto}
-  .cols, .cols.r55, .strata-w, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
+  .cols, .cols.r55, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
   .ls, .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}

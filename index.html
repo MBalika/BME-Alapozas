@@ -170,21 +170,48 @@ section{position:relative}
 .mut{color:var(--muted)}
 
 /* fogalom-rétegek */
-.strata-w{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:stretch}
-.layers{display:flex; flex-direction:column; border-radius:var(--r); overflow:hidden; border:1px solid var(--line2); box-shadow:var(--shadow)}
-.layer{position:relative; text-align:left; border:0; cursor:pointer; padding:20px 22px 20px 64px; background:var(--lc); color:#1d1a15; display:flex; flex-direction:column; gap:2px; transition:filter .2s, padding .25s}
-.layer:hover{filter:brightness(1.05)}
-.layer b{font:700 17px/1.2 var(--fd)}
-.layer span{font:500 12.5px/1.3 var(--fm); opacity:.78}
-.layer::before{content:attr(data-n); position:absolute; left:20px; top:50%; transform:translateY(-50%); width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,.18); color:#fff; display:grid; place-items:center; font:700 13px/1 var(--fm)}
-.layer.on{padding-top:26px; padding-bottom:26px; box-shadow:inset 6px 0 0 #1d1a15}
-.layer[data-k="geo"]{--lc:#e2d3b3; background-image:radial-gradient(circle at 20% 30%, rgba(0,0,0,.06) 1.5px, transparent 2px); background-size:14px 14px}
-.layer[data-k="tm"]{--lc:#cfb88c; background-image:radial-gradient(circle at 60% 60%, rgba(0,0,0,.08) 1.5px, transparent 2px); background-size:11px 11px}
-.layer[data-k="tf"]{--lc:#b49b70; background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 2px, transparent 2px 9px)}
-.layer[data-k="al"]{--lc:var(--c1); background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 2px, transparent 2px 22px)}
-.ldef{padding:26px 28px; display:flex; flex-direction:column; justify-content:center}
-.ldef h4{font:700 20px/1.25 var(--fd); margin:6px 0 10px}
-.ldef p{margin:0}
+/* kőzetből talaj */
+.rk{--rk-sky:color-mix(in srgb, #8fb6d4 24%, var(--card)); --rk-rock:color-mix(in srgb, #7b828b 88%, var(--card)); --rk-water:color-mix(in srgb, #4f93c4 62%, var(--card))}
+.rk .wg-h{padding-top:12px; padding-bottom:12px}
+.rk-play{border:1px solid var(--line2); background:transparent; color:var(--ink); border-radius:999px; padding:7px 13px; font:600 12.5px/1 var(--fb); cursor:pointer}
+.rk-play:hover{background:var(--paper2)}
+#rkSvg{margin-top:14px; border-radius:14px; overflow:hidden}
+#rkSvg [data-s]{opacity:0; transition:opacity .7s ease var(--d, 0s)}
+#rkSvg [data-s].vis{opacity:1}
+.rk-sky{fill:var(--rk-sky)}
+.rk-rock{fill:var(--rk-rock); stroke:color-mix(in srgb, var(--rk-rock) 70%, #000); stroke-width:1.2}
+.rk-water{fill:var(--rk-water)}
+.rk-jt path{fill:none; stroke:rgba(0,0,0,.2); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round}
+.rk-crk path{fill:none; stroke:rgba(0,0,0,.5); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.rk-scree path{fill:color-mix(in srgb, var(--rk-rock) 85%, #000); stroke:rgba(0,0,0,.35); stroke-width:1}
+.rk-sun{fill:#f2b84b}
+.rk-ray path{stroke:#f2b84b; stroke-width:3; stroke-linecap:round}
+.rk-rain path{stroke:#4f93c4; stroke-width:2; stroke-linecap:round}
+.rk-snow path{stroke:var(--ink2); stroke-width:1.6; stroke-linecap:round; fill:none}
+.rk-lead{fill:none; stroke:var(--muted); stroke-width:1.2; stroke-dasharray:3 3}
+.rk-river{fill:none; stroke:#4f93c4; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; opacity:.9}
+.rk-gr circle{stroke:rgba(0,0,0,.35); stroke-width:.8}
+.rk-t{font:600 15px/1 var(--fb); fill:var(--ink); paint-order:stroke; stroke:var(--rk-sky); stroke-width:4px; stroke-linejoin:round}
+.rk-t.w, .rk-lab text{fill:#fff; stroke:rgba(0,0,0,.45); stroke-width:3px}
+.rk-lab text{font:700 13.5px/1 var(--fm); paint-order:stroke; stroke-linejoin:round}
+.rk-bld rect, .rk-bld path{fill:#ece5d6; stroke:#3b3f45; stroke-width:1.4; stroke-linejoin:round}
+.rk-bld path{fill:#c4663a}
+.rk-bld .rk-win path{fill:#6f93b3; stroke:none}
+.rk-fnd{fill:#9aa0a6; stroke:#3b3f45; stroke-width:1.2}
+.rk-bulb path{fill:none; stroke:var(--accent); stroke-width:1.7; stroke-dasharray:5 4}
+.rk-cap{margin-top:16px; min-height:11.5em}
+.rk-cap h4{font:700 19px/1.25 var(--fd); margin:6px 0 8px}
+.rk-cap p{margin:0}
+.rk .seg i{font-style:normal; font-family:var(--fm); font-weight:700; opacity:.65}
+.rk .seg i::after{content:" · "}
+@media (max-width: 640px){
+  .rk .seg{display:grid; grid-template-columns:repeat(4, 1fr); width:100%; box-sizing:border-box}
+  .rk .seg button{display:flex; flex-direction:column; align-items:center; gap:3px; padding:7px 2px; font-size:12px}
+  .rk .seg i::after{content:none}
+  .rk-t{font-size:23px; stroke-width:5px}
+  .rk-lab text{font-size:19px}
+  .rk-cap{min-height:0}
+}
 
 /* kölcsönhatás-labor, alaptípusok, pisa – közös widget */
 .wg{background:var(--card); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); overflow:hidden}
@@ -431,7 +458,7 @@ footer .fb{max-width:46ch}
 @media (max-width: 880px){
   .nav{display:none}
   .menu-btn{display:grid; margin-left:auto}
-  .cols, .cols.r55, .strata-w, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
+  .cols, .cols.r55, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
   .ls, .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}
@@ -564,14 +591,60 @@ footer .fb{max-width:46ch}
           <p>Műszaki értelemben talajnak a földkéreg legkülső, laza takarórétegét nevezzük. Erre építjük a mérnöki létesítményeket, ez hat ki az alapozásukra és a viselkedésükre, és ebből készülnek a földművek. Hazánkban ezt a réteget jellemzően a szilárd kőzetek felaprózódott, mállott szemcséiből keletkezett laza üledékek alkotják.</p>
           <p>A talaj tehát maga is kőzet – üledékes kőzet –, de a teherbírása és az alakváltozási tulajdonságai jóval kedvezőtlenebbek, mint a szilárd kőzeteké. Magyarország legnagyobb részén a felszín közelében talajok és nem szilárd kőzetek vannak, ezért nálunk a talajmechanika sokkal nagyobb hangsúlyt kap, mint a kőzetmechanika.</p>
         </div>
-        <div class="strata-w" style="grid-template-columns:1fr">
-          <div class="layers" id="layers" role="tablist" aria-label="Fogalmak rétegei">
-            <button class="layer" data-k="geo" data-n="1" role="tab"><b>Geotechnika</b><span>elmélet + tapasztalat + mérés</span></button>
-            <button class="layer" data-k="tm" data-n="2" role="tab"><b>Talajmechanika</b><span>kölcsönhatás, modellek, méretezés</span></button>
-            <button class="layer" data-k="tf" data-n="3" role="tab"><b>Talajfizika</b><span>jellemzők, állapot, viselkedés</span></button>
-            <button class="layer" data-k="al" data-n="★" role="tab"><b>Alapozás</b><span>ez a tárgy</span></button>
+        <div class="wg rk" id="rk">
+          <div class="wg-h"><b>Kőzetből talaj</b><button class="rk-play" id="rkPlay" type="button">▶ végigjátszás</button></div>
+          <div class="wg-b">
+            <div class="seg" id="rkSeg" role="tablist" aria-label="A talaj keletkezésének lépései">
+              <button class="on" data-v="1" role="tab"><i>1</i>Kőzet</button><button data-v="2" role="tab"><i>2</i>Aprózódás</button><button data-v="3" role="tab"><i>3</i>Lerakódás</button><button data-v="4" role="tab"><i>4</i>Talaj</button>
+            </div>
+            <svg id="rkSvg" class="s1" viewBox="0 0 560 340" role="img" aria-label="Szemléltető metszet: a szilárd kőzetből aprózódás, mállás, szállítás és lerakódás útján laza üledék, azaz talaj lesz">
+              <defs>
+                <pattern id="rkPk" width="16" height="12" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.6" fill="rgba(0,0,0,.22)"/><circle cx="12" cy="9" r="2" fill="rgba(255,255,255,.25)"/></pattern>
+                <pattern id="rkPh" width="7" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="rgba(0,0,0,.25)"/><circle cx="5.5" cy="4.6" r=".7" fill="rgba(0,0,0,.18)"/></pattern>
+                <pattern id="rkPi" width="18" height="6" patternUnits="userSpaceOnUse"><path d="M1 3h7" stroke="rgba(0,0,0,.2)" stroke-width="1"/></pattern>
+                <pattern id="rkPa" width="24" height="5" patternUnits="userSpaceOnUse"><path d="M0 2.5h24" stroke="rgba(0,0,0,.18)" stroke-width="1"/></pattern>
+              </defs>
+              <rect class="rk-sky" width="560" height="340"/>
+              <!-- időjárás (2.) -->
+              <g data-s="2"><circle class="rk-sun" cx="500" cy="50" r="17"/><g class="rk-ray"><path d="M500 22v-9M500 87v-9M472 50h-9M537 50h-9M480 30l-6-6M526 76l-6-6M520 30l6-6M474 76l6-6"/></g>
+                <g class="rk-rain"><path d="M48 18l-6 14M74 12l-6 14M100 20l-6 14M126 14l-6 14M152 22l-6 14M62 38l-5 11M114 40l-5 11M140 44l-5 11"/></g>
+                <g class="rk-snow"><path d="M196 30h14M203 23v14M198 25l10 10M208 25l-10 10"/><path d="M24 50h10M29 45v10M25.5 46.5l7 7M32.5 46.5l-7 7"/></g>
+                <text class="rk-t" x="336" y="56" text-anchor="middle">fagy · hőingás · víz</text></g>
+              <!-- tó (1–3.) -->
+              <rect class="rk-water" data-s="123" x="200" y="210" width="360" height="130"/>
+              <!-- üledékrétegek -->
+              <g class="rk-sd" data-s="34" style="--d:0s"><rect x="200" y="278" width="360" height="62" fill="#a99a83"/><rect x="200" y="278" width="360" height="62" fill="url(#rkPk)"/></g>
+              <g class="rk-sd" data-s="34" style="--d:.45s"><rect x="200" y="250" width="360" height="28" fill="#dcc28a"/><rect x="200" y="250" width="360" height="28" fill="url(#rkPh)"/></g>
+              <g class="rk-sd" data-s="34" style="--d:.9s"><rect x="200" y="228" width="360" height="22" fill="#b79f7c"/><rect x="200" y="228" width="360" height="22" fill="url(#rkPi)"/></g>
+              <g class="rk-sd" data-s="4" style="--d:.2s"><rect x="200" y="210" width="360" height="18" fill="#8d7359"/><rect x="200" y="210" width="360" height="18" fill="url(#rkPa)"/><rect x="200" y="207" width="360" height="4" fill="#6f9a4c"/></g>
+              <!-- kőzet: hegy és medencealjzat -->
+              <path class="rk-rock" d="M0 340V168L30 140L60 104L84 80L96 68H128L146 88L170 118L196 150L218 184L232 204C300 262 370 320 440 326C490 330 530 318 560 312V340Z"/>
+              <g class="rk-jt"><path d="M20 190l26 18 8 30M64 150l18 22-6 26M110 96l-4 30 16 22M150 132l-14 26 10 24M96 240l30-14 22 18M40 280l26 12M170 250l24-12 20 14M300 300l26 10M380 330l22-8M500 330l18-10"/></g>
+              <g class="rk-crk" data-s="234"><path d="M110 70l-6 26 14 20-8 22M146 90l-10 18 8 16M176 124l-12 14 4 20M84 82l8 22-10 18M202 158l-14 10"/></g>
+              <!-- leváló tömbök (2–4.) -->
+              <g class="rk-scree" data-s="234"><path d="M206 176l12-4 6 9-10 6z"/><path d="M222 192l9-3 5 7-8 5z"/><path d="M190 168l7-5 6 6-6 6z"/><path d="M232 200l6 1 1 6-7 1z"/></g>
+              <g data-s="2"><path class="rk-lead" d="M240 186L286 164"/><text class="rk-t" x="290" y="162">leváló tömbök</text></g>
+              <!-- folyó és szállítás (3.) -->
+              <g data-s="3"><path class="rk-river" d="M140 84L166 116L192 150L214 182L234 206L262 212"/>
+                <g class="rk-gr" id="rkGr"></g>
+                <text class="rk-t" x="206" y="118">szállítás</text><text class="rk-t" x="300" y="196">lerakódás</text></g>
+              <!-- címkék -->
+              <text class="rk-t w" x="70" y="262" text-anchor="middle">szilárd kőzet</text>
+              <g data-s="12"><text class="rk-t w" x="400" y="264" text-anchor="middle">tó · medence</text></g>
+              <g class="rk-lab" data-s="34"><text x="470" y="309" text-anchor="middle">kavics</text><text x="470" y="269" text-anchor="middle">homok</text><text x="470" y="244" text-anchor="middle">iszap</text></g>
+              <g class="rk-lab" data-s="4"><text x="470" y="223" text-anchor="middle">agyag</text></g>
+              <!-- építmények (4.) -->
+              <g data-s="4">
+                <g class="rk-bld"><rect x="99" y="42" width="26" height="26"/><path d="M95 44L112 30L129 44Z"/></g>
+                <text class="rk-t" x="112" y="22" text-anchor="middle">kőzeten</text>
+                <g class="rk-bld"><rect x="340" y="112" width="52" height="98"/><g class="rk-win"><path d="M348 124h8v8h-8zM362 124h8v8h-8zM376 124h8v8h-8zM348 142h8v8h-8zM362 142h8v8h-8zM376 142h8v8h-8zM348 160h8v8h-8zM362 160h8v8h-8zM376 160h8v8h-8zM348 178h8v8h-8zM362 178h8v8h-8zM376 178h8v8h-8z"/></g></g>
+                <rect class="rk-fnd" x="332" y="206" width="68" height="12"/>
+                <g class="rk-bulb"><path d="M332 218C334 246 398 246 400 218"/><path d="M322 218C324 268 408 268 410 218"/><path d="M312 218C314 290 418 290 420 218"/></g>
+                <text class="rk-t" x="366" y="100" text-anchor="middle">talajon</text>
+              </g>
+            </svg>
+            <div class="rk-cap" id="rkCap" aria-live="polite"></div>
           </div>
-          <div class="card ldef" id="ldef" aria-live="polite"></div>
         </div>
       </div>
     </div>
@@ -852,14 +925,26 @@ $('#themeBtn').addEventListener('click', () => {
   S.forEach(s => { const a = el('a', { cls: 'stn' + (s.n === 1 ? ' here' : ''), href: '#st' + s.n, style: `--c:${cv(s.n)}` }, rail);
     el('span', { cls: 'dot' }, a, String(s.n)); el('b', {}, a, s.rail); el('small', {}, a, s.n === 1 ? 'itt vagy most' : (s.apps.filter(x => !x.here).length > 1 ? s.apps.filter(x => !x.here).length + ' tananyag' : 'tananyag ↗')); }); }
 
-/* ================= 1 · FOGALMAK RÉTEGEI ================= */
-{ const D = {
-    geo: ['Geotechnika', 'Az elmélet a gyakorlatban: a talajmechanika eredményei, kiegészítve tapasztalattal, megfigyeléssel és helyszíni méréssel. Ezek összessége alkotja a geotechnikát – ez ad irányt a tervezésnek és a kivitelezésnek is.'],
-    tm: ['Talajmechanika', 'A vizsgálatok eredményeiből modelleket épít, amelyekkel a talajtömegek viselkedése és az építmény–talaj kölcsönhatás elméletileg vizsgálható. Minőségileg és mennyiségileg foglalkozik az épület és az altalaj kapcsolatával, és módszert ad az alapok gazdaságos és biztonságos méretezéséhez.'],
-    tf: ['Talajfizika', 'A talajok osztályozására és állapotuk minősítésére alkalmas tulajdonságokkal, azok meghatározási módszereivel és a talaj viselkedésével foglalkozik: milyen a talaj, és hogyan reagál a terhelésre.'],
-    al: ['Alapozás – ez a tárgy', 'A geotechnika egyik fő területe: hogyan közvetítsük a felszerkezet terheit az altalajra károsodás nélkül. Ebben a tárgyban a síkalapoktól a mélyalapokon át a munkagödrökig jutunk el.'] };
-  const box = $('#ldef'); const set = (k) => { $$('#layers .layer').forEach(b => { const on = b.dataset.k === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); }); box.innerHTML = `<div class="kick">Fogalom</div><h4>${D[k][0]}</h4><p>${D[k][1]}</p>`; };
-  $$('#layers .layer').forEach(b => b.addEventListener('click', () => set(b.dataset.k))); set('al'); }
+/* ================= 1 · KŐZETBŐL TALAJ ================= */
+{ const svg = $('#rkSvg'), cap = $('#rkCap'), seg = $('#rkSeg'), play = $('#rkPlay');
+  const T = {
+    1: ['Szilárd kőzet', 'A kiindulás a szilárd kőzet: nagy a szilárdsága, és terhelés hatására alig nyomódik össze. Ahol a kőzet a felszín közelében van, ott az alapozás tervezésében a kőzetmechanika kerül előtérbe.'],
+    2: ['Aprózódás és mállás', 'A felszínre került kőzetet az időjárás lassan szétbontja. Az aprózódás (fagy, hőingás) mechanikusan darabolja: repedések nyílnak, tömbök válnak le. A mállás (víz, kémiai hatások) az ásványi összetételét is átalakítja, és egyre finomabb szemcsék keletkeznek.'],
+    3: ['Szállítás és lerakódás', 'A szemcséket a víz, a szél és a gravitáció elszállítja, majd a medencékben rétegről rétegre lerakja. Ahol a víz lelassul, előbb a durva szemcsék ülepednek le, a csendes vízben pedig a finomak: kavics, homok, iszap, agyag. Magyarország síkvidékein is ilyen, víz és szél által lerakott laza üledékek borítják a felszínt.'],
+    4: ['Laza üledék: a talaj', 'A lerakódott laza üledék a talaj. Maga is kőzet – üledékes kőzet –, de a szemcséi nincsenek szilárdan összecementálva, a hézagokat víz és levegő tölti ki. Ezért kisebb a teherbírása és nagyobb az alakváltozása, mint a szilárd kőzeté. Ami rá épül, az süllyed: az alapozás feladata, hogy ez biztonságos és károsodásmentes legyen.'] };
+  let cur = 1, tm = null;
+  const set = (k) => { cur = k; svg.querySelectorAll('[data-s]').forEach(g => g.classList.toggle('vis', g.dataset.s.includes(String(k))));
+    seg.querySelectorAll('button').forEach(b => { const on = +b.dataset.v === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+    cap.innerHTML = `<div class="kick">${k}. lépés</div><h4>${T[k][0]}</h4><p>${T[k][1]}</p>`; };
+  const stop = () => { clearInterval(tm); tm = null; play.textContent = '▶ végigjátszás'; };
+  seg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { stop(); set(+b.dataset.v); }));
+  play.addEventListener('click', () => { if (tm) return stop(); set(1); play.textContent = '■ megállítás'; tm = setInterval(() => { if (cur >= 4) return stop(); set(cur + 1); }, 4500); });
+  if (!reduce) { const g = $('#rkGr'), NS = 'http://www.w3.org/2000/svg', P0 = 'M140 84L166 116L192 150L214 182L234 206';
+    [[4.2, '#a99a83', P0 + 'L250 214L262 262', 2.6], [2.8, '#dcc28a', P0 + 'L292 218L318 252', 3.2], [1.9, '#b79f7c', P0 + 'L360 220L420 238', 3.8]].forEach(([r, c, d, dur], i) => {
+      for (let j = 0; j < 3; j++) { const ci = document.createElementNS(NS, 'circle'); ci.setAttribute('r', r); ci.setAttribute('fill', c);
+        const am = document.createElementNS(NS, 'animateMotion'); am.setAttribute('path', d); am.setAttribute('dur', dur + 's'); am.setAttribute('repeatCount', 'indefinite'); am.setAttribute('begin', (-(j * dur / 3 + i * 0.37)).toFixed(2) + 's');
+        ci.appendChild(am); g.appendChild(ci); } }); }
+  set(1); }
 
 /* ================= 1 · KÖLCSÖNHATÁS-LABOR ================= */
 { const svg = $('#kshSvg'), N = $('#kshN'); let soil = 0;

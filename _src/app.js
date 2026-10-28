@@ -45,14 +45,26 @@ $('#themeBtn').addEventListener('click', () => {
   S.forEach(s => { const a = el('a', { cls: 'stn' + (s.n === 1 ? ' here' : ''), href: '#st' + s.n, style: `--c:${cv(s.n)}` }, rail);
     el('span', { cls: 'dot' }, a, String(s.n)); el('b', {}, a, s.rail); el('small', {}, a, s.n === 1 ? 'itt vagy most' : (s.apps.filter(x => !x.here).length > 1 ? s.apps.filter(x => !x.here).length + ' tananyag' : 'tananyag ↗')); }); }
 
-/* ================= 1 · FOGALMAK RÉTEGEI ================= */
-{ const D = {
-    geo: ['Geotechnika', 'Az elmélet a gyakorlatban: a talajmechanika eredményei, kiegészítve tapasztalattal, megfigyeléssel és helyszíni méréssel. Ezek összessége alkotja a geotechnikát – ez ad irányt a tervezésnek és a kivitelezésnek is.'],
-    tm: ['Talajmechanika', 'A vizsgálatok eredményeiből modelleket épít, amelyekkel a talajtömegek viselkedése és az építmény–talaj kölcsönhatás elméletileg vizsgálható. Minőségileg és mennyiségileg foglalkozik az épület és az altalaj kapcsolatával, és módszert ad az alapok gazdaságos és biztonságos méretezéséhez.'],
-    tf: ['Talajfizika', 'A talajok osztályozására és állapotuk minősítésére alkalmas tulajdonságokkal, azok meghatározási módszereivel és a talaj viselkedésével foglalkozik: milyen a talaj, és hogyan reagál a terhelésre.'],
-    al: ['Alapozás – ez a tárgy', 'A geotechnika egyik fő területe: hogyan közvetítsük a felszerkezet terheit az altalajra károsodás nélkül. Ebben a tárgyban a síkalapoktól a mélyalapokon át a munkagödrökig jutunk el.'] };
-  const box = $('#ldef'); const set = (k) => { $$('#layers .layer').forEach(b => { const on = b.dataset.k === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); }); box.innerHTML = `<div class="kick">Fogalom</div><h4>${D[k][0]}</h4><p>${D[k][1]}</p>`; };
-  $$('#layers .layer').forEach(b => b.addEventListener('click', () => set(b.dataset.k))); set('al'); }
+/* ================= 1 · KŐZETBŐL TALAJ ================= */
+{ const svg = $('#rkSvg'), cap = $('#rkCap'), seg = $('#rkSeg'), play = $('#rkPlay');
+  const T = {
+    1: ['Szilárd kőzet', 'A kiindulás a szilárd kőzet: nagy a szilárdsága, és terhelés hatására alig nyomódik össze. Ahol a kőzet a felszín közelében van, ott az alapozás tervezésében a kőzetmechanika kerül előtérbe.'],
+    2: ['Aprózódás és mállás', 'A felszínre került kőzetet az időjárás lassan szétbontja. Az aprózódás (fagy, hőingás) mechanikusan darabolja: repedések nyílnak, tömbök válnak le. A mállás (víz, kémiai hatások) az ásványi összetételét is átalakítja, és egyre finomabb szemcsék keletkeznek.'],
+    3: ['Szállítás és lerakódás', 'A szemcséket a víz, a szél és a gravitáció elszállítja, majd a medencékben rétegről rétegre lerakja. Ahol a víz lelassul, előbb a durva szemcsék ülepednek le, a csendes vízben pedig a finomak: kavics, homok, iszap, agyag. Magyarország síkvidékein is ilyen, víz és szél által lerakott laza üledékek borítják a felszínt.'],
+    4: ['Laza üledék: a talaj', 'A lerakódott laza üledék a talaj. Maga is kőzet – üledékes kőzet –, de a szemcséi nincsenek szilárdan összecementálva, a hézagokat víz és levegő tölti ki. Ezért kisebb a teherbírása és nagyobb az alakváltozása, mint a szilárd kőzeté. Ami rá épül, az süllyed: az alapozás feladata, hogy ez biztonságos és károsodásmentes legyen.'] };
+  let cur = 1, tm = null;
+  const set = (k) => { cur = k; svg.querySelectorAll('[data-s]').forEach(g => g.classList.toggle('vis', g.dataset.s.includes(String(k))));
+    seg.querySelectorAll('button').forEach(b => { const on = +b.dataset.v === k; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+    cap.innerHTML = `<div class="kick">${k}. lépés</div><h4>${T[k][0]}</h4><p>${T[k][1]}</p>`; };
+  const stop = () => { clearInterval(tm); tm = null; play.textContent = '▶ végigjátszás'; };
+  seg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { stop(); set(+b.dataset.v); }));
+  play.addEventListener('click', () => { if (tm) return stop(); set(1); play.textContent = '■ megállítás'; tm = setInterval(() => { if (cur >= 4) return stop(); set(cur + 1); }, 4500); });
+  if (!reduce) { const g = $('#rkGr'), NS = 'http://www.w3.org/2000/svg', P0 = 'M140 84L166 116L192 150L214 182L234 206';
+    [[4.2, '#a99a83', P0 + 'L250 214L262 262', 2.6], [2.8, '#dcc28a', P0 + 'L292 218L318 252', 3.2], [1.9, '#b79f7c', P0 + 'L360 220L420 238', 3.8]].forEach(([r, c, d, dur], i) => {
+      for (let j = 0; j < 3; j++) { const ci = document.createElementNS(NS, 'circle'); ci.setAttribute('r', r); ci.setAttribute('fill', c);
+        const am = document.createElementNS(NS, 'animateMotion'); am.setAttribute('path', d); am.setAttribute('dur', dur + 's'); am.setAttribute('repeatCount', 'indefinite'); am.setAttribute('begin', (-(j * dur / 3 + i * 0.37)).toFixed(2) + 's');
+        ci.appendChild(am); g.appendChild(ci); } }); }
+  set(1); }
 
 /* ================= 1 · KÖLCSÖNHATÁS-LABOR ================= */
 { const svg = $('#kshSvg'), N = $('#kshN'); let soil = 0;
