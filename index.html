@@ -96,15 +96,18 @@ main .rag, footer .rag{text-align:left!important}
 .hero{position:relative; background:var(--night); color:var(--nink); overflow:hidden; isolation:isolate}
 .hero::before{content:""; position:absolute; inset:-20% -10% auto; height:120%; background:radial-gradient(60% 50% at 18% 30%, rgba(232,149,42,.22), transparent 70%), radial-gradient(50% 45% at 85% 25%, rgba(46,115,201,.22), transparent 70%), radial-gradient(40% 40% at 60% 90%, rgba(178,58,147,.16), transparent 70%); z-index:-1}
 .hero .strata{position:absolute; left:0; right:0; bottom:0; height:120px; z-index:-1; opacity:.9}
-.hero .wrap{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:56px; align-items:center; padding-top:72px; padding-bottom:64px}
+.hero .wrap{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"t v" "x x" "c c"; column-gap:56px; row-gap:30px; align-items:center; padding-top:72px; padding-bottom:64px}
+.h-t{grid-area:t} .h-v{grid-area:v} .h-txt{grid-area:x; columns:2; column-gap:56px} .h-cs{grid-area:c}
+.h-txt .hero-lead{margin:0 0 12px} .h-txt .hero-lead:last-child{margin-bottom:0}
+.h-cs{display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:56px; align-items:center; padding-top:26px; border-top:1px solid var(--nline)}
+.h-cs .ctas{flex-wrap:nowrap}
 .kick{font:500 12.5px/1.4 var(--fm); letter-spacing:.12em; text-transform:uppercase; color:var(--accent)}
 .hero .kick{color:var(--accent-2)}
 .hero h1{font:800 clamp(42px, 6.4vw, 94px)/.92 var(--fd); letter-spacing:-.025em; margin:18px 0 18px; background:linear-gradient(180deg,#fff 30%, #d9cfbd); -webkit-background-clip:text; background-clip:text; color:transparent}
-.tagline{font:600 clamp(20px, 2.4vw, 28px)/1.3 var(--fb); margin:0 0 16px; color:#fff; max-width:32ch}
+.tagline{font:600 clamp(20px, 2.4vw, 28px)/1.3 var(--fb); margin:0; color:#fff}
 main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:balance}
 .tagline em{font-style:normal; color:var(--accent-2)}
-.hero-lead{color:#c9cdd2; max-width:58ch; margin:0 0 26px}
-.hero-lead.hl1{margin-bottom:12px}
+.hero-lead{color:#c9cdd2}
 .ctas{display:flex; flex-wrap:wrap; gap:12px}
 .btn{display:inline-flex; align-items:center; gap:10px; padding:13px 20px; border-radius:999px; font:700 15px/1 var(--fb); text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform .15s, background .2s, border-color .2s}
 .btn:hover{transform:translateY(-1px)}
@@ -115,9 +118,9 @@ main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:bal
 .btn.line{border-color:var(--line2); color:var(--ink); background:transparent}
 .btn.line:hover{background:var(--paper2)}
 .btn svg{width:16px; height:16px; flex:none}
-.stats{display:grid; grid-template-columns:repeat(4, auto); gap:18px 30px; margin-top:34px; padding-top:22px; border-top:1px solid var(--nline); justify-content:start}
+.stats{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:18px 24px}
 .stat b{display:block; font:700 clamp(24px, 2.6vw, 32px)/1 var(--fd); color:#fff}
-.stat span{font:500 12.5px/1.35 var(--fm); color:var(--nmuted); letter-spacing:.04em}
+.stat span{display:block; margin-top:6px; font:500 12.5px/1.35 var(--fm); color:var(--nmuted); letter-spacing:.04em}
 .vcard{position:relative; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,.14); box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.3); cursor:pointer; background:#000; aspect-ratio:16/9; display:block; width:100%; padding:0}
 .vcard img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease}
 .vcard:hover img{transform:scale(1.035)}
@@ -154,7 +157,7 @@ section{position:relative}
 .shead .num{font:800 clamp(64px, 9vw, 120px)/.8 var(--fd); color:transparent; -webkit-text-stroke:2px var(--c, var(--accent)); letter-spacing:-.04em; grid-row:span 2}
 .shead h2{font:700 clamp(26px, 3.4vw, 44px)/1.12 var(--fd); margin:4px 0 0; letter-spacing:-.01em; max-width:24ch}
 .shead .kick{align-self:end}
-.lead{font-size:clamp(17px, 1.6vw, 19.5px); line-height:1.62; color:var(--ink2); max-width:68ch}
+.lead{font-size:clamp(17px, 1.6vw, 19.5px); line-height:1.62; color:var(--ink2)}
 .dark .lead, .journey .lead{color:#c9cdd2}
 .blk{margin-top:76px}
 .blk:first-of-type{margin-top:0}
@@ -165,6 +168,21 @@ section{position:relative}
 .cols.r55{grid-template-columns:.9fr 1.1fr}
 .prose p{margin:0 0 14px}
 .prose p:last-child{margin-bottom:0}
+.prose.two{columns:2; column-gap:44px}
+/* kétoszlopos widgetek: ábra balra, kezelők és szöveg jobbra – egyforma magas oszlopok */
+.rk-b, .ksh-b, .ft-b{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:26px; align-items:center}
+.ksh-side .seg{display:grid; grid-template-columns:1fr; width:100%; box-sizing:border-box}
+.ksh-side .seg button{text-align:left}
+.ksh-side .reads{grid-template-columns:1fr 1fr}
+.ft-side p{margin:0}
+.ft-side .go{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px}
+.ft-b{align-items:stretch}
+.ft-side{display:flex; flex-direction:column; justify-content:center; padding:22px 24px; border-radius:14px; background:var(--paper); border:1px solid var(--line)}
+.rk-b{align-items:stretch}
+.rk-side{display:flex; flex-direction:column}
+.duo{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; align-items:stretch}
+.duo .quote{display:flex; flex-direction:column; justify-content:center}
+.duo-p{display:flex; flex-direction:column; justify-content:center; padding:28px 32px; border-radius:22px; background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow)}
 .card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
 .note{font-size:14.5px; color:var(--muted); line-height:1.55}
 .mut{color:var(--muted)}
@@ -175,7 +193,8 @@ section{position:relative}
 .rk .wg-h{padding-top:12px; padding-bottom:12px}
 .rk-play{border:1px solid var(--line2); background:transparent; color:var(--ink); border-radius:999px; padding:7px 13px; font:600 12.5px/1 var(--fb); cursor:pointer}
 .rk-play:hover{background:var(--paper2)}
-#rkSvg{margin-top:14px; border-radius:14px; overflow:hidden}
+#rkSvg{border-radius:14px; overflow:hidden}
+.rk .seg{display:grid; grid-template-columns:1fr 1fr; width:100%; box-sizing:border-box}
 #rkSvg [data-s]{opacity:0; transition:opacity .7s ease var(--d, 0s)}
 #rkSvg [data-s].vis{opacity:1}
 .rk-sky{fill:var(--rk-sky)}
@@ -199,7 +218,7 @@ section{position:relative}
 .rk-bld .rk-win path{fill:#6f93b3; stroke:none}
 .rk-fnd{fill:#9aa0a6; stroke:#3b3f45; stroke-width:1.2}
 .rk-bulb path{fill:none; stroke:var(--accent); stroke-width:1.7; stroke-dasharray:5 4}
-.rk-cap{margin-top:16px; min-height:11.5em}
+.rk-cap{margin-top:14px; flex:1; padding:18px 20px; border-radius:14px; background:var(--paper); border:1px solid var(--line)}
 .rk-cap h4{font:700 19px/1.25 var(--fd); margin:6px 0 8px}
 .rk-cap p{margin:0}
 .rk .seg i{font-style:normal; font-family:var(--fm); font-weight:700; opacity:.65}
@@ -248,7 +267,7 @@ input[type=range]{width:100%; accent-color:var(--accent); height:28px}
 .vs .ico{width:26px; height:26px; flex:none}
 
 /* idézet-kártya */
-.quote{position:relative; padding:34px 36px 30px 36px; border-radius:22px; background:var(--night); color:var(--nink); overflow:hidden}
+.quote{position:relative; padding:34px 36px 30px 36px; border-radius:22px; background:var(--night); color:var(--nink); overflow:hidden; border:1px solid var(--nline)}
 .quote::after{content:""; position:absolute; right:-40px; bottom:-60px; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle, rgba(232,149,42,.3), transparent 70%)}
 .quote p{font:600 clamp(19px, 2vw, 24px)/1.45 var(--fb); margin:0; position:relative; z-index:1; text-align:left}
 .quote .kick{display:block; margin-bottom:12px}
@@ -265,7 +284,8 @@ input[type=range]{width:100%; accent-color:var(--accent); height:28px}
 .pill:hover{border-color:var(--line2); background:var(--card)}
 
 /* határállapotok */
-.ls{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+.ls{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.ls .lsg:first-child{grid-row:span 2}
 .lsg{border-radius:18px; padding:20px; border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow)}
 .lsg h4{font:700 13px/1.2 var(--fm); text-transform:uppercase; letter-spacing:.08em; margin:0 0 4px; color:var(--muted)}
 .lsg h5{font:700 18px/1.25 var(--fd); margin:0 0 12px}
@@ -281,8 +301,8 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .why .card b{display:block; font:700 17px/1.3 var(--fb); margin:10px 0 6px}
 .why .card p{margin:0; font-size:15px; line-height:1.55; color:var(--ink2)}
 .why .ix{font:800 30px/1 var(--fd); color:var(--c3)}
-.harder{margin-top:16px; display:grid; grid-template-columns:auto 1fr 1fr; gap:16px; align-items:stretch}
-.harder .hh{display:flex; align-items:center; padding:0 6px; font:700 18px/1.3 var(--fd); max-width:12ch}
+.harder{margin-top:16px; display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; align-items:stretch}
+.harder .hh{display:flex; align-items:center; padding:20px 22px; font:700 19px/1.3 var(--fd); background:color-mix(in srgb, var(--c3) 9%, var(--card))}
 .harder .card{padding:20px; font-size:15.5px}
 
 /* kvíz-kártyák */
@@ -316,21 +336,21 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .reveal-all.on{display:block}
 
 /* poll */
-.poll{display:grid; grid-template-columns:1fr 1.1fr; gap:24px; align-items:start}
-.popts{display:grid; gap:10px}
+.poll{display:block}
+.popts{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px}
 .popts button{display:flex; align-items:center; gap:14px; text-align:left; border:1px solid var(--line2); border-radius:14px; background:var(--card); padding:14px 16px; cursor:pointer; font-weight:700; position:relative; overflow:hidden}
 .popts button i{font:700 13px/1 var(--fm); font-style:normal; width:30px; height:30px; border-radius:8px; display:grid; place-items:center; background:var(--paper2); flex:none}
 .popts button .bar{position:absolute; left:0; top:0; bottom:0; background:color-mix(in srgb, var(--c1) 22%, transparent); width:0; transition:width .7s ease; z-index:0}
 .popts button > *:not(.bar){position:relative; z-index:1}
 .popts button.pick{border-color:var(--accent)}
 .pans{display:none}
-.pans.on{display:block}
+.pans.on{display:block; margin-top:16px}
 
 /* pisa */
 .pisa{display:grid; grid-template-columns:.95fr 1.05fr; gap:0}
 .pisa .pv{background:linear-gradient(180deg, #cfe4f2, #eef4f2 70%); position:relative; min-height:420px}
 .pisa .pv svg{position:absolute; inset:0; width:100%; height:100%}
-.pisa .pc{padding:24px 26px; display:flex; flex-direction:column; gap:14px}
+.pisa .pc{padding:24px 26px; display:flex; flex-direction:column; justify-content:center; gap:14px}
 .guess{display:flex; align-items:baseline; gap:10px}
 .guess output{font:800 44px/1 var(--fd)}
 .guess span{font:600 16px/1 var(--fb); color:var(--muted)}
@@ -442,9 +462,11 @@ footer .fb{max-width:46ch}
 @media (max-width: 1100px){
   :root{--pad:22px}
   .hero h1{font-size:clamp(44px, 12vw, 108px)}
-  .hero .wrap{grid-template-columns:1fr; gap:36px; padding-top:48px}
+  .hero .wrap{grid-template-columns:1fr; grid-template-areas:"t" "v" "x" "c"; row-gap:30px; padding-top:48px}
+  .h-txt{columns:1}
+  .h-cs{grid-template-columns:1fr; row-gap:24px}
+  .h-cs .ctas{flex-wrap:wrap}
   .vcard{max-width:760px}
-  .stats{grid-template-columns:repeat(4, auto)}
   .nav a{padding:9px 9px; font-size:13.5px}
   .grid-apps{grid-template-columns:repeat(3, 1fr)}
   .sites{grid-template-columns:repeat(2, 1fr)}
@@ -458,8 +480,11 @@ footer .fb{max-width:46ch}
 @media (max-width: 880px){
   .nav{display:none}
   .menu-btn{display:grid; margin-left:auto}
-  .cols, .cols.r55, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
-  .ls, .why{grid-template-columns:1fr}
+  .cols, .cols.r55, .pisa, .vsec .vgrid, footer .fg, .rk-b, .ksh-b, .ft-b, .duo, .ls{grid-template-columns:1fr}
+  .prose.two{columns:1}
+  .ls .lsg:first-child{grid-row:auto}
+  .popts{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}
   .qz{grid-template-columns:1fr}
@@ -480,7 +505,7 @@ footer .fb{max-width:46ch}
   .sec{padding:68px 0}
   .blk{margin-top:58px}
   .brand small{display:none}
-  .stats{grid-template-columns:repeat(2, auto); gap:16px 26px}
+  .stats{grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px 26px}
   .grid-apps{grid-template-columns:1fr 1fr; gap:10px}
   .ac .tx{padding:10px 12px 12px}
   .ac .tx b{font-size:14px}
@@ -535,13 +560,22 @@ footer .fb{max-width:46ch}
 <!-- ================= HŐS ================= -->
 <section class="hero">
   <svg class="strata" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C240 30 420 52 720 40 S1200 26 1440 38 V120 H0Z" fill="#141b22"/><path d="M0 66 C300 58 520 76 820 64 S1240 54 1440 64 V120 H0Z" fill="#18212b"/><path d="M0 92 C260 86 600 100 900 90 S1260 84 1440 92 V120 H0Z" fill="#0c1015"/></svg>
-  <div class="wrap">
-    <div>
+  <div class="wrap hgrid">
+    <div class="h-t">
       <div class="kick">BME Építőmérnöki Kar · Geotechnika és Mérnökgeológia Tanszék</div>
       <h1>Alapozás</h1>
       <p class="tagline">Minden építmény talajon/&#8288;kőzeten áll a Föld bolygón. Ez a tárgy megmutatja, <em>hogyan</em> kell a kapcsolatot biztonságosan létrehozni.</p>
-      <p class="hero-lead hl1">Ez az oldal bemutatja, miről is szól a tárgy. Innen indul az út a talaj megismerésétől (felderítésétől) a síkalapokon és a mélyalapokon át a munkagödrökig – kilenc, egymásra épülő állomáson. Minden állomáshoz önálló, interaktív tananyag tartozik: 3D szimulátorokkal, animációs videókkal, kalkulátorokkal és kvízekkel.</p>
+    </div>
+    <button class="vcard h-v" data-video aria-label="A bevezető animáció lejátszása">
+      <img src="img/poster-bevezeto.jpg" alt="A bevezető animáció képe: két épület egy elmetszett talajtömbön, az egyik síkalapon, a másik cölöpökön és résfalas mélypincén" width="1600" height="900">
+      <span class="play"><svg viewBox="0 0 24 24" fill="#1b1206"><path d="M6 4v16l14-8z"/></svg></span>
+      <span class="vcap"><span><b>A tárgy útja – bevezető animáció</b><span>kilenc lépés a talajtól az épületig</span></span><i>2:54</i></span>
+    </button>
+    <div class="h-txt">
+      <p class="hero-lead">Ez az oldal bemutatja, miről is szól a tárgy. Innen indul az út a talaj megismerésétől (felderítésétől) a síkalapokon és a mélyalapokon át a munkagödrökig – kilenc, egymásra épülő állomáson. Minden állomáshoz önálló, interaktív tananyag tartozik: 3D szimulátorokkal, animációs videókkal, kalkulátorokkal és kvízekkel.</p>
       <p class="hero-lead">A tárgy elsősorban a síkalapozásokra fókuszál, a mélyalapozásokról és a munkagödör-határolásokról részletesebben majd a „Földalatti műtárgyak, mélyalapozás” c.&nbsp;tárgyban hallhattok – aki olyan specializációt választ.</p>
+    </div>
+    <div class="h-cs">
       <div class="ctas">
         <button class="btn pri" data-video><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>A tárgy 3 percben</button>
         <a class="btn ghost" href="#bevezetes">Indulás az elejéről</a>
@@ -554,11 +588,6 @@ footer .fb{max-width:46ch}
         <div class="stat"><b>400+</b><span>kvízkérdés és állítás</span></div>
       </div>
     </div>
-    <button class="vcard" data-video aria-label="A bevezető animáció lejátszása">
-      <img src="img/poster-bevezeto.jpg" alt="A bevezető animáció képe: két épület egy elmetszett talajtömbön, az egyik síkalapon, a másik cölöpökön és résfalas mélypincén" width="1600" height="900">
-      <span class="play"><svg viewBox="0 0 24 24" fill="#1b1206"><path d="M6 4v16l14-8z"/></svg></span>
-      <span class="vcap"><span><b>A tárgy útja – bevezető animáció</b><span>kilenc lépés a talajtól az épületig</span></span><i>2:54</i></span>
-    </button>
   </div>
 </section>
 
@@ -585,64 +614,62 @@ footer .fb{max-width:46ch}
 
     <!-- A · a talaj -->
     <div class="blk">
-      <div class="cols r55">
-        <div class="prose">
-          <p class="lead">Az eddigi tanulmányaid során megismerted a talajmechanika alapjait, a földművek és a földmunkák tervezését és kivitelezését. Ebben a tárgyban mindezt egyetlen kérdésre fordítjuk le: hogyan adjuk át egy építmény terheit a talajnak úgy, hogy közben semmi ne károsodjon?</p>
-          <p>Műszaki értelemben talajnak a földkéreg legkülső, laza takarórétegét nevezzük. Erre építjük a mérnöki létesítményeket, ez hat ki az alapozásukra és a viselkedésükre, és ebből készülnek a földművek. Hazánkban ezt a réteget jellemzően a szilárd kőzetek felaprózódott, mállott szemcséiből keletkezett laza üledékek alkotják.</p>
-          <p>A talaj tehát maga is kőzet – üledékes kőzet –, de a teherbírása és az alakváltozási tulajdonságai jóval kedvezőtlenebbek, mint a szilárd kőzeteké. Magyarország legnagyobb részén a felszín közelében talajok és nem szilárd kőzetek vannak, ezért nálunk a talajmechanika sokkal nagyobb hangsúlyt kap, mint a kőzetmechanika.</p>
-        </div>
-        <div class="wg rk" id="rk">
-          <div class="wg-h"><b>Kőzetből talaj</b><button class="rk-play" id="rkPlay" type="button">▶ végigjátszás</button></div>
-          <div class="wg-b">
-            <div class="seg" id="rkSeg" role="tablist" aria-label="A talaj keletkezésének lépései">
-              <button class="on" data-v="1" role="tab"><i>1</i>Kőzet</button><button data-v="2" role="tab"><i>2</i>Aprózódás</button><button data-v="3" role="tab"><i>3</i>Lerakódás</button><button data-v="4" role="tab"><i>4</i>Talaj</button>
-            </div>
-            <svg id="rkSvg" class="s1" viewBox="0 0 560 340" role="img" aria-label="Szemléltető metszet: a szilárd kőzetből aprózódás, mállás, szállítás és lerakódás útján laza üledék, azaz talaj lesz">
-              <defs>
-                <pattern id="rkPk" width="16" height="12" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.6" fill="rgba(0,0,0,.22)"/><circle cx="12" cy="9" r="2" fill="rgba(255,255,255,.25)"/></pattern>
-                <pattern id="rkPh" width="7" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="rgba(0,0,0,.25)"/><circle cx="5.5" cy="4.6" r=".7" fill="rgba(0,0,0,.18)"/></pattern>
-                <pattern id="rkPi" width="18" height="6" patternUnits="userSpaceOnUse"><path d="M1 3h7" stroke="rgba(0,0,0,.2)" stroke-width="1"/></pattern>
-                <pattern id="rkPa" width="24" height="5" patternUnits="userSpaceOnUse"><path d="M0 2.5h24" stroke="rgba(0,0,0,.18)" stroke-width="1"/></pattern>
-              </defs>
-              <rect class="rk-sky" width="560" height="340"/>
-              <!-- időjárás (2.) -->
-              <g data-s="2"><circle class="rk-sun" cx="500" cy="50" r="17"/><g class="rk-ray"><path d="M500 22v-9M500 87v-9M472 50h-9M537 50h-9M480 30l-6-6M526 76l-6-6M520 30l6-6M474 76l6-6"/></g>
-                <g class="rk-rain"><path d="M48 18l-6 14M74 12l-6 14M100 20l-6 14M126 14l-6 14M152 22l-6 14M62 38l-5 11M114 40l-5 11M140 44l-5 11"/></g>
-                <g class="rk-snow"><path d="M196 30h14M203 23v14M198 25l10 10M208 25l-10 10"/><path d="M24 50h10M29 45v10M25.5 46.5l7 7M32.5 46.5l-7 7"/></g>
-                <text class="rk-t" x="336" y="56" text-anchor="middle">fagy · hőingás · víz</text></g>
-              <!-- tó (1–3.) -->
-              <rect class="rk-water" data-s="123" x="200" y="210" width="360" height="130"/>
-              <!-- üledékrétegek -->
-              <g class="rk-sd" data-s="34" style="--d:0s"><rect x="200" y="278" width="360" height="62" fill="#a99a83"/><rect x="200" y="278" width="360" height="62" fill="url(#rkPk)"/></g>
-              <g class="rk-sd" data-s="34" style="--d:.45s"><rect x="200" y="250" width="360" height="28" fill="#dcc28a"/><rect x="200" y="250" width="360" height="28" fill="url(#rkPh)"/></g>
-              <g class="rk-sd" data-s="34" style="--d:.9s"><rect x="200" y="228" width="360" height="22" fill="#b79f7c"/><rect x="200" y="228" width="360" height="22" fill="url(#rkPi)"/></g>
-              <g class="rk-sd" data-s="4" style="--d:.2s"><rect x="200" y="210" width="360" height="18" fill="#8d7359"/><rect x="200" y="210" width="360" height="18" fill="url(#rkPa)"/><rect x="200" y="207" width="360" height="4" fill="#6f9a4c"/></g>
-              <!-- kőzet: hegy és medencealjzat -->
-              <path class="rk-rock" d="M0 340V168L30 140L60 104L84 80L96 68H128L146 88L170 118L196 150L218 184L232 204C300 262 370 320 440 326C490 330 530 318 560 312V340Z"/>
-              <g class="rk-jt"><path d="M20 190l26 18 8 30M64 150l18 22-6 26M110 96l-4 30 16 22M150 132l-14 26 10 24M96 240l30-14 22 18M40 280l26 12M170 250l24-12 20 14M300 300l26 10M380 330l22-8M500 330l18-10"/></g>
-              <g class="rk-crk" data-s="234"><path d="M110 70l-6 26 14 20-8 22M146 90l-10 18 8 16M176 124l-12 14 4 20M84 82l8 22-10 18M202 158l-14 10"/></g>
-              <!-- leváló tömbök (2–4.) -->
-              <g class="rk-scree" data-s="234"><path d="M206 176l12-4 6 9-10 6z"/><path d="M222 192l9-3 5 7-8 5z"/><path d="M190 168l7-5 6 6-6 6z"/><path d="M232 200l6 1 1 6-7 1z"/></g>
-              <g data-s="2"><path class="rk-lead" d="M240 186L286 164"/><text class="rk-t" x="290" y="162">leváló tömbök</text></g>
-              <!-- folyó és szállítás (3.) -->
-              <g data-s="3"><path class="rk-river" d="M140 84L166 116L192 150L214 182L234 206L262 212"/>
-                <g class="rk-gr" id="rkGr"></g>
-                <text class="rk-t" x="206" y="118">szállítás</text><text class="rk-t" x="300" y="196">lerakódás</text></g>
-              <!-- címkék -->
-              <text class="rk-t w" x="70" y="262" text-anchor="middle">szilárd kőzet</text>
-              <g data-s="12"><text class="rk-t w" x="400" y="264" text-anchor="middle">tó · medence</text></g>
-              <g class="rk-lab" data-s="34"><text x="470" y="309" text-anchor="middle">kavics</text><text x="470" y="269" text-anchor="middle">homok</text><text x="470" y="244" text-anchor="middle">iszap</text></g>
-              <g class="rk-lab" data-s="4"><text x="470" y="223" text-anchor="middle">agyag</text></g>
-              <!-- építmények (4.) -->
-              <g data-s="4">
-                <g class="rk-bld"><rect x="99" y="42" width="26" height="26"/><path d="M95 44L112 30L129 44Z"/></g>
-                <text class="rk-t" x="112" y="22" text-anchor="middle">kőzeten</text>
-                <g class="rk-bld"><rect x="340" y="112" width="52" height="98"/><g class="rk-win"><path d="M348 124h8v8h-8zM362 124h8v8h-8zM376 124h8v8h-8zM348 142h8v8h-8zM362 142h8v8h-8zM376 142h8v8h-8zM348 160h8v8h-8zM362 160h8v8h-8zM376 160h8v8h-8zM348 178h8v8h-8zM362 178h8v8h-8zM376 178h8v8h-8z"/></g></g>
-                <rect class="rk-fnd" x="332" y="206" width="68" height="12"/>
-                <g class="rk-bulb"><path d="M332 218C334 246 398 246 400 218"/><path d="M322 218C324 268 408 268 410 218"/><path d="M312 218C314 290 418 290 420 218"/></g>
-                <text class="rk-t" x="366" y="100" text-anchor="middle">talajon</text>
-              </g>
-            </svg>
+      <p class="lead" style="margin-bottom:16px">Az eddigi tanulmányaid során megismerted a talajmechanika alapjait, a földművek és a földmunkák tervezését és kivitelezését. Ebben a tárgyban mindezt egyetlen kérdésre fordítjuk le: hogyan adjuk át egy építmény terheit a talajnak úgy, hogy közben semmi ne károsodjon?</p>
+      <div class="prose two">
+        <p>Műszaki értelemben talajnak a földkéreg legkülső, laza takarórétegét nevezzük. Erre építjük a mérnöki létesítményeket, ez hat ki az alapozásukra és a viselkedésükre, és ebből készülnek a földművek. Hazánkban ezt a réteget jellemzően a szilárd kőzetek felaprózódott, mállott szemcséiből keletkezett laza üledékek alkotják.</p>
+        <p>A talaj tehát maga is kőzet – üledékes kőzet –, de a teherbírása és az alakváltozási tulajdonságai jóval kedvezőtlenebbek, mint a szilárd kőzeteké. Magyarország legnagyobb részén a felszín közelében talajok és nem szilárd kőzetek vannak, ezért nálunk a talajmechanika sokkal nagyobb hangsúlyt kap, mint a kőzetmechanika.</p>
+      </div>
+      <div class="wg rk" id="rk" style="margin-top:30px">
+        <div class="wg-h"><b>Kőzetből talaj</b><button class="rk-play" id="rkPlay" type="button">▶ végigjátszás</button></div>
+        <div class="wg-b rk-b">
+          <svg id="rkSvg" class="s1" viewBox="0 0 560 340" role="img" aria-label="Szemléltető metszet: a szilárd kőzetből aprózódás, mállás, szállítás és lerakódás útján laza üledék, azaz talaj lesz">
+                <defs>
+                  <pattern id="rkPk" width="16" height="12" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.6" fill="rgba(0,0,0,.22)"/><circle cx="12" cy="9" r="2" fill="rgba(255,255,255,.25)"/></pattern>
+                  <pattern id="rkPh" width="7" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="rgba(0,0,0,.25)"/><circle cx="5.5" cy="4.6" r=".7" fill="rgba(0,0,0,.18)"/></pattern>
+                  <pattern id="rkPi" width="18" height="6" patternUnits="userSpaceOnUse"><path d="M1 3h7" stroke="rgba(0,0,0,.2)" stroke-width="1"/></pattern>
+                  <pattern id="rkPa" width="24" height="5" patternUnits="userSpaceOnUse"><path d="M0 2.5h24" stroke="rgba(0,0,0,.18)" stroke-width="1"/></pattern>
+                </defs>
+                <rect class="rk-sky" width="560" height="340"/>
+                <!-- időjárás (2.) -->
+                <g data-s="2"><circle class="rk-sun" cx="500" cy="50" r="17"/><g class="rk-ray"><path d="M500 22v-9M500 87v-9M472 50h-9M537 50h-9M480 30l-6-6M526 76l-6-6M520 30l6-6M474 76l6-6"/></g>
+                  <g class="rk-rain"><path d="M48 18l-6 14M74 12l-6 14M100 20l-6 14M126 14l-6 14M152 22l-6 14M62 38l-5 11M114 40l-5 11M140 44l-5 11"/></g>
+                  <g class="rk-snow"><path d="M196 30h14M203 23v14M198 25l10 10M208 25l-10 10"/><path d="M24 50h10M29 45v10M25.5 46.5l7 7M32.5 46.5l-7 7"/></g>
+                  <text class="rk-t" x="336" y="56" text-anchor="middle">fagy · hőingás · víz</text></g>
+                <!-- tó (1–3.) -->
+                <rect class="rk-water" data-s="123" x="200" y="210" width="360" height="130"/>
+                <!-- üledékrétegek -->
+                <g class="rk-sd" data-s="34" style="--d:0s"><rect x="200" y="278" width="360" height="62" fill="#a99a83"/><rect x="200" y="278" width="360" height="62" fill="url(#rkPk)"/></g>
+                <g class="rk-sd" data-s="34" style="--d:.45s"><rect x="200" y="250" width="360" height="28" fill="#dcc28a"/><rect x="200" y="250" width="360" height="28" fill="url(#rkPh)"/></g>
+                <g class="rk-sd" data-s="34" style="--d:.9s"><rect x="200" y="228" width="360" height="22" fill="#b79f7c"/><rect x="200" y="228" width="360" height="22" fill="url(#rkPi)"/></g>
+                <g class="rk-sd" data-s="4" style="--d:.2s"><rect x="200" y="210" width="360" height="18" fill="#8d7359"/><rect x="200" y="210" width="360" height="18" fill="url(#rkPa)"/><rect x="200" y="207" width="360" height="4" fill="#6f9a4c"/></g>
+                <!-- kőzet: hegy és medencealjzat -->
+                <path class="rk-rock" d="M0 340V168L30 140L60 104L84 80L96 68H128L146 88L170 118L196 150L218 184L232 204C300 262 370 320 440 326C490 330 530 318 560 312V340Z"/>
+                <g class="rk-jt"><path d="M20 190l26 18 8 30M64 150l18 22-6 26M110 96l-4 30 16 22M150 132l-14 26 10 24M96 240l30-14 22 18M40 280l26 12M170 250l24-12 20 14M300 300l26 10M380 330l22-8M500 330l18-10"/></g>
+                <g class="rk-crk" data-s="234"><path d="M110 70l-6 26 14 20-8 22M146 90l-10 18 8 16M176 124l-12 14 4 20M84 82l8 22-10 18M202 158l-14 10"/></g>
+                <!-- leváló tömbök (2–4.) -->
+                <g class="rk-scree" data-s="234"><path d="M206 176l12-4 6 9-10 6z"/><path d="M222 192l9-3 5 7-8 5z"/><path d="M190 168l7-5 6 6-6 6z"/><path d="M232 200l6 1 1 6-7 1z"/></g>
+                <g data-s="2"><path class="rk-lead" d="M240 186L286 164"/><text class="rk-t" x="290" y="162">leváló tömbök</text></g>
+                <!-- folyó és szállítás (3.) -->
+                <g data-s="3"><path class="rk-river" d="M140 84L166 116L192 150L214 182L234 206L262 212"/>
+                  <g class="rk-gr" id="rkGr"></g>
+                  <text class="rk-t" x="206" y="118">szállítás</text><text class="rk-t" x="300" y="196">lerakódás</text></g>
+                <!-- címkék -->
+                <text class="rk-t w" x="70" y="262" text-anchor="middle">szilárd kőzet</text>
+                <g data-s="12"><text class="rk-t w" x="400" y="264" text-anchor="middle">tó · medence</text></g>
+                <g class="rk-lab" data-s="34"><text x="470" y="309" text-anchor="middle">kavics</text><text x="470" y="269" text-anchor="middle">homok</text><text x="470" y="244" text-anchor="middle">iszap</text></g>
+                <g class="rk-lab" data-s="4"><text x="470" y="223" text-anchor="middle">agyag</text></g>
+                <!-- építmények (4.) -->
+                <g data-s="4">
+                  <g class="rk-bld"><rect x="99" y="42" width="26" height="26"/><path d="M95 44L112 30L129 44Z"/></g>
+                  <text class="rk-t" x="112" y="22" text-anchor="middle">kőzeten</text>
+                  <g class="rk-bld"><rect x="340" y="112" width="52" height="98"/><g class="rk-win"><path d="M348 124h8v8h-8zM362 124h8v8h-8zM376 124h8v8h-8zM348 142h8v8h-8zM362 142h8v8h-8zM376 142h8v8h-8zM348 160h8v8h-8zM362 160h8v8h-8zM376 160h8v8h-8zM348 178h8v8h-8zM362 178h8v8h-8zM376 178h8v8h-8z"/></g></g>
+                  <rect class="rk-fnd" x="332" y="206" width="68" height="12"/>
+                  <g class="rk-bulb"><path d="M332 218C334 246 398 246 400 218"/><path d="M322 218C324 268 408 268 410 218"/><path d="M312 218C314 290 418 290 420 218"/></g>
+                  <text class="rk-t" x="366" y="100" text-anchor="middle">talajon</text>
+                </g>
+              </svg>
+          <div class="rk-side">
+            <div class="seg" id="rkSeg" role="tablist" aria-label="A talaj keletkezésének lépései"><button class="on" data-v="1" role="tab"><i>1</i>Kőzet</button><button data-v="2" role="tab"><i>2</i>Aprózódás</button><button data-v="3" role="tab"><i>3</i>Lerakódás</button><button data-v="4" role="tab"><i>4</i>Talaj</button></div>
             <div class="rk-cap" id="rkCap" aria-live="polite"></div>
           </div>
         </div>
@@ -652,26 +679,26 @@ footer .fb{max-width:46ch}
     <!-- B · kölcsönhatás -->
     <div class="blk">
       <div class="bh"><h3>Talaj és szerkezet kölcsönhatása</h3><span class="tag">próbáld ki</span></div>
-      <div class="cols">
-        <div class="prose">
-          <p>Minden építmény az alapozási szerkezeten keresztül kapcsolódik a Földhöz. Az építmény feszültségeket ébreszt az altalajban, a feszültségek alakváltozást okoznak – és ez visszahat a szerkezetre, esetleg az állékonyságára is. Az altalaj alakváltozásai miatt az építmény is alakváltozik, a szerkezetben pedig átrendeződnek a feszültségek.</p>
-          <p>A talaj többfázisú közeg: szilárd szemcsék, víz és levegő. A terhelés hatására összenyomódik, az épület süllyed – sokszor csak nagyon lassan, a talaj áteresztőképességétől függően (ez a konszolidáció). Az épületek alatt jellemzően centiméteres nagyságrendű süllyedések alakulnak ki, ráadásul nem egyenletesen.</p>
-          <p>Az egyenlőtlen süllyedés erőket és feszültségeket ébreszt a felszerkezetben: a szerkezet megrepedhet, és szélsőséges esetben – túlterhelés miatt – az alap alatti talaj el is törhet. Próbáld ki a modellen, mit okoz egy puha lencse az épület alatt!</p>
-        </div>
-        <div class="wg" id="ksh">
-          <div class="wg-h"><b>Kölcsönhatás-labor</b><span class="mono">szemléltető modell · torzítva</span></div>
-          <div class="wg-b">
+      <div class="prose two">
+        <p>Minden építmény az alapozási szerkezeten keresztül kapcsolódik a Földhöz. Az építmény feszültségeket ébreszt az altalajban, a feszültségek alakváltozást okoznak – és ez visszahat a szerkezetre, esetleg az állékonyságára is. Az altalaj alakváltozásai miatt az építmény is alakváltozik, a szerkezetben pedig átrendeződnek a feszültségek.</p>
+        <p>A talaj többfázisú közeg: szilárd szemcsék, víz és levegő. A terhelés hatására összenyomódik, az épület süllyed – sokszor csak nagyon lassan, a talaj áteresztőképességétől függően (ez a konszolidáció). Az épületek alatt jellemzően centiméteres nagyságrendű süllyedések alakulnak ki, ráadásul nem egyenletesen.</p>
+        <p>Az egyenlőtlen süllyedés erőket és feszültségeket ébreszt a felszerkezetben: a szerkezet megrepedhet, és szélsőséges esetben – túlterhelés miatt – az alap alatti talaj el is törhet. Próbáld ki a modellen, mit okoz egy puha lencse az épület alatt!</p>
+      </div>
+      <div class="wg" id="ksh" style="margin-top:30px">
+        <div class="wg-h"><b>Kölcsönhatás-labor</b><span class="mono">szemléltető modell · torzítva</span></div>
+        <div class="wg-b ksh-b">
+          <svg id="kshSvg" viewBox="0 0 560 330" role="img" aria-label="Épület süllyedése a talajon"></svg>
+          <div class="ksh-side">
             <div class="seg" id="kshSoil" role="group" aria-label="Altalaj">
               <button class="on" data-v="0">tömör, egyenletes</button><button data-v="1">puha, egyenletes</button><button data-v="2">puha lencsével</button>
-            </div>
-            <svg id="kshSvg" viewBox="0 0 560 330" role="img" aria-label="Épület süllyedése a talajon"></svg>
+              </div>
             <div class="ctl"><label for="kshN">Szintszám</label><input type="range" id="kshN" min="1" max="10" value="4"><output id="kshNo">4 szint</output></div>
             <div class="reads">
-              <div class="rd"><span>átlagos süllyedés</span><b id="kshS">–</b></div>
-              <div class="rd"><span>süllyedéskülönbség</span><b id="kshD">–</b></div>
-              <div class="rd"><span>szögtorzulás</span><b id="kshB">–</b></div>
-              <div class="rd"><span>talpfeszültség</span><b id="kshP">–</b></div>
-            </div>
+                <div class="rd"><span>átlagos süllyedés</span><b id="kshS">–</b></div>
+                <div class="rd"><span>süllyedéskülönbség</span><b id="kshD">–</b></div>
+                <div class="rd"><span>szögtorzulás</span><b id="kshB">–</b></div>
+                <div class="rd"><span>talpfeszültség</span><b id="kshP">–</b></div>
+              </div>
             <div class="verdict ok" id="kshV" aria-live="polite"></div>
           </div>
         </div>
@@ -704,17 +731,17 @@ footer .fb{max-width:46ch}
 
     <!-- D · az alapozás feladata, alaptípusok -->
     <div class="blk">
-      <div class="cols">
-        <div style="display:flex; flex-direction:column; gap:18px">
-          <div class="quote"><span class="kick">Az alapozás feladata</span><p>A felszerkezet terheinek átadása az altalajra anélkül, hogy az építményben károsodás – repedés, túlzott dőlés vagy hajlás – alakulna ki.</p></div>
-          <div class="prose"><p>Sokféle alapozási rendszer létezik, de alapvetően két nagy csoportba sorolhatók: síkalapok és mélyalapok. Emellett vannak vegyes (kombinált, hibrid) alapozások is. Válts a típusok között, és nézd meg, hol adja át az alap a terhet!</p></div>
-        </div>
-        <div class="wg" id="ftype">
-          <div class="wg-h"><div class="seg" role="tablist" aria-label="Alaptípus"><button class="on" data-v="0">Síkalap</button><button data-v="1">Mélyalap</button><button data-v="2">Vegyes alapozás</button></div><span class="mono">teherátadás</span></div>
-          <div class="wg-b">
-            <svg id="ftSvg" viewBox="0 0 560 300" role="img" aria-label="Az alaptípus teherátadása"></svg>
-            <p id="ftTxt" style="margin:14px 0 0"></p>
-            <div class="go" id="ftGo" style="display:flex; gap:6px; margin-top:12px; flex-wrap:wrap"></div>
+      <div class="duo">
+        <div class="quote"><span class="kick">Az alapozás feladata</span><p>A felszerkezet terheinek átadása az altalajra anélkül, hogy az építményben károsodás – repedés, túlzott dőlés vagy hajlás – alakulna ki.</p></div>
+        <div class="prose duo-p"><p>Sokféle alapozási rendszer létezik, de alapvetően két nagy csoportba sorolhatók: síkalapok és mélyalapok. Emellett vannak vegyes (kombinált, hibrid) alapozások is. Válts a típusok között, és nézd meg, hol adja át az alap a terhet!</p></div>
+      </div>
+      <div class="wg" id="ftype" style="margin-top:30px">
+        <div class="wg-h"><div class="seg" role="tablist" aria-label="Alaptípus"><button class="on" data-v="0">Síkalap</button><button data-v="1">Mélyalap</button><button data-v="2">Vegyes alapozás</button></div><span class="mono">teherátadás</span></div>
+        <div class="wg-b ft-b">
+          <svg id="ftSvg" viewBox="0 0 560 300" role="img" aria-label="Az alaptípus teherátadása"></svg>
+          <div class="ft-side">
+            <p id="ftTxt"></p>
+            <div class="go" id="ftGo"></div>
           </div>
         </div>
       </div>
@@ -742,7 +769,7 @@ footer .fb{max-width:46ch}
         <div class="card"><span class="ix">3</span><b>A hibája az egész épületet veszélyezteti</b><p>Utólag csak nagyon nehezen és nagy költséggel javítható, és sokszor még a hiba okát is nehéz kideríteni.</p></div>
       </div>
       <div class="harder">
-        <div class="hh">És miért egyre nehezebb?</div>
+        <div class="hh card">És miért egyre nehezebb?</div>
         <div class="card">A településeken a jó altalajú területeket már döntően beépítették. Ami maradt, az sokszor mocsaras, feltöltött, alábányászott vagy csúszásveszélyes.</div>
         <div class="card">Egyre érzékenyebb szerkezeteket kell építeni: nagyobb fesztávokkal, jelentősen változó szintszámokkal, a szomszéd épületekhez egyre közelebb.</div>
       </div>
@@ -782,14 +809,12 @@ footer .fb{max-width:46ch}
     <!-- K · ki a felelős -->
     <div class="blk">
       <div class="poll">
-        <div>
-          <div class="bh"><h3>Megsüllyedt a ház. Ki a felelős?</h3></div>
-          <div class="popts" id="poll">
-            <button data-v="0"><span class="bar"></span><i>A</i><span>a tervező</span></button>
-            <button data-v="1"><span class="bar"></span><i>B</i><span>a kivitelező</span></button>
-            <button data-v="2"><span class="bar"></span><i>C</i><span>maga a talaj</span></button>
-            <button data-v="3"><span class="bar"></span><i>D</i><span>az időjárás</span></button>
-          </div>
+        <div class="bh"><h3>Megsüllyedt a ház. Ki a felelős?</h3></div>
+        <div class="popts" id="poll">
+          <button data-v="0"><span class="bar"></span><i>A</i><span>a tervező</span></button>
+          <button data-v="1"><span class="bar"></span><i>B</i><span>a kivitelező</span></button>
+          <button data-v="2"><span class="bar"></span><i>C</i><span>maga a talaj</span></button>
+          <button data-v="3"><span class="bar"></span><i>D</i><span>az időjárás</span></button>
         </div>
         <div class="card pans" id="pans" style="padding:24px" aria-live="polite">
           <div class="kick" style="margin-bottom:8px">A tanulság</div>
@@ -1288,7 +1313,7 @@ const XS = (() => {
 
 /* ================= GYŰJTŐRÁCS, LÁBLÉC ================= */
 { const box = $('#gridApps'), fl = $('#footList');
-  S.forEach(s => s.apps.forEach(a => { if (a.here) return; const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
+  S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); })); }
 

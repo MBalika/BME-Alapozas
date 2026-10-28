@@ -77,15 +77,18 @@ main .rag, footer .rag{text-align:left!important}
 .hero{position:relative; background:var(--night); color:var(--nink); overflow:hidden; isolation:isolate}
 .hero::before{content:""; position:absolute; inset:-20% -10% auto; height:120%; background:radial-gradient(60% 50% at 18% 30%, rgba(232,149,42,.22), transparent 70%), radial-gradient(50% 45% at 85% 25%, rgba(46,115,201,.22), transparent 70%), radial-gradient(40% 40% at 60% 90%, rgba(178,58,147,.16), transparent 70%); z-index:-1}
 .hero .strata{position:absolute; left:0; right:0; bottom:0; height:120px; z-index:-1; opacity:.9}
-.hero .wrap{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:56px; align-items:center; padding-top:72px; padding-bottom:64px}
+.hero .wrap{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-areas:"t v" "x x" "c c"; column-gap:56px; row-gap:30px; align-items:center; padding-top:72px; padding-bottom:64px}
+.h-t{grid-area:t} .h-v{grid-area:v} .h-txt{grid-area:x; columns:2; column-gap:56px} .h-cs{grid-area:c}
+.h-txt .hero-lead{margin:0 0 12px} .h-txt .hero-lead:last-child{margin-bottom:0}
+.h-cs{display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:56px; align-items:center; padding-top:26px; border-top:1px solid var(--nline)}
+.h-cs .ctas{flex-wrap:nowrap}
 .kick{font:500 12.5px/1.4 var(--fm); letter-spacing:.12em; text-transform:uppercase; color:var(--accent)}
 .hero .kick{color:var(--accent-2)}
 .hero h1{font:800 clamp(42px, 6.4vw, 94px)/.92 var(--fd); letter-spacing:-.025em; margin:18px 0 18px; background:linear-gradient(180deg,#fff 30%, #d9cfbd); -webkit-background-clip:text; background-clip:text; color:transparent}
-.tagline{font:600 clamp(20px, 2.4vw, 28px)/1.3 var(--fb); margin:0 0 16px; color:#fff; max-width:32ch}
+.tagline{font:600 clamp(20px, 2.4vw, 28px)/1.3 var(--fb); margin:0; color:#fff}
 main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:balance}
 .tagline em{font-style:normal; color:var(--accent-2)}
-.hero-lead{color:#c9cdd2; max-width:58ch; margin:0 0 26px}
-.hero-lead.hl1{margin-bottom:12px}
+.hero-lead{color:#c9cdd2}
 .ctas{display:flex; flex-wrap:wrap; gap:12px}
 .btn{display:inline-flex; align-items:center; gap:10px; padding:13px 20px; border-radius:999px; font:700 15px/1 var(--fb); text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform .15s, background .2s, border-color .2s}
 .btn:hover{transform:translateY(-1px)}
@@ -96,9 +99,9 @@ main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:bal
 .btn.line{border-color:var(--line2); color:var(--ink); background:transparent}
 .btn.line:hover{background:var(--paper2)}
 .btn svg{width:16px; height:16px; flex:none}
-.stats{display:grid; grid-template-columns:repeat(4, auto); gap:18px 30px; margin-top:34px; padding-top:22px; border-top:1px solid var(--nline); justify-content:start}
+.stats{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:18px 24px}
 .stat b{display:block; font:700 clamp(24px, 2.6vw, 32px)/1 var(--fd); color:#fff}
-.stat span{font:500 12.5px/1.35 var(--fm); color:var(--nmuted); letter-spacing:.04em}
+.stat span{display:block; margin-top:6px; font:500 12.5px/1.35 var(--fm); color:var(--nmuted); letter-spacing:.04em}
 .vcard{position:relative; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,.14); box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.3); cursor:pointer; background:#000; aspect-ratio:16/9; display:block; width:100%; padding:0}
 .vcard img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease}
 .vcard:hover img{transform:scale(1.035)}
@@ -135,7 +138,7 @@ section{position:relative}
 .shead .num{font:800 clamp(64px, 9vw, 120px)/.8 var(--fd); color:transparent; -webkit-text-stroke:2px var(--c, var(--accent)); letter-spacing:-.04em; grid-row:span 2}
 .shead h2{font:700 clamp(26px, 3.4vw, 44px)/1.12 var(--fd); margin:4px 0 0; letter-spacing:-.01em; max-width:24ch}
 .shead .kick{align-self:end}
-.lead{font-size:clamp(17px, 1.6vw, 19.5px); line-height:1.62; color:var(--ink2); max-width:68ch}
+.lead{font-size:clamp(17px, 1.6vw, 19.5px); line-height:1.62; color:var(--ink2)}
 .dark .lead, .journey .lead{color:#c9cdd2}
 .blk{margin-top:76px}
 .blk:first-of-type{margin-top:0}
@@ -146,6 +149,21 @@ section{position:relative}
 .cols.r55{grid-template-columns:.9fr 1.1fr}
 .prose p{margin:0 0 14px}
 .prose p:last-child{margin-bottom:0}
+.prose.two{columns:2; column-gap:44px}
+/* kétoszlopos widgetek: ábra balra, kezelők és szöveg jobbra – egyforma magas oszlopok */
+.rk-b, .ksh-b, .ft-b{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:26px; align-items:center}
+.ksh-side .seg{display:grid; grid-template-columns:1fr; width:100%; box-sizing:border-box}
+.ksh-side .seg button{text-align:left}
+.ksh-side .reads{grid-template-columns:1fr 1fr}
+.ft-side p{margin:0}
+.ft-side .go{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px}
+.ft-b{align-items:stretch}
+.ft-side{display:flex; flex-direction:column; justify-content:center; padding:22px 24px; border-radius:14px; background:var(--paper); border:1px solid var(--line)}
+.rk-b{align-items:stretch}
+.rk-side{display:flex; flex-direction:column}
+.duo{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; align-items:stretch}
+.duo .quote{display:flex; flex-direction:column; justify-content:center}
+.duo-p{display:flex; flex-direction:column; justify-content:center; padding:28px 32px; border-radius:22px; background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow)}
 .card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
 .note{font-size:14.5px; color:var(--muted); line-height:1.55}
 .mut{color:var(--muted)}
@@ -156,7 +174,8 @@ section{position:relative}
 .rk .wg-h{padding-top:12px; padding-bottom:12px}
 .rk-play{border:1px solid var(--line2); background:transparent; color:var(--ink); border-radius:999px; padding:7px 13px; font:600 12.5px/1 var(--fb); cursor:pointer}
 .rk-play:hover{background:var(--paper2)}
-#rkSvg{margin-top:14px; border-radius:14px; overflow:hidden}
+#rkSvg{border-radius:14px; overflow:hidden}
+.rk .seg{display:grid; grid-template-columns:1fr 1fr; width:100%; box-sizing:border-box}
 #rkSvg [data-s]{opacity:0; transition:opacity .7s ease var(--d, 0s)}
 #rkSvg [data-s].vis{opacity:1}
 .rk-sky{fill:var(--rk-sky)}
@@ -180,7 +199,7 @@ section{position:relative}
 .rk-bld .rk-win path{fill:#6f93b3; stroke:none}
 .rk-fnd{fill:#9aa0a6; stroke:#3b3f45; stroke-width:1.2}
 .rk-bulb path{fill:none; stroke:var(--accent); stroke-width:1.7; stroke-dasharray:5 4}
-.rk-cap{margin-top:16px; min-height:11.5em}
+.rk-cap{margin-top:14px; flex:1; padding:18px 20px; border-radius:14px; background:var(--paper); border:1px solid var(--line)}
 .rk-cap h4{font:700 19px/1.25 var(--fd); margin:6px 0 8px}
 .rk-cap p{margin:0}
 .rk .seg i{font-style:normal; font-family:var(--fm); font-weight:700; opacity:.65}
@@ -229,7 +248,7 @@ input[type=range]{width:100%; accent-color:var(--accent); height:28px}
 .vs .ico{width:26px; height:26px; flex:none}
 
 /* idézet-kártya */
-.quote{position:relative; padding:34px 36px 30px 36px; border-radius:22px; background:var(--night); color:var(--nink); overflow:hidden}
+.quote{position:relative; padding:34px 36px 30px 36px; border-radius:22px; background:var(--night); color:var(--nink); overflow:hidden; border:1px solid var(--nline)}
 .quote::after{content:""; position:absolute; right:-40px; bottom:-60px; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle, rgba(232,149,42,.3), transparent 70%)}
 .quote p{font:600 clamp(19px, 2vw, 24px)/1.45 var(--fb); margin:0; position:relative; z-index:1; text-align:left}
 .quote .kick{display:block; margin-bottom:12px}
@@ -246,7 +265,8 @@ input[type=range]{width:100%; accent-color:var(--accent); height:28px}
 .pill:hover{border-color:var(--line2); background:var(--card)}
 
 /* határállapotok */
-.ls{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+.ls{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.ls .lsg:first-child{grid-row:span 2}
 .lsg{border-radius:18px; padding:20px; border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow)}
 .lsg h4{font:700 13px/1.2 var(--fm); text-transform:uppercase; letter-spacing:.08em; margin:0 0 4px; color:var(--muted)}
 .lsg h5{font:700 18px/1.25 var(--fd); margin:0 0 12px}
@@ -262,8 +282,8 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .why .card b{display:block; font:700 17px/1.3 var(--fb); margin:10px 0 6px}
 .why .card p{margin:0; font-size:15px; line-height:1.55; color:var(--ink2)}
 .why .ix{font:800 30px/1 var(--fd); color:var(--c3)}
-.harder{margin-top:16px; display:grid; grid-template-columns:auto 1fr 1fr; gap:16px; align-items:stretch}
-.harder .hh{display:flex; align-items:center; padding:0 6px; font:700 18px/1.3 var(--fd); max-width:12ch}
+.harder{margin-top:16px; display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; align-items:stretch}
+.harder .hh{display:flex; align-items:center; padding:20px 22px; font:700 19px/1.3 var(--fd); background:color-mix(in srgb, var(--c3) 9%, var(--card))}
 .harder .card{padding:20px; font-size:15.5px}
 
 /* kvíz-kártyák */
@@ -297,21 +317,21 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .reveal-all.on{display:block}
 
 /* poll */
-.poll{display:grid; grid-template-columns:1fr 1.1fr; gap:24px; align-items:start}
-.popts{display:grid; gap:10px}
+.poll{display:block}
+.popts{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px}
 .popts button{display:flex; align-items:center; gap:14px; text-align:left; border:1px solid var(--line2); border-radius:14px; background:var(--card); padding:14px 16px; cursor:pointer; font-weight:700; position:relative; overflow:hidden}
 .popts button i{font:700 13px/1 var(--fm); font-style:normal; width:30px; height:30px; border-radius:8px; display:grid; place-items:center; background:var(--paper2); flex:none}
 .popts button .bar{position:absolute; left:0; top:0; bottom:0; background:color-mix(in srgb, var(--c1) 22%, transparent); width:0; transition:width .7s ease; z-index:0}
 .popts button > *:not(.bar){position:relative; z-index:1}
 .popts button.pick{border-color:var(--accent)}
 .pans{display:none}
-.pans.on{display:block}
+.pans.on{display:block; margin-top:16px}
 
 /* pisa */
 .pisa{display:grid; grid-template-columns:.95fr 1.05fr; gap:0}
 .pisa .pv{background:linear-gradient(180deg, #cfe4f2, #eef4f2 70%); position:relative; min-height:420px}
 .pisa .pv svg{position:absolute; inset:0; width:100%; height:100%}
-.pisa .pc{padding:24px 26px; display:flex; flex-direction:column; gap:14px}
+.pisa .pc{padding:24px 26px; display:flex; flex-direction:column; justify-content:center; gap:14px}
 .guess{display:flex; align-items:baseline; gap:10px}
 .guess output{font:800 44px/1 var(--fd)}
 .guess span{font:600 16px/1 var(--fb); color:var(--muted)}
@@ -423,9 +443,11 @@ footer .fb{max-width:46ch}
 @media (max-width: 1100px){
   :root{--pad:22px}
   .hero h1{font-size:clamp(44px, 12vw, 108px)}
-  .hero .wrap{grid-template-columns:1fr; gap:36px; padding-top:48px}
+  .hero .wrap{grid-template-columns:1fr; grid-template-areas:"t" "v" "x" "c"; row-gap:30px; padding-top:48px}
+  .h-txt{columns:1}
+  .h-cs{grid-template-columns:1fr; row-gap:24px}
+  .h-cs .ctas{flex-wrap:wrap}
   .vcard{max-width:760px}
-  .stats{grid-template-columns:repeat(4, auto)}
   .nav a{padding:9px 9px; font-size:13.5px}
   .grid-apps{grid-template-columns:repeat(3, 1fr)}
   .sites{grid-template-columns:repeat(2, 1fr)}
@@ -439,8 +461,11 @@ footer .fb{max-width:46ch}
 @media (max-width: 880px){
   .nav{display:none}
   .menu-btn{display:grid; margin-left:auto}
-  .cols, .cols.r55, .poll, .pisa, .vsec .vgrid, footer .fg{grid-template-columns:1fr}
-  .ls, .why{grid-template-columns:1fr}
+  .cols, .cols.r55, .pisa, .vsec .vgrid, footer .fg, .rk-b, .ksh-b, .ft-b, .duo, .ls{grid-template-columns:1fr}
+  .prose.two{columns:1}
+  .ls .lsg:first-child{grid-row:auto}
+  .popts{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}
   .qz{grid-template-columns:1fr}
@@ -461,7 +486,7 @@ footer .fb{max-width:46ch}
   .sec{padding:68px 0}
   .blk{margin-top:58px}
   .brand small{display:none}
-  .stats{grid-template-columns:repeat(2, auto); gap:16px 26px}
+  .stats{grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px 26px}
   .grid-apps{grid-template-columns:1fr 1fr; gap:10px}
   .ac .tx{padding:10px 12px 12px}
   .ac .tx b{font-size:14px}

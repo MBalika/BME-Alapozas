@@ -408,7 +408,7 @@ const XS = (() => {
 
 /* ================= GYŰJTŐRÁCS, LÁBLÉC ================= */
 { const box = $('#gridApps'), fl = $('#footList');
-  S.forEach(s => s.apps.forEach(a => { if (a.here) return; const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
+  S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); })); }
 
