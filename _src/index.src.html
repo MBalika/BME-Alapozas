@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BME Alapozás</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Az Alapozás tárgy nyitóoldala: bevezetés, a tárgy felépítése kilenc állomásban, és átjárás az összes interaktív tananyaghoz.">
+<meta name="theme-color" content="#0c1015">
+<meta property="og:title" content="Alapozás – a tárgy útja">
+<meta property="og:description" content="Bevezetés és tananyagtérkép: kilenc állomás a talajtól az épületig.">
+<meta property="og:image" content="img/poster-bevezeto.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c1015'/%3E%3Crect x='14' y='14' width='36' height='18' rx='2' fill='%23f2a531'/%3E%3Crect x='8' y='36' width='48' height='7' fill='%23cfae74'/%3E%3Crect x='8' y='45' width='48' height='5' fill='%238a7f6e'/%3E%3Crect x='8' y='52' width='48' height='4' fill='%235d5046'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem('alap-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preload" href="fonts/unbounded-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
+<script>Hyphenopoly.config({ require: { "hu": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<a class="sr" href="#bevezetes">Ugrás a tartalomhoz</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Alapozás – az oldal teteje">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#151c24"/><rect x="18" y="10" width="28" height="22" rx="2" fill="none" stroke="#f2a531" stroke-width="3"/><rect x="14" y="32" width="36" height="5" fill="#f2a531"/><rect x="8" y="39" width="48" height="6" fill="#cfae74"/><rect x="8" y="47" width="48" height="5" fill="#8a7f6e"/><rect x="8" y="54" width="48" height="4" fill="#5d5046"/></svg>
+      <span><b>Alapozás</b><small>BMEEOGTMAT45</small></span>
+    </a>
+    <nav class="nav" aria-label="Fő menü">
+      <a href="#bevezetes">Bevezetés</a>
+      <a href="#utvonal">A tárgy útja</a>
+      <a href="#temakorok">Tananyagok</a>
+      <a href="#felev">A félév</a>
+      <a href="#video">Videó</a>
+    </nav>
+    <button class="tbtn menu-btn" id="menuBtn" aria-label="Menü" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="tbtn" id="themeBtn" aria-label="Világos vagy sötét téma"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg></button>
+  </div>
+</header>
+<div class="drawer" id="drawer" aria-label="Menü"></div>
+
+<main id="top">
+<!-- ================= HŐS ================= -->
+<section class="hero">
+  <svg class="strata" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C240 30 420 52 720 40 S1200 26 1440 38 V120 H0Z" fill="#141b22"/><path d="M0 66 C300 58 520 76 820 64 S1240 54 1440 64 V120 H0Z" fill="#18212b"/><path d="M0 92 C260 86 600 100 900 90 S1260 84 1440 92 V120 H0Z" fill="#0c1015"/></svg>
+  <div class="wrap">
+    <div>
+      <div class="kick">BME Építőmérnöki Kar · Geotechnika és Mérnökgeológia Tanszék</div>
+      <h1>Alapozás</h1>
+      <p class="tagline">Minden épület a talajon áll. Ez a tárgy arról szól, <em>hogyan</em>.</p>
+      <p class="hero-lead">Ez az oldal a tárgy térképe. Innen indul az út a talaj megismerésétől a síkalapokon és a mélyalapokon át a munkagödrökig – kilenc, egymásra épülő állomáson. Minden állomáshoz önálló, interaktív tananyag tartozik: 3D szimulátorokkal, animációs videókkal, kalkulátorokkal és kvízekkel.</p>
+      <div class="ctas">
+        <button class="btn pri" data-video><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>A tárgy 3 percben</button>
+        <a class="btn ghost" href="#bevezetes">Indulás az elejéről</a>
+        <a class="btn ghost" href="#temakorok">Minden tananyag</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>9</b><span>állomás</span></div>
+        <div class="stat"><b>10</b><span>interaktív tananyag</span></div>
+        <div class="stat"><b>50+</b><span>animációs videó</span></div>
+        <div class="stat"><b>400+</b><span>kvízkérdés és állítás</span></div>
+      </div>
+    </div>
+    <button class="vcard" data-video aria-label="A bevezető animáció lejátszása">
+      <img src="img/poster-bevezeto.jpg" alt="A bevezető animáció képe: két épület egy elmetszett talajtömbön, az egyik síkalapon, a másik cölöpökön és résfalas mélypincén" width="1600" height="900">
+      <span class="play"><svg viewBox="0 0 24 24" fill="#1b1206"><path d="M6 4v16l14-8z"/></svg></span>
+      <span class="vcap"><span><b>A tárgy útja – bevezető animáció</b><span>kilenc lépés a talajtól az épületig</span></span><i>2:54</i></span>
+    </button>
+  </div>
+</section>
+
+<!-- ================= ÚTVONALTÉRKÉP ================= -->
+<section class="route" aria-labelledby="routeH">
+  <div class="wrap">
+    <div class="route-h">
+      <div><div class="kick">Az útvonal</div><h2 id="routeH">Kilenc állomás, egy irányba</h2></div>
+      <p>Kattints egy állomásra: a leírásához ugrasz,<br>onnan pedig a tananyagához.</p>
+    </div>
+    <div class="rail" id="rail"></div>
+    <div class="rail-ends"><span>Indulás: a talaj</span><span>Cél: a kész épület</span></div>
+  </div>
+</section>
+
+<!-- ================= 1 · BEVEZETÉS ================= -->
+<section class="sec" id="bevezetes" style="--c:var(--c1)">
+  <div class="wrap">
+    <div class="shead">
+      <div class="num">01</div>
+      <div class="kick">1. állomás · itt vagy most</div>
+      <h2>Mi az alapozás – és miért nehéz jól megcsinálni?</h2>
+    </div>
+
+    <!-- A · a talaj -->
+    <div class="blk">
+      <div class="cols r55">
+        <div class="prose">
+          <p class="lead">Az eddigi tanulmányaid során megismerted a talajmechanika alapjait, a földművek és a földmunkák tervezését és kivitelezését. Ebben a tárgyban mindezt egyetlen kérdésre fordítjuk le: hogyan adjuk át egy építmény terheit a talajnak úgy, hogy közben semmi ne károsodjon?</p>
+          <p>Műszaki értelemben talajnak a földkéreg legkülső, laza takarórétegét nevezzük. Erre építjük a mérnöki létesítményeket, ez hat ki az alapozásukra és a viselkedésükre, és ebből készülnek a földművek. Hazánkban ezt a réteget jellemzően a szilárd kőzetek felaprózódott, mállott szemcséiből keletkezett laza üledékek alkotják.</p>
+          <p>A talaj tehát maga is kőzet – üledékes kőzet –, de a teherbírása és az alakváltozási tulajdonságai jóval kedvezőtlenebbek, mint a szilárd kőzeteké. Magyarország legnagyobb részén a felszín közelében talajok és nem szilárd kőzetek vannak, ezért nálunk a talajmechanika sokkal nagyobb hangsúlyt kap, mint a kőzetmechanika.</p>
+        </div>
+        <div class="strata-w" style="grid-template-columns:1fr">
+          <div class="layers" id="layers" role="tablist" aria-label="Fogalmak rétegei">
+            <button class="layer" data-k="geo" data-n="1" role="tab"><b>Geotechnika</b><span>elmélet + tapasztalat + mérés</span></button>
+            <button class="layer" data-k="tm" data-n="2" role="tab"><b>Talajmechanika</b><span>kölcsönhatás, modellek, méretezés</span></button>
+            <button class="layer" data-k="tf" data-n="3" role="tab"><b>Talajfizika</b><span>jellemzők, állapot, viselkedés</span></button>
+            <button class="layer" data-k="al" data-n="★" role="tab"><b>Alapozás</b><span>ez a tárgy</span></button>
+          </div>
+          <div class="card ldef" id="ldef" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B · kölcsönhatás -->
+    <div class="blk">
+      <div class="bh"><h3>Talaj és szerkezet kölcsönhatása</h3><span class="tag">próbáld ki</span></div>
+      <div class="cols">
+        <div class="prose">
+          <p>Minden építmény az alapozási szerkezeten keresztül kapcsolódik a Földhöz. Az építmény feszültségeket ébreszt az altalajban, a feszültségek alakváltozást okoznak – és ez visszahat a szerkezetre, esetleg az állékonyságára is. Az altalaj alakváltozásai miatt az építmény is alakváltozik, a szerkezetben pedig átrendeződnek a feszültségek.</p>
+          <p>A talaj többfázisú közeg: szilárd szemcsék, víz és levegő. A terhelés hatására összenyomódik, az épület süllyed – sokszor csak nagyon lassan, a talaj áteresztőképességétől függően (ez a konszolidáció). Az épületek alatt jellemzően centiméteres nagyságrendű süllyedések alakulnak ki, ráadásul nem egyenletesen.</p>
+          <p>Az egyenlőtlen süllyedés erőket és feszültségeket ébreszt a felszerkezetben: a szerkezet megrepedhet, és szélsőséges esetben – túlterhelés miatt – az alap alatti talaj el is törhet. Próbáld ki a modellen, mit okoz egy puha lencse az épület alatt!</p>
+        </div>
+        <div class="wg" id="ksh">
+          <div class="wg-h"><b>Kölcsönhatás-labor</b><span class="mono">szemléltető modell · torzítva</span></div>
+          <div class="wg-b">
+            <div class="seg" id="kshSoil" role="group" aria-label="Altalaj">
+              <button class="on" data-v="0">tömör, egyenletes</button><button data-v="1">puha, egyenletes</button><button data-v="2">puha lencsével</button>
+            </div>
+            <svg id="kshSvg" viewBox="0 0 560 330" role="img" aria-label="Épület süllyedése a talajon"></svg>
+            <div class="ctl"><label for="kshN">Szintszám</label><input type="range" id="kshN" min="1" max="10" value="4"><output id="kshNo">4 szint</output></div>
+            <div class="reads">
+              <div class="rd"><span>átlagos süllyedés</span><b id="kshS">–</b></div>
+              <div class="rd"><span>süllyedéskülönbség</span><b id="kshD">–</b></div>
+              <div class="rd"><span>szögtorzulás</span><b id="kshB">–</b></div>
+              <div class="rd"><span>talpfeszültség</span><b id="kshP">–</b></div>
+            </div>
+            <div class="verdict ok" id="kshV" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C · talaj ≠ acél -->
+    <div class="blk">
+      <div class="bh"><h3>Miért más a talaj, mint a többi építőanyag?</h3></div>
+      <p class="lead" style="margin-bottom:22px">A tartószerkezeti tervező az acél, a beton vagy a fa jól ismert jellemzőiből indul ki: néhány adat és a statika törvényei elegendők ahhoz, hogy bármilyen terhelésre meghatározza a szerkezet viselkedését. Az altalaj kérdése jóval bonyolultabb.</p>
+      <div class="vs" id="vs">
+        <div class="vh"></div>
+        <div class="vh"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 17h18M7 7v10M17 7v10"/></svg>Acél, beton, fa</div>
+        <div class="vh" style="color:var(--accent-ink)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8c3-1 6 1 9 0s6-1 9 0M3 13c3-1 6 1 9 0s6-1 9 0M3 18c3-1 6 1 9 0s6-1 9 0"/></svg>Talaj</div>
+        <div class="vq">Ki választja ki?</div>
+        <div class="vs-s">A tervező választja ki, és pontosan ismeri a tulajdonságait.</div>
+        <div class="vs-t">Adottság. Az épület helyét rendszerint más szempontok döntik el, a talajt úgy kell elfogadni, ahogy a telken található – az alapozás módját kell hozzá igazítani.</div>
+        <div class="vq">Mennyit tudunk róla?</div>
+        <div class="vs-s">Néhány jellemző – szilárdság, rugalmassági modulus – elég a viselkedés leírásához.</div>
+        <div class="vs-t">A talajviszonyok nem tárhatók fel teljeskörűen: pontszerű vizsgálatokból következtetünk a teljes terület geotechnikai adottságaira.</div>
+        <div class="vq">Miből áll?</div>
+        <div class="vs-s">Homogén, szilárd anyag, előre ismert tulajdonságokkal.</div>
+        <div class="vs-t">Többfázisú rendszer – szilárd szemcsék, víz és levegő –, ezért bonyolultabb törvényekkel írható le, és viselkedéséhez sok jellemző kell.</div>
+        <div class="vq">Mikor alakváltozik?</div>
+        <div class="vs-s">A terhelés pillanatában, kiszámítható módon.</div>
+        <div class="vs-t">A teljes süllyedés sokszor csak lassan, akár évek alatt alakul ki (konszolidáció) – és szinte sosem egyenletesen.</div>
+      </div>
+      <p class="note" style="margin-top:14px">Az építmény alatti, az építmény okozta feszültségek által érintett talajtömeg tehát jóval bonyolultabban és nagyobb bizonytalansággal modellezhető, mint a felszerkezet. Ezért kell fokozott gondossággal eljárni az altalajviszonyok feltárásakor és az alapozás tervezésekor.</p>
+    </div>
+
+    <!-- D · az alapozás feladata, alaptípusok -->
+    <div class="blk">
+      <div class="cols">
+        <div style="display:flex; flex-direction:column; gap:18px">
+          <div class="quote"><span class="kick">Az alapozás feladata</span><p>A felszerkezet terheinek átadása az altalajra anélkül, hogy az építményben károsodás – repedés, túlzott dőlés vagy hajlás – alakulna ki.</p></div>
+          <div class="prose"><p>Sokféle alapozási rendszer létezik, de alapvetően két nagy csoportba sorolhatók: síkalapok és mélyalapok. Emellett vannak vegyes (kombinált, hibrid) alapozások is. Válts a típusok között, és nézd meg, hol adja át az alap a terhet!</p></div>
+        </div>
+        <div class="wg" id="ftype">
+          <div class="wg-h"><div class="seg" role="tablist" aria-label="Alaptípus"><button class="on" data-v="0">Síkalap</button><button data-v="1">Mélyalap</button><button data-v="2">Vegyes alapozás</button></div><span class="mono">teherátadás</span></div>
+          <div class="wg-b">
+            <svg id="ftSvg" viewBox="0 0 560 300" role="img" aria-label="Az alaptípus teherátadása"></svg>
+            <p id="ftTxt" style="margin:14px 0 0"></p>
+            <div class="go" id="ftGo" style="display:flex; gap:6px; margin-top:12px; flex-wrap:wrap"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E · mitől függ -->
+    <div class="blk">
+      <div class="bh"><h3>Mitől függ, milyen alapot választunk?</h3></div>
+      <div class="tiles" id="tiles"></div>
+    </div>
+
+    <!-- F · határállapotok -->
+    <div class="blk">
+      <div class="bh"><h3>Amit igazolni kell: a határállapotok</h3></div>
+      <p class="lead" style="margin-bottom:22px">Az alapozás tervezésekor számos teherbírási és használhatósági határállapotot kell kielégíteni. A legfontosabbak – és hogy melyik állomáson tanulod meg őket:</p>
+      <div class="ls" id="ls"></div>
+    </div>
+
+    <!-- G · miért érzékeny -->
+    <div class="blk">
+      <div class="bh"><h3>Miért érzékenyebb az alapozás, mint a többi szerkezet?</h3></div>
+      <div class="why">
+        <div class="card"><span class="ix">1</span><b>Nehezen tipizálható</b><p>Ugyanaz az épület minden helyszínen más geotechnikai adottságokra kerül – az alapozást mindig újra kell gondolni.</p></div>
+        <div class="card"><span class="ix">2</span><b>Terepszint alatt épül</b><p>Rosszabb körülmények között készül, a kivitelezési pontosság sokkal nehezebben tartható, és a kész szerkezet nem látható.</p></div>
+        <div class="card"><span class="ix">3</span><b>A hibája az egész épületet veszélyezteti</b><p>Utólag csak nagyon nehezen és nagy költséggel javítható, és sokszor még a hiba okát is nehéz kideríteni.</p></div>
+      </div>
+      <div class="harder">
+        <div class="hh">És miért egyre nehezebb?</div>
+        <div class="card">A településeken a jó altalajú területeket már döntően beépítették. Ami maradt, az sokszor mocsaras, feltöltött, alábányászott vagy csúszásveszélyes.</div>
+        <div class="card">Egyre érzékenyebb szerkezeteket kell építeni: nagyobb fesztávokkal, jelentősen változó szintszámokkal, a szomszéd épületekhez egyre közelebb.</div>
+      </div>
+    </div>
+
+    <!-- H · Pisa -->
+    <div class="blk">
+      <div class="bh"><h3>Tippelj! A pisai ferde torony</h3><span class="tag">valós eset</span></div>
+      <div class="wg pisa" id="pisa">
+        <div class="pv"><svg id="pisaSvg" viewBox="0 0 420 420" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A pisai torony dőlése"></svg></div>
+        <div class="pc">
+          <b style="font:700 18px/1.35 var(--fb)">Mennyivel tér el ma a torony csúcsa a függőlegestől?</b>
+          <div class="guess"><output id="pgO">2,0</output><span>méter – a te tipped</span></div>
+          <input type="range" id="pg" min="0" max="6" step="0.1" value="2" aria-label="Tipp méterben">
+          <div><button class="btn pri" id="pgGo" style="padding:11px 18px">Mutasd a választ</button></div>
+          <div class="answer" id="pgA"><b>kb. 3,9 m</b><p id="pgAt"></p></div>
+          <div class="tl" id="ptl"></div>
+          <p class="tlx" id="ptx"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- I · villámkör -->
+    <div class="blk">
+      <div class="bh"><h3>Villámkör: síkalap vagy mélyalap?</h3><span class="score" id="qzScore"></span></div>
+      <div class="qz" id="qz"></div>
+    </div>
+
+    <!-- J · hová építenél -->
+    <div class="blk">
+      <div class="bh"><h3>Melyik telekre építenél saját házat?</h3></div>
+      <p class="lead" style="margin-bottom:20px">Válassz – vagy kattints mindegyikre, és nézd meg, mit rejt a talaj.</p>
+      <div class="sites" id="sites"></div>
+      <div class="verdict warn reveal-all" id="sitesAll">Csapda volt: mind a négy telek kedvezőtlen. A jó altalajú területeket a településeken már beépítették – ezért kell érteni a nehéz talajokhoz is. Ezekről szól a 4., a 6. és a 7. állomás.</div>
+    </div>
+
+    <!-- K · ki a felelős -->
+    <div class="blk">
+      <div class="poll">
+        <div>
+          <div class="bh"><h3>Megsüllyedt a ház. Ki a felelős?</h3></div>
+          <div class="popts" id="poll">
+            <button data-v="0"><span class="bar"></span><i>A</i><span>a tervező</span></button>
+            <button data-v="1"><span class="bar"></span><i>B</i><span>a kivitelező</span></button>
+            <button data-v="2"><span class="bar"></span><i>C</i><span>maga a talaj</span></button>
+            <button data-v="3"><span class="bar"></span><i>D</i><span>az időjárás</span></button>
+          </div>
+        </div>
+        <div class="card pans" id="pans" style="padding:24px" aria-live="polite">
+          <div class="kick" style="margin-bottom:8px">A tanulság</div>
+          <p style="margin:0 0 10px">A talajt nem lehet felelőssé tenni: az adottság. Ha egy ház megsüllyed, annak oka szinte mindig az, hogy a talajt nem ismerték meg eléggé, vagy a tervezés és a kivitelezés nem igazodott hozzá. Ezért kezdünk a talajfelderítéssel, és ezért kell minden határállapotot igazolni.</p>
+          <p style="margin:0">Az időjárás is lehet kiváltó ok – például aszály idején a zsugorodó agyag –, de ezt is a tervezésnek kell előre kezelnie.</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px"><a class="pill" href="#st2" style="--c:var(--c2)"><i>2</i>Talajfelderítés</a><a class="pill" href="#st6" style="--c:var(--c6)"><i>6</i>Kedvezőtlen talaj</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= A TÁRGY ÚTJA ================= -->
+<section class="sec journey" id="utvonal">
+  <div class="wrap">
+    <div class="shead">
+      <div class="num">1→9</div>
+      <div class="kick">A tárgy útja</div>
+      <h2>A semmiből az épületig</h2>
+    </div>
+    <p class="lead" style="margin:-20px 0 0">A témakörök egymásra épülnek: mindegyik arra a tudásra támaszkodik, amelyet az előzőkben szereztél. Görgess végig rajtuk – a metszet közben lépésről lépésre felépül, és minden állomásról egy kattintással átléphetsz a tananyagába.</p>
+    <div class="jgrid">
+      <div class="jstage">
+        <div class="jframe" id="jframe" style="--c:var(--c1)">
+          <svg class="xs" id="xs" viewBox="96 150 336 210" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Metszet: a telek és a két épület, állomásról állomásra felépülve"></svg>
+          <div class="jhud" id="jhud"><i>1</i><span>Bevezetés</span></div>
+        </div>
+        <div class="jprog" id="jprog"></div>
+        <div class="jcap">szemléltető metszet · a mozgások torzítva</div>
+      </div>
+      <div class="steps" id="steps"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MINDEN TANANYAG ================= -->
+<section class="sec alt" id="temakorok">
+  <div class="wrap">
+    <div class="shead" style="--c:var(--c8)">
+      <div class="num">10+</div>
+      <div class="kick">Gyűjtőoldal</div>
+      <h2>Minden tananyag egy helyen</h2>
+    </div>
+    <p class="lead" style="margin:-20px 0 30px">Ha már ismered az utat, innen egyenesen a tananyagokhoz ugorhatsz. Mindegyik új lapon nyílik, és ugyanígy épül fel: magyarázat, interaktív ábrák és szimulátorok, videók, a végén kvíz és önellenőrzés.</p>
+    <div class="grid-apps" id="gridApps"></div>
+  </div>
+</section>
+
+<!-- ================= A FÉLÉV ================= -->
+<section class="sec" id="felev">
+  <div class="wrap">
+    <div class="shead" style="--c:var(--c5)">
+      <div class="num">14</div>
+      <div class="kick">A félév menete</div>
+      <h2>Tizennégy hét, kilenc állomás</h2>
+    </div>
+    <p class="lead" style="margin:-20px 0 30px">Az előadások sorrendje követi az állomásokat. A színes jel mutatja, melyik tananyaghoz tartozik az adott óra; a jelvények az évközi számonkéréseket jelölik.</p>
+    <div class="weeks" id="weeks"></div>
+    <div class="req">
+      <div class="card">
+        <h4>Hogyan áll össze a jegy?</h4>
+        <div class="wbar" id="wbar" role="img" aria-label="A pontszám összetétele: 1. zárthelyi 15 %, 2. zárthelyi 15 %, ED1, ED2 és ED3 5–5 %, házi feladat 15 %, írásbeli vizsga 40 %"></div>
+        <div class="wlab"><span>szorgalmi időszak: 60 %</span><span>vizsga: 40 %</span></div>
+        <div class="wleg" id="wleg"></div>
+        <ul class="rules">
+          <li>A két zárthelyi eredménytelen, ha bármelyiken nem éred el külön-külön az elérhető pontszám 50 %-át.</li>
+          <li>A három ED közül legalább kettőn részt kell venni, és mindegyiken külön-külön el kell érni a 30 %-ot.</li>
+          <li>A házi feladatot 100 %-osan kell teljesíteni: addig kerül vissza, amíg minden végeredmény hibátlan. A (rész)határidőkhöz képest egy-egy hét pótbeadási lehetőség van; ennek elmulasztása az aláírás megtagadását vonja maga után.</li>
+          <li>Az elérhető pontszám 50 %-ánál gyengébb vizsgaeredmény elégtelen vizsgajegyet eredményez, a zárthelyik eredményétől függetlenül.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Érdemjegy</h4>
+        <table class="grades">
+          <tr><td>jeles (5)</td><td>80 % ≤ P</td></tr>
+          <tr><td>jó (4)</td><td>70 % ≤ P &lt; 80 %</td></tr>
+          <tr><td>közepes (3)</td><td>60 % ≤ P &lt; 70 %</td></tr>
+          <tr><td>elégséges (2)</td><td>50 % ≤ P &lt; 60 %</td></tr>
+          <tr><td>elégtelen (1)</td><td>P &lt; 50 %</td></tr>
+        </table>
+        <p class="note" style="margin:16px 0 0">P: a szorgalmi időszak és a vizsga súlyozott pontszáma, százalékban.</p>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid var(--line)">
+          <div class="kick" style="margin-bottom:6px">Előadók</div>
+          <p style="margin:0; text-align:left">Dr. Móczár Balázs<br>Dr. Kádár István</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIDEÓ ================= -->
+<section class="sec dark vsec" id="video">
+  <div class="wrap vgrid">
+    <button class="vcard" data-video aria-label="A bevezető animáció lejátszása">
+      <img src="img/poster-alt.jpg" alt="A bevezető animáció nyitóképe: a kész telek a két épülettel" width="1600" height="900" loading="lazy">
+      <span class="play"><svg viewBox="0 0 24 24" fill="#1b1206"><path d="M6 4v16l14-8z"/></svg></span>
+      <span class="vcap"><span><b>A tárgy útja</b><span>bevezető animáció</span></span><i>2:54</i></span>
+    </button>
+    <div>
+      <div class="kick">Bevezető animáció</div>
+      <h2 style="font:700 clamp(26px,3vw,38px)/1.15 var(--fd); margin:10px 0 14px">A tárgy felépítése három percben</h2>
+      <p>Egy kitalált telken, a semmiből indulunk: először nem tudjuk, mi van a lábunk alatt. Lépésről lépésre feltárjuk a talajt, megtervezzük az alapokat, ellenőrizzük az állékonyságot és a süllyedést, felismerjük a rossz talajt és a külső hatásokat – a végén pedig cölöpökön és résfalas munkagödörben felépül a második ház is.</p>
+      <div class="chips"><span class="chip">9 lépés</span><span class="chip">saját zene</span><span class="chip">Esc: bezárás</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap fg">
+    <div>
+      <p style="margin:0 0 6px"><b>Alapozás</b> (BMEEOGTMAT45)</p>
+      <p class="fb" style="margin:0">Budapesti Műszaki és Gazdaságtudományi Egyetem, Építőmérnöki Kar, Geotechnika és Mérnökgeológia Tanszék</p>
+      <p style="margin:16px 0 0" class="mono">Interaktív tananyag-sorozat</p>
+    </div>
+    <div>
+      <b>Az állomások tananyagai</b>
+      <ol id="footList"></ol>
+    </div>
+  </div>
+</footer>
+
+<div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Bevezető animáció">
+  <div class="vbox">
+    <div class="vf"><iframe id="vmFrame" title="A tárgy útja – bevezető animáció" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="vbar"><span>A tárgy útja – bevezető animáció · 2:54 · Esc: bezárás</span><button id="vmClose">Bezárás ✕</button></div>
+  </div>
+</div>
+
+<script>
+/*JS*/
+</script>
+</body>
+</html>
