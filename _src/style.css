@@ -81,7 +81,8 @@ main .rag, footer .rag{text-align:left!important}
 .kick{font:500 12.5px/1.4 var(--fm); letter-spacing:.12em; text-transform:uppercase; color:var(--accent)}
 .hero .kick{color:var(--accent-2)}
 .hero h1{font:800 clamp(42px, 6.4vw, 94px)/.92 var(--fd); letter-spacing:-.025em; margin:18px 0 18px; background:linear-gradient(180deg,#fff 30%, #d9cfbd); -webkit-background-clip:text; background-clip:text; color:transparent}
-.tagline{font:600 clamp(20px, 2.4vw, 28px)/1.3 var(--fb); margin:0 0 16px; color:#fff; max-width:30ch}
+.tagline{font:600 clamp(20px, 2.4vw, 28px)/1.3 var(--fb); margin:0 0 16px; color:#fff; max-width:32ch}
+main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:balance}
 .tagline em{font-style:normal; color:var(--accent-2)}
 .hero-lead{color:#c9cdd2; max-width:58ch; margin:0 0 26px}
 .ctas{display:flex; flex-wrap:wrap; gap:12px}
