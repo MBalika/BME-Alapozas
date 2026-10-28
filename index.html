@@ -1377,7 +1377,7 @@ const GUARD = (() => {
     if (!el.isConnected) return; if (el.closest('svg')) return; const cur = el.textContent; if (done.get(el) === cur) return;
     const nodes = textNodes(el); for (const n of nodes) { const v = textPass(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; } crossPass(nodes);
     const full = nodes.map(n => n.nodeValue).join(''); const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const cpl = el.clientWidth > 40 ? el.clientWidth / (fs * 0.52) : 70;
-    const bind = bindPositions(full, cpl);
+    const bind = el.closest('[data-loose]') ? new Set() : bindPositions(full, cpl);
     if (bind.size) { let off = 0; for (const n of nodes) { const v = n.nodeValue; let o = '', ch = false; for (let i = 0; i < v.length; i++) { if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i]; } off += v.length; if (ch) n.nodeValue = o; } }
     if (hyph && el.matches(HYPH)) { for (const n of textNodes(el)) { if (n.parentElement && n.parentElement.closest(NOHY) && n.parentElement.closest(NOHY) !== el) continue; const parts = n.nodeValue.split(/( )/); let ch = false;
       for (let i = 0; i < parts.length; i += 2) { const t = parts[i]; if (!t || !/\p{L}{6,}/u.test(t)) continue; const clean = t.replace(/[\u00AD\u200B]/g, ''); let hh;
@@ -1394,17 +1394,46 @@ const GUARD = (() => {
   return { start, run };
 })();
 
-/* lyukas sorkizárt blokk → balra zárt tartalék (.rag): keskeny dobozban, ha a szóközök túl szélesek */
+/* RAG3 – lyukas sorkizárt blokk tartalék, 3 lépésben: (1) text-wrap: wrap, (2) a puha kötések (NBSP+U+2060) oldása
+   a blokkban (data-loose: az őr ilyenkor nem köt újra, és a felszabadult szavakat elválasztja), (3) csak ezután balra zárás (.rag).
+   Idempotens: a döntést szélesség + szöveg szerint megjegyzi, tétlen oldalon nem módosít. */
+const RAG3 = (() => {
+  try { const st = document.createElement('style'); st.textContent = '.twr{text-wrap:wrap!important}'; document.head.appendChild(st); } catch (e) {}
+  const SOFT = /\u00A0\u2060|\u2060\u00A0/g;
+  const memo = new WeakMap(); const saved = new WeakMap(); const queue = new Set(); let tmr = 0;
+  const sig = (el) => el.textContent.replace(/[\u00AD\u2060\u200B]/g, '').replace(/\u00A0/g, ' ');
+  function bad(el) {
+    const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return false;
+    let lastTop = -1e9; for (const r of rs) if (r.width && r.top > lastTop) lastTop = r.top; let big = 0, mid = 0;
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { const c = t[i]; if (c !== ' ' && c !== '\u00A0') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
+    return big > 0 || mid >= 2;
+  }
+  function apply(el, res) { el.classList.toggle('twr', res === 'twr' || res === 'loose'); el.classList.toggle('rag', res === 'rag'); }
+  function check(el) {
+    if (!el || !el.isConnected) return; const cs = getComputedStyle(el); if (cs.display === 'none') return;
+    const w = el.clientWidth, s = sig(el), m = memo.get(el);
+    if (m && m.w === w && m.s === s && (m.res !== 'loose' || el.dataset.loose)) { apply(el, m.res); return; }
+    el.classList.remove('rag', 'twr'); if (getComputedStyle(el).textAlign !== 'justify') { memo.set(el, { w, s, res: 'ok' }); return; }
+    if (!bad(el)) { memo.set(el, { w, s, res: el.dataset.loose ? 'loose' : 'ok' }); if (el.dataset.loose) el.classList.add('twr'); return; }
+    el.classList.add('twr'); if (!bad(el)) { memo.set(el, { w, s, res: el.dataset.loose ? 'loose' : 'twr' }); return; }
+    queue.add(el); clearTimeout(tmr); tmr = setTimeout(step2, 0);
+  }
+  function step2() {
+    const L = [...queue]; queue.clear();
+    for (const el of L) { if (el.dataset.loose) continue; const arr = []; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) { if (SOFT.test(n.nodeValue)) { SOFT.lastIndex = 0; arr.push([n, n.nodeValue]); } SOFT.lastIndex = 0; } if (!arr.length) continue; saved.set(el, arr); el.dataset.loose = '1'; for (const [nd, v] of arr) nd.nodeValue = v.replace(SOFT, ' '); }
+    // az őr a következő képkockában dolgozza fel (elválasztás, kötés nélkül) – utána mérünk
+    requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(() => { for (const el of L) { if (!el.isConnected) continue; el.classList.add('twr');
+      if (el.dataset.loose && !bad(el)) { memo.set(el, { w: el.clientWidth, s: sig(el), res: 'loose' }); continue; }
+      const arr = saved.get(el); if (el.dataset.loose) { delete el.dataset.loose; if (arr) for (const [nd, v] of arr) if (nd.isConnected) nd.nodeValue = v; saved.delete(el); }
+      apply(el, 'rag'); memo.set(el, { w: el.clientWidth, s: sig(el), res: 'rag' }); } }, 60)));
+  }
+  return { check };
+})();
+
 const RAG = (() => {
   const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead';
-  function check(el) {
-    el.classList.remove('rag'); const cs = getComputedStyle(el); if (cs.textAlign !== 'justify' || cs.display === 'none') return;
-    const fs = parseFloat(cs.fontSize); const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return;
-    const lastTop = Math.max(...Array.from(rs).map(r => r.top)); let big = 0, mid = 0;
-    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
-    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { if (t[i] !== ' ') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
-    if (big || mid >= 2) el.classList.add('rag');
-  }
+  const check = (el) => RAG3.check(el);
   const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
   let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
   document.addEventListener('click', () => { clearTimeout(tm); tm = setTimeout(run, 120); });
