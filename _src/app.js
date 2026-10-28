@@ -67,50 +67,88 @@ $('#themeBtn').addEventListener('click', () => {
   set(1); }
 
 /* ================= 1 · KÖLCSÖNHATÁS-LABOR ================= */
+// Hajlékony lemezalap rugalmas féltéren: a talpfeszültség egyenletes (p), a süllyedés pontonként
+// s(x) = Σ Δσz(x, z) · Δz / E(x, z) – Δσz a téglalap alakú teher alatt (Steinbrenner/Newmark-szuperpozíció),
+// összenyomható réteg 12 m, alaprajz 14 × 12 m. Szögtorzulás: szomszédos falak/pillérek (3,5 m) között, a dőlés levonásával.
 { const svg = $('#kshSvg'), N = $('#kshN'); let soil = 0;
-  const W = 560, GY = 150, BX0 = 170, BX1 = 390, Bm = 14;    // az épület 14 m széles (220 px)
+  const W = 560, GY = 150, CX = 280, PX = 220 / 14, BX0 = CX - 7 * PX, BX1 = CX + 7 * PX;
+  const LB = 14, BB = 12, HC = 12, DZ = 0.25, SP = 3.5, PTS = [-7, -3.5, 0, 3.5, 7];
+  const LENS = { x: 3.5, z: 3.8, rx: 3.0, rz: 1.5, E: 6 };
+  const Ic = (a, b, z) => { if (a <= 0 || b <= 0) return 0; const m = a / z, n = b / z, m2 = m * m, n2 = n * n, V = m2 + n2 + 1, Vr = Math.sqrt(V); let at = Math.atan2(2 * m * n * Vr, V - m2 * n2); if (at < 0) at += Math.PI; return (2 * m * n * Vr / (V + m2 * n2) * (V + 1) / V + at) / (4 * Math.PI); };
+  const g = (a, b, z) => Math.sign(a) * Math.sign(b) * Ic(Math.abs(a), Math.abs(b), z);
+  const sig = (x, z) => g(LB / 2 - x, BB / 2, z) - g(-LB / 2 - x, BB / 2, z) - g(LB / 2 - x, -BB / 2, z) + g(-LB / 2 - x, -BB / 2, z);
+  // előre számolt hatástényezők: x = −18 … +18 m (0,5 m-enként), z = 0 … 12 m
+  const XS = [], ZS = []; for (let x = -18; x <= 18.001; x += 0.5) XS.push(+x.toFixed(2)); for (let z = DZ / 2; z < HC; z += DZ) ZS.push(z);
+  const SIG = XS.map(x => ZS.map(z => sig(x, z)));
+  const Emod = (x, z) => { if (soil === 1) return 10; if (soil === 2) { const u = (x - LENS.x) / LENS.rx, v = (z - LENS.z) / LENS.rz; if (u * u + v * v <= 1) return LENS.E; } return 60; };
+  const profile = (p) => XS.map((x, i) => { let s = 0; ZS.forEach((z, j) => { s += p * SIG[i][j] * DZ / (Emod(x, z) * 1000); }); return s * 1000; });   // [mm]
+  const sAt = (prof, x) => { const t = (x + 18) / 0.5, i = Math.max(0, Math.min(XS.length - 2, Math.floor(t))); return lerp(prof[i], prof[i + 1], clamp(t - i)); };
+  // izobárok (σz/p) – nem függnek a tehertől és a talajtól
+  const ISO = [0.8, 0.5].map(r => { const L = [], R = []; for (let z = 0.2; z <= 11.6; z += 0.2) { if (sig(0, z) < r) break; let a = 0, b = 18; for (let k = 0; k < 30; k++) { const m = (a + b) / 2; if (sig(m, z) > r) a = m; else b = m; } R.push([a, z]); L.unshift([-a, z]); } return { r, pts: L.concat(R) }; });
+  const fmtB = (b) => b < 1 / 5000 ? '≈ 0' : '1/' + Math.round(1 / b);
   function draw() {
     const n = +N.value; $('#kshNo').textContent = n + ' szint';
-    const p = 10 + 12 * n;                                     // talpfeszültség [kPa]
-    const E = soil === 0 ? 40 : 8, Er = soil === 2 ? 3.2 : E;   // modulus [MPa]
-    const sc = (Ee) => p * Bm * 0.9 / (Ee * 1000) * 1000;     // [mm] – egyszerűsített rugalmas becslés
-    const sL = 0.8 * sc(E), sR = 0.8 * sc(Er), sC = 0.5 * (sc(E) + sc(Er)) * (soil === 2 ? 1.05 : 1);
-    const dS = Math.abs(sR - sL); const dish = Math.max(0, sC - (sL + sR) / 2);
-    const beta = Math.max(dS / (Bm * 1000), dish / (Bm / 2 * 1000));
-    const k = 0.55; const yL = sL * k, yR = sR * k, yC = sC * k;    // torzított képi elmozdulás [px]
+    const p = 10 + 12 * n;                                       // talpfeszültség [kPa]
+    const prof = profile(p);
+    const sp = PTS.map(x => sAt(prof, x));
+    const raft = []; for (let x = -7; x <= 7.001; x += 0.5) raft.push(sAt(prof, x));
+    const sAvg = raft.reduce((a, b) => a + b, 0) / raft.length, sMax = Math.max(...raft), sMin = Math.min(...raft), dS = sMax - sMin;
+    const om = (sp[4] - sp[0]) / (LB * 1000);                   // az egész épület dőlése
+    let beta = 0, bi = 0; const bet = []; for (let i = 0; i < 4; i++) { const b = Math.abs((sp[i + 1] - sp[i]) / (SP * 1000) - om); bet.push(b); if (b > beta) { beta = b; bi = i; } }
+    const k = Math.min(0.6, 58 / Math.max(sMax, 1));             // torzítás [px/mm]
+    const X = (m) => CX + m * PX, M = (px) => (px - CX) / PX, Y = (px) => GY + k * sAt(prof, M(px));
     svg.innerHTML = '';
     const defs = h('defs', {}, svg); const pat = h('pattern', { id: 'kshDots', width: 9, height: 9, patternUnits: 'userSpaceOnUse' }, defs); h('circle', { cx: 2, cy: 2, r: 1.1, fill: 'rgba(60,40,20,.35)' }, pat);
     const pat2 = h('pattern', { id: 'kshLen', width: 12, height: 6, patternUnits: 'userSpaceOnUse' }, defs); h('path', { d: 'M0 3 q3 -3 6 0 t6 0', stroke: 'rgba(240,210,160,.55)', fill: 'none', 'stroke-width': 1.3 }, pat2);
-    h('rect', { x: 0, y: 0, width: W, height: GY, fill: 'url(#kshSky)' }, svg);
     const sky = h('linearGradient', { id: 'kshSky', x1: 0, y1: 0, x2: 0, y2: 1 }, defs); h('stop', { offset: 0, 'stop-color': '#cfe3f0' }, sky); h('stop', { offset: 1, 'stop-color': '#eef3f0' }, sky);
-    // talaj (a felszín a süllyedési teknő szerint)
-    const trough = (x) => { if (x <= BX0 - 70 || x >= BX1 + 70) return 0; if (x < BX0) return yL * Math.pow((x - (BX0 - 70)) / 70, 2); if (x > BX1) return yR * Math.pow(((BX1 + 70) - x) / 70, 2); const u = (x - BX0) / (BX1 - BX0); return lerp(yL, yR, u) + 4 * u * (1 - u) * (yC - (yL + yR) / 2); };
-    let d = `M0 ${GY}`; for (let x = 0; x <= W; x += 5) d += ` L${x} ${GY + trough(x)}`; d += ` L${W} 330 L0 330 Z`;
-    h('path', { d, fill: soil === 0 ? '#c9a46b' : '#8b8274' }, svg); h('path', { d, fill: 'url(#kshDots)' }, svg);
-    if (soil === 2) { h('ellipse', { cx: 335, cy: 215, rx: 95, ry: 28, fill: '#4a3626' }, svg); h('ellipse', { cx: 335, cy: 215, rx: 95, ry: 28, fill: 'url(#kshLen)' }, svg); const t = h('text', { x: 335, y: 220, 'text-anchor': 'middle', fill: '#f3e3c8', 'font-size': 13, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'puha lencse' }, svg); }
-    // feszültséghagyma (a teherrel nő)
-    const s0 = 0.45 + 0.07 * n; for (const [f, a] of [[1, .55], [1.7, .38], [2.6, .24]]) h('ellipse', { cx: (BX0 + BX1) / 2, cy: GY + yC, rx: 110 * s0 * f * 0.62 + 40, ry: 52 * s0 * f, fill: 'none', stroke: `rgba(232,149,42,${a + 0.15})`, 'stroke-width': 2, 'stroke-dasharray': '6 5', 'clip-path': 'url(#kshClip)' }, svg);
-    const cp = h('clipPath', { id: 'kshClip' }, defs); h('rect', { x: 0, y: GY + 2, width: W, height: 330 - GY }, cp);
+    const cp = h('clipPath', { id: 'kshClip' }, defs);
+    h('rect', { x: 0, y: 0, width: W, height: 330, fill: 'url(#kshSky)' }, svg);
+    // talaj: a felszín a süllyedési teknő szerint
+    let d = `M0 ${Y(0)}`; for (let x = 5; x <= W; x += 5) d += ` L${x} ${Y(x).toFixed(1)}`; d += ` L${W} 330 L0 330 Z`;
+    h('path', { d, fill: soil === 1 ? '#8b8274' : '#c9a46b' }, svg); h('path', { d, fill: 'url(#kshDots)' }, svg); h('path', { d }, cp);
+    if (soil === 2) { const ex = X(LENS.x), ez = GY + LENS.z * PX; h('ellipse', { cx: ex, cy: ez, rx: LENS.rx * PX, ry: LENS.rz * PX, fill: '#4a3626' }, svg); h('ellipse', { cx: ex, cy: ez, rx: LENS.rx * PX, ry: LENS.rz * PX, fill: 'url(#kshLen)' }, svg); h('text', { x: ex, y: ez + 4, 'text-anchor': 'middle', fill: '#f3e3c8', 'font-size': 12, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'puha lencse' }, svg); }
+    // izobárok (σz = 0,8 · 0,5 · 0,3 p)
+    const ig = h('g', { 'clip-path': 'url(#kshClip)' }, svg);
+    ISO.forEach(({ r, pts }, i) => { let dd = ''; pts.forEach(([x, z], j) => { dd += (j ? ' L' : 'M') + X(x).toFixed(1) + ' ' + (GY + k * sAt(prof, x) + z * PX).toFixed(1); }); h('path', { d: dd, fill: 'none', stroke: `rgba(232,149,42,${0.75 - i * 0.18})`, 'stroke-width': 1.8, 'stroke-dasharray': '6 5' }, ig);
+      const last = pts[Math.floor(pts.length / 2)]; if (GY + last[1] * PX < 318) h('text', { x: CX - 26, y: GY + k * sAt(prof, 0) + last[1] * PX - 4, 'font-size': 10.5, 'font-family': 'var(--fm)', fill: 'rgba(255,240,215,.9)', text: String(r).replace('.', ',') + ' p' }, ig); });
     // eredeti felszín
-    h('line', { x1: 0, y1: GY, x2: W, y2: GY, stroke: 'rgba(20,20,20,.5)', 'stroke-dasharray': '7 6', 'stroke-width': 1.4 }, svg);
-    // épület (a két sarok süllyedése szerint elfordítva)
-    const ang = Math.atan2(yR - yL, BX1 - BX0) * 180 / Math.PI; const fh = 17, H = n * fh + 8;
-    const g = h('g', { transform: `translate(${BX0} ${GY + yL}) rotate(${ang})` }, svg);
-    h('rect', { x: -6, y: 0, width: BX1 - BX0 + 12, height: 12, fill: '#b9b4aa', stroke: '#6f6a62', 'stroke-width': 1 }, g);
-    h('rect', { x: 0, y: -H, width: BX1 - BX0, height: H, fill: '#efe6d2', stroke: '#8d8576', 'stroke-width': 1.2 }, g);
-    for (let i = 0; i < n; i++) { const y = -8 - (i + 1) * fh + 4; for (let j = 0; j < 8; j++) h('rect', { x: 10 + j * 26.5, y, width: 14, height: 9, fill: '#5b7286', rx: 1 }, g); h('line', { x1: 0, y1: -8 - i * fh, x2: BX1 - BX0, y2: -8 - i * fh, stroke: 'rgba(0,0,0,.08)' }, g); }
-    h('rect', { x: -3, y: -H - 5, width: BX1 - BX0 + 6, height: 6, fill: '#7c8086' }, g);
-    // repedések
-    const crack = (x0, y0, segs, w) => { let dd = `M${x0} ${y0}`; let x = x0, y = y0; for (let i = 0; i < segs; i++) { x += (i % 2 ? 6 : -4) + 3; y -= 9; dd += ` L${x} ${y}`; } h('path', { d: dd, stroke: '#3b2a20', 'stroke-width': w, fill: 'none', 'stroke-linecap': 'round' }, g); };
-    if (beta > 1 / 300) { const xr = soil === 2 ? 0.72 : 0.5; crack((BX1 - BX0) * xr, -10, Math.min(n * 2, 9), 1.8); crack((BX1 - BX0) * (xr - 0.18), -12, Math.min(n * 2 - 1, 7), 1.4); }
-    if (beta > 1 / 150) { crack((BX1 - BX0) * 0.86, -10, Math.min(n * 2, 10), 2.4); crack((BX1 - BX0) * 0.4, -12, Math.min(n * 2, 8), 1.6); }
+    h('line', { x1: 0, y1: GY, x2: W, y2: GY, stroke: 'rgba(20,20,20,.45)', 'stroke-dasharray': '7 6', 'stroke-width': 1.3 }, svg);
+    // hajlékony lemezalap (a talajjal együtt hajlik)
+    const RT = 9; let rd = `M${BX0 - 6} ${Y(BX0 - 6)}`; for (let x = BX0 - 6; x <= BX1 + 6; x += 4) rd += ` L${x} ${Y(x).toFixed(1)}`; rd += ` L${BX1 + 6} ${(Y(BX1 + 6) + RT).toFixed(1)}`; for (let x = BX1 + 6; x >= BX0 - 6; x -= 4) rd += ` L${x} ${(Y(x) + RT).toFixed(1)}`; rd += ' Z';
+    h('path', { d: rd, fill: '#b9b4aa', stroke: '#6f6a62', 'stroke-width': 1 }, svg);
+    { const tc = soil === 1 ? 'rgba(255,245,230,.95)' : 'rgba(40,30,20,.88)', ly = GY + 34; h('line', { x1: 112, y1: ly - 4, x2: BX0 - 4, y2: Y(BX0) + RT / 2, stroke: tc, 'stroke-width': 1 }, svg); h('text', { x: 108, y: ly - 8, 'text-anchor': 'end', 'font-size': 10.5, 'font-family': 'var(--fm)', fill: tc, text: 'hajlékony' }, svg); h('text', { x: 108, y: ly + 5, 'text-anchor': 'end', 'font-size': 10.5, 'font-family': 'var(--fm)', fill: tc, text: 'lemezalap' }, svg); }
+    // épület – a homlokzat együtt hajlik a lemezzel
+    const fh = Math.min(17, (GY - 46) / n), wh = Math.min(9, fh - 5), H = n * fh + 8, top = (x) => Y(x) - H;
+    let fd = `M${BX0} ${Y(BX0)}`; for (let x = BX0; x <= BX1; x += 4) fd += ` L${x} ${Y(x).toFixed(1)}`; fd += ` L${BX1} ${Y(BX1)}`; for (let x = BX1; x >= BX0; x -= 4) fd += ` L${x} ${top(x).toFixed(1)}`; fd += ' Z';
+    h('path', { d: fd, fill: '#efe6d2', stroke: '#8d8576', 'stroke-width': 1.2 }, svg);
+    for (let i = 1; i < n; i++) { let ld = ''; for (let x = BX0; x <= BX1; x += 6) ld += (x === BX0 ? 'M' : ' L') + x + ' ' + (Y(x) - 8 - i * fh).toFixed(1); h('path', { d: ld, fill: 'none', stroke: 'rgba(0,0,0,.09)' }, svg); }
+    for (let i = 0; i < n; i++) for (let j = 0; j < 8; j++) { const x = BX0 + 10 + j * 26.5; h('rect', { x, y: (Y(x + 7) - 8 - (i + 1) * fh + (fh - wh) / 2).toFixed(1), width: 14, height: wh.toFixed(1), fill: '#5b7286', rx: 1 }, svg); }
+    let rf = ''; for (let x = BX0 - 3; x <= BX1 + 3; x += 4) rf += (x === BX0 - 3 ? 'M' : ' L') + x + ' ' + (top(x) - 2.5).toFixed(1); h('path', { d: rf, fill: 'none', stroke: '#7c8086', 'stroke-width': 6 }, svg);
+    // falak / pillérek helye (3,5 m-enként)
+    PTS.forEach(m => { const x = X(m); h('line', { x1: x, y1: Y(x), x2: x, y2: top(x), stroke: 'rgba(80,70,55,.18)', 'stroke-width': 1.2 }, svg); });
+    // repedések: ahol a szomszédos pontok közötti szögtorzulás nagy; a repedés a jobban süllyedő oldal felé emelkedik
+    bet.forEach((b, i) => { if (b < 1 / 300) return; const dir = Math.sign(sp[i + 1] - sp[i] - om * SP * 1000) || 1, xm = (X(PTS[i]) + X(PTS[i + 1])) / 2, w = b >= 1 / 150 ? 2.4 : 1.6, segs = Math.min(2 + n, 9);
+      for (const off of b >= 1 / 150 ? [-14, 12] : [0]) { let x = xm + off - dir * segs * 2.5, y = Y(x) - 4, dd = `M${x.toFixed(1)} ${y.toFixed(1)}`; for (let s = 0; s < segs; s++) { x += dir * (s % 2 ? 7 : 3); y = Y(x) - 4 - (s + 1) * Math.min(9, (H - 12) / segs); dd += ` L${x.toFixed(1)} ${y.toFixed(1)}`; } h('path', { d: dd, stroke: '#3b2a20', 'stroke-width': w, fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, svg); } });
     // terhek
-    for (let i = 0; i < 5; i++) { const x = BX0 + 22 + i * 44; h('path', { d: `M${x} ${GY - H - 34 + yL} v20`, stroke: '#e8952a', 'stroke-width': 3, 'marker-end': '' }, svg); h('path', { d: `M${x - 5} ${GY - H - 16 + yL} l5 7 l5 -7z`, fill: '#e8952a' }, svg); }
-    // süllyedés-jelölés
-    if (Math.max(yL, yR) > 4) { const x = BX1 + 30; h('line', { x1: x, y1: GY, x2: x, y2: GY + yR, stroke: '#1b1d20', 'stroke-width': 1.5 }, svg); h('text', { x: x + 6, y: GY + yR / 2 + 4, 'font-size': 13, 'font-weight': 700, fill: '#1b1d20', 'font-family': 'var(--fm)', text: 's' }, svg); }
+    for (let i = 0; i < 5; i++) { const x = BX0 + 22 + i * 44, y0 = top(x) - 30; h('path', { d: `M${x} ${y0} v18`, stroke: '#e8952a', 'stroke-width': 3 }, svg); h('path', { d: `M${x - 5} ${y0 + 16} l5 7 l5 -7z`, fill: '#e8952a' }, svg); }
+    // Δs: a legkisebb és a legnagyobb süllyedés különbsége (jobbra, méretvonallal)
+    if (dS * k > 11) { const iMax = raft.indexOf(sMax), iMin = raft.indexOf(sMin), xMax = X(-7 + iMax * 0.5), xMin = X(-7 + iMin * 0.5), xd = BX0 - 30, y1 = Y(xMin) + RT, y2 = Y(xMax) + RT;
+      h('line', { x1: xMin, y1, x2: xd - 6, y2: y1, stroke: 'rgba(255,255,255,.85)', 'stroke-dasharray': '3 3', 'stroke-width': 1.1 }, svg); h('line', { x1: xMax, y1: y2, x2: xd - 6, y2, stroke: 'rgba(255,255,255,.85)', 'stroke-dasharray': '3 3', 'stroke-width': 1.1 }, svg);
+      h('line', { x1: xd, y1, x2: xd, y2, stroke: '#fff', 'stroke-width': 1.6 }, svg); h('path', { d: `M${xd - 4} ${y1 + 6} l4 -6 l4 6 M${xd - 4} ${y2 - 6} l4 6 l4 -6`, stroke: '#fff', fill: 'none', 'stroke-width': 1.4 }, svg);
+      h('text', { x: xd - 8, y: (y1 + y2) / 2 + 4, 'text-anchor': 'end', 'font-size': 13, 'font-weight': 700, 'font-family': 'var(--fm)', fill: '#fff', text: 'Δs' }, svg); }
+    // β: a legnagyobb szögtorzulású szakasz pirossal (δs / ℓ)
+    if (beta > 1 / 5000) { const xa = X(PTS[bi]), xb = X(PTS[bi + 1]), ya = Y(xa) + RT, yb = Y(xb) + RT, col = beta >= 1 / 300 ? '#d63a2f' : beta >= 1 / 500 ? '#d98a12' : '#2f8f5b';
+      h('line', { x1: xa, y1: ya, x2: xb, y2: yb, stroke: col, 'stroke-width': 3 }, svg);
+      const yr = ya + (xb - xa) * (om * 1000) * k / PX;       // a dőlésnek megfelelő vonal
+      h('line', { x1: xa, y1: ya, x2: xb, y2: yr, stroke: col, 'stroke-dasharray': '4 3', 'stroke-width': 1.3 }, svg);
+      if (Math.abs(yb - yr) > 6) { h('line', { x1: xb + 5, y1: yr, x2: xb + 5, y2: yb, stroke: col, 'stroke-width': 1.6 }, svg); h('text', { x: xb + 9, y: (yr + yb) / 2 + 4, 'font-size': 11.5, 'font-weight': 700, 'font-family': 'var(--fm)', fill: col, text: 'δs' }, svg); }
+      [xa, xb].forEach((x, i) => h('circle', { cx: x, cy: i ? yb : ya, r: 4, fill: col, stroke: '#fff', 'stroke-width': 1.2 }, svg));
+      const lx = BX1 + 74, ly = GY + 40; h('line', { x1: (xa + xb) / 2, y1: (ya + yb) / 2 + 3, x2: lx - 44, y2: ly - 3, stroke: col, 'stroke-width': 1.2 }, svg); h('rect', { x: lx - 44, y: ly - 12, width: 88, height: 36, rx: 6, fill: 'rgba(255,255,255,.94)' }, svg);
+      h('text', { x: lx, y: ly + 1, 'text-anchor': 'middle', 'font-size': 11.5, 'font-weight': 700, 'font-family': 'var(--fm)', fill: col, text: 'β = δs / ℓ' }, svg);
+      h('text', { x: lx, y: ly + 16, 'text-anchor': 'middle', 'font-size': 10.5, 'font-family': 'var(--fm)', fill: '#3b3f45', text: 'ℓ = 3,5 m' }, svg); }
     // értékek
-    $('#kshS').textContent = Math.round((sL + sR + sC) / 3) + ' mm'; $('#kshD').textContent = Math.round(dS) + ' mm';
-    $('#kshB').innerHTML = beta < 1 / 5000 ? '≈ 0' : '1/' + Math.round(1 / beta); $('#kshP').textContent = Math.round(p) + ' kPa';
+    $('#kshS').textContent = Math.round(sAvg) + ' mm'; $('#kshD').textContent = Math.round(dS) + ' mm';
+    $('#kshB').innerHTML = fmtB(beta); $('#kshP').textContent = Math.round(p) + ' kPa';
     const V = $('#kshV'); let cls = 'ok', txt = 'Rendben: a szögtorzulás 1/500 alatt marad, az épület károsodás nélkül viseli a süllyedést.';
     if (beta >= 1 / 150) { cls = 'bad'; txt = 'Szerkezeti károsodás veszélye: a szögtorzulás nagyobb, mint 1/150. Itt már nem a síkalap méretén, hanem az alapozás módján kell változtatni.'; }
     else if (beta >= 1 / 300) { cls = 'bad'; txt = 'Repedések várhatók a falakban (1/300 fölött). Az egyenlőtlen süllyedés a veszélyes – nem az abszolút érték.'; }
@@ -173,7 +211,7 @@ $('#themeBtn').addEventListener('click', () => {
 /* ================= 1 · HATÁRÁLLAPOTOK ================= */
 { const ic = (k) => { const s = { brk: '<rect x="14" y="12" width="16" height="6" fill="#9a958b"/><path d="M8 20 Q22 40 36 20" stroke="#d4483a" stroke-width="2.4" fill="none"/>', sl: '<rect x="12" y="14" width="18" height="8" fill="#9a958b"/><path d="M30 18h9M36 15l3 3-3 3" stroke="#d4483a" stroke-width="2.4" fill="none"/><path d="M6 22h32" stroke="#555" stroke-width="1.5"/>',
       ov: '<g transform="rotate(-12 30 22)"><rect x="16" y="6" width="12" height="16" fill="#cfc6b3"/><rect x="12" y="22" width="20" height="5" fill="#9a958b"/></g><path d="M12 30 A14 14 0 0 1 9 16" stroke="#d4483a" stroke-width="2.4" fill="none"/>', up: '<rect x="10" y="12" width="24" height="12" fill="#9a958b"/><path d="M6 18h32" stroke="#3d9ad6" stroke-width="2"/><path d="M16 34v-8M28 34v-8" stroke="#3d9ad6" stroke-width="2.4"/><path d="M13 28l3-4 3 4M25 28l3-4 3 4" fill="#3d9ad6"/>',
-      gl: '<path d="M4 14h12l20 22H4z" fill="#cbb98f"/><path d="M10 12 A20 20 0 0 0 36 34" stroke="#d4483a" stroke-width="2.4" fill="none" stroke-dasharray="4 3"/>', st: '<rect x="12" y="8" width="20" height="16" fill="#cfc6b3"/><path d="M14 26 Q22 34 30 26" stroke="#3d9ad6" stroke-width="2" fill="none"/><path d="M22 10v10" stroke="#555" stroke-width="1.6" stroke-dasharray="2 2"/>',
+      gl: '<path d="M4 14h12l20 22H4z" fill="#cbb98f"/><path d="M8 14 A24 24 0 0 0 38 36" stroke="#d4483a" stroke-width="2.4" fill="none" stroke-dasharray="4 3"/>', st: '<rect x="12" y="8" width="20" height="16" fill="#cfc6b3"/><path d="M14 26 Q22 34 30 26" stroke="#3d9ad6" stroke-width="2" fill="none"/><path d="M22 10v10" stroke="#555" stroke-width="1.6" stroke-dasharray="2 2"/>',
       df: '<g transform="rotate(5 22 22)"><rect x="10" y="8" width="24" height="16" fill="#cfc6b3"/><path d="M20 10l3 5-2 3 3 5" stroke="#3b2a20" stroke-width="1.6" fill="none"/></g><path d="M6 30h32" stroke="#555" stroke-width="1.5"/>', str: '<rect x="8" y="16" width="28" height="10" fill="#9a958b"/><path d="M14 16v10M20 16v10M26 16v10M32 16v10" stroke="#555" stroke-width="1.4"/><path d="M8 21h28" stroke="#d4483a" stroke-width="1.6" stroke-dasharray="3 2"/>' }[k];
       return `<svg viewBox="0 0 44 44" aria-hidden="true">${s}</svg>`; };
   const G = [['Teherbírási határállapotok', 'Biztonság a tönkremenetel ellen', [['brk', 'talajtörés', 3], ['sl', 'elcsúszás', 4], ['ov', 'felborulás (billenés)', 4], ['up', 'felúszás', 4], ['gl', 'általános állékonyság', 4]]],
@@ -232,7 +270,7 @@ $('#themeBtn').addEventListener('click', () => {
 { const P = (k) => ({
     A: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 70 Q50 64 100 70 T200 68 V120 H0Z" fill="#7d8f5a"/><path d="M0 84 Q60 78 120 86 T200 82 V120 H0Z" fill="#5e7a8c" opacity=".85"/><g stroke="#4f6a3a" stroke-width="2"><path d="M30 70v-14M36 70v-18M42 70v-12M150 69v-15M156 69v-19"/></g><path d="M0 100 h200" stroke="#3d2d20" stroke-width="14" opacity=".55"/>',
     B: '<rect width="200" height="120" fill="#cfe2ee"/><rect x="20" y="24" width="34" height="46" fill="#9a8f84"/><rect x="60" y="34" width="26" height="36" fill="#b9ae9f"/><rect x="140" y="20" width="40" height="50" fill="#8c837a"/><path d="M0 70 H200 V120 H0Z" fill="#8a7f6e"/><g fill="#5b4a3a"><rect x="30" y="86" width="16" height="7"/><rect x="90" y="96" width="22" height="6"/><rect x="150" y="84" width="12" height="9"/></g><g fill="#b9b2a4"><circle cx="70" cy="88" r="4"/><circle cx="130" cy="104" r="5"/></g>',
-    C: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 40 L70 40 L150 110 L200 110 V120 H0Z" fill="#b8a07a"/><path d="M0 40 L70 40" stroke="#6f8f4c" stroke-width="5"/><rect x="26" y="20" width="30" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M22 20 l19 -12 19 12z" fill="#c0704c"/><path d="M78 32 A60 60 0 0 1 160 112" stroke="#d4483a" stroke-width="2.4" fill="none" stroke-dasharray="6 4"/>',
+    C: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 40 L70 40 L150 110 L200 110 V120 H0Z" fill="#b8a07a"/><path d="M0 40 L70 40" stroke="#6f8f4c" stroke-width="5"/><rect x="26" y="20" width="30" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M22 20 l19 -12 19 12z" fill="#c0704c"/><path d="M18 40 A110 110 0 0 0 158 110" stroke="#d4483a" stroke-width="2.4" fill="none" stroke-dasharray="6 4"/>',
     D: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 64 H120 L140 76 H200 V120 H0Z" fill="#a39271"/><path d="M128 72 H200 V84 H134Z" fill="#4f88b0"/><path d="M0 58 H200" stroke="#4f88b0" stroke-width="2" stroke-dasharray="6 4" opacity=".8"/><rect x="40" y="44" width="34" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M36 44 l21 -12 21 12z" fill="#c0704c"/>' })[k];
   const D = [['A', 'Mocsaras, lápos terület a Tisza-tó partján', 'Szerves talaj és magas talajvíz', 'A tőzeg és a láp nagyon összenyomható, évekig süllyed, a víz a felszín közelében van. Síkalap helyett mélyalap vagy talajjavítás kell.', [6, 8]],
     ['B', 'Régi ipari feltöltés a bulinegyedben', 'Ismeretlen feltöltés', 'Laza, vegyes összetételű, akár szennyezett anyag, amely egyenlőtlenül roskad, sőt gázt is fejleszthet. Ki kell cserélni, át kell alapozni rajta.', [6, 5]],
@@ -244,7 +282,6 @@ $('#themeBtn').addEventListener('click', () => {
     b.addEventListener('click', () => { b.classList.add('open'); $('#sitesAll').classList.add('on'); }); }); }
 
 /* ================= 1 · KI A FELELŐS ================= */
-$$('#poll button').forEach(b => b.addEventListener('click', () => { $$('#poll button').forEach(x => { x.classList.toggle('pick', x === b); $('.bar', x).style.width = x === b ? '100%' : '0'; }); $('#pans').classList.add('on'); }));
 
 /* ================= A TÁRGY ÚTJA: lépések ================= */
 { const box = $('#steps'), prog = $('#jprog');

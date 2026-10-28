@@ -170,23 +170,24 @@
         <p>Az egyenlőtlen süllyedés erőket és feszültségeket ébreszt a felszerkezetben: a szerkezet megrepedhet, és szélsőséges esetben – túlterhelés miatt – az alap alatti talaj el is törhet. Próbáld ki a modellen, mit okoz egy puha lencse az épület alatt!</p>
       </div>
       <div class="wg" id="ksh" style="margin-top:30px">
-        <div class="wg-h"><b>Kölcsönhatás-labor</b><span class="mono">szemléltető modell · torzítva</span></div>
+        <div class="wg-h"><b>Kölcsönhatás-labor</b><span class="mono">hajlékony lemezalap · torzítva</span></div>
         <div class="wg-b ksh-b">
           <svg id="kshSvg" viewBox="0 0 560 330" role="img" aria-label="Épület süllyedése a talajon"></svg>
           <div class="ksh-side">
             <div class="seg" id="kshSoil" role="group" aria-label="Altalaj">
-              <button class="on" data-v="0">tömör, egyenletes</button><button data-v="1">puha, egyenletes</button><button data-v="2">puha lencsével</button>
+              <button class="on" data-v="0">tömör, egyenletes</button><button data-v="1">puha, egyenletes</button><button data-v="2">tömör, puha lencsével</button>
               </div>
             <div class="ctl"><label for="kshN">Szintszám</label><input type="range" id="kshN" min="1" max="10" value="4"><output id="kshNo">4 szint</output></div>
             <div class="reads">
                 <div class="rd"><span>átlagos süllyedés</span><b id="kshS">–</b></div>
-                <div class="rd"><span>süllyedéskülönbség</span><b id="kshD">–</b></div>
-                <div class="rd"><span>szögtorzulás</span><b id="kshB">–</b></div>
+                <div class="rd"><span>süllyedéskülönbség Δs</span><b id="kshD">–</b></div>
+                <div class="rd"><span>szögtorzulás β</span><b id="kshB">–</b></div>
                 <div class="rd"><span>talpfeszültség</span><b id="kshP">–</b></div>
               </div>
             <div class="verdict ok" id="kshV" aria-live="polite"></div>
           </div>
         </div>
+        <p class="note ksh-note">A lemezalap hajlékony: együtt hajlik a talajjal, ezért egyenletes talajon is a közepe süllyed a legtöbbet. A <b>süllyedéskülönbség</b> (Δs) a legnagyobb és a legkisebb süllyedés különbsége. A <b>szögtorzulás</b> (β) két szomszédos fal vagy pillér (itt 3,5 m-enként) süllyedéskülönbsége (δs) osztva a távolságukkal (ℓ), az egész épület dőlését levonva – az ábrán a színes szakasz mutatja, hol a legnagyobb. A falak repedését ez okozza, nem az átlagos süllyedés.</p>
       </div>
     </div>
 
@@ -291,24 +292,6 @@
       <div class="verdict warn reveal-all" id="sitesAll">Csapda volt: mind a négy telek kedvezőtlen. A jó altalajú területeket a településeken már beépítették – ezért kell érteni a nehéz talajokhoz is. Ezekről szól a 4., a 6. és a 7. állomás.</div>
     </div>
 
-    <!-- K · ki a felelős -->
-    <div class="blk">
-      <div class="poll">
-        <div class="bh"><h3>Megsüllyedt a ház. Ki a felelős?</h3></div>
-        <div class="popts" id="poll">
-          <button data-v="0"><span class="bar"></span><i>A</i><span>a tervező</span></button>
-          <button data-v="1"><span class="bar"></span><i>B</i><span>a kivitelező</span></button>
-          <button data-v="2"><span class="bar"></span><i>C</i><span>maga a talaj</span></button>
-          <button data-v="3"><span class="bar"></span><i>D</i><span>az időjárás</span></button>
-        </div>
-        <div class="card pans" id="pans" style="padding:24px" aria-live="polite">
-          <div class="kick" style="margin-bottom:8px">A tanulság</div>
-          <p style="margin:0 0 10px">A talajt nem lehet felelőssé tenni: az adottság. Ha egy ház megsüllyed, annak oka szinte mindig az, hogy a talajt nem ismerték meg eléggé, vagy a tervezés és a kivitelezés nem igazodott hozzá. Ezért kezdünk a talajfelderítéssel, és ezért kell minden határállapotot igazolni.</p>
-          <p style="margin:0">Az időjárás is lehet kiváltó ok – például aszály idején a zsugorodó agyag –, de ezt is a tervezésnek kell előre kezelnie.</p>
-          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px"><a class="pill" href="#st2" style="--c:var(--c2)"><i>2</i>Talajfelderítés</a><a class="pill" href="#st6" style="--c:var(--c6)"><i>6</i>Kedvezőtlen talaj</a></div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 

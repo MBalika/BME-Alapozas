@@ -155,6 +155,7 @@ section{position:relative}
 .ksh-side .seg{display:grid; grid-template-columns:1fr; width:100%; box-sizing:border-box}
 .ksh-side .seg button{text-align:left}
 .ksh-side .reads{grid-template-columns:1fr 1fr}
+.ksh-note{margin:0; padding:0 20px 18px}
 .ft-side p{margin:0}
 .ft-side .go{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px}
 .ft-b{align-items:stretch}
@@ -307,6 +308,7 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .site svg{width:100%; height:auto; display:block; background:#cfe2ee}
 .site .st{padding:14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1}
 .site .st i{font:700 12px/1 var(--fm); font-style:normal; color:var(--muted)}
+.site .st .pill i{color:#fff; font:700 11px/1 var(--fm)}
 .site .st b{font:700 15.5px/1.3 var(--fb)}
 .site .st .rv{display:none; font-size:14px; line-height:1.5; color:var(--ink2); border-top:1px dashed var(--line2); padding-top:8px; margin-top:4px}
 .site.open .st .rv{display:block}
@@ -316,16 +318,6 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .reveal-all{margin-top:16px; display:none}
 .reveal-all.on{display:block}
 
-/* poll */
-.poll{display:block}
-.popts{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px}
-.popts button{display:flex; align-items:center; gap:14px; text-align:left; border:1px solid var(--line2); border-radius:14px; background:var(--card); padding:14px 16px; cursor:pointer; font-weight:700; position:relative; overflow:hidden}
-.popts button i{font:700 13px/1 var(--fm); font-style:normal; width:30px; height:30px; border-radius:8px; display:grid; place-items:center; background:var(--paper2); flex:none}
-.popts button .bar{position:absolute; left:0; top:0; bottom:0; background:color-mix(in srgb, var(--c1) 22%, transparent); width:0; transition:width .7s ease; z-index:0}
-.popts button > *:not(.bar){position:relative; z-index:1}
-.popts button.pick{border-color:var(--accent)}
-.pans{display:none}
-.pans.on{display:block; margin-top:16px}
 
 /* pisa */
 .pisa{display:grid; grid-template-columns:.95fr 1.05fr; gap:0}
@@ -464,7 +456,6 @@ footer .fb{max-width:46ch}
   .cols, .cols.r55, .pisa, .vsec .vgrid, footer .fg, .rk-b, .ksh-b, .ft-b, .duo, .ls{grid-template-columns:1fr}
   .prose.two{columns:1}
   .ls .lsg:first-child{grid-row:auto}
-  .popts{grid-template-columns:1fr 1fr}
   .why{grid-template-columns:1fr}
   .harder{grid-template-columns:1fr}
   .harder .hh{max-width:none}
