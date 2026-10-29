@@ -505,7 +505,7 @@ footer .fb{max-width:46ch}
   .stp{padding:20px 18px 18px}
   .vs .vh{display:none}
   .vs .vs-s::before, .vs .vs-t::before{display:block; font:700 11px/1.4 var(--fm); letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; color:var(--muted)}
-  .vs .vs-s::before{content:'Acél, beton, fa'}
+  .vs .vs-s::before{content:'Acél, (vas)beton, fa'}
   .vs .vs-t::before{content:'Talaj'; color:var(--accent-ink)}
   footer ol{columns:1}
   .ctl{grid-template-columns:1fr auto}
