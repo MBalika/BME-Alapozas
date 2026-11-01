@@ -511,3 +511,12 @@ footer .fb{max-width:46ch}
   .ctl{grid-template-columns:1fr auto}
   .ctl label{grid-column:1 / -1}
 }
+
+/* ===== az egész félévet átfogó tananyagok (széles kártyák a gyűjtőrács végén) ===== */
+.ac.wide{grid-column:span 2; flex-direction:row}
+.ac.wide .im{flex:0 0 calc(50% - 8px); aspect-ratio:auto; min-height:100%}
+.ac.wide .tx{justify-content:center; padding:18px 20px}
+.ac.wide .tx b{font-size:18px}
+.ac.wide .im i{background:var(--accent); color:#1b1206}
+@media (max-width: 1100px){ .ac.wide{grid-column:span 3} .ac.wide .im{flex-basis:calc(33.333% - 6px)} }
+@media (max-width: 640px){ .ac.wide{grid-column:span 2; flex-direction:column} .ac.wide .im{flex:none; aspect-ratio:16/10; min-height:0} .ac.wide .tx{padding:12px 14px 14px} }

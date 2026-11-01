@@ -469,7 +469,14 @@ const XS = (() => {
 { const box = $('#gridApps'), fl = $('#footList');
   S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><p class="acd">A tárgy felépítése, a kilenc állomás és az összes tananyag egy helyen – innen indul az út.</p><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Megnyitás ↗</em></span>`);
-    el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); })); }
+    el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); }));
+  // az egész félévet átfogó tananyagok: széles kártyák a rács végén
+  const X = [
+    { t: 'Egy telek, egy félév', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Kilenc állomás egyetlen telken: te vagy a geotechnikus, és minden megoldott feladattal tovább épül a két ház 3D-makettje, a talaj megismerésétől az utolsó födémig.' },
+    { t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },
+  ];
+  X.forEach(a => { el('a', { cls: 'ac wide', href: U(a.u), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
+    el('li', {}, fl, `<i>${a.lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); }); }
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;

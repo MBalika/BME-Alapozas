@@ -8,3 +8,4 @@ a tárgy útja kilenc állomásban (görgetésre felépülő, ráközelítő met
 - A tananyagok adatai (címek, URL-ek, leírások, jelvények) az `_src/app.js` elején, az `S` tömbben vannak; a félév órarendje a `W` tömbben (2026-os dátumokkal).
 - Formázás: sorkizárás + magyar elválasztás (Hyphenopoly hu.wasm), nem törő egységek őre, keskeny dobozban lyuk esetén balra zárt tartalék.
 - A bevezető videó forrása: `Claude videók/_forras/bevezeto_forras.zip` (a kit a `hatasok_forras.zip`-ben van).
+- Átfogó tananyagok almappákban: `telek/` (Egy telek, egy félév – esettanulmány 3D-makettel) és `helyszinelok/` (Geotechnikai helyszínelők – kárügyek). Mindkettő önálló, kész oldal; a forrásuk nem itt van.
