@@ -1061,7 +1061,7 @@ $('#themeBtn').addEventListener('click', () => {
 { const svg = $('#ftSvg'); const TX = [
     'A síkalapok az építmény terheit teljes egészében a talpfelületükön – az alapsíkon – adják át az altalajnak. Az oldalfelületükön fellépő ellenállást elhanyagoljuk (kivéve szeizmikus terhelésnél). Amit itt látsz, az egy ún.\u00A0vasbeton lemezalap – a\u00A0síkalapok egyik fajtája.',
     'A mélyalapok – elsősorban a cölöp- és a résalapok – a terheket egyrészt a talpukon, másrészt az oldalfelületükön, a palástjukon adják át az altalajra, gyakorlatilag egymástól függetlenül.',
-    'A vegyes alapozások ötvözik a sík- és a mélyalapozást: ilyen a cölöppel gyámolított lemezalap, a kútalap, a mélyített síkalap és a cölöpdoboz-alap.'];
+    'A vegyes alapozások ötvözik a sík- és a mélyalapozást: ilyen pl.\u00A0a\u00A0cölöppel gyámolított lemezalap.'];
   const GO = [[3, 4, 5], [8], [8]];
   function draw(t) {
     svg.innerHTML = ''; const GY = 92;
@@ -1087,7 +1087,7 @@ $('#themeBtn').addEventListener('click', () => {
     if (t === 2) { h('rect', { x: bx0 - 30, y: GY, width: bx1 - bx0 + 60, height: 20, fill: conc, stroke: cs }, svg);
       for (let i = 0; i <= 12; i++) up(bx0 - 26 + i * ((bx1 - bx0 + 52) / 12), GY + 42, 18, '#2f9d62');
       for (const x of [205, 255, 305, 355]) { h('rect', { x: x - 7, y: GY + 20, width: 14, height: 118, fill: conc, stroke: cs }, svg); for (let k = 0; k < 4; k++) up(x + 13, GY + 66 + k * 20, 12, '#2f9d62'); up(x, GY + 160, 18, '#e8952a'); }
-      lab(450, GY + 40, 'lemez + cölöpök', '#f1ece2', 'end'); }
+      lab(bx1 + 44, GY + 58, 'lemez +', '#f1ece2'); lab(bx1 + 44, GY + 76, 'cölöpök', '#f1ece2'); }
     $('#ftTxt').textContent = TX[t]; const go = $('#ftGo'); go.innerHTML = '<span class="mut" style="font:600 13px/2 var(--fb); margin-right:4px">Részletesen:</span>';
     GO[t].forEach(n => el('a', { cls: 'pill', href: '#st' + n, style: `--c:${cv(n)}` }, go, `<i>${n}</i>${S[n - 1].rail.replace('\u00AD', '')}`));
   }
