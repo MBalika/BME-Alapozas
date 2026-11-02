@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/vizsga/">
+<title>Alapozás vizsgaszimulátor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Véletlen adatokkal generált számpéldák lépésenkénti ellenőrzéssel, és igaz–hamis kártyapakli az egész tárgyból.">
+<style>
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/schibsted-grotesk-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/schibsted-grotesk-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/schibsted-grotesk-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/schibsted-grotesk-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/schibsted-grotesk-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/schibsted-grotesk-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Kalam';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/kalam-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Kalam';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/kalam-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+</style>
+<style>
+/* elrendezés: vizsgadolgozat – vonalas lap, kék tollal írt válaszok, piros javítás; balra a feladattípusok, középen a lap */
+:root{
+  --desk:#e9ebef; --paper:#fbfbf8; --rule:rgba(54,96,190,.13); --margin:rgba(214,52,44,.35); --ink:#1a1f2b; --ink2:#3d4554; --muted:#687080; --line:rgba(26,31,43,.12); --line2:rgba(26,31,43,.24);
+  --pen:#1f4fd1; --red:#d6342c; --ok:#1c8a55; --okbg:rgba(28,138,85,.1); --badbg:rgba(214,52,44,.08); --warn:#c27c0e; --warnbg:rgba(194,124,14,.11);
+  --head:#1a1f2b; --hink:#eef0f4; --hmuted:#a3aab8; --hline:rgba(255,255,255,.12);
+  --r:14px; --w:1240px; --pad:28px; --hh:58px;
+  --fd:'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif; --fh:'Kalam', 'Comic Sans MS', cursive; --fm:'JBMono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.05), 0 12px 30px rgba(26,31,43,.09);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --desk:#0e1117; --paper:#171b23; --rule:rgba(120,150,230,.1); --margin:rgba(240,100,90,.3); --ink:#e7eaf0; --ink2:#c4cad6; --muted:#8f97a6; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --pen:#7ea2ff; --red:#ff6d63; --ok:#45c283; --okbg:rgba(69,194,131,.12); --badbg:rgba(255,109,99,.1); --warn:#e7a43c; --warnbg:rgba(231,164,60,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px rgba(0,0,0,.35); color-scheme: dark; } }
+:root[data-theme="dark"]{
+  --desk:#0e1117; --paper:#171b23; --rule:rgba(120,150,230,.1); --margin:rgba(240,100,90,.3); --ink:#e7eaf0; --ink2:#c4cad6; --muted:#8f97a6; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --pen:#7ea2ff; --red:#ff6d63; --ok:#45c283; --okbg:rgba(69,194,131,.12); --badbg:rgba(255,109,99,.1); --warn:#e7a43c; --warnbg:rgba(231,164,60,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px rgba(0,0,0,.35); color-scheme: dark; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+body{margin:0; background:var(--desk); color:var(--ink); font:400 17px/1.6 var(--fd); overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:var(--head)}
+a{color:inherit}
+button, input{font:inherit; color:inherit}
+.wrap{max-width:var(--w); margin:0 auto; padding-block:0; padding-left:max(var(--pad), env(safe-area-inset-left, 0px)); padding-right:max(var(--pad), env(safe-area-inset-right, 0px))}
+.nw{white-space:nowrap; hyphens:none}
+sub, sup{font-size:.72em; line-height:0}
+:focus-visible{outline:3px solid var(--pen); outline-offset:2px; border-radius:6px}
+main p, main li, footer p, .lead, .card .s, .card .e{ text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty }
+h1,h2,h3,button,label,.mono,output,td,th{hyphens:none; -webkit-hyphens:none}
+main .rag, footer .rag, .lead.rag{text-align:left!important}
+
+.top{position:sticky; top:env(safe-area-inset-top, 0px); z-index:50; height:var(--hh); background:var(--head); color:var(--hink); border-bottom:1px solid var(--hline)}
+.top .wrap{height:100%; display:flex; align-items:center; gap:16px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--hink); min-width:0}
+.brand svg{flex:none; width:30px; height:30px}
+.brand b{font:800 18px/1 var(--fd); white-space:nowrap}
+.tabs{margin-left:auto; display:flex; gap:6px}
+.tabs a{text-decoration:none; color:var(--hmuted); font:600 14.5px/1 var(--fd); padding:9px 12px; border-radius:999px}
+.tabs a:hover{color:var(--hink)}
+.tabs a.on{background:rgba(255,255,255,.1); color:var(--hink)}
+
+.hero{background:var(--head); color:var(--hink)}
+.hero .wrap{padding-block:clamp(24px, 4vw, 44px) clamp(26px, 4vw, 44px); display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:clamp(18px, 3vw, 36px); align-items:end}
+.kick{font:500 12px/1.3 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--hmuted)}
+h1{font:800 clamp(40px, 6.5vw, 82px)/.95 var(--fd); letter-spacing:-.03em; margin:10px 0 0; text-wrap:balance}
+h1 em{font:700 1em/1 var(--fh); font-style:normal; color:#ff6d63; letter-spacing:0}
+.lead{margin:14px 0 0; font-size:clamp(16px, 1.6vw, 18.5px); opacity:.92}
+.legend{border:1px solid var(--hline); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.legend div{display:grid; grid-template-columns:30px minmax(0, 1fr); gap:10px; align-items:center; font-size:15px}
+.legend .mk{font:700 24px/1 var(--fh); text-align:center}
+
+.work{padding-block:26px 0}
+.wgrid{display:grid; grid-template-columns:270px minmax(0, 1fr); gap:22px; align-items:start}
+.types{position:sticky; top:calc(var(--hh) + env(safe-area-inset-top, 0px) + 14px); display:flex; flex-direction:column; gap:6px}
+.types h2{margin:0 0 4px; font:500 11.5px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.tbtn{display:grid; grid-template-columns:30px minmax(0, 1fr) auto; gap:10px; align-items:center; text-align:left; border:1px solid transparent; background:transparent; border-radius:12px; padding:9px 10px; cursor:pointer; font:600 15px/1.25 var(--fd)}
+.tbtn .n{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; font:500 12px/1 var(--fm); background:var(--paper); border:1px solid var(--line2); color:var(--ink2)}
+.tbtn .c{font:500 12px/1 var(--fm); color:var(--ok)}
+.tbtn:hover{background:var(--paper)}
+.tbtn[aria-current="true"]{background:var(--paper); border-color:var(--line2); box-shadow:var(--shadow)}
+.tbtn[aria-current="true"] .n{background:var(--pen); color:#fff; border-color:var(--pen)}
+.sheet{position:relative; background:var(--paper); border-radius:6px; box-shadow:var(--shadow); padding:clamp(18px, 3vw, 34px) clamp(18px, 3vw, 34px) clamp(18px, 3vw, 34px) clamp(30px, 5vw, 66px); background-image:linear-gradient(var(--rule) 1px, transparent 1px); background-size:100% 32px; background-position:0 14px; min-width:0}
+.sheet::before{content:""; position:absolute; top:0; bottom:0; left:clamp(18px, 3.4vw, 46px); width:2px; background:var(--margin)}
+.sheet{scroll-margin-top:calc(var(--hh) + 16px)}
+.shead{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:10px; margin-bottom:16px}
+.shead h3{margin:0; font:800 clamp(22px, 2.6vw, 30px)/1.15 var(--fd); letter-spacing:-.01em}
+.shead .meta{font:500 12px/1.3 var(--fm); color:var(--muted)}
+.task{margin:0 0 14px}
+.given{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; padding:0}
+.given div{flex:1 1 210px; min-width:0; border:1px solid var(--line2); border-radius:10px; padding:8px 11px; background:var(--paper)}
+.given dt{font:500 12px/1.3 var(--fd); color:var(--muted)}
+.given dd{margin:2px 0 0; font:500 15.5px/1.3 var(--fm); font-variant-numeric:tabular-nums; white-space:nowrap}
+.fig{margin:0 0 18px; border:1px solid var(--line); border-radius:10px; background:var(--paper); overflow:hidden; max-width:100%}
+.fig svg{display:block; width:100%; height:auto; max-height:260px}
+.steps{display:flex; flex-direction:column; gap:10px; margin:0; padding:0; list-style:none; counter-reset:st}
+.step{counter-increment:st; display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:8px 14px; align-items:center; padding:10px 12px; border-radius:10px; border:1px solid transparent}
+.step .lab{display:flex; gap:10px; align-items:baseline; min-width:0}
+.step .lab::before{content:counter(st) "."; font:500 13px/1 var(--fm); color:var(--muted); flex:none}
+.step .lab span{font-size:16px; text-align:left}
+.step .in{display:flex; align-items:center; gap:6px}
+.step input{width:120px; border:0; border-bottom:2px solid var(--line2); background:transparent; padding:5px 4px; font:700 22px/1 var(--fh); color:var(--pen); text-align:right; outline:none; font-variant-numeric:tabular-nums}
+.step input:focus{border-bottom-color:var(--pen)}
+.step .u{font:500 13.5px/1 var(--fm); color:var(--muted); min-width:44px}
+.step .mk{grid-column:1 / -1; font:700 19px/1.25 var(--fh); display:none}
+.step.ok{background:var(--okbg); border-color:rgba(28,138,85,.35)} .step.ok .mk{display:block; color:var(--ok)}
+.step.bad{background:var(--badbg); border-color:rgba(214,52,44,.4)} .step.bad .mk{display:block; color:var(--red)}
+.step.carry{background:var(--warnbg); border-color:rgba(194,124,14,.4)} .step.carry .mk{display:block; color:var(--warn)}
+.step.ok input{color:var(--ok)} .step.carry input{color:var(--warn)} .step.bad input{color:var(--red); text-decoration:line-through; text-decoration-thickness:2px}
+.step .sol{grid-column:1 / -1; font:500 14px/1.6 var(--fm); color:var(--ink2); overflow-x:auto; display:none}
+.step.showsol .sol{display:block}
+.row{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--line2); background:var(--paper); color:var(--ink); border-radius:999px; padding:11px 17px; font:700 15px/1 var(--fd); text-decoration:none; cursor:pointer}
+.btn:hover{border-color:var(--pen)}
+.btn.pri{background:var(--pen); border-color:var(--pen); color:#fff}
+.btn svg{width:14px; height:14px}
+.grade{display:flex; gap:16px; align-items:center; margin-top:18px; padding:14px 16px; border:2px dashed var(--line2); border-radius:12px}
+.grade .big{font:700 46px/1 var(--fh); color:var(--red); flex:none}
+.grade p{margin:0}
+
+.deck{padding-block:40px 0}
+.deck h2{font:800 clamp(28px, 3.4vw, 40px)/1 var(--fd); letter-spacing:-.02em; margin:0 0 8px}
+.deck > p{margin:0 0 16px; color:var(--ink2)}
+.dgrid{display:grid; grid-template-columns:minmax(0, 1.2fr) minmax(0, 1fr); gap:22px; align-items:stretch}
+.card{background:var(--paper); border-radius:16px; box-shadow:var(--shadow); padding:clamp(20px, 3vw, 32px); display:flex; flex-direction:column; gap:14px; min-height:300px; border:1px solid var(--line)}
+.card .lec{font:500 12px/1.3 var(--fm); color:var(--muted)}
+.card .s{margin:0; font:700 clamp(20px, 2.2vw, 26px)/1.3 var(--fd)}
+.card .e{margin:0; color:var(--ink2)}
+.card .res{font:700 30px/1 var(--fh)}
+.card .res.ok{color:var(--ok)} .card .res.bad{color:var(--red)}
+.card .acts{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto}
+.tally{background:var(--paper); border-radius:16px; border:1px solid var(--line); padding:20px; display:flex; flex-direction:column; gap:12px}
+.tally h3{margin:0; font:500 11.5px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.tally .nums{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px}
+.tally .nums div{border:1px solid var(--line); border-radius:10px; padding:10px}
+.tally .nums b{display:block; font:800 26px/1 var(--fd); font-variant-numeric:tabular-nums}
+.tally .nums span{display:block; font:500 11.5px/1.3 var(--fm); color:var(--muted); margin-top:4px}
+.tally .bar{height:10px; border-radius:10px; background:var(--line); overflow:hidden}
+.tally .bar i{display:block; height:100%; background:var(--ok); width:0; transition:width .4s}
+.tally p{margin:0; font-size:15px; color:var(--ink2)}
+footer.wrap{border-top:1px solid var(--line); margin-top:40px; padding-block:18px 28px; color:var(--muted); font-size:14px}
+footer p{margin:0}
+@media (max-width: 980px){
+  .wgrid, .dgrid, .hero .wrap{grid-template-columns:1fr}
+  .types{position:relative; top:0; flex-direction:row; overflow-x:auto; padding-bottom:4px}
+  .types h2{display:none}
+  .tbtn{grid-template-columns:30px auto; white-space:nowrap}
+  .tbtn .c{display:none}
+}
+@media (max-width: 560px){
+  :root{--pad:16px}
+  .tabs{display:none}
+  .step{grid-template-columns:1fr}
+  .step .in{justify-content:flex-end}
+  .step input{width:100%}
+  .given{gap:6px}
+  .given div{flex:1 1 100%; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:2px 12px; padding:7px 10px}
+  .given dt{flex:1 1 120px; min-width:0}
+  .given dd{flex:0 0 auto; margin-left:auto}
+  .given dd{margin:0; font-size:14px; text-align:right}
+  .fig svg text{font-size:24px}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
+<script>Hyphenopoly.config({ require: { "hu": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Vizsgaszimulátor – az oldal teteje"><svg viewBox="0 0 30 30" aria-hidden="true"><rect x="4" y="2" width="22" height="26" rx="3" fill="#fbfbf8"/><path d="M8 9h14M8 14h14M8 19h9" stroke="#1f4fd1" stroke-width="1.6"/><path d="M17 22l3 3 6-8" stroke="#d6342c" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Vizsgaszimulátor</b></a>
+    <nav class="tabs" aria-label="Részek"><a href="#szamitas" class="on">Számpéldák</a><a href="#pakli">Igaz vagy hamis</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kick">BME Alapozás · felkészülés a vizsgára</div>
+      <h1>Alapozás <em>vizsgaszimulátor</em></h1>
+      <p class="lead">Minden feladat új, véletlen adatokkal készül, így annyiszor gyakorolhatsz, ahányszor csak akarsz. A megoldást lépésenként írod be, és a lap megmutatja, pontosan melyik lépésnél csúsztál el – és azt is, ha a módszered jó, csak egy korábbi hibás eredményt vittél tovább. Az eredmények az első generációs Eurocode 7 és a DA-2* szerint készülnek.</p>
+    </div>
+    <div class="legend" aria-label="Jelölések">
+      <div><span class="mk" style="color:#45c283">✓</span><span>Helyes lépés</span></div>
+      <div><span class="mk" style="color:#e7a43c">↳</span><span>A módszer jó, de egy korábbi hibás érték vitte tovább</span></div>
+      <div><span class="mk" style="color:#ff6d63">✗</span><span>Hibás lépés: itt csúszott el a számítás</span></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="work wrap" id="szamitas">
+    <div class="wgrid">
+      <nav class="types" id="types" aria-label="Feladattípusok"></nav>
+      <article class="sheet" id="sheet" aria-live="polite"></article>
+    </div>
+  </section>
+  <section class="deck wrap" id="pakli">
+    <h2>Igaz vagy hamis?</h2>
+    <p>Gyors ismétlés az egész tárgyból: döntsd el minden állításról, hogy igaz-e. A kártyák minden körben új sorrendben jönnek.</p>
+    <div class="dgrid"><div class="card" id="card"></div><div class="tally" id="tally"></div></div>
+  </section>
+</main>
+<footer class="wrap"><p>BME Geotechnika és Mérnökgeológia Tanszék · Alapozás · Gyakorló feladatok; a pontos vizsgakövetelményeket az előadásokon hallod.</p></footer>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const rad = (d) => d * Math.PI / 180, tg = (d) => Math.tan(rad(d));
+const f = (v, d = 1) => { const s = (Math.round(v * 10 ** d) / 10 ** d).toFixed(d); const [i, fr] = s.split('.'); const ii = i.replace('-', '−').replace(/\B(?=(\d{3})+(?!\d))/g, ' '); return fr ? ii + ',' + fr : ii; };
+const Nq = (p) => Math.exp(Math.PI * tg(p)) * tg(45 + p / 2) ** 2;
+let seed = Date.now() % 2147483647; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const pick = (a) => a[Math.floor(rnd() * a.length)];
+const range = (a, b, st) => { const n = Math.round((b - a) / st); return +(a + st * Math.floor(rnd() * (n + 1))).toFixed(3); };
+
+/* Steinbrenner: négyzetes alap középpontja alatti hatásszám */
+function Ic(a, b, z) { if (z <= 0) return 0.25; const m = a / z, n = b / z, m2 = m * m, n2 = n * n, V = m2 + n2 + 1; const t1 = (2 * m * n * Math.sqrt(V) / (m2 + n2 + m2 * n2 + 1)) * ((m2 + n2 + 2) / V); const den = V - m2 * n2; const at = den > 0 ? Math.atan(2 * m * n * Math.sqrt(V) / den) : den < 0 ? Math.PI + Math.atan(2 * m * n * Math.sqrt(V) / den) : Math.PI / 2; return (t1 + at) / (4 * Math.PI); }
+
+/* ================= VÁZLATOK ================= */
+const svgFoot = (o) => { const { B, D, strip, gw } = o; const W = 560, H = 230, cx = 280, gy = 70, sc = 60, bw = Math.min(260, B * sc), dd = Math.min(110, D * sc);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Az alap vázlata"><rect x="0" y="${gy}" width="${W}" height="${H - gy}" fill="#cfae74" opacity=".35"/><line x1="0" y1="${gy}" x2="${W}" y2="${gy}" stroke="currentColor" stroke-width="2"/>
+  <rect x="${cx - bw / 2}" y="${gy + dd - 26}" width="${bw}" height="26" fill="#c9c6bd" stroke="currentColor" stroke-width="1.5"/>${strip ? '' : `<rect x="${cx - 16}" y="${gy - 30}" width="32" height="${dd + 4}" fill="#c9c6bd" stroke="currentColor" stroke-width="1.5"/>`}${strip ? `<rect x="${cx - 18}" y="${gy - 30}" width="36" height="${dd + 4}" fill="#c9c6bd" stroke="currentColor" stroke-width="1.5"/>` : ''}
+  <path d="M${cx} ${gy - 62} v26" stroke="#1f4fd1" stroke-width="3"/><path d="M${cx - 7} ${gy - 44} l7 10 l7 -10" fill="none" stroke="#1f4fd1" stroke-width="3"/><text x="${cx + 12}" y="${gy - 46}" font-size="15" fill="#1f4fd1" font-family="Kalam, cursive" font-weight="700">${strip ? 'G, Q (kN/m)' : 'G, Q'}</text>
+  <line x1="${cx - bw / 2}" y1="${gy + dd + 18}" x2="${cx + bw / 2}" y2="${gy + dd + 18}" stroke="currentColor"/><text x="${cx}" y="${gy + dd + 36}" text-anchor="middle" font-size="14" fill="currentColor" font-family="JBMono, monospace">B = ${f(B, 2)} m</text>
+  <line x1="${cx + bw / 2 + 26}" y1="${gy}" x2="${cx + bw / 2 + 26}" y2="${gy + dd}" stroke="currentColor"/><text x="${cx + bw / 2 + 34}" y="${gy + dd / 2 + 5}" font-size="14" fill="currentColor" font-family="JBMono, monospace">D = ${f(D, 2)} m</text>
+  ${gw ? `<line x1="0" y1="${gy + Math.min(150, gw * sc)}" x2="${W}" y2="${gy + Math.min(150, gw * sc)}" stroke="#3d9ad6" stroke-width="2" stroke-dasharray="7 5"/><text x="10" y="${gy + Math.min(150, gw * sc) - 6}" font-size="13" fill="#3d9ad6" font-family="JBMono, monospace">talajvíz</text>` : ''}</svg>`; };
+const svgWall = (H0) => { const W = 560, Hh = 230, gy = 40, sc = Math.min(26, 170 / H0), h = H0 * sc, x = 220;
+  return `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="A támfal vázlata"><rect x="${x}" y="${gy}" width="${W - x}" height="${Hh - gy}" fill="#cfae74" opacity=".35"/><line x1="${x}" y1="${gy}" x2="${W}" y2="${gy}" stroke="currentColor" stroke-width="2"/><rect x="${x - 22}" y="${gy}" width="22" height="${h + 20}" fill="#c9c6bd" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M${x} ${gy} L${x + 0} ${gy + h} L${x + 0.333 * 120} ${gy + h} Z" fill="rgba(214,52,44,.18)" stroke="#d6342c" stroke-width="1.5"/><path d="M${x + 8} ${gy + h * 2 / 3} h-30" stroke="#d6342c" stroke-width="3"/><path d="M${x - 14} ${gy + h * 2 / 3 - 7} l-8 7 l8 7" fill="none" stroke="#d6342c" stroke-width="3"/><text x="${x - 30}" y="${gy + h * 2 / 3 - 12}" text-anchor="end" font-size="16" fill="#d6342c" font-family="Kalam, cursive" font-weight="700">E<tspan font-size="11" dy="4">a</tspan></text>
+  <line x1="${x - 60}" y1="${gy}" x2="${x - 60}" y2="${gy + h}" stroke="currentColor"/><text x="${x - 68}" y="${gy + h / 2 + 5}" text-anchor="end" font-size="14" fill="currentColor" font-family="JBMono, monospace">H = ${f(H0, 1)} m</text></svg>`; };
+const svgBox = (t, d) => { const W = 560, H = 230, gy = 40, sc = Math.min(20, 170 / t), x0 = 170, x1 = 400;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="A pince vázlata"><rect x="0" y="${gy}" width="${W}" height="${H - gy}" fill="#cfae74" opacity=".3"/><line x1="0" y1="${gy}" x2="${W}" y2="${gy}" stroke="currentColor" stroke-width="2"/><line x1="0" y1="${gy + d * sc}" x2="${W}" y2="${gy + d * sc}" stroke="#3d9ad6" stroke-width="2" stroke-dasharray="7 5"/><text x="10" y="${gy + d * sc - 6}" font-size="13" fill="#3d9ad6" font-family="JBMono, monospace">talajvíz −${f(d, 1)} m</text>
+  <rect x="${x0}" y="${gy}" width="${x1 - x0}" height="${t * sc}" fill="rgba(201,198,189,.35)" stroke="currentColor" stroke-width="2"/><rect x="${x0}" y="${gy + t * sc - 12}" width="${x1 - x0}" height="12" fill="#c9c6bd" stroke="currentColor"/>
+  ${[0, 1, 2, 3, 4].map(i => `<path d="M${x0 + 25 + i * 45} ${gy + t * sc + 34} v-22" stroke="#3d9ad6" stroke-width="3"/><path d="M${x0 + 18 + i * 45} ${gy + t * sc + 20} l7 -9 l7 9" fill="none" stroke="#3d9ad6" stroke-width="3"/>`).join('')}<text x="${x1 + 14}" y="${gy + t * sc + 5}" font-size="14" fill="currentColor" font-family="JBMono, monospace">−${f(t, 1)} m</text></svg>`; };
+
+/* ================= FELADATTÍPUSOK =================
+   Minden lépés: id, lab (HTML), unit, fn(v) – v-ben a korábbi lépések értékei; tol: relatív tűrés vagy abs; sol(v): a lépés megoldása. */
+const TYPES = [
+  { id: 'pill', t: 'Pillér alap teherbírása', lec: '3. előadás', gen() {
+      const p = { B: range(1.6, 2.6, 0.2), D: range(1.0, 2.0, 0.2), phi: pick([28, 30, 32, 34]), g: pick([18, 19, 20]), G: range(500, 1100, 50), Q: range(120, 360, 20) }; return p; },
+    given: (p) => [['alapméret', `B = L = ${f(p.B, 2)} m`], ['alapozási mélység', `D = ${f(p.D, 2)} m`], ['homok', `γ = ${p.g} kN/m³`], ['nyírószilárdság', `φ′<sub>k</sub> = ${p.phi}°, c′<sub>k</sub> = 0`], ['állandó teher (alaptesttel)', `G<sub>k</sub> = ${f(p.G, 0)} kN`], ['esetleges teher', `Q<sub>k</sub> = ${f(p.Q, 0)} kN`]],
+    text: 'Központosan terhelt, négyzet alakú pillér alap homokban. A talajvíz mélyen van, a hatása elhanyagolható. Igazold a teherbírást DA-2* szerint (γ<sub>G</sub> = 1,35; γ<sub>Q</sub> = 1,5; γ<sub>R;v</sub> = 1,4).', fig: (p) => svgFoot({ B: p.B, D: p.D }),
+    steps: (p) => [
+      { id: 'q', lab: 'Hatékony feszültség az alapsík szintjén: q′', unit: 'kPa', fn: () => p.g * p.D, sol: () => `q′ = γ · D = ${p.g} · ${f(p.D, 2)} = ${f(p.g * p.D, 1)} kPa` },
+      { id: 'nq', lab: 'N<sub>q</sub>', unit: '–', tol: 0.015, fn: () => Nq(p.phi), sol: () => `N<sub>q</sub> = e<sup>π·tg ${p.phi}°</sup> · tg²(45° + ${p.phi}°/2) = ${f(Nq(p.phi), 2)}` },
+      { id: 'ng', lab: 'N<sub>γ</sub>', unit: '–', tol: 0.015, fn: (v) => 2 * (v.nq - 1) * tg(p.phi), sol: (v) => `N<sub>γ</sub> = 2 · (N<sub>q</sub> − 1) · tg φ = 2 · (${f(v.nq, 2)} − 1) · ${f(tg(p.phi), 3)} = ${f(2 * (v.nq - 1) * tg(p.phi), 2)}` },
+      { id: 'sq', lab: 'Alaktényező: s<sub>q</sub>', unit: '–', tol: 0.01, fn: () => 1 + Math.sin(rad(p.phi)), sol: () => `s<sub>q</sub> = 1 + (B′/L′) · sin φ = 1 + sin ${p.phi}° = ${f(1 + Math.sin(rad(p.phi)), 3)}` },
+      { id: 'sg', lab: 'Alaktényező: s<sub>γ</sub>', unit: '–', tol: 0.01, fn: () => 0.7, sol: () => 's<sub>γ</sub> = 1 − 0,3 · B′/L′ = 1 − 0,3 = 0,7' },
+      { id: 'rk', lab: 'Fajlagos törőfeszültség: R<sub>k</sub>/A′', unit: 'kPa', fn: (v) => 0.5 * p.B * p.g * v.ng * v.sg + v.q * v.nq * v.sq, sol: (v) => `R<sub>k</sub>/A′ = 0,5 · ${f(p.B, 2)} · ${p.g} · ${f(v.ng, 2)} · ${f(v.sg, 2)} + ${f(v.q, 1)} · ${f(v.nq, 2)} · ${f(v.sq, 3)} = ${f(0.5 * p.B * p.g * v.ng * v.sg + v.q * v.nq * v.sq, 0)} kPa` },
+      { id: 'rd', lab: 'Tervezési teherbírás: R<sub>d</sub>', unit: 'kN', fn: (v) => v.rk * p.B * p.B / 1.4, sol: (v) => `R<sub>d</sub> = R<sub>k</sub>/A′ · A′ / γ<sub>R;v</sub> = ${f(v.rk, 0)} · ${f(p.B * p.B, 2)} / 1,4 = ${f(v.rk * p.B * p.B / 1.4, 0)} kN` },
+      { id: 'vd', lab: 'Tervezési teher: V<sub>d</sub>', unit: 'kN', fn: () => 1.35 * p.G + 1.5 * p.Q, sol: () => `V<sub>d</sub> = 1,35 · ${f(p.G, 0)} + 1,5 · ${f(p.Q, 0)} = ${f(1.35 * p.G + 1.5 * p.Q, 0)} kN` },
+      { id: 'L', lab: 'Kihasználtság: Λ = V<sub>d</sub>/R<sub>d</sub>', unit: '–', abs: 0.02, fn: (v) => v.vd / v.rd, sol: (v) => `Λ = ${f(v.vd, 0)} / ${f(v.rd, 0)} = ${f(v.vd / v.rd, 2)} – ${v.vd / v.rd <= 1 ? 'megfelel' : 'nem felel meg'}` },
+    ] },
+  { id: 'sav', t: 'Sávalap teherbírása', lec: '3. előadás', gen() { return { B: range(0.8, 1.6, 0.1), D: range(0.8, 1.4, 0.1), phi: pick([22, 24, 26, 28, 30]), c: pick([0, 5, 10, 15]), g: pick([18, 19, 20]), G: range(120, 280, 10), Q: range(30, 100, 5) }; },
+    given: (p) => [['alapszélesség', `B = ${f(p.B, 2)} m`], ['alapozási mélység', `D = ${f(p.D, 2)} m`], ['talaj', `γ = ${p.g} kN/m³`], ['nyírószilárdság', `φ′<sub>k</sub> = ${p.phi}°, c′<sub>k</sub> = ${p.c} kPa`], ['állandó teher (alaptesttel)', `G<sub>k</sub> = ${f(p.G, 0)} kN/m`], ['esetleges teher', `Q<sub>k</sub> = ${f(p.Q, 0)} kN/m`]],
+    text: 'Központosan terhelt sávalap, a talajvíz mélyen van. Sávalapnál az alaktényezők értéke 1. Igazold a teherbírást 1 m hosszú szakaszra, DA-2* szerint.', fig: (p) => svgFoot({ B: p.B, D: p.D, strip: true }),
+    steps: (p) => [
+      { id: 'q', lab: 'q′ az alapsík szintjén', unit: 'kPa', fn: () => p.g * p.D, sol: () => `q′ = ${p.g} · ${f(p.D, 2)} = ${f(p.g * p.D, 1)} kPa` },
+      { id: 'nq', lab: 'N<sub>q</sub>', unit: '–', tol: 0.015, fn: () => Nq(p.phi), sol: () => `N<sub>q</sub> = ${f(Nq(p.phi), 2)}` },
+      { id: 'ng', lab: 'N<sub>γ</sub>', unit: '–', tol: 0.015, fn: (v) => 2 * (v.nq - 1) * tg(p.phi), sol: (v) => `N<sub>γ</sub> = 2 · (${f(v.nq, 2)} − 1) · tg ${p.phi}° = ${f(2 * (v.nq - 1) * tg(p.phi), 2)}` },
+      { id: 'nc', lab: 'N<sub>c</sub>', unit: '–', tol: 0.015, fn: (v) => (v.nq - 1) / tg(p.phi), sol: (v) => `N<sub>c</sub> = (N<sub>q</sub> − 1) · ctg φ = (${f(v.nq, 2)} − 1) / ${f(tg(p.phi), 3)} = ${f((v.nq - 1) / tg(p.phi), 2)}` },
+      { id: 'rk', lab: 'R<sub>k</sub>/B′', unit: 'kPa', fn: (v) => 0.5 * p.B * p.g * v.ng + v.q * v.nq + p.c * v.nc, sol: (v) => `R<sub>k</sub>/B′ = 0,5 · ${f(p.B, 2)} · ${p.g} · ${f(v.ng, 2)} + ${f(v.q, 1)} · ${f(v.nq, 2)} + ${p.c} · ${f(v.nc, 2)} = ${f(0.5 * p.B * p.g * v.ng + v.q * v.nq + p.c * v.nc, 0)} kPa` },
+      { id: 'rd', lab: 'R<sub>d</sub> 1 m-re', unit: 'kN/m', fn: (v) => v.rk * p.B / 1.4, sol: (v) => `R<sub>d</sub> = ${f(v.rk, 0)} · ${f(p.B, 2)} / 1,4 = ${f(v.rk * p.B / 1.4, 0)} kN/m` },
+      { id: 'vd', lab: 'V<sub>d</sub> 1 m-re', unit: 'kN/m', fn: () => 1.35 * p.G + 1.5 * p.Q, sol: () => `V<sub>d</sub> = 1,35 · ${f(p.G, 0)} + 1,5 · ${f(p.Q, 0)} = ${f(1.35 * p.G + 1.5 * p.Q, 1)} kN/m` },
+      { id: 'L', lab: 'Λ = V<sub>d</sub>/R<sub>d</sub>', unit: '–', abs: 0.02, fn: (v) => v.vd / v.rd, sol: (v) => `Λ = ${f(v.vd, 1)} / ${f(v.rd, 0)} = ${f(v.vd / v.rd, 2)} – ${v.vd / v.rd <= 1 ? 'megfelel' : 'nem felel meg'}` },
+    ] },
+  { id: 'csu', t: 'Elcsúszás', lec: '4. előadás', gen() { return { G: range(300, 900, 25), Q: range(80, 260, 10), H: range(40, 150, 5), phi: pick([28, 30, 32, 34]) }; },
+    given: (p) => [['függőleges állandó teher', `G<sub>k</sub> = ${f(p.G, 0)} kN`], ['függőleges esetleges teher', `Q<sub>k</sub> = ${f(p.Q, 0)} kN`], ['vízszintes szélteher', `H<sub>k</sub> = ${f(p.H, 0)} kN`], ['talaj az alapsík alatt', `φ′<sub>k</sub> = ${p.phi}°, c′<sub>k</sub> = 0`], ['alaptest', 'helyszíni beton']],
+    text: 'Pillér alap elcsúszásának vizsgálata drénezett esetben, DA-2* szerint (γ<sub>R;h</sub> = 1,1). A passzív földellenállást a biztonság javára elhanyagoljuk. Vigyázz: a stabilizáló erőbe csak az állandó teher számít.', fig: () => svgFoot({ B: 2, D: 1.2 }),
+    steps: (p) => [
+      { id: 'td', lab: 'tg δ<sub>k</sub> (helyszíni betonnál δ<sub>k</sub> = φ′<sub>k</sub>)', unit: '–', tol: 0.01, fn: () => tg(p.phi), sol: () => `tg δ<sub>k</sub> = tg ${p.phi}° = ${f(tg(p.phi), 3)}` },
+      { id: 'rd', lab: 'Csúszási ellenállás: R<sub>d</sub>', unit: 'kN', fn: (v) => p.G * v.td / 1.1, sol: (v) => `R<sub>d</sub> = V′<sub>k</sub> · tg δ<sub>k</sub> / γ<sub>R;h</sub> = ${f(p.G, 0)} · ${f(v.td, 3)} / 1,1 = ${f(p.G * v.td / 1.1, 1)} kN` },
+      { id: 'hd', lab: 'Tervezési vízszintes erő: H<sub>d</sub>', unit: 'kN', fn: () => 1.5 * p.H, sol: () => `H<sub>d</sub> = 1,5 · ${f(p.H, 0)} = ${f(1.5 * p.H, 1)} kN` },
+      { id: 'L', lab: 'Λ = H<sub>d</sub>/R<sub>d</sub>', unit: '–', abs: 0.02, fn: (v) => v.hd / v.rd, sol: (v) => `Λ = ${f(v.hd, 1)} / ${f(v.rd, 1)} = ${f(v.hd / v.rd, 2)} – ${v.hd / v.rd <= 1 ? 'megfelel' : 'nem felel meg'}` },
+    ] },
+  { id: 'sul', t: 'Süllyedés', lec: '5. előadás', gen() { const p = { B: range(1.6, 2.6, 0.2), D: range(1.0, 1.8, 0.2), g: pick([18, 19, 20]), F: range(700, 1500, 50), E: pick([12, 15, 20, 25, 30]) };
+      const st = p.F / (p.B * p.B), q0 = st - p.g * p.D; let z = 0; while (z < 40) { z += 0.01; if (4 * q0 * Ic(p.B / 2, p.B / 2, z) <= 0.2 * p.g * (p.D + z)) break; } p.m0 = Math.round(z * 10) / 10; p.I = [0, 1, 2, 3].map(i => Math.round(4 * Ic(p.B / 2, p.B / 2, (i + 0.5) * p.m0 / 4) * 1000) / 1000); return p; },
+    given: (p) => [['alapméret', `B = L = ${f(p.B, 2)} m`], ['alapozási mélység', `D = ${f(p.D, 2)} m`], ['talaj', `γ = ${p.g} kN/m³, E<sub>oed</sub> = ${p.E} MPa`], ['teher (karakterisztikus, alaptesttel)', `G<sub>k</sub> + Q<sub>k</sub> = ${f(p.F, 0)} kN`], ['határmélység', `m<sub>0</sub> = ${f(p.m0, 1)} m`], ['rétegek', `4 × ${f(p.m0 / 4, 3)} m`], ['hatásszámok (i) a rétegek közepén', p.I.map(x => f(x, 3)).join(' · ')]],
+    text: 'Négyzet alakú pillér alap süllyedése rétegösszegzéssel. A talajvíz mélyen van. A határmélységig négy egyforma réteget veszünk fel; a rétegek közepén a többletfeszültség Δσ<sub>z</sub> = i · σ<sub>0</sub>, ahol i a megadott hatásszám (Steinbrenner, a talp középpontja alatt).', fig: (p) => svgFoot({ B: p.B, D: p.D }),
+    steps: (p) => [
+      { id: 'st', lab: 'Talpfeszültség: σ<sub>talp</sub>', unit: 'kPa', fn: () => p.F / (p.B * p.B), sol: () => `σ<sub>talp</sub> = ${f(p.F, 0)} / ${f(p.B * p.B, 2)} = ${f(p.F / (p.B * p.B), 1)} kPa` },
+      { id: 'q0', lab: 'Nettó talpfeszültség: σ<sub>0</sub>', unit: 'kPa', fn: (v) => v.st - p.g * p.D, sol: (v) => `σ<sub>0</sub> = σ<sub>talp</sub> − γ · D = ${f(v.st, 1)} − ${f(p.g * p.D, 1)} = ${f(v.st - p.g * p.D, 1)} kPa` },
+      { id: 'd1', lab: 'Többletfeszültség az 1. réteg közepén: Δσ<sub>1</sub>', unit: 'kPa', fn: (v) => p.I[0] * v.q0, sol: (v) => `Δσ<sub>1</sub> = ${f(p.I[0], 3)} · ${f(v.q0, 1)} = ${f(p.I[0] * v.q0, 1)} kPa` },
+      { id: 's', lab: 'Süllyedés: s = Σ h · Δσ<sub>i</sub> / E<sub>oed</sub>', unit: 'mm', tol: 0.03, fn: (v) => p.I.reduce((a, i) => a + (p.m0 / 4) * i * v.q0, 0) / (p.E * 1000) * 1000, sol: (v) => `s = ${f(p.m0 / 4, 3)} · (${p.I.map(x => f(x, 3)).join(' + ')}) · ${f(v.q0, 1)} / ${f(p.E * 1000, 0)} = ${f(p.I.reduce((a, i) => a + (p.m0 / 4) * i * v.q0, 0) / p.E, 1)} mm` },
+    ] },
+  { id: 'fel', t: 'Felúszás', lec: '4. előadás', gen() { return { t: range(5, 9, 0.5), d: range(1.5, 4, 0.5), g: range(30, 90, 5) }; },
+    given: (p) => [['alaplemez alsó síkja', `−${f(p.t, 1)} m`], ['talajvízszint', `−${f(p.d, 1)} m`], ['a szerkezet állandó terhe', `g<sub>k</sub> = ${f(p.g, 0)} kPa`], ['parciális tényezők (UPL)', 'γ<sub>G;dst</sub> = 1,0 · γ<sub>G;stb</sub> = 0,9']],
+    text: 'Vízzáró pince felúszásának vizsgálata építés közben, 1 m²-re. Az oldalsó súrlódást a biztonság javára elhanyagoljuk.', fig: (p) => svgBox(p.t, p.d),
+    steps: (p) => [
+      { id: 'hw', lab: 'Vízoszlop a lemez alatt: h<sub>w</sub>', unit: 'm', abs: 0.01, fn: () => p.t - p.d, sol: () => `h<sub>w</sub> = ${f(p.t, 1)} − ${f(p.d, 1)} = ${f(p.t - p.d, 1)} m` },
+      { id: 'u', lab: 'Víznyomás: u = U<sub>dst;d</sub>', unit: 'kPa', fn: (v) => 10 * v.hw, sol: (v) => `u = γ<sub>w</sub> · h<sub>w</sub> = 10 · ${f(v.hw, 1)} = ${f(10 * v.hw, 1)} kPa (γ<sub>G;dst</sub> = 1,0)` },
+      { id: 'gs', lab: 'Stabilizáló teher: G<sub>stb;d</sub>', unit: 'kPa', fn: () => 0.9 * p.g, sol: () => `G<sub>stb;d</sub> = 0,9 · ${f(p.g, 0)} = ${f(0.9 * p.g, 1)} kPa` },
+      { id: 'L', lab: 'Λ = U<sub>dst;d</sub>/G<sub>stb;d</sub>', unit: '–', abs: 0.02, fn: (v) => v.u / v.gs, sol: (v) => `Λ = ${f(v.u, 1)} / ${f(v.gs, 1)} = ${f(v.u / v.gs, 2)} – ${v.u / v.gs <= 1 ? 'megfelel' : 'nem felel meg: a pince felúszna'}` },
+    ] },
+  { id: 'fnyo', t: 'Aktív földnyomás', lec: '9. előadás', gen() { return { H: range(3, 7, 0.5), phi: pick([26, 28, 30, 32, 34, 36]), g: pick([17, 18, 19, 20]) }; },
+    given: (p) => [['falmagasság', `H = ${f(p.H, 1)} m`], ['homok a fal mögött', `γ = ${p.g} kN/m³`], ['nyírószilárdság', `φ′ = ${p.phi}°, c′ = 0`], ['egyéb', 'függőleges, sima fal, vízszintes terep, talajvíz nincs']],
+    text: 'Számítsd ki a fal 1 m-es szakaszára ható aktív földnyomást (Rankine), és a nyomaték értékét a fal alsó pontjára.', fig: (p) => svgWall(p.H),
+    steps: (p) => [
+      { id: 'ka', lab: 'Aktív földnyomási szorzó: K<sub>a</sub>', unit: '–', tol: 0.01, fn: () => tg(45 - p.phi / 2) ** 2, sol: () => `K<sub>a</sub> = tg²(45° − ${p.phi}°/2) = ${f(tg(45 - p.phi / 2) ** 2, 3)}` },
+      { id: 'ea', lab: 'Földnyomás a fal alján: e<sub>a</sub>(H)', unit: 'kPa', fn: (v) => v.ka * p.g * p.H, sol: (v) => `e<sub>a</sub> = K<sub>a</sub> · γ · H = ${f(v.ka, 3)} · ${p.g} · ${f(p.H, 1)} = ${f(v.ka * p.g * p.H, 1)} kPa` },
+      { id: 'E', lab: 'Eredő: E<sub>a</sub>', unit: 'kN/m', fn: (v) => 0.5 * v.ea * p.H, sol: (v) => `E<sub>a</sub> = 0,5 · e<sub>a</sub> · H = 0,5 · ${f(v.ea, 1)} · ${f(p.H, 1)} = ${f(0.5 * v.ea * p.H, 1)} kN/m` },
+      { id: 'M', lab: 'Nyomaték a fal aljára: M', unit: 'kNm/m', fn: (v) => v.E * p.H / 3, sol: (v) => `M = E<sub>a</sub> · H/3 = ${f(v.E, 1)} · ${f(p.H / 3, 3)} = ${f(v.E * p.H / 3, 1)} kNm/m` },
+    ] },
+];
+
+/* ================= ÁLLAPOT ================= */
+const KEY = 'alap-vizsga-v1'; let S = { type: 'pill', p: {}, ans: {}, done: {}, deck: { order: [], i: 0, ok: 0, bad: 0, cur: null } };
+try { const o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && o.type) S = { ...S, ...o }; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const T = () => TYPES.find(t => t.id === S.type) || TYPES[0];
+function ensure() { const t = T(); if (!S.p[t.id]) { S.p[t.id] = t.gen(); S.ans[t.id] = {}; save(); } }
+const parse = (s) => { const x = String(s ?? '').replace(/[\s  ]/g, '').replace(',', '.').replace('−', '-'); return /^-?\d*\.?\d+$/.test(x) ? parseFloat(x) : NaN; };
+const close = (a, b, st) => st.abs != null ? Math.abs(a - b) <= st.abs + 1e-9 : Math.abs(a - b) <= Math.abs(b) * (st.tol || 0.02) + 1e-9;
+
+function renderTypes() { $('#types').innerHTML = '<h2>Feladattípusok</h2>' + TYPES.map((t, i) => `<button type="button" class="tbtn" data-t="${t.id}" aria-current="${t.id === S.type}"><span class="n">${i + 1}</span><span>${t.t}</span><span class="c">${S.done[t.id] ? '✓ ' + S.done[t.id] : ''}</span></button>`).join(''); }
+$('#types').addEventListener('click', (e) => { const b = e.target.closest('.tbtn'); if (!b) return; S.type = b.dataset.t; ensure(); save(); renderTypes(); renderSheet(); });
+
+function evaluate(t, p, a) { // minden lépésre: állapot és helyes érték
+  const steps = t.steps(p); const corr = {}, own = {}; const out = [];
+  for (const st of steps) { const c = st.fn(corr), o = st.fn(own); corr[st.id] = c; const u = parse(a[st.id]); let state = '';
+    if (a[st.id] != null && a[st.id] !== '' && a.checked) { if (isNaN(u)) state = 'bad'; else if (close(u, c, st)) state = 'ok'; else if (close(u, o, st) && !close(o, c, st)) state = 'carry'; else state = 'bad'; }
+    own[st.id] = isNaN(u) ? c : u; out.push({ st, c, o, u, state }); }
+  return { steps, out, corr };
+}
+function renderSheet() {
+  const t = T(), p = S.p[t.id], a = S.ans[t.id]; const ev = evaluate(t, p, a);
+  const MK = { ok: '✓ helyes', carry: '↳ a módszer jó, egy korábbi hibás érték vitte tovább', bad: '✗ itt csúszott el' };
+  let h = `<div class="shead"><h3>${t.t}</h3><span class="meta">${t.lec} · feladat #${String(Math.round(p.B * 100 || p.t * 10 || p.G || p.H * 10)).padStart(3, '0')}</span></div><p class="task">${t.text}</p><div class="fig">${t.fig(p)}</div><dl class="given">${t.given(p).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl><ol class="steps">`;
+  ev.out.forEach(({ st, state }, i) => { const show = a.sol || state === 'bad' && a.revealBad; h += `<li class="step ${state}${a.sol ? ' showsol' : ''}"><div class="lab"><span>${st.lab}</span></div><div class="in"><input id="in-${st.id}" type="text" inputmode="decimal" autocomplete="off" aria-label="${st.lab.replace(/<[^>]+>/g, '')}" value="${a[st.id] != null ? String(a[st.id]).replace(/"/g, '') : ''}"><span class="u">${st.unit}</span></div><div class="mk">${MK[state] || ''}</div><div class="sol">${st.sol(ev.corr)}</div></li>`; });
+  h += '</ol>';
+  const nOk = ev.out.filter(x => x.state === 'ok').length, n = ev.out.length;
+  h += `<div class="row"><button class="btn pri" type="button" id="check">Ellenőrzés</button><button class="btn" type="button" id="sol">${a.sol ? 'A megoldás elrejtése' : 'A megoldás megmutatása'}</button><button class="btn" type="button" id="new">Új feladat új adatokkal</button></div>`;
+  if (a.checked) { const first = ev.out.findIndex(x => x.state !== 'ok'); h += `<div class="grade"><span class="big">${nOk}/${n}</span><p>${nOk === n ? 'Hibátlan megoldás. Kérj egy új feladatot, vagy válts típust!' : first >= 0 ? `Az első gond a(z) ${first + 1}. lépésnél van. Javítsd ki, és ellenőrizd újra – a többi lépés a javított értékkel újraszámolódik.` : 'Töltsd ki az összes lépést.'}</p></div>`; }
+  $('#sheet').innerHTML = h;
+  ev.out.forEach(({ st }) => { const el = $('#in-' + st.id); el.addEventListener('input', () => { a[st.id] = el.value; save(); }); el.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); check(); } }); });
+  $('#check').addEventListener('click', check);
+  $('#sol').addEventListener('click', () => { a.sol = !a.sol; save(); renderSheet(); });
+  $('#new').addEventListener('click', () => { S.p[t.id] = t.gen(); S.ans[t.id] = {}; save(); renderSheet(); });
+}
+function check() { const t = T(), a = S.ans[t.id]; $$('.step input').forEach(el => { a[el.id.slice(3)] = el.value; }); a.checked = true; const ev = evaluate(t, S.p[t.id], a); if (ev.out.every(x => x.state === 'ok') && !a.counted && !a.sol) { a.counted = true; S.done[t.id] = (S.done[t.id] || 0) + 1; } save(); renderTypes(); renderSheet(); }
+
+/* ================= IGAZ VAGY HAMIS ================= */
+const CARDS = [
+  [3, 'Budapesten kötött talajban az alapsíkot a fagy miatt legalább 0,8 m mélyre kell tenni.', true, 'A fagyhatár alatti alapot a jéglencsék nem tudják megemelni. Ez a szabály a könnyű melléképületekre is vonatkozik.'],
+  [3, 'Egy ismeretlen összetételű feltöltés teherbíró rétegnek tekinthető, ha elég vastag.', false, 'Az ismeretlen feltöltés heterogén és összenyomható, a vastagsága ezen nem segít. Alá kell alapozni, vagy talajjavítással kell kezelni.'],
+  [3, 'A teherbírási tényezők a belső súrlódási szöggel arányosan, lineárisan nőnek.', false, 'Rohamosan nőnek: 30°-ról 35°-ra az N<sub>q</sub> közel a duplájára nő, 20°-ról 35°-ra az N<sub>γ</sub> több mint tízszeresére.'],
+  [3, 'DA-2* szerint a hatásokból karakterisztikus értékkel számolunk, és a parciális tényezőket a végén alkalmazzuk.', true, 'Ezért a külpontosságot és a hatékony alapméretet is karakterisztikus terhekből határozzuk meg.'],
+  [3, 'A talajvízszint emelkedése növeli a síkalap teherbírását.', false, 'Csökkenti: víz alatt a talaj hatékony térfogatsúlya kb. a felére esik, így a teherbírási képlet súlyból származó tagjai is csökkennek.'],
+  [3, 'Drénezetlen teherbírásnál teljes feszültségekkel számolunk.', true, 'Gyors terhelésnél a telített kötött talajban a pórusvíz nem tud elszivárogni, ezért a drénezetlen nyírószilárdsággal és teljes feszültségekkel számolunk.'],
+  [3, 'Ha a terhek eredője a talp középső harmadán kívül esik (e > B/6), a talp egy része alatt nem adódik át nyomás.', true, 'A talp egy része „felemelkedik”. Ilyenkor a hatékony alapméret jelentősen kisebb, mint a valódi.'],
+  [4, 'Elcsúszásnál a stabilizáló függőleges erőbe az esetleges terhet is beszámítjuk.', false, 'Csak az állandó teher számít: az esetleges teher éppen akkor hiányozhat, amikor a vízszintes erő hat.'],
+  [4, 'Az általános állékonyságot a hazai nemzeti melléklet szerint DA-3 szerint igazoljuk.', true, 'DA-3-ban a nyírószilárdság jellemzőit osztjuk parciális tényezővel.'],
+  [4, 'A vízzáró pince felúszása csak a kész épületnél fenyeget.', false, 'Építés közben a legveszélyesebb: a szerkezet még könnyű, a víznyomás már teljes. Ezért kell a víztelenítést addig fenntartani, amíg a súly elég nem lesz.'],
+  [5, 'A határmélység ott van, ahol a többletfeszültség a hatékony geosztatikus feszültség 20 %-ára csökken.', true, 'A határmélység alatt a talaj összenyomódása már elhanyagolható.'],
+  [5, 'Az egyenletes süllyedés mindig veszélyesebb, mint a süllyedéskülönbség.', false, 'Fordítva: a szerkezetet a süllyedéskülönbség és a szögtorzulás repeszti meg. Egy egyenletesen süllyedő épület akár több centit is károsodás nélkül elvisel.'],
+  [5, 'A ferde repedés a fal nagyobb süllyedésű része felé emelkedik.', true, 'Ebből a repedésképből visszafelé is következtethetünk arra, hol süllyedt többet az alap.'],
+  [6, 'A talajinjektálás tartósan megszünteti a zsugorodó-duzzadó agyag okozta mozgásokat.', false, 'A mozgás oka a víztartalom évszakos változása. Tartós megoldás csak az, ha az alap a kiszáradási zóna alá kerül.'],
+  [6, 'Löszön a csőtörésből beázó víz hirtelen, nagy süllyedést okozhat.', true, 'A roskadó lösz szárazon szilárd, de beázáskor a laza váza összeomlik.'],
+  [6, 'A tőzeg összenyomódása a terhelés után rövid időn belül befejeződik.', false, 'A tőzeg évekig kúszik, ezért a süllyedése sokszor jóval nagyobb, mint az első hónapokban mért érték.'],
+  [7, 'Egy könnyű, fűtetlen melléképület alapját a fagy kevésbé emeli meg, mint egy nehéz házét.', false, 'Éppen ellenkezőleg: a könnyű épületet a jéglencsék könnyebben megemelik, és alatta a talaj teljes mélységben átfagy.'],
+  [7, 'A vert cölöpözés rezgése a szomszédos épületek alatt tömörítheti a homokot, és süllyedést okozhat.', true, 'Ezért szomszédos épület mellett fúrt vagy rezgésmentes technológiát választunk.'],
+  [8, 'A CFA-cölöp fúrásakor a furat falát béléscső vagy zagy támasztja meg.', false, 'A spirál menetei között lévő talaj támasztja meg a falat, a betont pedig a spirál kihúzásával egy időben, alulról nyomják be.'],
+  [8, 'Az álló cölöp terhének nagyobb részét a talp adja át.', true, 'Álló cölöpnél a talpellenállás az összes ellenállás legalább kétharmada; lebegő cölöpnél a palástellenállás.'],
+  [8, 'Ha a teherbíró réteg mélyen van, a síkalap helyett mélyalapozás lehet gazdaságos.', true, 'A cölöp a terhet a gyenge rétegeken át a teherbíró rétegbe viszi.'],
+  [9, 'A berlini dúcolat vízzáró munkatérhatárolás.', false, 'A pallók közötti hézagokon a víz átszivárog, ezért csak talajvíz fölött, vagy víztelenítéssel együtt alkalmazható.'],
+  [9, 'A résfal a végleges pincefal része lehet.', true, 'A vasbeton résfal vízzáró és merev, ezért a munkatér határolása után a pince szerkezetének része marad.'],
+  [9, 'A talajhorgony befogott szakaszának a lehetséges csúszólapon belül kell lennie.', false, 'A csúszólapon túl, a megcsúszó földéken kívül, teherbíró rétegben kell lennie – különben a horgony a földdel együtt mozdul.'],
+  [2, 'Pillér alapnál a feltárás mélysége a talp szélességétől függetlenül 2 m.', false, 'Az alapsík alatt legalább a talpszélesség háromszorosáig, de legalább 6 m mélyre kell feltárni.'],
+];
+const shuffle = () => { const a = CARDS.map((_, i) => i); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function renderDeck() {
+  const d = S.deck; if (!d.order || d.order.length !== CARDS.length) { d.order = shuffle(); d.i = 0; d.ok = 0; d.bad = 0; d.cur = null; }
+  const host = $('#card');
+  if (d.i >= CARDS.length) { host.innerHTML = `<span class="lec">kör vége</span><p class="s">${d.ok} helyes válasz a ${CARDS.length}-ből.</p><p class="e">${d.ok >= CARDS.length * 0.9 ? 'Kiváló – ezekből a kérdésekből felkészültél.' : d.ok >= CARDS.length * 0.75 ? 'Jó eredmény. Nézd át újra azokat a témákat, ahol tévedtél.' : 'Érdemes átnézni az előadások anyagát, aztán újrakezdeni.'}</p><div class="acts"><button class="btn pri" type="button" id="restart">Új kör, új sorrend</button></div>`; $('#restart').addEventListener('click', () => { d.order = shuffle(); d.i = 0; d.ok = 0; d.bad = 0; d.cur = null; save(); renderDeck(); }); renderTally(); return; }
+  const c = CARDS[d.order[d.i]];
+  host.innerHTML = `<span class="lec">${d.i + 1}. kártya a ${CARDS.length}-ből · ${c[0]}. előadás</span><p class="s">${c[1]}</p>${d.cur ? `<div class="res ${d.cur}">${d.cur === 'ok' ? '✓ Így van' : '✗ Nem így van'} – ${c[2] ? 'igaz' : 'hamis'}</div><p class="e">${c[3]}</p><div class="acts"><button class="btn pri" type="button" id="nextc">Következő kártya</button></div>` : '<div class="acts"><button class="btn pri" type="button" data-v="1">Igaz</button><button class="btn" type="button" data-v="0">Hamis</button></div>'}`;
+  $$('[data-v]', host).forEach(b => b.addEventListener('click', () => { const ok = (b.dataset.v === '1') === c[2]; d.cur = ok ? 'ok' : 'bad'; d[ok ? 'ok' : 'bad']++; save(); renderDeck(); }));
+  const nx = $('#nextc'); if (nx) nx.addEventListener('click', () => { d.i++; d.cur = null; save(); renderDeck(); });
+  renderTally();
+}
+function renderTally() { const d = S.deck, n = d.ok + d.bad; $('#tally').innerHTML = `<h3>Ebben a körben</h3><div class="nums"><div><b>${d.ok}</b><span>helyes</span></div><div><b>${d.bad}</b><span>téves</span></div><div><b>${CARDS.length - Math.min(CARDS.length, d.i + (d.cur ? 1 : 0))}</b><span>hátravan</span></div></div><div class="bar"><i style="width:${n ? d.ok / n * 100 : 0}%"></i></div><p>A kártyák az egész tárgyat lefedik, a talajfelderítéstől a munkatérhatárolásig. Minden válasz után rövid magyarázat jön.</p>`; }
+
+ensure(); renderTypes(); renderSheet(); renderDeck();
+window.__vizsga = { TYPES, S, evaluate };
+
+const GUARD = (() => {
+  const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
+  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead, .lead, main .task, main .step .lab span';
+  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead, .lead';
+  const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
+  const TERMS = ['talaj és szerkezet', 'teherbíró réteg', 'talajvíz-viszonyok', 'egyenlőtlen süllyedés', 'egyenlőtlen süllyedések', 'általános állékonyság', 'teherbírási határállapot', 'használhatósági határállapot', 'puha lencse', 'szerves talaj', 'szerves agyag', 'roskadékony lösz', 'térfogatváltozó agyag', 'kút- és szekrényalapok', 'cölöppel gyámolított lemezalap', 'mélyített síkalap', 'házi feladat', 'pisai torony'];
+  const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
+  const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
+  const NUMW = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  function textPass(s) {
+    if (!/[ \-–·]/.test(s)) return s;
+    s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
+    s = s.replace(/ ([=≤≥≈→←×±<>⇒↔]) /g, NB + '$1' + NB);
+    s = s.replace(/([\p{N}\p{L})\]′″°²³]) ([+−]) (?=[\p{N}\p{L}(])/gu, '$1' + NB + '$2' + NB);
+    s = s.replace(/(^|[(\[„])([=≤≥≈<>±~]) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/ · (?=(\S+))/g, (m, nxt) => { const w = nxt.replace(/^[(„"]/, ''); if (/^\p{L}{3,}/u.test(w) && !MULT_SYM.test(w)) return m; return NB + '·' + NB; });
+    s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(NUMW, '$1$2' + NB);
+    s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    return s;
+  }
+  const SHORTEND = new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
+    if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
+    const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
+    const me = / ([=≤≥≈→←×±<>⇒+−/]) $/.exec(a.nodeValue); if (me && /^\S/.test(b.nodeValue)) a.nodeValue = a.nodeValue.slice(0, -3) + NB + me[1] + NB; } }
+  function bindPositions(full, cpl = 70) {
+    const bind = new Set(); const segMax = Math.max(14, Math.min(38, 0.42 * cpl)), parMax = Math.max(10, Math.min(24, 0.30 * cpl));
+    const mark = (a, b) => { for (let i = a; i < b; i++) if (full[i] === ' ') bind.add(i); };
+    const sepRx = / · |; | – /g; let last = 0, m, lastSep = ''; const segs = [];
+    while ((m = sepRx.exec(full))) { segs.push([last, m.index, lastSep, m[0]]); last = m.index + m[0].length; lastSep = m[0]; } segs.push([last, full.length, lastSep, '']);
+    if (segs.length > 1) for (const [a, b, before, after] of segs) { const t = full.slice(a, b).replace(/[\u2060\u00AD]/g, '').trim(); const dashOnly = (before === ' – ' || before === '') && (after === ' – ' || after === '') && (before || after); const lim = dashOnly ? Math.min(22, segMax) : segMax; if (t.length > 0 && t.length < lim) mark(a, b); }
+    const pr = /\(([^()]{1,30})\)/g; while ((m = pr.exec(full))) { if (m[0].replace(/[\u2060\u00AD]/g, '').length <= parMax) mark(m.index, m.index + m[0].length); }
+    termRx.lastIndex = 0; while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    return bind;
+  }
+  function textNodes(root) { const out = []; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) { let p = n.parentNode; while (p && p !== root) { if (SKIP.has(p.nodeName)) return NodeFilter.FILTER_REJECT; p = p.parentNode; } return NodeFilter.FILTER_ACCEPT; } }); let n; while ((n = w.nextNode())) out.push(n); return out; }
+  let hyph = null; const done = new WeakMap();
+  function processBlock(el) {
+    if (!el.isConnected) return; if (el.closest('svg')) return; const cur = el.textContent; if (done.get(el) === cur) return;
+    const nodes = textNodes(el); for (const n of nodes) { const v = textPass(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; } crossPass(nodes);
+    const full = nodes.map(n => n.nodeValue).join(''); const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const cpl = el.clientWidth > 40 ? el.clientWidth / (fs * 0.52) : 70;
+    const bind = bindPositions(full, cpl);
+    if (bind.size) { let off = 0; for (const n of nodes) { const v = n.nodeValue; let o = '', ch = false; for (let i = 0; i < v.length; i++) { if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i]; } off += v.length; if (ch) n.nodeValue = o; } }
+    if (hyph && el.matches(HYPH)) { for (const n of textNodes(el)) { if (n.parentElement && n.parentElement.closest(NOHY) && n.parentElement.closest(NOHY) !== el) continue; const parts = n.nodeValue.split(/( )/); let ch = false;
+      for (let i = 0; i < parts.length; i += 2) { const t = parts[i]; if (!t || !/\p{L}{6,}/u.test(t)) continue; const clean = t.replace(/[\u00AD\u200B]/g, ''); let hh;
+        if (t.includes(WJ)) { const vis = clean.replace(/[\u2060]/g, ''); if (vis.length <= 16 || /^\(.*\)[.,;:!?]*$/.test(vis)) continue; const k = Math.max(clean.lastIndexOf('\u00A0'), clean.lastIndexOf(WJ)); const tail = clean.slice(k + 1); if (!/\p{L}{6,}/u.test(tail)) continue; hh = clean.slice(0, k + 1) + hyph(tail); } else hh = hyph(clean);
+        hh = hh.replace(/\u200B/g, ''); if (hh !== t) { parts[i] = hh; ch = true; } } if (ch) n.nodeValue = parts.join(''); } }
+    done.set(el, el.textContent);
+  }
+  let obs = null, pend = new Set(), sched = false;
+  function observe() { obs.observe(document.body, { childList: true, subtree: true, characterData: true }); }
+  function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
+  function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
+  function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
+    const H = window.Hyphenopoly; if (H && H.hyphenators && H.hyphenators.hu) H.hyphenators.hu.then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+  return { start, run };
+})();
+
+/* RAG3 – lyukas sorkizárt blokk tartaléka (formázás skill): (1) ha a szép tördelés (text-wrap: pretty) lyukas,
+   előbb sima tördeléssel (text-wrap: wrap, .twr) próbálja – a blokk sorkizárt marad; (2) csak ha így is lyukas,
+   balra zárt lesz (.rag). Az összetartozó egységek (NBSP/U+2060 kötések) érintetlenek maradnak.
+   Idempotens: a döntést szélesség + szöveg szerint megjegyzi, ismételt futáskor nem mér újra. */
+const RAG3 = (() => {
+  try { const st = document.createElement('style'); st.textContent = '.twr{text-wrap:wrap!important}'; document.head.appendChild(st); } catch (e) {}
+  const memo = new WeakMap();
+  const sig = (el) => el.textContent;   // a teljes szöveg (az elválasztás után is újramér)
+  function bad(el, strict) {
+    const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return false;
+    let lastTop = -1e9; for (const r of rs) if (r.width && r.top > lastTop) lastTop = r.top; let big = 0, mid = 0;
+    // sima tördelésnél (strict): egy nem utolsó, nagyon rövid sor (pl. hosszú, nem törhető képlet előtt) is rossz – a sorokat
+    // függőleges átfedés szerint vonjuk össze, így az alsó/felső index nem számít külön sornak; <br>-es blokknál nem vizsgáljuk
+    if (strict && !el.querySelector('br')) { const L = []; for (const r of rs) { if (!r.width || !r.height) continue; let l = L.find((q) => Math.min(q.b, r.bottom) - Math.max(q.t, r.top) > 0.5 * Math.min(q.b - q.t, r.height));
+      if (!l) L.push({ t: r.top, b: r.bottom, l: r.left, r: r.right }); else { l.t = Math.min(l.t, r.top); l.b = Math.max(l.b, r.bottom); l.l = Math.min(l.l, r.left); l.r = Math.max(l.r, r.right); } }
+      L.sort((a, b) => a.t - b.t); for (let i = 0; i < L.length - 1; i++) if (L[i].r - L[i].l < el.clientWidth * 0.35) return true; }
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { const c = t[i]; if (c !== ' ' && c !== '\u00A0') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
+    return big > 0 || mid >= 2;
+  }
+  function check(el) {
+    if (!el || !el.isConnected || !el.offsetParent) return;
+    const w = el.clientWidth, s = sig(el), m = memo.get(el);
+    if (m && m.w === w && m.s === s) { el.classList.toggle('twr', m.res === 'twr'); el.classList.toggle('rag', m.res === 'rag'); return; }
+    el.classList.remove('rag', 'twr'); let res = 'ok';
+    if (getComputedStyle(el).textAlign === 'justify' && bad(el)) { el.classList.add('twr'); res = 'twr'; if (bad(el, true)) { el.classList.remove('twr'); el.classList.add('rag'); res = 'rag'; } }
+    memo.set(el, { w, s, res });
+  }
+  return { check };
+})();
+
+const RAG = (() => {
+  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead, .lead';
+  const check = (el) => RAG3.check(el);
+  const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
+  let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
+  document.addEventListener('click', () => { clearTimeout(tm); tm = setTimeout(run, 120); });
+  return { run };
+})();
+GUARD.start();
+setTimeout(() => RAG.run(), 400);
+{ const iv = setInterval(() => { if (window.__fmtHyphReady) { clearInterval(iv); requestAnimationFrame(() => { RAG.run(); window.__ragDone = true; }); } }, 100); setTimeout(() => clearInterval(iv), 8000); }
+})();
+
+</script>
+
+</body>
+</html>
