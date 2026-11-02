@@ -157,7 +157,7 @@ footer p{margin:0}
     <div class="kick"><span>BME Alapozás</span><span class="tag">kiterjesztett valóság</span></div>
     <div class="head">
       <h1>Alapozás <em>AR labor</em></h1>
-      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A feliratok a legtöbb modellre rá vannak írva, így a térbeli nézetben is olvashatók.</p>
+      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A feliratokat a „Feliratok a modellen” kapcsolóval lehet bekapcsolni; ilyenkor a térbeli nézetben is látszanak.</p>
     </div>
     <nav class="shelf" id="shelf" aria-label="Modellek"></nav>
     <div class="grid">
@@ -173,7 +173,7 @@ footer p{margin:0}
           <div><div class="lec" id="lec"></div><h2 id="mname"></h2></div>
           <p id="minfo"></p>
           <div class="views" id="views" role="group" aria-label="Nézőpontok"></div>
-          <label class="switch" for="lbl"><input type="checkbox" id="lbl" checked>Feliratok a modellen</label>
+          <label class="switch" for="lbl"><input type="checkbox" id="lbl">Feliratok a modellen</label>
           <div class="facts" id="facts"></div>
           <a class="link" id="mlink" href="#" target="_blank" rel="noopener"></a>
         </div>
@@ -192,7 +192,7 @@ footer p{margin:0}
     <ol class="steps">
       <li><b>Koppints a gombra</b><p>A modell alatti „Nézd meg a térben” gomb megnyitja a kamerát. Első alkalommal a telefon engedélyt kér hozzá.</p></li>
       <li><b>Pásztázd a felületet</b><p>Lassan mozgasd a telefont a padló vagy az asztal fölött, amíg felismeri a vízszintes felületet. Jól megvilágított, mintás felületen gyorsabb.</p></li>
-      <li><b>Tedd le és járd körbe</b><p>A makettet két ujjal kisebbre vagy nagyobbra állíthatod, és körbejárhatod. Közel hajolva a modellre írt feliratok is jól olvashatók.</p></li>
+      <li><b>Tedd le és járd körbe</b><p>A makettet két ujjal kisebbre vagy nagyobbra állíthatod, és körbejárhatod. Ha a feliratokat előtte bekapcsolod, közel hajolva azok is olvashatók.</p></li>
     </ol>
   </section>
   <section class="sec">
@@ -236,7 +236,7 @@ const M = [
     info: 'A spirál 10 m mélyen jár, a menetei tele vannak talajjal: ez a talaj támasztja meg a furat falát, ezért a CFA-cölöpnél nem kell béléscső vagy zagy. A betont tömlő hozza a forgatófejig, onnan a spirál üreges szárán jut le a talpig. A gépet a fülkében ülő gépkezelő irányítja.',
     facts: [['80 cm', 'cölöpátmérő'], ['10 m', 'fúrásmélység'], ['20 m', 'spirálhossz']], link: ['A teljes CFA-animáció', 'cfa-colop-3d.vercel.app'],
     views: [['Metszet szemből', '0deg 88deg 0.95m', '0m 0.04m 0m'], ['Fúrófej közelről', '6deg 86deg 0.2m', '0m -0.158m 0m']],
-    hs: [['Forgatófej', [0, 11.5, 0.1], 0, '--accent'], ['Spirál, a menetek tele talajjal', [0.42, 5.0, 0.05], 0, '--accent'], ['Fúrófej, 10 m mélyen', [0.42, -9.8, 0.05], 0, '--accent'], ['Gépkezelő a fülkében', [-2.16, 3.7, -5.9], 1, '--accent'], ['Talajvíz −4,2 m', [3.9, -4.2, 0.05], 2, '--water'], ['Agyag', [-4.7, -3.0, 0.05], 2, ''], ['Homok', [-4.7, -14.25, 0.05], 2, '']] },
+    hs: [] },
   { id: 'godor', f: 'munkagodor', name: 'Horgonyzott résfalas munkagödör', lec: '9', lc: 'var(--c9)', k: 1 / 50, scale: 'auto', tag: 'M 1 : 50', orbit: '18deg 78deg auto',
     info: 'Két pinceszinthez 8 m mély gödör homokban és homokos kavicsban, a talajvíz alatt. A 16 m mély résfal a vízzáró agyagba köt, így a gödör víztelenítése nem szívja le a környék talajvizét. A falat két sor talajhorgony tartja: a felső sor a homokban, az alsó a homokos kavicsban van befogva. A két sor széttart, egymástól mindenhol legalább 2,8 m-re fut, a szomszéd ház alatt is.',
     facts: [['8 m', 'gödörmélység'], ['16 m', 'résfal'], ['2 sor', 'talajhorgony']], link: ['9. előadás: Munkatérhatárolások', 'munkaterhatarolasok.vercel.app'],
@@ -246,9 +246,12 @@ const M = [
     info: 'Az „Egy telek, egy félév” esettanulmány kész telke. Az A ház pillér alapokon áll a homokban; a B ház a tőzeglencse miatt CFA-cölöpökön, két pinceszintje horgonyzott résfalas gödörben épült. Az egész tárgy egyetlen asztalon.',
     facts: [['2', 'ház'], ['9', 'állomás'], ['−3,0 m', 'talajvíz']], link: ['Egy telek, egy félév', 'bme-alapozas.vercel.app/telek'],
     views: [['Metszet szemből', '0deg 86deg auto', 'auto auto auto']],
-    hs: [['A ház – pillér alapokon', [-25, 11.2, 15], 0, '--accent'], ['B ház – CFA-cölöpökön', [19, 27.5, 15], 0, '--accent'], ['Horgonyzott résfal', [7.7, -6, 15.05], 1, '--accent'], ['CFA-cölöpök', [19, -13, 15.05], 0, '--accent'], ['Homokos kavics', [-22, -13.5, 15.05], 2, ''], ['Talajvíz −3,0 m', [-36, -3, 15.1], 2, '--water'], ['Kerékpártároló', [39.5, 2.8, 14.7], 0, '--accent']] },
+    hs: [] },
 ];
 let cur = M[0];
+// feliratok: a modellnek két változata van (felirat nélkül / feliratokkal), a kapcsoló a kettő között vált – az AR-nézetben is
+const fileOf = (m) => m.f + ($('#lbl').checked ? '-feliratok' : '');
+function setSrc(m) { const f = fileOf(m); if (EMB) mv.removeAttribute('ios-src'); else mv.setAttribute('ios-src', abs('models/' + f + '.usdz')); mv.setAttribute('src', EMB ? EMB[f] : abs('models/' + f + '.glb')); }
 $('#shelf').innerHTML = M.map(m => `<button type="button" class="mcard" data-id="${m.id}" style="--lc:${m.lc}" aria-pressed="false"><img src="img/${m.f}.jpg" alt="" width="560" height="350" loading="lazy"><i>${m.lec}</i><span class="t"><b>${m.name}</b><span>${m.tag}</span></span></button>`).join('');
 $('#shelf').addEventListener('click', (e) => { const b = e.target.closest('.mcard'); if (b) select(b.dataset.id, true); });
 function select(id, push) {
@@ -259,11 +262,10 @@ function select(id, push) {
     b.dataset.position = p.map(v => (v * m.k).toFixed(5) + 'm').join(' '); b.dataset.normal = '0 0 1'; b.dataset.visibilityAttribute = 'visible'; if (col) b.style.setProperty('--dot', 'var(' + col + ')');
     const sp = document.createElement('span'); sp.className = 'p'; sp.textContent = t; b.appendChild(sp); mv.appendChild(b); });
   mv.setAttribute('ar-scale', m.scale); mv.setAttribute('alt', m.name); mv.removeAttribute('auto-rotate'); mv.setAttribute('min-camera-orbit', 'auto 5deg auto'); mv.setAttribute('max-camera-orbit', 'auto 100deg auto');
-  if (EMB) mv.removeAttribute('ios-src'); else mv.setAttribute('ios-src', abs('models/' + m.f + '.usdz'));
-  mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.setAttribute('src', EMB ? EMB[m.f] : abs('models/' + m.f + '.glb'));
+  mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.removeAttribute('field-of-view'); setSrc(m);
   $('#scaleTag').textContent = m.tag; $('#animTag').hidden = !m.anim;
   $('#lec').innerHTML = `<i style="background:${m.lc}">${m.lec}</i><span>${m.lec.includes('–') ? 'az egész tárgy' : m.lec + '. előadás'}</span>`;
-  $('#mname').textContent = m.name; $('#minfo').textContent = m.info; $('.switch').style.display = m.hs.length ? '' : 'none';
+  $('#mname').textContent = m.name; $('#minfo').textContent = m.info;
   $('#facts').innerHTML = m.facts.map(([v, l]) => `<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('');
   $('#views').innerHTML = [['Áttekintés', m.orbit, 'auto auto auto'], ...m.views].map(([t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${t}</button>`).join('') + '<button type="button" data-i="rot" aria-pressed="false">Körbeforgatás</button>';
   const ln = $('#mlink'); ln.href = SB + m.link[1]; ln.innerHTML = m.link[0] + ' ' + ARROW;
@@ -275,7 +277,9 @@ $('#views').addEventListener('click', (e) => { const b = e.target.closest('butto
   const all = [['Áttekintés', cur.orbit, 'auto auto auto'], ...cur.views]; const [, o, t] = all[+b.dataset.i]; mv.setAttribute('camera-target', t); mv.setAttribute('camera-orbit', o);
   $$('#views button').forEach(x => { if (x.dataset.i !== 'rot') x.setAttribute('aria-pressed', String(x === b)); }); });
 mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-interaction') $$('#views button').forEach(x => { if (x.dataset.i !== 'rot' && x.getAttribute('aria-pressed') !== 'false') x.setAttribute('aria-pressed', 'false'); }); });
-$('#lbl').addEventListener('change', (e) => $('#viewer').classList.toggle('nolabels', !e.target.checked));
+$('#lbl').addEventListener('change', () => { // a nézőpont megmarad
+  try { const o = mv.getCameraOrbit(), t = mv.getCameraTarget(); mv.setAttribute('camera-orbit', `${o.theta}rad ${o.phi}rad ${o.radius}m`); mv.setAttribute('camera-target', `${t.x}m ${t.y}m ${t.z}m`); mv.setAttribute('field-of-view', mv.getFieldOfView() + 'deg'); } catch (e) {}
+  setSrc(cur); });
 addEventListener('hashchange', () => { const id = location.hash.slice(1); if (M.some(m => m.id === id) && id !== cur.id) select(id, false); });
 { let id = location.hash.slice(1); if (!M.some(m => m.id === id)) { try { id = localStorage.getItem('ar-labor-model') || ''; } catch (e) { id = ''; } } select(M.some(m => m.id === id) ? id : M[0].id, false); }
 
