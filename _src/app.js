@@ -32,11 +32,13 @@ $('#themeBtn').addEventListener('click', () => {
 { const d = $('#drawer'), b = $('#menuBtn');
   const items = [['#bevezetes', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#video', 'Bevezető videó']];
   items.forEach(([hh, t]) => el('a', { href: hh }, d, `<i style="background:#2b3440">→</i>${t}`));
+  el('a', { cls: 'd-ar', href: U('bme-alapozas.vercel.app/ar-labor/'), target: '_blank', rel: 'noopener' }, d, `<i>AR</i>Alapozás AR labor ↗`);
   S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? U(a.u) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? ' ↗' : ''}`); });
+  [['telek', 'Egy telek, egy félév'], ['helyszinelok', 'Geotechnikai helyszínelők'], ['tippelj', 'Tippelj, aztán számolj'], ['vizsga', 'Vizsgaszimulátor']].forEach(([u, t]) => el('a', { href: U('bme-alapozas.vercel.app/' + u + '/'), target: '_blank', rel: 'noopener' }, d, `<i style="background:var(--accent);color:#1b1206">★</i>${t} ↗`));
   b.addEventListener('click', () => { const o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
   d.addEventListener('click', (e) => { if (e.target.closest('a')) { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); } }); }
 // aktív menüpont
-{ const links = $$('.nav a'); const secs = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
+{ const links = $$('.nav a').filter(a => a.getAttribute('href').startsWith('#')); const secs = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
   const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); } }); }, { rootMargin: '-45% 0px -50% 0px' });
   secs.forEach(s => io.observe(s)); }
 
