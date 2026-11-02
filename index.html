@@ -131,6 +131,9 @@ main .tagline{text-align:left; hyphens:none; -webkit-hyphens:none; text-wrap:bal
 .vcap b{font:700 15px/1.3 var(--fb); display:block}
 .vcap span{font:500 12px/1.3 var(--fm); color:#c9cdd2; letter-spacing:.04em}
 .vcap i{font:700 12px/1 var(--fm); font-style:normal; background:rgba(255,255,255,.14); padding:7px 10px; border-radius:999px; white-space:nowrap}
+.vcap b + span{display:block}
+.vcap b, .vcap b + span{text-wrap:balance}
+@media (max-width: 640px){ .vcard .play{width:60px; height:60px; margin:-30px 0 0 -30px; top:38%} .vcard .play svg{width:22px; height:22px; margin-left:4px} .vcard .vcap{padding:10px 12px; gap:8px} .vcap b{font-size:13.5px} .vcap b + span{font-size:10.5px; letter-spacing:.02em} .vcap i{padding:6px 8px; font-size:11px} }
 
 /* ===== útvonaltérkép ===== */
 .route{background:var(--night); color:var(--nink); padding:4px 0 70px; position:relative}
@@ -605,7 +608,7 @@ footer .fb{max-width:46ch}
     <button class="vcard h-v" data-video aria-label="A bevezető animáció lejátszása">
       <img src="img/poster-bevezeto.jpg" alt="A bevezető animáció képe: két épület egy elmetszett talajtömbön, az egyik síkalapon, a másik cölöpökön és résfalas mélypincén" width="1600" height="900">
       <span class="play"><svg viewBox="0 0 24 24" fill="#1b1206"><path d="M6 4v16l14-8z"/></svg></span>
-      <span class="vcap"><span><b>A tárgy útja – bevezető animáció</b><span>kilenc lépés a talajtól az épületig</span></span><i>2:54</i></span>
+      <span class="vcap"><span><b>A tárgy felépítése – bevezető&nbsp;animáció</b><span>Hogyan jutunk el a&nbsp;talaj felderítésétől a&nbsp;kész épületig</span></span><i>2:54</i></span>
     </button>
     <div class="h-txt">
       <p class="hero-lead">Ez az oldal bemutatja, miről is szól a tárgy. Innen indul az út a talaj megismerésétől (felderítésétől) a síkalapokon és a mélyalapokon át a munkagödrökig – kilenc, egymásra épülő állomáson. Minden állomáshoz önálló, interaktív tananyag tartozik: 3D szimulátorokkal, animációs videókkal, kalkulátorokkal és kvízekkel.</p>
@@ -910,7 +913,7 @@ footer .fb{max-width:46ch}
     <button class="vcard" data-video aria-label="A bevezető animáció lejátszása">
       <img src="img/poster-alt.jpg" alt="A bevezető animáció nyitóképe: a kész telek a két épülettel" width="1600" height="900" loading="lazy">
       <span class="play"><svg viewBox="0 0 24 24" fill="#1b1206"><path d="M6 4v16l14-8z"/></svg></span>
-      <span class="vcap"><span><b>A tárgy útja</b><span>bevezető animáció</span></span><i>2:54</i></span>
+      <span class="vcap"><span><b>A tárgy felépítése – bevezető&nbsp;animáció</b><span>Hogyan jutunk el a&nbsp;talaj felderítésétől a&nbsp;kész épületig</span></span><i>2:54</i></span>
     </button>
     <div>
       <div class="kick">Bevezető animáció</div>
@@ -938,8 +941,8 @@ footer .fb{max-width:46ch}
 
 <div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Bevezető animáció">
   <div class="vbox">
-    <div class="vf"><iframe id="vmFrame" title="A tárgy útja – bevezető animáció" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="vbar"><span>A tárgy útja – bevezető animáció · 2:54 · Esc: bezárás</span><button id="vmClose">Bezárás ✕</button></div>
+    <div class="vf"><iframe id="vmFrame" title="A tárgy felépítése – bevezető animáció" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="vbar"><span>A tárgy felépítése – bevezető animáció · 2:54 · Esc: bezárás</span><button id="vmClose">Bezárás ✕</button></div>
   </div>
 </div>
 
@@ -1414,7 +1417,7 @@ const XS = (() => {
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;
-  const open = () => { last = document.activeElement; f.src = 'video/bevezeto.html#autoplay'; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => f.focus(), 300); };
+  const open = () => { last = document.activeElement; f.src = 'video/bevezeto.html?v=2#autoplay'; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => f.focus(), 300); };
   const close = () => { m.hidden = true; f.src = 'about:blank'; document.body.style.overflow = ''; if (last) last.focus(); };
   $$('[data-video]').forEach(b => b.addEventListener('click', open)); $('#vmClose').addEventListener('click', close);
   m.addEventListener('click', (e) => { if (e.target === m) close(); });
