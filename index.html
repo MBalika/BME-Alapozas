@@ -266,6 +266,12 @@ input[type=range]{width:100%; accent-color:var(--accent); height:28px}
 .vs .vs-s{border-left:1px solid var(--line)}
 .vs .vs-t{border-left:1px solid var(--line); background:color-mix(in srgb, var(--c1) 7%, var(--card))}
 .vs .ico{width:26px; height:26px; flex:none}
+.vs .vs-s b, .vs .vs-t b{font-weight:700; color:var(--ink)}
+.vs .vs-t b{color:var(--accent-ink)}
+.vs .unc{display:inline-flex; gap:4px; vertical-align:middle; margin-right:10px}
+.vs .unc i{width:22px; height:10px; border-radius:3px; background:var(--line)}
+.vs .vs-s .unc i:nth-child(1){background:var(--ink2)}
+.vs .vs-t .unc i{background:var(--accent)}
 
 /* idézet-kártya */
 .quote{position:relative; padding:34px 36px 30px 36px; border-radius:22px; background:var(--night); color:var(--nink); overflow:hidden; border:1px solid var(--nline)}
@@ -321,21 +327,6 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 .score{font:700 13px/1 var(--fm); color:var(--muted)}
 
 /* helyszín-választó */
-.sites{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px}
-.site{text-align:left; border:1px solid var(--line); background:var(--card); border-radius:18px; padding:0; overflow:hidden; cursor:pointer; box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .2s}
-.site:hover{transform:translateY(-2px)}
-.site svg{width:100%; height:auto; display:block; background:#cfe2ee}
-.site .st{padding:14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1}
-.site .st i{font:700 12px/1 var(--fm); font-style:normal; color:var(--muted)}
-.site .st .pill i{color:#fff; font:700 11px/1 var(--fm)}
-.site .st b{font:700 15.5px/1.3 var(--fb)}
-.site .st .rv{display:none; font-size:14px; line-height:1.5; color:var(--ink2); border-top:1px dashed var(--line2); padding-top:8px; margin-top:4px}
-.site.open .st .rv{display:block}
-.site.open{border-color:var(--bad)}
-.site .risk{display:none; font:700 11.5px/1 var(--fm); color:var(--bad); letter-spacing:.06em; text-transform:uppercase}
-.site.open .risk{display:block}
-.reveal-all{margin-top:16px; display:none}
-.reveal-all.on{display:block}
 
 
 /* pisa */
@@ -466,7 +457,6 @@ footer .fb{max-width:46ch}
   .vcard{max-width:760px}
   .nav a{padding:9px 9px; font-size:13.5px}
   .grid-apps{grid-template-columns:repeat(3, 1fr)}
-  .sites{grid-template-columns:repeat(2, 1fr)}
   .jgrid{grid-template-columns:1fr; gap:0}
   .jstage{top:var(--hh); height:auto; max-height:none; z-index:5; padding:10px 0 6px; background:var(--night); margin:0 calc(-1 * var(--pad)); padding-left:var(--pad); padding-right:var(--pad)}
   .jframe{border-radius:14px}
@@ -509,9 +499,6 @@ footer .fb{max-width:46ch}
   .ac.here{flex-direction:column}
   .ac.here .im{flex:none; aspect-ratio:16/10}
   .tiles{grid-template-columns:1fr}
-  .sites{grid-template-columns:1fr 1fr; gap:10px}
-  .site .st{padding:10px 12px 12px}
-  .site .st b{font-size:14px}
   .reads{grid-template-columns:1fr 1fr}
   .app{grid-template-columns:104px 1fr; gap:12px}
   .app img{width:104px}
@@ -716,25 +703,28 @@ footer .fb{max-width:46ch}
     <!-- C · talaj ≠ acél -->
     <div class="blk">
       <div class="bh"><h3>Miért más a talaj, mint a többi építőanyag?</h3></div>
-      <p class="lead" style="margin-bottom:22px">A tartószerkezeti tervező az acél, a (vas)beton vagy a fa előírt minőségéből és az ezekhez tartozó anyagjellemzőkből indul ki, figyelembe véve az adott anyag sajátosságait. A geotechnikai tervezés kiindulópontja a helyszínen meglévő talaj és talajvíz: ezek térbeli változékonyságát és viselkedését vizsgálatokkal kell megismerni.</p>
+      <p class="lead" style="margin-bottom:22px">Az acélt, a (vas)betont és a fát a tervező választja ki. A talajt készen kapjuk: meg kell ismerni, és ahhoz kell igazodni.</p>
       <div class="vs" id="vs">
         <div class="vh">Szempont</div>
         <div class="vh"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 17h18M7 7v10M17 7v10"/></svg>Acél, (vas)beton, fa</div>
         <div class="vh" style="color:var(--accent-ink)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8c3-1 6 1 9 0s6-1 9 0M3 13c3-1 6 1 9 0s6-1 9 0M3 18c3-1 6 1 9 0s6-1 9 0"/></svg>Talaj</div>
         <div class="vq">Ki választja ki?</div>
-        <div class="vs-s">A tervező előírja a beépítendő anyag típusát, minőségét és szilárdsági osztályát. A felhasznált anyag megfelelőségét ellenőrizni kell.</div>
-        <div class="vs-t">A helyszíni talaj-&nbsp;és talajvízviszonyok meglévő adottságok. Az alapozást ezekhez kell igazítani; szükség esetén a talaj tulajdonságai például talajjavítással vagy talajcserével módosíthatók.</div>
+        <div class="vs-s"><b>A tervező.</b> Előírja a típusát és a minőségét.</div>
+        <div class="vs-t"><b>Senki – adottság.</b> El kell fogadni; legfeljebb javítható vagy cserélhető.</div>
         <div class="vq">Mennyit tudunk róla?</div>
-        <div class="vs-s">A tervezéshez minősítésen és vizsgálatokon alapuló, szabványosan megadott anyagjellemzők állnak rendelkezésre. A tulajdonságok szórásával, a környezeti hatásokkal és az időbeli változásokkal is számolni kell.</div>
-        <div class="vs-t">Feltárásokból, helyszíni és laboratóriumi vizsgálatokból, valamint földtani ismeretekből állítjuk össze a terület talajmodelljét. A vizsgálati helyek közötti változások megítélésében bizonytalanság marad.</div>
+        <div class="vs-s"><b>Szinte mindent.</b> Szabványos, bevizsgált anyagjellemzők.</div>
+        <div class="vs-t"><b>Csak pontokban.</b> A feltárások között becsülünk.</div>
         <div class="vq">Miből áll?</div>
-        <div class="vs-s">Az acél általában közel homogénként modellezhető. A beton több összetevőből álló anyag; a vasbeton viselkedését a beton és az acélbetétek együttdolgozása, valamint a repedezettség is meghatározza. A fa természetes változékonyságú, irányfüggő tulajdonságokkal rendelkező anyag.</div>
-        <div class="vs-t">Szilárd szemcsékből és a pórusokat kitöltő vízből és/vagy levegőből álló, gyakran rétegzett közeg. Viselkedését a szemcsék kapcsolata, a tömörség, a feszültségállapot, a terhelési előélet és a vízviszonyok együttesen befolyásolják.</div>
+        <div class="vs-s"><b>Ismert összetétel.</b> Kevés, jól leírható összetevő.</div>
+        <div class="vs-t"><b>Szemcse, víz, levegő.</b> Rétegesen, helyről helyre másképp.</div>
         <div class="vq">Mikor alakváltozik?</div>
-        <div class="vs-s">A terhelésre azonnali alakváltozás jelentkezik, amelyhez az anyagtól és a körülményektől függően időben elhúzódó változások is társulnak. A (vas)betonnál például a beton kúszásával és zsugorodásával, a fánál kúszással és a nedvességváltozás okozta méretváltozással is számolni kell.</div>
-        <div class="vs-t">Az alakváltozás egy része gyorsan, más része konszolidáció és kúszás révén hosszabb idő, akár évek alatt alakul ki. A süllyedés mértéke és időbeli lefolyása az épület alatt helyenként eltérhet; a vízviszonyok változása további mozgásokat is okozhat.</div>
+        <div class="vs-s"><b>Azonnal.</b> Döntően a terhelés pillanatában, kiszámítható módon.</div>
+        <div class="vs-t"><b>Akár évekig.</b> Részben azonnal, részben lassan – és nem mindenhol egyformán.</div>
+        <div class="vq">Bizonytalanság</div>
+        <div class="vs-s"><span class="unc" aria-label="kicsi"><i></i><i></i><i></i><i></i><i></i></span><b>kicsi</b></div>
+        <div class="vs-t"><span class="unc" aria-label="nagy"><i></i><i></i><i></i><i></i><i></i></span><b>nagy</b></div>
       </div>
-      <p class="note" style="margin-top:14px">Az alapozás tervezésekor az építmény és az érintett talajtömeg kölcsönhatását kell vizsgálni. A talaj térbeli változékonysága és megismerésének korlátai miatt a geotechnikai modell bizonytalanságait külön értékelni kell. <b>A biztonságos és gazdaságos alapozás alapja a megfelelő talajvizsgálat és az arra épülő geotechnikai tervezés.</b></p>
+      <p class="note" style="margin-top:14px"><b>Ezért az alapozás a talaj megismerésével kezdődik: jó talajvizsgálat nélkül nincs biztonságos és gazdaságos alapozás.</b></p>
     </div>
 
     <!-- D · az alapozás feladata, alaptípusok -->
@@ -804,14 +794,6 @@ footer .fb{max-width:46ch}
     <div class="blk">
       <div class="bh"><h3>Villámkör: síkalap vagy mélyalap?</h3><span class="score" id="qzScore"></span></div>
       <div class="qz" id="qz"></div>
-    </div>
-
-    <!-- J · hová építenél -->
-    <div class="blk">
-      <div class="bh"><h3>Melyik telekre építenél saját házat?</h3></div>
-      <p class="lead" style="margin-bottom:20px">Válassz – vagy kattints mindegyikre, és nézd meg, mit rejt a talaj.</p>
-      <div class="sites" id="sites"></div>
-      <div class="verdict warn reveal-all" id="sitesAll">Csapda volt: mind a négy telek kedvezőtlen. A jó altalajú területeket a településeken már beépítették – ezért kell érteni a nehéz talajokhoz is. Ezekről szól a 4., a 6. és a 7. állomás.</div>
     </div>
 
   </div>
@@ -1182,23 +1164,6 @@ $('#themeBtn').addEventListener('click', () => {
   Q.forEach(([t, a, e], i) => { const c = el('div', { cls: 'q' }, box, `<span class="qn">${i + 1} / ${Q.length}</span><b>${t}</b><div class="opts"><button data-v="0">Síkalap</button><button data-v="1">Mélyalap</button></div><p class="fb"></p>`);
     $$('button', c).forEach(b => b.addEventListener('click', () => { if (c.classList.contains('done')) return; const v = +b.dataset.v; c.classList.add('done'); done++; if (v === a) ok++;
       $$('button', c).forEach(x => x.classList.add(+x.dataset.v === a ? 'right' : (x === b ? 'wrong' : 'x'))); $('.fb', c).innerHTML = `<b style="font-size:15px">${v === a ? 'Igen! ' : 'Nem egészen. '}</b>${e}`; sc.textContent = `${ok} / ${done} helyes`; })); }); }
-
-/* ================= 1 · HOVÁ ÉPÍTENÉL? ================= */
-{ const P = (k) => ({
-    A: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 70 Q50 64 100 70 T200 68 V120 H0Z" fill="#7d8f5a"/><path d="M0 84 Q60 78 120 86 T200 82 V120 H0Z" fill="#5e7a8c" opacity=".85"/><g stroke="#4f6a3a" stroke-width="2"><path d="M30 70v-14M36 70v-18M42 70v-12M150 69v-15M156 69v-19"/></g><path d="M0 100 h200" stroke="#3d2d20" stroke-width="14" opacity=".55"/>',
-    B: '<rect width="200" height="120" fill="#cfe2ee"/><rect x="20" y="24" width="34" height="46" fill="#9a8f84"/><rect x="60" y="34" width="26" height="36" fill="#b9ae9f"/><rect x="140" y="20" width="40" height="50" fill="#8c837a"/><path d="M0 70 H200 V120 H0Z" fill="#8a7f6e"/><g fill="#5b4a3a"><rect x="30" y="86" width="16" height="7"/><rect x="90" y="96" width="22" height="6"/><rect x="150" y="84" width="12" height="9"/></g><g fill="#b9b2a4"><circle cx="70" cy="88" r="4"/><circle cx="130" cy="104" r="5"/></g>',
-    C: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 40 L70 40 L150 110 L200 110 V120 H0Z" fill="#b8a07a"/><path d="M0 40 L70 40" stroke="#6f8f4c" stroke-width="5"/><rect x="26" y="20" width="30" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M22 20 l19 -12 19 12z" fill="#c0704c"/><path d="M18 40 A110 110 0 0 0 158 110" stroke="#d4483a" stroke-width="2.4" fill="none" stroke-dasharray="6 4"/>',
-    D: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 64 H120 L140 76 H200 V120 H0Z" fill="#a39271"/><path d="M128 72 H200 V84 H134Z" fill="#4f88b0"/><path d="M0 58 H200" stroke="#4f88b0" stroke-width="2" stroke-dasharray="6 4" opacity=".8"/><rect x="40" y="44" width="34" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M36 44 l21 -12 21 12z" fill="#c0704c"/>' })[k];
-  const D = [['A', 'Mocsaras, lápos terület a Tisza-tó partján', 'Szerves talaj és magas talajvíz', 'A tőzeg és a láp nagyon összenyomható, évekig süllyed, a víz a felszín közelében van. Síkalap helyett mélyalap vagy talajjavítás kell.', [6, 8]],
-    ['B', 'Régi ipari feltöltés a bulinegyedben', 'Ismeretlen feltöltés', 'Laza, vegyes összetételű, akár szennyezett anyag, amely egyenlőtlenül roskad, sőt gázt is fejleszthet. Ki kell cserélni, át kell alapozni rajta.', [6, 5]],
-    ['C', 'Sziklás domboldal 30°-os rézsűvel, remek kilátással', 'Rézsűállékonyság', 'A ház és a lejtő együtt is megcsúszhat: az általános állékonyságot igazolni kell, a rézsűt esetleg meg kell támasztani.', [4, 9]],
-    ['D', 'Duna-parti öntésterület', 'Árvíz, kimosás, felúszás', 'Fiatal, puha folyami üledékek, ingadozó talajvíz: a víz kimoshatja az alap alól a talajt, a pince felúszhat.', [7, 4]]];
-  const box = $('#sites');
-  D.forEach(([k, t, risk, rv, go]) => { const b = el('button', { cls: 'site' }, box, `<svg viewBox="0 0 200 120" aria-hidden="true">${P(k)}</svg><span class="st"><i>${k}</i><b>${t}</b><span class="risk">⚠ ${risk}</span><span class="rv">${rv}</span></span>`);
-    const rvEl = $('.rv', b); const g = el('span', { style: 'display:flex; gap:6px; flex-wrap:wrap; margin-top:6px' }, rvEl); go.forEach(n => el('span', { cls: 'pill', style: `--c:${cv(n)}` }, g, `<i>${n}</i>${S[n - 1].rail.replace('\u00AD', '')}`));
-    b.addEventListener('click', () => { b.classList.add('open'); $('#sitesAll').classList.add('on'); }); }); }
-
-/* ================= 1 · KI A FELELŐS ================= */
 
 /* ================= A TÁRGY ÚTJA: lépések ================= */
 { const box = $('#steps'), prog = $('#jprog');

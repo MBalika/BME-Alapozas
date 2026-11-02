@@ -288,23 +288,6 @@ $('#themeBtn').addEventListener('click', () => {
     $$('button', c).forEach(b => b.addEventListener('click', () => { if (c.classList.contains('done')) return; const v = +b.dataset.v; c.classList.add('done'); done++; if (v === a) ok++;
       $$('button', c).forEach(x => x.classList.add(+x.dataset.v === a ? 'right' : (x === b ? 'wrong' : 'x'))); $('.fb', c).innerHTML = `<b style="font-size:15px">${v === a ? 'Igen! ' : 'Nem egészen. '}</b>${e}`; sc.textContent = `${ok} / ${done} helyes`; })); }); }
 
-/* ================= 1 · HOVÁ ÉPÍTENÉL? ================= */
-{ const P = (k) => ({
-    A: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 70 Q50 64 100 70 T200 68 V120 H0Z" fill="#7d8f5a"/><path d="M0 84 Q60 78 120 86 T200 82 V120 H0Z" fill="#5e7a8c" opacity=".85"/><g stroke="#4f6a3a" stroke-width="2"><path d="M30 70v-14M36 70v-18M42 70v-12M150 69v-15M156 69v-19"/></g><path d="M0 100 h200" stroke="#3d2d20" stroke-width="14" opacity=".55"/>',
-    B: '<rect width="200" height="120" fill="#cfe2ee"/><rect x="20" y="24" width="34" height="46" fill="#9a8f84"/><rect x="60" y="34" width="26" height="36" fill="#b9ae9f"/><rect x="140" y="20" width="40" height="50" fill="#8c837a"/><path d="M0 70 H200 V120 H0Z" fill="#8a7f6e"/><g fill="#5b4a3a"><rect x="30" y="86" width="16" height="7"/><rect x="90" y="96" width="22" height="6"/><rect x="150" y="84" width="12" height="9"/></g><g fill="#b9b2a4"><circle cx="70" cy="88" r="4"/><circle cx="130" cy="104" r="5"/></g>',
-    C: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 40 L70 40 L150 110 L200 110 V120 H0Z" fill="#b8a07a"/><path d="M0 40 L70 40" stroke="#6f8f4c" stroke-width="5"/><rect x="26" y="20" width="30" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M22 20 l19 -12 19 12z" fill="#c0704c"/><path d="M18 40 A110 110 0 0 0 158 110" stroke="#d4483a" stroke-width="2.4" fill="none" stroke-dasharray="6 4"/>',
-    D: '<rect width="200" height="120" fill="#cfe2ee"/><path d="M0 64 H120 L140 76 H200 V120 H0Z" fill="#a39271"/><path d="M128 72 H200 V84 H134Z" fill="#4f88b0"/><path d="M0 58 H200" stroke="#4f88b0" stroke-width="2" stroke-dasharray="6 4" opacity=".8"/><rect x="40" y="44" width="34" height="20" fill="#efe6d2" stroke="#8d8576"/><path d="M36 44 l21 -12 21 12z" fill="#c0704c"/>' })[k];
-  const D = [['A', 'Mocsaras, lápos terület a Tisza-tó partján', 'Szerves talaj és magas talajvíz', 'A tőzeg és a láp nagyon összenyomható, évekig süllyed, a víz a felszín közelében van. Síkalap helyett mélyalap vagy talajjavítás kell.', [6, 8]],
-    ['B', 'Régi ipari feltöltés a bulinegyedben', 'Ismeretlen feltöltés', 'Laza, vegyes összetételű, akár szennyezett anyag, amely egyenlőtlenül roskad, sőt gázt is fejleszthet. Ki kell cserélni, át kell alapozni rajta.', [6, 5]],
-    ['C', 'Sziklás domboldal 30°-os rézsűvel, remek kilátással', 'Rézsűállékonyság', 'A ház és a lejtő együtt is megcsúszhat: az általános állékonyságot igazolni kell, a rézsűt esetleg meg kell támasztani.', [4, 9]],
-    ['D', 'Duna-parti öntésterület', 'Árvíz, kimosás, felúszás', 'Fiatal, puha folyami üledékek, ingadozó talajvíz: a víz kimoshatja az alap alól a talajt, a pince felúszhat.', [7, 4]]];
-  const box = $('#sites');
-  D.forEach(([k, t, risk, rv, go]) => { const b = el('button', { cls: 'site' }, box, `<svg viewBox="0 0 200 120" aria-hidden="true">${P(k)}</svg><span class="st"><i>${k}</i><b>${t}</b><span class="risk">⚠ ${risk}</span><span class="rv">${rv}</span></span>`);
-    const rvEl = $('.rv', b); const g = el('span', { style: 'display:flex; gap:6px; flex-wrap:wrap; margin-top:6px' }, rvEl); go.forEach(n => el('span', { cls: 'pill', style: `--c:${cv(n)}` }, g, `<i>${n}</i>${S[n - 1].rail.replace('\u00AD', '')}`));
-    b.addEventListener('click', () => { b.classList.add('open'); $('#sitesAll').classList.add('on'); }); }); }
-
-/* ================= 1 · KI A FELELŐS ================= */
-
 /* ================= A TÁRGY ÚTJA: lépések ================= */
 { const box = $('#steps'), prog = $('#jprog');
   S.forEach(s => { const c = el('article', { cls: 'stp', id: 'st' + s.n, 'data-n': s.n, style: `--c:${cv(s.n)}` }, box);
