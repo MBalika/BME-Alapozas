@@ -474,6 +474,8 @@ const XS = (() => {
   const X = [
     { t: 'Egy telek, egy félév', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Kilenc állomás egyetlen telken: te vagy a geotechnikus, és minden megoldott feladattal tovább épül a két ház 3D-makettje, a talaj megismerésétől az utolsó födémig.' },
     { t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },
+    { t: 'Tippelj, aztán számolj', u: 'bme-alapozas.vercel.app/tippelj', img: 'tippelj', lab: '1–9', d: 'Becslős kérdések minden előadáshoz: előbb tippelsz egy logaritmikus skálán, aztán megnézed a számítást. Előadáson kivetítő módban, QR-kóddal.' },
+    { t: 'CFA-cölöp a térben', u: 'cfa-colop-3d.vercel.app/ar', img: 'cfa3d', lab: '8+', d: 'A CFA-fúrógép és a talajmetszet 3D-modellje kiterjesztett valóságban: telefonon az asztalra vagy a padlóra tehető, körbejárható.' },
   ];
   X.forEach(a => { el('a', { cls: 'ac wide', href: U(a.u), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${a.lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); }); }
