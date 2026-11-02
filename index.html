@@ -582,7 +582,7 @@ footer .fb{max-width:46ch}
       <span><b>Alapozás</b></span>
     </a>
     <nav class="nav" aria-label="Fő menü">
-      <a href="#bevezetes">Bevezetés</a>
+      <a href="#top">Bevezetés</a>
       <a href="#utvonal">A tárgy útja</a>
       <a href="#temakorok">Tananyagok</a>
       <a href="#video">Videó</a>
@@ -637,7 +637,7 @@ footer .fb{max-width:46ch}
       <div class="arb-t">
         <div class="kick"><span class="new">Új</span>Kiterjesztett valóság</div>
         <h2 id="arH">Alapozás AR labor</h2>
-        <p class="lead">Nyolc 3D-modell a tárgyból egy helyen: talajtörés, feszültséghagyma, CFA-cölöp, résfalas munkagödör, a pisai torony és a kész telek. Telefonon a „Nézd meg a térben” gombbal az asztalra vagy a padlóra teheted, és körbejárhatod.</p>
+        <p class="lead">Hat 3D-modell a tárgyból egy helyen: talajtörés, feszültséghagyma, a pisai torony a rétegsorával, CFA-cölöp, horgonyzott munkagödör és a kész telek. Telefonon a „Nézd meg a térben” gombbal az asztalra vagy a padlóra teheted, és körbejárhatod.</p>
         <a class="btn holo" href="https://bme-alapozas.vercel.app/ar-labor/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.4v9.2L12 21.2 4 16.6V7.4z"/><path d="M4 7.4 12 12l8-4.6M12 12v9.2"/></svg>Az AR labor megnyitása ↗</a>
       </div>
       <div class="arb-m">
@@ -979,7 +979,7 @@ $('#themeBtn').addEventListener('click', () => {
   r.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('alap-theme', r.dataset.theme); } catch (e) {}
 });
 { const d = $('#drawer'), b = $('#menuBtn');
-  const items = [['#bevezetes', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#video', 'Bevezető videó']];
+  const items = [['#top', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#video', 'Bevezető videó']];
   items.forEach(([hh, t]) => el('a', { href: hh }, d, `<i style="background:#2b3440">→</i>${t}`));
   el('a', { cls: 'd-ar', href: U('bme-alapozas.vercel.app/ar-labor/'), target: '_blank', rel: 'noopener' }, d, `<i>AR</i>Alapozás AR labor ↗`);
   S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? U(a.u) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? ' ↗' : ''}`); });
@@ -987,9 +987,9 @@ $('#themeBtn').addEventListener('click', () => {
   b.addEventListener('click', () => { const o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
   d.addEventListener('click', (e) => { if (e.target.closest('a')) { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); } }); }
 // aktív menüpont
-{ const links = $$('.nav a').filter(a => a.getAttribute('href').startsWith('#')); const secs = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
-  const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); } }); }, { rootMargin: '-45% 0px -50% 0px' });
-  secs.forEach(s => io.observe(s)); }
+{ const pairs = $$('.nav a').filter(a => a.getAttribute('href').startsWith('#')).map(a => [a, a.getAttribute('href') === '#top' ? $('.hero') : $(a.getAttribute('href'))]).filter(p => p[1]);
+  const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) pairs.forEach(([a, sec]) => a.classList.toggle('on', sec === e.target)); }); }, { rootMargin: '-45% 0px -50% 0px' });
+  pairs.forEach(p => io.observe(p[1])); }
 
 /* ================= ÚTVONALTÉRKÉP ================= */
 { const rail = $('#rail');
@@ -1410,7 +1410,7 @@ const XS = (() => {
     { t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },
     { t: 'Tippelj, aztán számolj', u: 'bme-alapozas.vercel.app/tippelj', img: 'tippelj', lab: '1–9', d: 'Becslős kérdések minden előadáshoz: előbb tippelsz egy logaritmikus skálán, aztán megnézed a számítást. Előadáson kivetítő módban, QR-kóddal.' },
     { t: 'Vizsgaszimulátor', u: 'bme-alapozas.vercel.app/vizsga', img: 'vizsga', lab: '2–9', d: 'Véletlen adatokkal generált számpéldák lépésenkénti ellenőrzéssel – megmutatja, melyik lépésnél csúsztál el –, és igaz–hamis kártyapakli az egész tárgyból.' },
-    { t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Nyolc 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma, CFA-cölöp, résfalas munkagödör, a pisai torony és a kész telek. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },
+    { t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Hat 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma, a pisai torony a rétegsorával, CFA-cölöp, horgonyzott munkagödör és a kész telek. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },
   ];
   X.forEach(a => { el('a', { cls: 'ac wide', href: U(a.u), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${a.lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); }); }

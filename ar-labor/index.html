@@ -66,7 +66,7 @@ h1{font:800 clamp(34px, 6vw, 70px)/.98 var(--fd); letter-spacing:-.025em; margin
 h1 em{font-style:normal; color:var(--holo)}
 .lead{color:var(--nink); opacity:.9; font-size:clamp(16px, 1.6vw, 18px); margin:0}
 
-.shelf{display:grid; grid-template-columns:repeat(8, minmax(0, 1fr)); gap:10px; margin-top:24px}
+.shelf{display:grid; grid-template-columns:repeat(6, minmax(0, 1fr)); gap:12px; margin-top:24px}
 .mcard{position:relative; display:flex; flex-direction:column; text-align:left; border:1px solid var(--nline); border-radius:14px; overflow:hidden; background:var(--night2); cursor:pointer; padding:0; min-width:0}
 .mcard img{display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; background:#e9eef2; max-width:100%}
 .mcard .t{padding:8px 10px 10px; display:flex; flex-direction:column; gap:3px}
@@ -136,7 +136,7 @@ main{padding-block:clamp(34px, 5vw, 56px) 30px}
 .trouble p{margin:0; color:var(--ink2); font-size:15px}
 footer.wrap{border-top:1px solid var(--line); margin-top:30px; padding-block:18px 26px; color:var(--muted); font-size:14px}
 footer p{margin:0}
-@media (max-width: 1100px){ .shelf{grid-template-columns:repeat(4, minmax(0, 1fr))} }
+@media (max-width: 1100px){ .shelf{grid-template-columns:repeat(3, minmax(0, 1fr))} }
 @media (max-width: 880px){
   .head, .grid{grid-template-columns:1fr}
   .viewer, model-viewer{min-height:min(118vw, 600px)}
@@ -157,7 +157,7 @@ footer p{margin:0}
     <div class="kick"><span>BME Alapozás</span><span class="tag">kiterjesztett valóság</span></div>
     <div class="head">
       <h1>Alapozás <em>AR labor</em></h1>
-      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A makettek kicsinyítve, a gépek és a pisai torony valós méretben is kipróbálhatók.</p>
+      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A feliratok a legtöbb modellre rá vannak írva, így a térbeli nézetben is olvashatók.</p>
     </div>
     <nav class="shelf" id="shelf" aria-label="Modellek"></nav>
     <div class="grid">
@@ -192,7 +192,7 @@ footer p{margin:0}
     <ol class="steps">
       <li><b>Koppints a gombra</b><p>A modell alatti „Nézd meg a térben” gomb megnyitja a kamerát. Első alkalommal a telefon engedélyt kér hozzá.</p></li>
       <li><b>Pásztázd a felületet</b><p>Lassan mozgasd a telefont a padló vagy az asztal fölött, amíg felismeri a vízszintes felületet. Jól megvilágított, mintás felületen gyorsabb.</p></li>
-      <li><b>Tedd le és járd körbe</b><p>A makettet két ujjal kisebbre vagy nagyobbra állíthatod. A valós méretű modelleknél hátrálj, hogy beleférjenek a képbe – a pisai toronyhoz parkban vagy sportpályán érdemes kimenni.</p></li>
+      <li><b>Tedd le és járd körbe</b><p>A makettet két ujjal kisebbre vagy nagyobbra állíthatod, és körbejárhatod. Közel hajolva a modellre írt feliratok is jól olvashatók.</p></li>
     </ol>
   </section>
   <section class="sec">
@@ -217,40 +217,31 @@ const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke
 const SB = 'https://';
 // hotspot: [felirat, [x, y, z] méterben a modell saját koordinátáiban, normál, 0 jobbra / 1 balra / 2 középre, szín]
 const M = [
-  { id: 'tores', f: 'talajtores', name: 'Talajtörés a sávalap alatt', lec: '3', lc: 'var(--c3)', k: 1 / 30, scale: 'auto', tag: 'M 1 : 30', anim: true, orbit: '8deg 80deg auto',
-    info: 'Ha a teher eléri a talaj teherbírását, a sávalap alatt aktív ék alakul ki, amely oldalra tolja a talajt. A logaritmikus spirál mentén megcsúszó zóna a két oldalon felemeli a felszínt. Az animációban az alap lesüllyed, a talaj kitüremkedik. Szemléltető mechanizmus homokban, φ′ = 30°-kal.',
-    facts: [['30°', 'φ′ a homokban'], ['2,0 m', 'alapszélesség'], ['≈ 19 m', 'a mechanizmus szélessége']], link: ['3. előadás: Síkalapok tervezése', 'sikalapoktervezese.vercel.app'],
-    views: [['Metszet szemből', '0deg 88deg auto', 'auto auto auto']],
-    hs: [['Sávalap a fallal', [1.0, -0.7, 0.05], 0, '--accent'], ['Aktív ék', [0, -1.95, 0.05], 2, ''], ['Csúszólap', [5.29, -3.48, 0.05], 0, '--c3'], ['Felpúposodó talaj', [7.0, 0.05, 0.05], 1, '--c3'], ['Feltöltés', [-8.5, -0.5, 0.05], 2, ''], ['Homok', [-8.5, -5.5, 0.05], 2, '']] },
-  { id: 'hagyma', f: 'feszultseghagyma', name: 'Feszültséghagyma', lec: '5', lc: 'var(--c5)', k: 1 / 10, scale: 'auto', tag: 'M 1 : 10', orbit: '50deg 68deg auto',
-    info: 'A pillér alap alatt a többletfeszültség a mélységgel gyorsan csökken. A színes héjak a nettó talpfeszültség 80, 50, 20 és 10 %-át jelölik: ezen belül nagyobb, kívül kisebb a többletfeszültség. A héjak Boussinesq szerint készültek, a 2 × 2 m-es alappal azonos területű, egyenletesen terhelt kör alatt.',
-    facts: [['1,5 m', 'a 0,5 · σ₀ héj alja'], ['2,8 m', 'a 0,2 · σ₀ héj alja'], ['4,2 m', 'a 0,1 · σ₀ héj alja']], link: ['5. előadás: Síkalapok süllyedésszámítása', 'sikalapok-sullyedesszamitasa.vercel.app'],
-    views: [['A kivágott sarok', '40deg 64deg 0.75m', '0.15m -0.25m 0.15m']],
-    hs: [['Pillér alap, 2 × 2 m', [0.9, -0.5, 0.9], 0, '--accent'], ['0,8 · σ₀', [0.02, -1.61, 0.02], 1, '--c3'], ['0,5 · σ₀', [0.02, -2.27, 0.02], 1, '--accent'], ['0,2 · σ₀', [1.45, -1.93, 0.02], 0, '--accent-2'], ['0,1 · σ₀', [1.96, -2.75, 0.02], 0, '--accent-2'], ['1 m-es mélységi lépték', [3.5, -5.8, 0.06], 1, '']] },
-  { id: 'pisa', f: 'pisa-makett', name: 'A pisai ferde torony', lec: '5', lc: 'var(--c5)', k: 1 / 100, scale: 'auto', tag: 'M 1 : 100', orbit: '45deg 80deg auto',
-    info: 'A torony alatt puha, összenyomható iszap- és agyagrétegek vannak, a talajvíz 1–2 m mélyen. A déli oldal kicsit jobban süllyedt, és a dőlés maga is növelte a terhet ezen az oldalon. 1999 és 2001 között az északi oldal alól talajt termeltek ki, így a dőlés kb. 0,5°-kal csökkent. Ma a torony tengelye kb. 4°-ban dől.',
-    facts: [['≈ 4°', 'dőlés ma'], ['≈ 3,9 m', 'kilógás a tetején'], ['56 m', 'magasság']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'],
-    views: [['A kivágott sarok', '60deg 82deg 0.9m', '0.05m 0m 0.05m']],
-    hs: [['Harangtorony', [3.9, 53.5, 5.3], 0, '--accent'], ['Oszlopos loggiák', [2.31, 30.6, 7.7], 0, '--accent'], ['Alapgyűrű', [7.04, -1.3, 6.93], 0, '--accent'], ['Homokos iszap', [-12, -5, 22.05], 2, ''], ['Puha agyag', [-12, -20, 22.05], 2, '']] },
-  { id: 'pisa11', f: 'pisa-valos-meret', name: 'Pisai torony valós méretben', lec: '5', lc: 'var(--c5)', k: 1, scale: 'fixed', tag: 'M 1 : 1', orbit: '30deg 86deg auto',
-    info: 'A torony valós méretben, kb. 56 m magasan. Tágas helyen, parkban vagy sportpályán érdemes kipróbálni, és jó messzire kell hátrálni, hogy beleférjen a képbe. Mellette egy 1,8 m-es ember a lépték.',
-    facts: [['56 m', 'magasság'], ['≈ 4°', 'dőlés'], ['1,8 m', 'ember mellette']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'], views: [],
-    hs: [['A torony teteje', [3.9, 53.5, 5.3], 0, '--accent'], ['Ember, 1,8 m', [-12, 1.9, 9], 1, '--accent'], ['Alapgyűrű', [0.13, -0.83, 9.8], 0, '--accent']] },
+  { id: 'tores', f: 'talajtores', name: 'Talajtörés a sávalap alatt', lec: '3', lc: 'var(--c3)', k: 1 / 25, scale: 'auto', tag: 'M 1 : 25', orbit: '22deg 70deg auto',
+    info: 'Általános nyírási törés végállapota sávalap alatt, homokban. Az alap az aktív ékkel együtt lesüllyedt, és a törés oldala felé megdőlt. A radiális nyírási zóna a logaritmikus spirál mentén elcsúszott, a passzív ék a csúszólapon felfelé-kifelé tolódott ki, ezért a felszín felpúposodott; a túloldalon repedés nyílt. A zónák mindkét metszetlapon látszanak, a felpúposodás végig a sávalap mentén.',
+    facts: [['30°', 'φ′ a homokban'], ['2,0 m', 'alapszélesség'], ['≈ 10 m', 'a felpúposodás kifutása']], link: ['3. előadás: Síkalapok tervezése', 'sikalapoktervezese.vercel.app'],
+    views: [['Metszet szemből', '0deg 90deg auto', 'auto auto auto'], ['A felpúposodás', '55deg 58deg 0.75m', '0.22m 0m -0.16m']],
+    hs: [] },
+  { id: 'hagyma', f: 'feszultseghagyma', name: 'Feszültséghagyma', lec: '5', lc: 'var(--c5)', k: 1 / 10, scale: 'auto', tag: 'M 1 : 10', orbit: '45deg 66deg auto',
+    info: 'A pillér alap alatt a többletfeszültség a mélységgel gyorsan csökken. A színes héjak a nettó talpfeszültség 80, 60, 40, 20 és 10 %-ánál húzódnak. A belső héjak nyúlnak ki legjobban a kivágott negyedből, így mindegyik látszik, a két metszetlapon pedig a teljes hagyma. A héjak Boussinesq szerint készültek, a 2 × 2 m-es alappal azonos területű, egyenletesen terhelt kör alatt.',
+    facts: [['1,8 m', 'a 40 %-os héj alja'], ['2,8 m', 'a 20 %-os héj alja'], ['4,2 m', 'a 10 %-os héj alja']], link: ['5. előadás: Síkalapok süllyedésszámítása', 'sikalapok-sullyedesszamitasa.vercel.app'],
+    views: [['A kivágott sarok', '45deg 64deg 1.4m', '0m -0.27m 0m'], ['Szemből', '15deg 84deg 1.5m', '0m -0.25m 0m']],
+    hs: [] },
+  { id: 'pisa', f: 'pisa-makett', name: 'A pisai ferde torony', lec: '5', lc: 'var(--c5)', k: 1 / 100, scale: 'auto', tag: 'M 1 : 100', orbit: '40deg 76deg auto',
+    info: 'A torony alatt kb. 10 m vastag, változékony iszapos-homokos réteg (A horizont) van, alatta 40 m mélységig puha, érzékeny tengeri agyag (B horizont, felső része a Pancone agyag), legalul tömör homok (C horizont). A talajvíz 1–2 m mélyen van. A torony átlagosan kb. 3 m-t süllyedt, a Pancone teteje alatta tál alakban hajlott le. Délen az A horizont agyagosabb, a felső homok vékonyabb, ott nagyobb a süllyedés. 1990-ben a dőlés 5,5° volt; 1999 és 2001 között az északi oldal alól talajt termeltek ki, így kb. 0,5°-kal csökkent.',
+    facts: [['≈ 5°', 'dőlés ma'], ['≈ 3 m', 'átlagos süllyedés'], ['14 500 t', 'a torony tömege']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'],
+    views: [['A metszetek', '30deg 84deg 1.2m', '0.04m -0.2m 0m'], ['Délről', '90deg 80deg auto', 'auto auto auto']],
+    hs: [] },
   { id: 'cfa', f: 'cfa-makett', name: 'CFA-cölöp fúrás közben', lec: '8', lc: 'var(--c8)', k: 1 / 60, scale: 'auto', tag: 'M 1 : 60', anim: true, orbit: '28deg 74deg auto',
     info: 'A spirál 10 m mélyen jár, a menetei tele vannak talajjal: ez a talaj támasztja meg a furat falát, ezért a CFA-cölöpnél nem kell béléscső vagy zagy. A betont tömlő hozza a forgatófejig, onnan a spirál üreges szárán jut le a talpig. A gépet a fülkében ülő gépkezelő irányítja.',
     facts: [['80 cm', 'cölöpátmérő'], ['10 m', 'fúrásmélység'], ['20 m', 'spirálhossz']], link: ['A teljes CFA-animáció', 'cfa-colop-3d.vercel.app'],
     views: [['Metszet szemből', '0deg 88deg 0.95m', '0m 0.04m 0m'], ['Fúrófej közelről', '6deg 86deg 0.2m', '0m -0.158m 0m']],
     hs: [['Forgatófej', [0, 11.5, 0.1], 0, '--accent'], ['Spirál, a menetek tele talajjal', [0.42, 5.0, 0.05], 0, '--accent'], ['Fúrófej, 10 m mélyen', [0.42, -9.8, 0.05], 0, '--accent'], ['Gépkezelő a fülkében', [-2.16, 3.7, -5.9], 1, '--accent'], ['Talajvíz −4,2 m', [3.9, -4.2, 0.05], 2, '--water'], ['Agyag', [-4.7, -3.0, 0.05], 2, ''], ['Homok', [-4.7, -14.25, 0.05], 2, '']] },
-  { id: 'cfagep', f: 'cfa-gep-valos-meret', name: 'CFA-fúrógép valós méretben', lec: '8', lc: 'var(--c8)', k: 1, scale: 'fixed', tag: 'M 1 : 1', orbit: '38deg 78deg auto',
-    info: 'A fúrógép valós méretben, felhúzott spirállal és betonszivattyúval. Az árboc kb. 27 m magas: tágas helyen érdemes kipróbálni, és jócskán hátrálni kell, hogy beleférjen a képbe.',
-    facts: [['27 m', 'árbocmagasság'], ['20 m', 'spirálhossz'], ['1,8 m', 'ember mellette']], link: ['A teljes CFA-animáció', 'cfa-colop-3d.vercel.app'],
-    views: [['Forgatófej', '24deg 84deg 17m', '0m 21.5m -0.6m']],
-    hs: [['Árbocfej', [0, 27.3, -0.35], 0, '--accent'], ['Forgatófej', [0, 22.1, 0.1], 0, '--accent'], ['Spirál, 20 m', [0.42, 11, 0.05], 0, '--accent'], ['Betonszivattyú', [-7.6, 1.8, -12.6], 1, '--accent'], ['Ember, 1,8 m', [-3.6, 1.9, 0.8], 1, '--accent']] },
-  { id: 'godor', f: 'munkagodor', name: 'Horgonyzott résfalas munkagödör', lec: '9', lc: 'var(--c9)', k: 1 / 48, scale: 'auto', tag: 'M 1 : 48', orbit: '18deg 78deg auto',
-    info: 'Két pinceszinthez 8 m mély gödör puha agyagban, a talajvíz alatt. A 16 m mély résfal a vízzáró agyagba köt, így a gödör víztelenítése nem szívja le a környék talajvizét. A falat két sor talajhorgony tartja: a befogott szakaszuk a homokos kavicsban van, a szomszéd ház alatt.',
+  { id: 'godor', f: 'munkagodor', name: 'Horgonyzott résfalas munkagödör', lec: '9', lc: 'var(--c9)', k: 1 / 50, scale: 'auto', tag: 'M 1 : 50', orbit: '18deg 78deg auto',
+    info: 'Két pinceszinthez 8 m mély gödör homokban és homokos kavicsban, a talajvíz alatt. A 16 m mély résfal a vízzáró agyagba köt, így a gödör víztelenítése nem szívja le a környék talajvizét. A falat két sor talajhorgony tartja: a felső sor a homokban, az alsó a homokos kavicsban van befogva. A két sor széttart, egymástól mindenhol legalább 2,8 m-re fut, a szomszéd ház alatt is.',
     facts: [['8 m', 'gödörmélység'], ['16 m', 'résfal'], ['2 sor', 'talajhorgony']], link: ['9. előadás: Munkatérhatárolások', 'munkaterhatarolasok.vercel.app'],
     views: [['Metszet szemből', '0deg 88deg auto', 'auto auto auto'], ['A gödörben', '20deg 70deg 0.45m', '0m -0.12m -0.12m']],
-    hs: [['Résfal, 16 m', [-6.3, -12, 0.05], 2, ''], ['Szabad szakasz', [-10.7, -5.07, 0.05], 1, '--accent'], ['Befogott szakasz', [-16.84, -9.37, 0.05], 1, '--accent'], ['Heveder', [-5.8, -2.2, 0.06], 0, '--accent'], ['Talajvíz −3,0 m', [-15, -3, 0.05], 2, '--water'], ['Kotró', [-1.5, -5.0, -6], 0, '--accent'], ['Szomszédos ház', [12.5, 7.3, -1], 0, '--accent'], ['Puha agyag', [14, -5.5, 0.05], 2, ''], ['Homokos kavics', [14, -11, 0.05], 2, ''], ['Vízzáró agyag', [14, -17, 0.05], 2, '']] },
+    hs: [] },
   { id: 'telek', f: 'egy-telek', name: 'Egy telek, egy félév', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', orbit: '18deg 74deg auto',
     info: 'Az „Egy telek, egy félév” esettanulmány kész telke. Az A ház pillér alapokon áll a homokban; a B ház a tőzeglencse miatt CFA-cölöpökön, két pinceszintje horgonyzott résfalas gödörben épült. Az egész tárgy egyetlen asztalon.',
     facts: [['2', 'ház'], ['9', 'állomás'], ['−3,0 m', 'talajvíz']], link: ['Egy telek, egy félév', 'bme-alapozas.vercel.app/telek'],
@@ -272,7 +263,7 @@ function select(id, push) {
   mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.setAttribute('src', EMB ? EMB[m.f] : abs('models/' + m.f + '.glb'));
   $('#scaleTag').textContent = m.tag; $('#animTag').hidden = !m.anim;
   $('#lec').innerHTML = `<i style="background:${m.lc}">${m.lec}</i><span>${m.lec.includes('–') ? 'az egész tárgy' : m.lec + '. előadás'}</span>`;
-  $('#mname').textContent = m.name; $('#minfo').textContent = m.info;
+  $('#mname').textContent = m.name; $('#minfo').textContent = m.info; $('.switch').style.display = m.hs.length ? '' : 'none';
   $('#facts').innerHTML = m.facts.map(([v, l]) => `<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('');
   $('#views').innerHTML = [['Áttekintés', m.orbit, 'auto auto auto'], ...m.views].map(([t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${t}</button>`).join('') + '<button type="button" data-i="rot" aria-pressed="false">Körbeforgatás</button>';
   const ln = $('#mlink'); ln.href = SB + m.link[1]; ln.innerHTML = m.link[0] + ' ' + ARROW;
