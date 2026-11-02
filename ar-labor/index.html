@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alapozás AR labor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Az Alapozás tárgy 3D-modelljei kiterjesztett valóságban: telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.">
+<base href="/ar-labor/">
+<style>
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/unbounded-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/unbounded-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/unbounded-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/unbounded-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/manrope-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/manrope-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/manrope-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/manrope-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/manrope-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/manrope-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+</style>
+<style>
+/* elrendezés: sötét labor-sáv – fent a modellpolc, alatta a nagy nézőablak és az oldalpanel; világos rész: használati útmutató */
+:root{
+  --paper:#f4f0e6; --card:#fffdf7; --ink:#15181c; --ink2:#363c44; --muted:#5f666e; --line:rgba(21,24,28,.13); --line2:rgba(21,24,28,.22);
+  --night:#0c1015; --night2:#121820; --night3:#19212b; --nink:#eeeae1; --nmuted:#a6adb5; --nline:rgba(255,255,255,.11);
+  --accent:#e8952a; --accent-2:#f2b354; --accent-ink:#8a4f08; --holo:#5fe3ff; --water:#3d9ad6;
+  --c1:#f2a531; --c3:#e4553f; --c5:#b23a93; --c8:#4b8fe0; --c9:#22a9b8;
+  --r:16px; --w:1240px; --pad:28px;
+  --fd:'Unbounded', 'Arial Black', system-ui, sans-serif; --fb:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; --fm:'JBMono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.06), 0 8px 28px rgba(18,20,24,.08);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#10151b; --card:#18202a; --ink:#ebe7de; --ink2:#cdc8be; --muted:#9aa2aa; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --accent-ink:#f5c06e; --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); color-scheme: dark; } }
+:root[data-theme="dark"]{
+  --paper:#10151b; --card:#18202a; --ink:#ebe7de; --ink2:#cdc8be; --muted:#9aa2aa; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --accent-ink:#f5c06e; --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); color-scheme: dark; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+body{margin:0; background:var(--paper); color:var(--ink); font:400 17px/1.62 var(--fb); overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:var(--night)}
+a{color:inherit}
+button{font:inherit; color:inherit}
+.wrap{max-width:var(--w); margin:0 auto; padding-block:0; padding-left:max(var(--pad), env(safe-area-inset-left, 0px)); padding-right:max(var(--pad), env(safe-area-inset-right, 0px))}
+.nw{white-space:nowrap; hyphens:none}
+sub, sup{font-size:.72em; line-height:0}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:6px}
+main p, main li, footer p, .lead, .info p{ text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty }
+h1,h2,h3,button,label,.kick,.mono{hyphens:none; -webkit-hyphens:none}
+main .rag, footer .rag, .lead.rag, .info p.rag{text-align:left!important}
+
+.lab{background:radial-gradient(120% 90% at 75% 0%, #1b2633 0%, var(--night) 62%); color:var(--nink); padding-block:clamp(22px, 4vw, 42px) clamp(26px, 4vw, 46px)}
+.kick{display:flex; flex-wrap:wrap; align-items:center; gap:10px; font:600 12.5px/1.3 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--nmuted)}
+.kick .tag{border:1px solid var(--nline); border-radius:999px; padding:3px 10px; color:var(--holo)}
+.head{display:grid; grid-template-columns:minmax(0, 1.25fr) minmax(0, 1fr); gap:clamp(16px, 3vw, 40px); align-items:end}
+h1{font:800 clamp(34px, 6vw, 70px)/.98 var(--fd); letter-spacing:-.025em; margin:12px 0 0; text-transform:uppercase; text-wrap:balance}
+h1 em{font-style:normal; color:var(--holo)}
+.lead{color:var(--nink); opacity:.9; font-size:clamp(16px, 1.6vw, 18px); margin:0}
+
+.shelf{display:grid; grid-template-columns:repeat(8, minmax(0, 1fr)); gap:10px; margin-top:24px}
+.mcard{position:relative; display:flex; flex-direction:column; text-align:left; border:1px solid var(--nline); border-radius:14px; overflow:hidden; background:var(--night2); cursor:pointer; padding:0; min-width:0}
+.mcard img{display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; background:#e9eef2; max-width:100%}
+.mcard .t{padding:8px 10px 10px; display:flex; flex-direction:column; gap:3px}
+.mcard b{font:700 13.5px/1.25 var(--fb); color:var(--nink)}
+.mcard span{font:500 11px/1.2 var(--fm); color:var(--nmuted)}
+.mcard i{position:absolute; left:8px; top:8px; min-width:26px; height:24px; padding:0 7px; border-radius:999px; display:grid; place-items:center; font:800 11.5px/1 var(--fd); font-style:normal; color:#fff; background:var(--lc, var(--accent)); box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.mcard:hover{border-color:rgba(95,227,255,.5)}
+.mcard[aria-pressed="true"]{border-color:var(--holo); box-shadow:0 0 0 2px var(--holo) inset}
+
+.grid{display:grid; grid-template-columns:minmax(0, 1.55fr) minmax(0, 1fr); gap:20px; margin-top:20px; align-items:stretch}
+.viewer{position:relative; border-radius:22px; overflow:hidden; border:1px solid var(--nline); background:radial-gradient(90% 80% at 50% 35%, #233142 0%, #121a23 70%, #0e141b 100%); min-height:580px}
+model-viewer{width:100%; height:100%; min-height:580px; display:block; --poster-color:transparent; --progress-bar-color:var(--holo); background:transparent}
+.hs{position:relative; width:0; height:0; padding:0; border:0; background:none; pointer-events:none; transition:opacity .2s}
+.hs .p{position:absolute; left:0; top:0; display:block; white-space:nowrap; padding:4px 9px 4px 20px; border-radius:999px; background:rgba(12,16,21,.8); color:#f3efe6; font:600 12px/1.2 var(--fb); box-shadow:0 2px 10px rgba(0,0,0,.3); transform:translate(-8px, -50%)}
+.hs .p::before{content:""; position:absolute; left:4px; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:var(--dot, var(--accent)); box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.hs.l .p{padding:4px 20px 4px 9px; transform:translate(calc(-100% + 8px), -50%)}
+.hs.l .p::before{left:auto; right:4px}
+.hs.c .p{padding:3px 9px; background:rgba(12,16,21,.62); transform:translate(-50%, -50%)}
+.hs.c .p::before{display:none}
+.hs:not([data-visible]){opacity:0}
+.nolabels .hs{opacity:0!important}
+.arbtn{position:absolute; left:50%; bottom:max(18px, env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); display:flex; align-items:center; gap:10px; border:0; border-radius:999px; padding:14px 22px; background:var(--holo); color:#03222a; font:700 16px/1 var(--fb); box-shadow:0 8px 30px rgba(95,227,255,.35); cursor:pointer; white-space:nowrap}
+.arbtn svg{width:22px; height:22px}
+.scale{position:absolute; left:14px; top:14px; font:600 12px/1 var(--fm); color:var(--nmuted); background:rgba(12,16,21,.6); border:1px solid var(--nline); border-radius:8px; padding:6px 8px}
+.anim{position:absolute; right:14px; top:14px; font:600 12px/1 var(--fm); color:var(--accent-2); background:rgba(12,16,21,.6); border:1px solid var(--nline); border-radius:8px; padding:6px 8px}
+.panel{display:flex; flex-direction:column; gap:14px; min-width:0}
+.box{background:var(--night2); border:1px solid var(--nline); border-radius:var(--r); padding:18px}
+.box h2{font:800 20px/1.2 var(--fd); margin:0; letter-spacing:-.01em}
+.box .lec{display:inline-flex; gap:8px; align-items:center; font:600 12px/1.2 var(--fm); color:var(--nmuted); margin-bottom:8px}
+.box .lec i{display:grid; place-items:center; min-width:24px; height:22px; padding:0 6px; border-radius:999px; font:800 11px/1 var(--fd); font-style:normal; color:#fff; background:var(--lc, var(--accent))}
+.info{flex:1; display:flex; flex-direction:column; gap:12px}
+.info p{margin:0; color:var(--nink); opacity:.92; font-size:15.5px}
+.views{display:flex; flex-wrap:wrap; gap:8px}
+.views button{border:1px solid var(--nline); background:var(--night); color:var(--nink); border-radius:999px; padding:8px 12px; font:600 13.5px/1 var(--fb); cursor:pointer}
+.views button:hover{border-color:var(--holo)}
+.views button[aria-pressed="true"]{background:var(--holo); color:#03222a; border-color:var(--holo)}
+.switch{display:flex; align-items:center; gap:10px; cursor:pointer; color:var(--nink); font:600 14.5px/1.2 var(--fb)}
+.switch input{appearance:none; -webkit-appearance:none; width:42px; height:24px; border-radius:999px; background:var(--night3); border:1px solid var(--nline); position:relative; cursor:pointer; margin:0; flex:none}
+.switch input::after{content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:var(--nmuted); transition:transform .2s}
+.switch input:checked{background:var(--holo)}
+.switch input:checked::after{transform:translateX(18px); background:#fff}
+.facts{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; margin-top:auto}
+.fact{background:var(--night); border:1px solid var(--nline); border-radius:12px; padding:10px}
+.fact b{display:block; font:700 17px/1.1 var(--fd); color:var(--nink); font-variant-numeric:tabular-nums; white-space:nowrap}
+.fact span{display:block; font:500 11.5px/1.3 var(--fb); color:var(--nmuted); margin-top:4px}
+.link{display:inline-flex; align-items:center; gap:8px; color:var(--holo); font:600 14px/1.2 var(--fb); text-decoration:none}
+.link svg{width:13px; height:13px}
+.status{display:flex; gap:12px; align-items:flex-start; font-size:14.5px; line-height:1.5; color:var(--nink)}
+.status .dot{width:10px; height:10px; border-radius:50%; background:var(--nmuted); margin-top:6px; flex:none}
+.status.ok .dot{background:#41c07c; box-shadow:0 0 0 4px rgba(65,192,124,.18)}
+.status.no .dot{background:var(--accent)}
+#qr{display:none; margin-top:12px; background:#fff; padding:10px; border-radius:12px; width:max-content}
+#qr.on{display:block}
+#qr img, #qr canvas{display:block; width:148px; height:148px}
+
+main{padding-block:clamp(34px, 5vw, 56px) 30px}
+.sec + .sec{margin-top:clamp(30px, 5vw, 52px)}
+.sec h2{font:800 clamp(21px, 2.6vw, 28px)/1.15 var(--fd); letter-spacing:-.01em; margin:0 0 14px; text-wrap:balance}
+.steps{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px; counter-reset:s}
+.steps li{counter-increment:s; background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px; min-width:0}
+.steps li::before{content:counter(s); display:grid; place-items:center; width:34px; height:34px; border-radius:10px; background:var(--holo); color:#03222a; font:800 16px/1 var(--fd)}
+.steps li b{display:block; font:700 16.5px/1.3 var(--fb); text-align:left}
+.steps li p{margin:0; color:var(--ink2); font-size:15.5px}
+.trouble{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px}
+.trouble div{border:1px solid var(--line2); border-radius:var(--r); padding:16px 18px; min-width:0}
+.trouble h3{margin:0 0 6px; font:700 15.5px/1.3 var(--fb)}
+.trouble p{margin:0; color:var(--ink2); font-size:15px}
+footer.wrap{border-top:1px solid var(--line); margin-top:30px; padding-block:18px 26px; color:var(--muted); font-size:14px}
+footer p{margin:0}
+@media (max-width: 1100px){ .shelf{grid-template-columns:repeat(4, minmax(0, 1fr))} }
+@media (max-width: 880px){
+  .head, .grid{grid-template-columns:1fr}
+  .viewer, model-viewer{min-height:min(118vw, 600px)}
+  .steps, .trouble{grid-template-columns:1fr}
+  .shelf{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; gap:8px}
+  .mcard{flex:0 0 150px; scroll-snap-align:start}
+}
+@media (max-width: 520px){ :root{--pad:16px} .fact b{font-size:15px} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
+<script>Hyphenopoly.config({ require: { "hu": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
+
+</head>
+<body>
+<header class="lab">
+  <div class="wrap">
+    <div class="kick"><span>BME Alapozás</span><span class="tag">kiterjesztett valóság</span></div>
+    <div class="head">
+      <h1>Alapozás <em>AR labor</em></h1>
+      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A makettek kicsinyítve, a gépek és a pisai torony valós méretben is kipróbálhatók.</p>
+    </div>
+    <nav class="shelf" id="shelf" aria-label="Modellek"></nav>
+    <div class="grid">
+      <div class="viewer" id="viewer">
+        <model-viewer id="mv" alt="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls touch-action="pan-y" autoplay shadow-intensity="1" shadow-softness="0.8" exposure="1.05" environment-image="neutral" interaction-prompt="none" loading="eager">
+          <button slot="ar-button" class="arbtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>Nézd meg a térben</button>
+        </model-viewer>
+        <div class="scale mono" id="scaleTag"></div>
+        <div class="anim mono" id="animTag" hidden>animált</div>
+      </div>
+      <div class="panel">
+        <div class="box info">
+          <div><div class="lec" id="lec"></div><h2 id="mname"></h2></div>
+          <p id="minfo"></p>
+          <div class="views" id="views" role="group" aria-label="Nézőpontok"></div>
+          <label class="switch" for="lbl"><input type="checkbox" id="lbl" checked>Feliratok a modellen</label>
+          <div class="facts" id="facts"></div>
+          <a class="link" id="mlink" href="#" target="_blank" rel="noopener"></a>
+        </div>
+        <div class="box">
+          <div class="status" id="status"><span class="dot"></span><span id="statusText">Az AR-támogatás ellenőrzése…</span></div>
+          <div id="qr" aria-label="QR-kód az oldal megnyitásához telefonon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="sec">
+    <h2>Így teheted le a modellt</h2>
+    <ol class="steps">
+      <li><b>Koppints a gombra</b><p>A modell alatti „Nézd meg a térben” gomb megnyitja a kamerát. Első alkalommal a telefon engedélyt kér hozzá.</p></li>
+      <li><b>Pásztázd a felületet</b><p>Lassan mozgasd a telefont a padló vagy az asztal fölött, amíg felismeri a vízszintes felületet. Jól megvilágított, mintás felületen gyorsabb.</p></li>
+      <li><b>Tedd le és járd körbe</b><p>A makettet két ujjal kisebbre vagy nagyobbra állíthatod. A valós méretű modelleknél hátrálj, hogy beleférjenek a képbe – a pisai toronyhoz parkban vagy sportpályán érdemes kimenni.</p></li>
+    </ol>
+  </section>
+  <section class="sec">
+    <h2>Ha nem indul az AR</h2>
+    <div class="trouble">
+      <div><h3>Androidon</h3><p>Olyan telefon kell, amelyen fut a Google Play-szolgáltatások AR-hez. A modell a Google Scene Viewer nézőjében nyílik meg; az animált modellek ott is mozognak.</p></div>
+      <div><h3>iPhone-on, iPaden</h3><p>A modell az Apple AR Gyorsnézetében jelenik meg. Itt a modellek állóképek, az animáció csak a böngészőben látszik.</p></div>
+      <div><h3>Számítógépen</h3><p>Asztali gépen nincs kamerás AR, a modell egérrel forgatható és görgővel nagyítható. A térbeli nézethez olvasd be a QR-kódot a telefonoddal.</p></div>
+    </div>
+  </section>
+</main>
+<footer class="wrap"><p>BME Geotechnika és Mérnökgeológia Tanszék · Alapozás · A modellek szemléltető vázlatok.</p></footer>
+
+<script type="module" src="vendor/model-viewer.min.js"></script>
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const mv = $('#mv');
+const EMB = window.__EMBED || null;
+const abs = (u) => new URL(u, document.baseURI).href; // az AR-nézők az oldal címéhez viszonyítanak, ezért teljes cím kell
+const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>';
+const SB = 'https://';
+// hotspot: [felirat, [x, y, z] méterben a modell saját koordinátáiban, normál, 0 jobbra / 1 balra / 2 középre, szín]
+const M = [
+  { id: 'tores', f: 'talajtores', name: 'Talajtörés a sávalap alatt', lec: '3', lc: 'var(--c3)', k: 1 / 30, scale: 'auto', tag: 'M 1 : 30', anim: true, orbit: '8deg 80deg auto',
+    info: 'Ha a teher eléri a talaj teherbírását, a sávalap alatt aktív ék alakul ki, amely oldalra tolja a talajt. A logaritmikus spirál mentén megcsúszó zóna a két oldalon felemeli a felszínt. Az animációban az alap lesüllyed, a talaj kitüremkedik. Szemléltető mechanizmus homokban, φ′ = 30°-kal.',
+    facts: [['30°', 'φ′ a homokban'], ['2,0 m', 'alapszélesség'], ['≈ 19 m', 'a mechanizmus szélessége']], link: ['3. előadás: Síkalapok tervezése', 'sikalapoktervezese.vercel.app'],
+    views: [['Metszet szemből', '0deg 88deg auto', 'auto auto auto']],
+    hs: [['Sávalap a fallal', [1.0, -0.7, 0.05], 0, '--accent'], ['Aktív ék', [0, -1.95, 0.05], 2, ''], ['Csúszólap', [5.29, -3.48, 0.05], 0, '--c3'], ['Felpúposodó talaj', [7.0, 0.05, 0.05], 1, '--c3'], ['Feltöltés', [-8.5, -0.5, 0.05], 2, ''], ['Homok', [-8.5, -5.5, 0.05], 2, '']] },
+  { id: 'hagyma', f: 'feszultseghagyma', name: 'Feszültséghagyma', lec: '5', lc: 'var(--c5)', k: 1 / 10, scale: 'auto', tag: 'M 1 : 10', orbit: '50deg 68deg auto',
+    info: 'A pillér alap alatt a többletfeszültség a mélységgel gyorsan csökken. A színes héjak a nettó talpfeszültség 80, 50, 20 és 10 %-át jelölik: ezen belül nagyobb, kívül kisebb a többletfeszültség. A héjak Boussinesq szerint készültek, a 2 × 2 m-es alappal azonos területű, egyenletesen terhelt kör alatt.',
+    facts: [['1,5 m', 'a 0,5 · σ₀ héj alja'], ['2,8 m', 'a 0,2 · σ₀ héj alja'], ['4,2 m', 'a 0,1 · σ₀ héj alja']], link: ['5. előadás: Síkalapok süllyedésszámítása', 'sikalapok-sullyedesszamitasa.vercel.app'],
+    views: [['A kivágott sarok', '40deg 64deg 0.75m', '0.15m -0.25m 0.15m']],
+    hs: [['Pillér alap, 2 × 2 m', [0.9, -0.5, 0.9], 0, '--accent'], ['0,8 · σ₀', [0.02, -1.61, 0.02], 1, '--c3'], ['0,5 · σ₀', [0.02, -2.27, 0.02], 1, '--accent'], ['0,2 · σ₀', [1.45, -1.93, 0.02], 0, '--accent-2'], ['0,1 · σ₀', [1.96, -2.75, 0.02], 0, '--accent-2'], ['1 m-es mélységi lépték', [3.5, -5.8, 0.06], 1, '']] },
+  { id: 'pisa', f: 'pisa-makett', name: 'A pisai ferde torony', lec: '5', lc: 'var(--c5)', k: 1 / 100, scale: 'auto', tag: 'M 1 : 100', orbit: '45deg 80deg auto',
+    info: 'A torony alatt puha, összenyomható iszap- és agyagrétegek vannak, a talajvíz 1–2 m mélyen. A déli oldal kicsit jobban süllyedt, és a dőlés maga is növelte a terhet ezen az oldalon. 1999 és 2001 között az északi oldal alól talajt termeltek ki, így a dőlés kb. 0,5°-kal csökkent. Ma a torony tengelye kb. 4°-ban dől.',
+    facts: [['≈ 4°', 'dőlés ma'], ['≈ 3,9 m', 'kilógás a tetején'], ['56 m', 'magasság']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'],
+    views: [['A kivágott sarok', '60deg 82deg 0.9m', '0.05m 0m 0.05m']],
+    hs: [['Harangtorony', [3.9, 53.5, 5.3], 0, '--accent'], ['Oszlopos loggiák', [2.31, 30.6, 7.7], 0, '--accent'], ['Alapgyűrű', [7.04, -1.3, 6.93], 0, '--accent'], ['Homokos iszap', [-12, -5, 22.05], 2, ''], ['Puha agyag', [-12, -20, 22.05], 2, '']] },
+  { id: 'pisa11', f: 'pisa-valos-meret', name: 'Pisai torony valós méretben', lec: '5', lc: 'var(--c5)', k: 1, scale: 'fixed', tag: 'M 1 : 1', orbit: '30deg 86deg auto',
+    info: 'A torony valós méretben, kb. 56 m magasan. Tágas helyen, parkban vagy sportpályán érdemes kipróbálni, és jó messzire kell hátrálni, hogy beleférjen a képbe. Mellette egy 1,8 m-es ember a lépték.',
+    facts: [['56 m', 'magasság'], ['≈ 4°', 'dőlés'], ['1,8 m', 'ember mellette']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'], views: [],
+    hs: [['A torony teteje', [3.9, 53.5, 5.3], 0, '--accent'], ['Ember, 1,8 m', [-12, 1.9, 9], 1, '--accent'], ['Alapgyűrű', [0.13, -0.83, 9.8], 0, '--accent']] },
+  { id: 'cfa', f: 'cfa-makett', name: 'CFA-cölöp fúrás közben', lec: '8', lc: 'var(--c8)', k: 1 / 60, scale: 'auto', tag: 'M 1 : 60', anim: true, orbit: '28deg 74deg auto',
+    info: 'A spirál 10 m mélyen jár, a menetei tele vannak talajjal: ez a talaj támasztja meg a furat falát, ezért a CFA-cölöpnél nem kell béléscső vagy zagy. A betont tömlő hozza a forgatófejig, onnan a spirál üreges szárán jut le a talpig. A gépet a fülkében ülő gépkezelő irányítja.',
+    facts: [['80 cm', 'cölöpátmérő'], ['10 m', 'fúrásmélység'], ['20 m', 'spirálhossz']], link: ['A teljes CFA-animáció', 'cfa-colop-3d.vercel.app'],
+    views: [['Metszet szemből', '0deg 88deg 0.95m', '0m 0.04m 0m'], ['Fúrófej közelről', '6deg 86deg 0.2m', '0m -0.158m 0m']],
+    hs: [['Forgatófej', [0, 11.5, 0.1], 0, '--accent'], ['Spirál, a menetek tele talajjal', [0.42, 5.0, 0.05], 0, '--accent'], ['Fúrófej, 10 m mélyen', [0.42, -9.8, 0.05], 0, '--accent'], ['Gépkezelő a fülkében', [-2.16, 3.7, -5.9], 1, '--accent'], ['Talajvíz −4,2 m', [3.9, -4.2, 0.05], 2, '--water'], ['Agyag', [-4.7, -3.0, 0.05], 2, ''], ['Homok', [-4.7, -14.25, 0.05], 2, '']] },
+  { id: 'cfagep', f: 'cfa-gep-valos-meret', name: 'CFA-fúrógép valós méretben', lec: '8', lc: 'var(--c8)', k: 1, scale: 'fixed', tag: 'M 1 : 1', orbit: '38deg 78deg auto',
+    info: 'A fúrógép valós méretben, felhúzott spirállal és betonszivattyúval. Az árboc kb. 27 m magas: tágas helyen érdemes kipróbálni, és jócskán hátrálni kell, hogy beleférjen a képbe.',
+    facts: [['27 m', 'árbocmagasság'], ['20 m', 'spirálhossz'], ['1,8 m', 'ember mellette']], link: ['A teljes CFA-animáció', 'cfa-colop-3d.vercel.app'],
+    views: [['Forgatófej', '24deg 84deg 17m', '0m 21.5m -0.6m']],
+    hs: [['Árbocfej', [0, 27.3, -0.35], 0, '--accent'], ['Forgatófej', [0, 22.1, 0.1], 0, '--accent'], ['Spirál, 20 m', [0.42, 11, 0.05], 0, '--accent'], ['Betonszivattyú', [-7.6, 1.8, -12.6], 1, '--accent'], ['Ember, 1,8 m', [-3.6, 1.9, 0.8], 1, '--accent']] },
+  { id: 'godor', f: 'munkagodor', name: 'Horgonyzott résfalas munkagödör', lec: '9', lc: 'var(--c9)', k: 1 / 48, scale: 'auto', tag: 'M 1 : 48', orbit: '18deg 78deg auto',
+    info: 'Két pinceszinthez 8 m mély gödör puha agyagban, a talajvíz alatt. A 16 m mély résfal a vízzáró agyagba köt, így a gödör víztelenítése nem szívja le a környék talajvizét. A falat két sor talajhorgony tartja: a befogott szakaszuk a homokos kavicsban van, a szomszéd ház alatt.',
+    facts: [['8 m', 'gödörmélység'], ['16 m', 'résfal'], ['2 sor', 'talajhorgony']], link: ['9. előadás: Munkatérhatárolások', 'munkaterhatarolasok.vercel.app'],
+    views: [['Metszet szemből', '0deg 88deg auto', 'auto auto auto'], ['A gödörben', '20deg 70deg 0.45m', '0m -0.12m -0.12m']],
+    hs: [['Résfal, 16 m', [-6.3, -12, 0.05], 2, ''], ['Szabad szakasz', [-10.7, -5.07, 0.05], 1, '--accent'], ['Befogott szakasz', [-16.84, -9.37, 0.05], 1, '--accent'], ['Heveder', [-5.8, -2.2, 0.06], 0, '--accent'], ['Talajvíz −3,0 m', [-15, -3, 0.05], 2, '--water'], ['Kotró', [-1.5, -5.0, -6], 0, '--accent'], ['Szomszédos ház', [12.5, 7.3, -1], 0, '--accent'], ['Puha agyag', [14, -5.5, 0.05], 2, ''], ['Homokos kavics', [14, -11, 0.05], 2, ''], ['Vízzáró agyag', [14, -17, 0.05], 2, '']] },
+  { id: 'telek', f: 'egy-telek', name: 'Egy telek, egy félév', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', orbit: '18deg 74deg auto',
+    info: 'Az „Egy telek, egy félév” esettanulmány kész telke. Az A ház pillér alapokon áll a homokban; a B ház a tőzeglencse miatt CFA-cölöpökön, két pinceszintje horgonyzott résfalas gödörben épült. Az egész tárgy egyetlen asztalon.',
+    facts: [['2', 'ház'], ['9', 'állomás'], ['−3,0 m', 'talajvíz']], link: ['Egy telek, egy félév', 'bme-alapozas.vercel.app/telek'],
+    views: [['Metszet szemből', '0deg 86deg auto', 'auto auto auto']],
+    hs: [['A ház – pillér alapokon', [-25, 11.2, 15], 0, '--accent'], ['B ház – CFA-cölöpökön', [19, 27.5, 15], 0, '--accent'], ['Horgonyzott résfal', [7.7, -6, 15.05], 1, '--accent'], ['CFA-cölöpök', [19, -13, 15.05], 0, '--accent'], ['Homokos kavics', [-22, -13.5, 15.05], 2, ''], ['Talajvíz −3,0 m', [-36, -3, 15.1], 2, '--water'], ['Kerékpártároló', [39.5, 2.8, 14.7], 0, '--accent']] },
+];
+let cur = M[0];
+$('#shelf').innerHTML = M.map(m => `<button type="button" class="mcard" data-id="${m.id}" style="--lc:${m.lc}" aria-pressed="false"><img src="img/${m.f}.jpg" alt="" width="560" height="350" loading="lazy"><i>${m.lec}</i><span class="t"><b>${m.name}</b><span>${m.tag}</span></span></button>`).join('');
+$('#shelf').addEventListener('click', (e) => { const b = e.target.closest('.mcard'); if (b) select(b.dataset.id, true); });
+function select(id, push) {
+  const m = M.find(x => x.id === id) || M[0]; cur = m;
+  $$('.mcard').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === m.id)));
+  $$('.hs', mv).forEach(e => e.remove());
+  m.hs.forEach(([t, p, side, col], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'hs' + (side === 1 ? ' l' : side === 2 ? ' c' : ''); b.slot = 'hotspot-' + m.id + '-' + i; b.tabIndex = -1;
+    b.dataset.position = p.map(v => (v * m.k).toFixed(5) + 'm').join(' '); b.dataset.normal = '0 0 1'; b.dataset.visibilityAttribute = 'visible'; if (col) b.style.setProperty('--dot', 'var(' + col + ')');
+    const sp = document.createElement('span'); sp.className = 'p'; sp.textContent = t; b.appendChild(sp); mv.appendChild(b); });
+  mv.setAttribute('ar-scale', m.scale); mv.setAttribute('alt', m.name); mv.removeAttribute('auto-rotate'); mv.setAttribute('min-camera-orbit', 'auto 5deg auto'); mv.setAttribute('max-camera-orbit', 'auto 100deg auto');
+  if (EMB) mv.removeAttribute('ios-src'); else mv.setAttribute('ios-src', abs('models/' + m.f + '.usdz'));
+  mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.setAttribute('src', EMB ? EMB[m.f] : abs('models/' + m.f + '.glb'));
+  $('#scaleTag').textContent = m.tag; $('#animTag').hidden = !m.anim;
+  $('#lec').innerHTML = `<i style="background:${m.lc}">${m.lec}</i><span>${m.lec.includes('–') ? 'az egész tárgy' : m.lec + '. előadás'}</span>`;
+  $('#mname').textContent = m.name; $('#minfo').textContent = m.info;
+  $('#facts').innerHTML = m.facts.map(([v, l]) => `<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('');
+  $('#views').innerHTML = [['Áttekintés', m.orbit, 'auto auto auto'], ...m.views].map(([t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${t}</button>`).join('') + '<button type="button" data-i="rot" aria-pressed="false">Körbeforgatás</button>';
+  const ln = $('#mlink'); ln.href = SB + m.link[1]; ln.innerHTML = m.link[0] + ' ' + ARROW;
+  if (push) { try { history.replaceState(null, '', '#' + m.id); } catch (e) {} }
+  try { localStorage.setItem('ar-labor-model', m.id); } catch (e) {}
+}
+$('#views').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.i === 'rot') { const on = !mv.hasAttribute('auto-rotate'); mv.toggleAttribute('auto-rotate', on); b.setAttribute('aria-pressed', String(on)); return; }
+  const all = [['Áttekintés', cur.orbit, 'auto auto auto'], ...cur.views]; const [, o, t] = all[+b.dataset.i]; mv.setAttribute('camera-target', t); mv.setAttribute('camera-orbit', o);
+  $$('#views button').forEach(x => { if (x.dataset.i !== 'rot') x.setAttribute('aria-pressed', String(x === b)); }); });
+mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-interaction') $$('#views button').forEach(x => { if (x.dataset.i !== 'rot' && x.getAttribute('aria-pressed') !== 'false') x.setAttribute('aria-pressed', 'false'); }); });
+$('#lbl').addEventListener('change', (e) => $('#viewer').classList.toggle('nolabels', !e.target.checked));
+addEventListener('hashchange', () => { const id = location.hash.slice(1); if (M.some(m => m.id === id) && id !== cur.id) select(id, false); });
+{ let id = location.hash.slice(1); if (!M.some(m => m.id === id)) { try { id = localStorage.getItem('ar-labor-model') || ''; } catch (e) { id = ''; } } select(M.some(m => m.id === id) ? id : M[0].id, false); }
+
+let qrDone = false;
+const setStatus = (cls, txt) => { const st = $('#status'), tx = $('#statusText'); if (st.className !== cls) st.className = cls; if (tx.textContent !== txt) tx.textContent = txt; };
+function arStatus() {
+  if (mv.canActivateAR) { setStatus('status ok', 'Ez az eszköz tudja az AR-t. Válassz modellt, és koppints a „Nézd meg a térben” gombra.'); return; }
+  const standalone = (() => { try { return window.top === window.self; } catch (e) { return false; } })();
+  if (standalone) { setStatus('status no', 'Ezen az eszközön nincs kamerás AR. Olvasd be a kódot a telefonoddal, és ott nyisd meg az oldalt.'); if (qrDone) return; qrDone = true;
+    const q = $('#qr'); q.classList.add('on'); const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload = () => { try { new QRCode(q, { text: location.href.split('#')[0], width: 296, height: 296, correctLevel: QRCode.CorrectLevel.M }); } catch (e) { q.classList.remove('on'); } }; s.onerror = () => q.classList.remove('on'); document.head.appendChild(s); }
+  else if (EMB) setStatus('status no', 'Ez az előnézet: a modellek forgathatók és nagyíthatók. A kamerás AR-hoz az oldalt önálló webcímen kell megnyitni a telefonon.');
+  else setStatus('status no', 'Ezen az eszközön nincs kamerás AR. Nyisd meg ezt az oldalt a telefonodon, ott megjelenik a „Nézd meg a térben” gomb.');
+}
+customElements.whenDefined('model-viewer').then(() => { mv.addEventListener('load', arStatus, { once: true }); setTimeout(arStatus, 1500); });
+mv.addEventListener('ar-status', (e) => { if (e.detail.status === 'failed') setStatus('status no', 'Az AR nem indult el ezen az eszközön. Próbáld meg Chrome-ban (Android) vagy Safariban (iPhone).'); });
+window.__arlabor = { M };
+
+const GUARD = (() => {
+  const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
+  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead, .lead, .info p';
+  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead, .lead, .info p';
+  const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
+  const TERMS = ['talaj és szerkezet', 'teherbíró réteg', 'talajvíz-viszonyok', 'egyenlőtlen süllyedés', 'egyenlőtlen süllyedések', 'általános állékonyság', 'teherbírási határállapot', 'használhatósági határállapot', 'puha lencse', 'szerves talaj', 'szerves agyag', 'roskadékony lösz', 'térfogatváltozó agyag', 'kút- és szekrényalapok', 'cölöppel gyámolított lemezalap', 'mélyített síkalap', 'házi feladat', 'pisai torony'];
+  const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
+  const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
+  const NUMW = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  function textPass(s) {
+    if (!/[ \-–·]/.test(s)) return s;
+    s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
+    s = s.replace(/ ([=≤≥≈→←×±<>⇒↔]) /g, NB + '$1' + NB);
+    s = s.replace(/([\p{N}\p{L})\]′″°²³]) ([+−]) (?=[\p{N}\p{L}(])/gu, '$1' + NB + '$2' + NB);
+    s = s.replace(/(^|[(\[„])([=≤≥≈<>±~]) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/ · (?=(\S+))/g, (m, nxt) => { const w = nxt.replace(/^[(„"]/, ''); if (/^\p{L}{3,}/u.test(w) && !MULT_SYM.test(w)) return m; return NB + '·' + NB; });
+    s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(NUMW, '$1$2' + NB);
+    s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    return s;
+  }
+  const SHORTEND = new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
+    if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
+    const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
+    const me = / ([=≤≥≈→←×±<>⇒+−/]) $/.exec(a.nodeValue); if (me && /^\S/.test(b.nodeValue)) a.nodeValue = a.nodeValue.slice(0, -3) + NB + me[1] + NB; } }
+  function bindPositions(full, cpl = 70) {
+    const bind = new Set(); const segMax = Math.max(14, Math.min(38, 0.42 * cpl)), parMax = Math.max(10, Math.min(24, 0.30 * cpl));
+    const mark = (a, b) => { for (let i = a; i < b; i++) if (full[i] === ' ') bind.add(i); };
+    const sepRx = / · |; | – /g; let last = 0, m, lastSep = ''; const segs = [];
+    while ((m = sepRx.exec(full))) { segs.push([last, m.index, lastSep, m[0]]); last = m.index + m[0].length; lastSep = m[0]; } segs.push([last, full.length, lastSep, '']);
+    if (segs.length > 1) for (const [a, b, before, after] of segs) { const t = full.slice(a, b).replace(/[\u2060\u00AD]/g, '').trim(); const dashOnly = (before === ' – ' || before === '') && (after === ' – ' || after === '') && (before || after); const lim = dashOnly ? Math.min(22, segMax) : segMax; if (t.length > 0 && t.length < lim) mark(a, b); }
+    const pr = /\(([^()]{1,30})\)/g; while ((m = pr.exec(full))) { if (m[0].replace(/[\u2060\u00AD]/g, '').length <= parMax) mark(m.index, m.index + m[0].length); }
+    termRx.lastIndex = 0; while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    return bind;
+  }
+  function textNodes(root) { const out = []; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) { let p = n.parentNode; while (p && p !== root) { if (SKIP.has(p.nodeName)) return NodeFilter.FILTER_REJECT; p = p.parentNode; } return NodeFilter.FILTER_ACCEPT; } }); let n; while ((n = w.nextNode())) out.push(n); return out; }
+  let hyph = null; const done = new WeakMap();
+  function processBlock(el) {
+    if (!el.isConnected) return; if (el.closest('svg')) return; const cur = el.textContent; if (done.get(el) === cur) return;
+    const nodes = textNodes(el); for (const n of nodes) { const v = textPass(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; } crossPass(nodes);
+    const full = nodes.map(n => n.nodeValue).join(''); const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const cpl = el.clientWidth > 40 ? el.clientWidth / (fs * 0.52) : 70;
+    const bind = bindPositions(full, cpl);
+    if (bind.size) { let off = 0; for (const n of nodes) { const v = n.nodeValue; let o = '', ch = false; for (let i = 0; i < v.length; i++) { if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i]; } off += v.length; if (ch) n.nodeValue = o; } }
+    if (hyph && el.matches(HYPH)) { for (const n of textNodes(el)) { if (n.parentElement && n.parentElement.closest(NOHY) && n.parentElement.closest(NOHY) !== el) continue; const parts = n.nodeValue.split(/( )/); let ch = false;
+      for (let i = 0; i < parts.length; i += 2) { const t = parts[i]; if (!t || !/\p{L}{6,}/u.test(t)) continue; const clean = t.replace(/[\u00AD\u200B]/g, ''); let hh;
+        if (t.includes(WJ)) { const vis = clean.replace(/[\u2060]/g, ''); if (vis.length <= 16 || /^\(.*\)[.,;:!?]*$/.test(vis)) continue; const k = Math.max(clean.lastIndexOf('\u00A0'), clean.lastIndexOf(WJ)); const tail = clean.slice(k + 1); if (!/\p{L}{6,}/u.test(tail)) continue; hh = clean.slice(0, k + 1) + hyph(tail); } else hh = hyph(clean);
+        hh = hh.replace(/\u200B/g, ''); if (hh !== t) { parts[i] = hh; ch = true; } } if (ch) n.nodeValue = parts.join(''); } }
+    done.set(el, el.textContent);
+  }
+  let obs = null, pend = new Set(), sched = false;
+  function observe() { obs.observe(document.body, { childList: true, subtree: true, characterData: true }); }
+  function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
+  function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
+  function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
+    const H = window.Hyphenopoly; if (H && H.hyphenators && H.hyphenators.hu) H.hyphenators.hu.then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+  return { start, run };
+})();
+
+/* RAG3 – lyukas sorkizárt blokk tartaléka (formázás skill): (1) ha a szép tördelés (text-wrap: pretty) lyukas,
+   előbb sima tördeléssel (text-wrap: wrap, .twr) próbálja – a blokk sorkizárt marad; (2) csak ha így is lyukas,
+   balra zárt lesz (.rag). Az összetartozó egységek (NBSP/U+2060 kötések) érintetlenek maradnak.
+   Idempotens: a döntést szélesség + szöveg szerint megjegyzi, ismételt futáskor nem mér újra. */
+const RAG3 = (() => {
+  try { const st = document.createElement('style'); st.textContent = '.twr{text-wrap:wrap!important}'; document.head.appendChild(st); } catch (e) {}
+  const memo = new WeakMap();
+  const sig = (el) => el.textContent;   // a teljes szöveg (az elválasztás után is újramér)
+  function bad(el, strict) {
+    const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return false;
+    let lastTop = -1e9; for (const r of rs) if (r.width && r.top > lastTop) lastTop = r.top; let big = 0, mid = 0;
+    // sima tördelésnél (strict): egy nem utolsó, nagyon rövid sor (pl. hosszú, nem törhető képlet előtt) is rossz – a sorokat
+    // függőleges átfedés szerint vonjuk össze, így az alsó/felső index nem számít külön sornak; <br>-es blokknál nem vizsgáljuk
+    if (strict && !el.querySelector('br')) { const L = []; for (const r of rs) { if (!r.width || !r.height) continue; let l = L.find((q) => Math.min(q.b, r.bottom) - Math.max(q.t, r.top) > 0.5 * Math.min(q.b - q.t, r.height));
+      if (!l) L.push({ t: r.top, b: r.bottom, l: r.left, r: r.right }); else { l.t = Math.min(l.t, r.top); l.b = Math.max(l.b, r.bottom); l.l = Math.min(l.l, r.left); l.r = Math.max(l.r, r.right); } }
+      L.sort((a, b) => a.t - b.t); for (let i = 0; i < L.length - 1; i++) if (L[i].r - L[i].l < el.clientWidth * 0.35) return true; }
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { const c = t[i]; if (c !== ' ' && c !== '\u00A0') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
+    return big > 0 || mid >= 2;
+  }
+  function check(el) {
+    if (!el || !el.isConnected || !el.offsetParent) return;
+    const w = el.clientWidth, s = sig(el), m = memo.get(el);
+    if (m && m.w === w && m.s === s) { el.classList.toggle('twr', m.res === 'twr'); el.classList.toggle('rag', m.res === 'rag'); return; }
+    el.classList.remove('rag', 'twr'); let res = 'ok';
+    if (getComputedStyle(el).textAlign === 'justify' && bad(el)) { el.classList.add('twr'); res = 'twr'; if (bad(el, true)) { el.classList.remove('twr'); el.classList.add('rag'); res = 'rag'; } }
+    memo.set(el, { w, s, res });
+  }
+  return { check };
+})();
+
+const RAG = (() => {
+  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead, .lead, .info p';
+  const check = (el) => RAG3.check(el);
+  const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
+  let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
+  document.addEventListener('click', () => { clearTimeout(tm); tm = setTimeout(run, 120); });
+  return { run };
+})();
+GUARD.start();
+setTimeout(() => RAG.run(), 400);
+{ const iv = setInterval(() => { if (window.__fmtHyphReady) { clearInterval(iv); requestAnimationFrame(() => { RAG.run(); window.__ragDone = true; }); } }, 100); setTimeout(() => clearInterval(iv), 8000); }
+})();
+</script>
+
+</body>
+</html>
