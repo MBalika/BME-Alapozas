@@ -9,3 +9,8 @@ a tárgy útja kilenc állomásban (görgetésre felépülő, ráközelítő met
 - Formázás: sorkizárás + magyar elválasztás (Hyphenopoly hu.wasm), nem törő egységek őre, keskeny dobozban lyuk esetén balra zárt tartalék.
 - A bevezető videó forrása: `Claude videók/_forras/bevezeto_forras.zip` (a kit a `hatasok_forras.zip`-ben van).
 - Átfogó tananyagok almappákban: `telek/` (Egy telek, egy félév – esettanulmány 3D-makettel) és `helyszinelok/` (Geotechnikai helyszínelők – kárügyek). Mindkettő önálló, kész oldal; a forrásuk nem itt van.
+
+
+## Videók zenéje
+
+A videók zenéje (2026-11) valódi hangszerek felvett mintáiból készült – zongora, vonósok, akusztikus és elektromos gitár, basszusgitár, fúvósok, akusztikus dob –, ütemre igazítva a képhez; a gép- és effekthangok a korábbi hangkönyvtárból vannak. Hangminták: Salamander Grand Piano (Alexander Holm, CC BY 3.0); tonejs-instruments (nbrosowsky; VSCO2, Karoryfer, Iowa, Freesound – CC BY 3.0); Tone.js dobminták.
