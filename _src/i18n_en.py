@@ -363,6 +363,7 @@ JS = [
     ("tag(g9l, 1, -11.5, 'résfal', '#cfcac0'); tag(g9l, 41, -5.4, 'talajhorgony', '#cfcac0');", "tag(g9l, -2.4, -11.5, 'diaphragm wall', '#cfcac0'); tag(g9l, 41, -5.4, 'ground anchor', '#cfcac0');"),
     # gyűjtőrács
     ('img/apps/bevezetes.jpg', 'img/apps/bevezetes-en.jpg'),
+    ("en: 'talajfelderites.vercel.app/en', img: 'talajfelderites' }", "en: 'talajfelderites.vercel.app/en', img: 'talajfelderites-en' }"),
     ("en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese' }", "en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese-en' }"),
     ("en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras',", "en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras-en',"),
     ('alt="Bevezetés – nyitókép"', 'alt="Introduction – opening screen"'),
