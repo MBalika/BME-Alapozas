@@ -929,7 +929,7 @@ footer .fb{max-width:46ch}
       <div class="kick">All in one place</div>
       <h2>All learning modules in one place</h2>
     </div>
-    <p class="lead" style="margin:-20px 0 30px">If you already know the route, you can jump straight to the modules from here. Each opens in a new tab and follows the same structure: explanation, interactive figures and simulators, videos, and a quiz and self-test at the end. The modules themselves are still in Hungarian; English versions will follow one by one.</p>
+    <p class="lead" style="margin:-20px 0 30px">If you already know the route, you can jump straight to the modules from here. Each opens in a new tab and follows the same structure: explanation, interactive figures and simulators, videos, and a quiz and self-test at the end. Most modules are still in Hungarian; English versions are being added one by one.</p>
     <div class="grid-apps" id="gridApps"></div>
   </div>
 </section>
@@ -960,7 +960,7 @@ footer .fb{max-width:46ch}
       <p style="margin:16px 0 0" class="mono">Interactive learning series</p>
     </div>
     <div>
-      <b>Modules by station</b> <span class="inhu">in Hungarian</span>
+      <b>Modules by station</b>
       <ol id="footList"></ol>
     </div>
   </div>
@@ -987,10 +987,12 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ================= ADATOK ================= */
 const U = (u) => 'https://' + u;
+// a tananyag címe: az angol oldalon az angol változaté, ha már van (a.en)
+const AU = (a) => U(EN && a.en ? a.en : a.u), AT = (a) => (EN && a.en ? a.en : a.u);
 const S = [
   { n: 1, title: 'Introduction', rail: 'Introduction', q: 'Why do we need to understand the ground?', p: 'Soil–structure interaction, the purpose and types of foundations, the limit states to be verified in design – and why getting a foundation right is harder than designing any other structure.', li: ['basic concepts of geotechnics', 'interaction: soil and structure', 'foundation types and limit states'], apps: [{ here: true }], meta: ['on this page', 'introductory animation'] },
   { n: 2, title: 'Ground investigation', rail: 'Ground investigation', q: 'What lies beneath us?', p: 'The first and most important step in geotechnical design is getting to know the ground profile and the groundwater conditions: desk study, boreholes and sampling, penetration tests and geophysical surveys, and finally summarising and presenting the results of the investigation.', li: ['boreholes, sampling, penetration tests', 'how many investigation points, how deep and how closely spaced', 'groundwater and Geotechnical Categories'], apps: [{ t: 'Ground investigation', u: 'talajfelderites.vercel.app', img: 'talajfelderites' }], meta: ['17 animated videos', '5 × 10 self-test questions', '50 true/false'] },
-  { n: 3, title: 'Design of shallow foundations', rail: 'Design of shallow foundations', q: 'What foundation is needed, and how deep?', p: 'From the boundary between shallow and deep foundations, through the seven foundation types and choosing the foundation level, to the mechanism of bearing failure – then calculating bearing resistance in drained and undrained conditions, with step-by-step worked examples.', li: ['strip, pad, beam and raft foundations', 'choosing the foundation level', 'bearing resistance: <span class="nw">V<sub>d</sub> ≤ R<sub>d</sub></span>'], apps: [{ t: 'Design of shallow foundations', u: 'sikalapoktervezese.vercel.app', img: 'sikalapoktervezese' }, { t: 'Bearing resistance of shallow foundations', u: 'sikalapok-teherbirasszamitasa.vercel.app', img: 'teherbiras', sub: '3b' }], meta: ['3D foundation-type lab', 'failure mechanisms in 3D', 'worked examples, calculator'] },
+  { n: 3, title: 'Design of shallow foundations', rail: 'Design of shallow foundations', q: 'What foundation is needed, and how deep?', p: 'From the boundary between shallow and deep foundations, through the seven foundation types and choosing the foundation level, to the mechanism of bearing failure – then calculating bearing resistance in drained and undrained conditions, with step-by-step worked examples.', li: ['strip, pad, beam and raft foundations', 'choosing the foundation level', 'bearing resistance: <span class="nw">V<sub>d</sub> ≤ R<sub>d</sub></span>'], apps: [{ t: 'Design of shallow foundations', u: 'sikalapoktervezese.vercel.app', en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese-en' }, { t: 'Bearing resistance of shallow foundations', u: 'sikalapok-teherbirasszamitasa.vercel.app', en: 'sikalapok-teherbirasszamitasa-en.vercel.app', img: 'teherbiras', sub: '3b' }], meta: ['3D foundation-type lab', 'failure mechanisms in 3D', 'worked examples, calculator'] },
   { n: 4, title: 'Stability of shallow foundations', rail: 'Stability', railL: 'Stability of shallow foundations', q: 'Will it slide? Will it overturn?', p: 'A footing can lose its stability in four ways: it slides along its base, overturns, is lifted by uplift, or slips together with the surrounding ground. Each of the four has to be verified separately – with simulators, worked examples and a calculator.', li: ['sliding and overturning', 'uplift in groundwater', 'overall stability'], apps: [{ t: 'Stability of shallow foundations', u: 'sikalapokallekonysagvizsgalata.vercel.app', img: 'allekonysag' }], meta: ['4 simulators', '9 worked examples', '5 animated videos'] },
   { n: 5, title: 'Settlement of shallow foundations', rail: 'Settlement', railL: 'Settlement of shallow foundations', q: 'How much does it settle, and how unevenly?', p: 'Stress distribution beneath the foundation, influence depth, compression layer by layer – then what we can do if the calculated settlement is not acceptable: lower contact pressure, a deeper foundation level, ground improvement or a structural solution.', li: ['pressure bulb and superposition', 'settlement tolerance and monitoring', 'remedies: soil replacement, compaction, preloading'], apps: [{ t: 'Settlement of shallow foundations', u: 'sikalapok-sullyedesszamitasa.vercel.app', img: 'sullyedes' }, { t: 'Protection against harmful settlement', u: 'vedekezesakarossullyedesekellen.vercel.app', img: 'vedekezes', sub: '5b' }], meta: ['worked examples, calculator', '3D settlement simulator', 'BME footage'] },
   { n: 6, title: 'Foundations on unfavourable ground', rail: 'Unfavourable ground', railL: 'Foundations on unfavourable ground', q: 'What if the ground is the biggest opponent?', p: 'Four soils you cannot ‘just’ build on: shrink–swell clay, loess that collapses when wetted, made ground, and compressible organic soil. How do we recognise them, and how do we found on them?', li: ['expansive and collapsible soils', 'made ground (fills)', 'organic soils, peat'], apps: [{ t: 'Foundations on unfavourable ground', u: 'kedvezotlen-altalaj.vercel.app', img: 'kedvezotlen' }], meta: ['4 animated videos', '4 3D simulators', 'soil detective'] },
@@ -1011,7 +1013,7 @@ $('#themeBtn').addEventListener('click', toggleTheme);
   const items = [['#top', 'Introduction'], ['#utvonal', 'Course journey'], ['#temakorok', 'All modules'], ['#video', 'Introductory video']];
   items.forEach(([hh, t]) => el('a', { href: hh }, d, `<i style="background:#2b3440">→</i>${t}`));
   el('a', { cls: 'd-ar', href: U('bme-alapozas.vercel.app/ar-labor/'), target: '_blank', rel: 'noopener' }, d, `<i>AR</i>Foundation Engineering AR lab ↗`);
-  S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? U(a.u) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? ' <span class="inhu">HU</span> ↗' : ''}`); });
+  S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? AU(a) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? (a.en ? ' ↗' : ' <span class="inhu">HU</span> ↗') : ''}`); });
   [['telek', 'One site, one semester'], ['helyszinelok', 'Geotechnical CSI'], ['tippelj', 'Guess, then calculate'], ['vizsga', 'Exam simulator']].forEach(([u, t]) => el('a', { href: U('bme-alapozas.vercel.app/' + u + '/'), target: '_blank', rel: 'noopener' }, d, `<i style="background:var(--accent);color:#1b1206">★</i>${t} <span class="inhu">HU</span> ↗`));
   el('button', { cls: 'd-theme', type: 'button' }, d, '<i>◐</i>Light or dark theme').addEventListener('click', toggleTheme);
   b.addEventListener('click', () => { const o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
@@ -1290,7 +1292,7 @@ $('#themeBtn').addEventListener('click', toggleTheme);
     el('p', { cls: 'q1' }, c, s.q); el('p', {}, c, s.p); const ul = el('ul', {}, c); s.li.forEach(x => el('li', {}, ul, x));
     const ap = el('div', { cls: 'apps' }, c);
     s.apps.forEach(a => { if (a.here) { el('a', { cls: 'app here', href: '#bevezetes' }, ap, `<span><b>On this page – the introduction</b><span>scroll back up, or watch the introductory animation</span><em>↑ Back to the introduction</em></span>`); return; }
-      el('a', { cls: 'app', href: U(a.u), target: '_blank', rel: 'noopener' }, ap, `<img src="img/apps/${a.img}.jpg" alt="${a.t} – opening screen of the module" loading="lazy" width="960" height="600"><span><b>${a.sub ? a.sub + ' · ' : ''}${a.t}</b><span>${a.u}</span><em>Open · in Hungarian ${arrow}</em></span>`); });
+      el('a', { cls: 'app', href: AU(a), target: '_blank', rel: 'noopener' }, ap, `<img src="img/apps/${a.img}.jpg" alt="${a.t} – opening screen of the module" loading="lazy" width="960" height="600"><span><b>${a.sub ? a.sub + ' · ' : ''}${a.t}</b><span>${AT(a)}</span><em>${a.en ? 'Open' : 'Open · in Hungarian'} ${arrow}</em></span>`); });
     const m = el('div', { cls: 'meta' }, c); s.meta.forEach(x => el('span', {}, m, x));
     el('b', { style: `--c:${cv(s.n)}` }, prog); }); }
 
@@ -1515,8 +1517,8 @@ const XS = (() => {
 /* ================= GYŰJTŐRÁCS, LÁBLÉC ================= */
 { const box = $('#gridApps'), fl = $('#footList');
   S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes-en.jpg" alt="Introduction – opening screen" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Introduction – this page</b><span>bme-alapozas.vercel.app</span><p class="acd">The course structure, the nine stations and all the learning modules in one place – this is where the journey starts.</p><em>You are here ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
-    el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: U(a.u), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – opening screen" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><em>Open · in Hungarian ↗</em></span>`);
-    el('li', {}, fl, `<i>${lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); }));
+    el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: AU(a), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – opening screen" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${AT(a)}</span><em>${a.en ? 'Open' : 'Open · in Hungarian'} ↗</em></span>`);
+    el('li', {}, fl, `<i>${lab}</i><a href="${AU(a)}" target="_blank" rel="noopener">${a.t}</a>${EN && !a.en ? ' <span class="inhu">HU</span>' : ''}`); }));
   // az egész félévet átfogó tananyagok: széles kártyák a rács végén
   const X = [
     { t: 'One site, one semester', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Nine stations on a single site: you are the geotechnical engineer, and with every task you solve the 3D model of the two buildings grows further, from investigating the ground to the last floor slab.' },
@@ -1526,7 +1528,7 @@ const XS = (() => {
     { t: 'Foundation Engineering AR lab', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Six 3D models in augmented reality – bearing failure, the pressure bulb, the Leaning Tower of Pisa with its soil profile, a CFA pile, an anchored excavation and the finished site. On a phone you can place them on a table or the floor and walk around them.' },
   ];
   X.forEach(a => { el('a', { cls: 'ac wide', href: U(a.u), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – opening screen" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><p class="acd">${a.d}</p><em>Open · in Hungarian ↗</em></span>`);
-    el('li', {}, fl, `<i>${a.lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>`); }); }
+    el('li', {}, fl, `<i>${a.lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>${EN ? ' <span class="inhu">HU</span>' : ''}`); }); }
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;
