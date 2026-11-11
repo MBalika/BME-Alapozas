@@ -364,6 +364,7 @@ JS = [
     # gyűjtőrács
     ('img/apps/bevezetes.jpg', 'img/apps/bevezetes-en.jpg'),
     ("en: 'talajfelderites.vercel.app/en', img: 'talajfelderites' }", "en: 'talajfelderites.vercel.app/en', img: 'talajfelderites-en' }"),
+    ("en: 'sikalapokallekonysagvizsgalata.vercel.app/en', img: 'allekonysag' }", "en: 'sikalapokallekonysagvizsgalata.vercel.app/en', img: 'allekonysag-en' }"),
     ("en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese' }", "en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese-en' }"),
     ("en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras',", "en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras-en',"),
     ('alt="Bevezetés – nyitókép"', 'alt="Introduction – opening screen"'),
