@@ -5,7 +5,8 @@ const NS = 'http://www.w3.org/2000/svg';
 const h = (tag, a = {}, p = null) => { const e = document.createElementNS(NS, tag); for (const k in a) { if (k === 'text') e.textContent = a[k]; else e.setAttribute(k, a[k]); } if (p) p.appendChild(e); return e; };
 const el = (tag, a = {}, p = null, html = null) => { const e = document.createElement(tag); for (const k in a) { if (k === 'cls') e.className = a[k]; else if (k === 'style') e.setAttribute('style', a[k]); else e.setAttribute(k, a[k]); } if (html !== null) e.innerHTML = html; if (p) p.appendChild(e); return e; };
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), lerp = (a, b, t) => a + (b - a) * t;
-const fmt = (v, d = 1) => v.toFixed(d).replace('.', ',').replace('-', '−');
+const EN = (document.documentElement.lang || '').startsWith('en');   // angol változat (en.html): tizedespont, angol tördelési szabályok
+const fmt = (v, d = 1) => v.toFixed(d).replace('.', EN ? '.' : ',').replace('-', '−');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ================= ADATOK ================= */
@@ -25,22 +26,38 @@ const cv = (n) => `var(--c${n})`;
 const arrow = '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>';
 
 /* ================= TÉMA, MENÜ ================= */
-$('#themeBtn').addEventListener('click', () => {
+const toggleTheme = () => {
   const r = document.documentElement; const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
   r.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('alap-theme', r.dataset.theme); } catch (e) {}
-});
+};
+$('#themeBtn').addEventListener('click', toggleTheme);
 { const d = $('#drawer'), b = $('#menuBtn');
   const items = [['#top', 'Bevezetés'], ['#utvonal', 'A tárgy útja'], ['#temakorok', 'Minden tananyag'], ['#video', 'Bevezető videó']];
   items.forEach(([hh, t]) => el('a', { href: hh }, d, `<i style="background:#2b3440">→</i>${t}`));
   el('a', { cls: 'd-ar', href: U('bme-alapozas.vercel.app/ar-labor/'), target: '_blank', rel: 'noopener' }, d, `<i>AR</i>Alapozás AR labor ↗`);
   S.forEach(s => { const a = s.apps.find(x => !x.here); el('a', { href: a ? U(a.u) : '#bevezetes', ...(a ? { target: '_blank', rel: 'noopener' } : {}) }, d, `<i style="background:${cv(s.n)}">${s.n}</i>${s.title}${a ? ' ↗' : ''}`); });
   [['telek', 'Egy telek, egy félév'], ['helyszinelok', 'Geotechnikai helyszínelők'], ['tippelj', 'Tippelj, aztán számolj'], ['vizsga', 'Vizsgaszimulátor']].forEach(([u, t]) => el('a', { href: U('bme-alapozas.vercel.app/' + u + '/'), target: '_blank', rel: 'noopener' }, d, `<i style="background:var(--accent);color:#1b1206">★</i>${t} ↗`));
+  el('button', { cls: 'd-theme', type: 'button' }, d, '<i>◐</i>Világos vagy sötét téma').addEventListener('click', toggleTheme);
   b.addEventListener('click', () => { const o = d.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
   d.addEventListener('click', (e) => { if (e.target.closest('a')) { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); } }); }
 // aktív menüpont
 { const pairs = $$('.nav a').filter(a => a.getAttribute('href').startsWith('#')).map(a => [a, a.getAttribute('href') === '#top' ? $('.hero') : $(a.getAttribute('href'))]).filter(p => p[1]);
   const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) pairs.forEach(([a, sec]) => a.classList.toggle('on', sec === e.target)); }); }, { rootMargin: '-45% 0px -50% 0px' });
   pairs.forEach(p => io.observe(p[1])); }
+
+/* ================= NYELVVÁLTÓ (HU | EN) ================= */
+// a választás megmarad (localStorage), és a másik nyelvű oldal ugyanott nyílik meg: a fejléc alatti legmélyebb azonosítós elem + eltolás
+{ const sw = $('#langSw'), KEY = 'alap-pos', hh = () => $('.top').offsetHeight;
+  if (sw) sw.addEventListener('click', () => {
+    try { localStorage.setItem('alap-lang', EN ? 'hu' : 'en'); } catch (e) {}
+    const H = hh(); let best = null; $$('main [id]').forEach(n => { if (n.closest('svg')) return; const r = n.getBoundingClientRect(); if (r.height && r.top <= H + 1 && r.bottom > H) best = n; });
+    try { sessionStorage.setItem(KEY, JSON.stringify({ id: best ? best.id : '', off: best ? H - best.getBoundingClientRect().top : 0, y: scrollY, t: Date.now() })); } catch (e) {}
+    sw.setAttribute('href', (EN ? './' : 'en') + (best ? '#' + best.id : ''));
+  });
+  let p = null; try { p = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
+  if (p && Date.now() - p.t < 20000) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const go = () => { const n = p.id && document.getElementById(p.id); const y = n ? n.getBoundingClientRect().top + scrollY - hh() + p.off : p.y; scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
+    requestAnimationFrame(go); addEventListener('load', () => { go(); setTimeout(go, 500); }, { once: true }); } }
 
 /* ================= ÚTVONALTÉRKÉP ================= */
 { const rail = $('#rail');
@@ -109,7 +126,7 @@ $('#themeBtn').addEventListener('click', () => {
   const ISO = [0.8, 0.5].map(r => { const L = [], R = []; for (let z = 0.2; z <= 11.6; z += 0.2) { if (sig(0, z) < r) break; let a = 0, b = 18; for (let k = 0; k < 30; k++) { const m = (a + b) / 2; if (sig(m, z) > r) a = m; else b = m; } R.push([a, z]); L.unshift([-a, z]); } return { r, pts: L.concat(R) }; });
   const fmtB = (b) => b < 1 / 5000 ? '≈ 0' : '1/' + Math.round(1 / b);
   function draw() {
-    const n = +N.value; $('#kshNo').textContent = n + ' szint';
+    const n = +N.value; $('#kshNo').textContent = n + (EN ? (n === 1 ? ' storey' : ' storeys') : ' szint');
     const p = 10 + 12 * n;                                       // talpfeszültség [kPa]
     const prof = profile(p);
     const sp = PTS.map(x => sAt(prof, x));
@@ -132,7 +149,7 @@ $('#themeBtn').addEventListener('click', () => {
     // izobárok (σz = 0,8 · 0,5 · 0,3 p)
     const ig = h('g', { 'clip-path': 'url(#kshClip)' }, svg);
     ISO.forEach(({ r, pts }, i) => { let dd = ''; pts.forEach(([x, z], j) => { dd += (j ? ' L' : 'M') + X(x).toFixed(1) + ' ' + (GY + k * sAt(prof, x) + z * PX).toFixed(1); }); h('path', { d: dd, fill: 'none', stroke: `rgba(232,149,42,${0.75 - i * 0.18})`, 'stroke-width': 1.8, 'stroke-dasharray': '6 5' }, ig);
-      const last = pts[Math.floor(pts.length / 2)]; if (GY + last[1] * PX < 318) h('text', { x: CX - 26, y: GY + k * sAt(prof, 0) + last[1] * PX - 4, 'font-size': 10.5, 'font-family': 'var(--fm)', fill: 'rgba(255,240,215,.9)', text: String(r).replace('.', ',') + ' p' }, ig); });
+      const last = pts[Math.floor(pts.length / 2)]; if (GY + last[1] * PX < 318) h('text', { x: CX - 26, y: GY + k * sAt(prof, 0) + last[1] * PX - 4, 'font-size': 10.5, 'font-family': 'var(--fm)', fill: 'rgba(255,240,215,.9)', text: String(r).replace('.', EN ? '.' : ',') + ' p' }, ig); });
     // eredeti felszín
     h('line', { x1: 0, y1: GY, x2: W, y2: GY, stroke: 'rgba(20,20,20,.45)', 'stroke-dasharray': '7 6', 'stroke-width': 1.3 }, svg);
     // hajlékony lemezalap (a talajjal együtt hajlik)
@@ -537,7 +554,7 @@ const XS = (() => {
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;
-  const open = () => { last = document.activeElement; f.src = 'video/bevezeto.html?v=4#autoplay'; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => f.focus(), 300); };
+  const open = () => { last = document.activeElement; f.src = EN ? 'video/bevezeto-en.html?v=1#autoplay' : 'video/bevezeto.html?v=4#autoplay'; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => f.focus(), 300); };
   const close = () => { m.hidden = true; f.src = 'about:blank'; document.body.style.overflow = ''; if (last) last.focus(); };
   $$('[data-video]').forEach(b => b.addEventListener('click', open)); $('#vmClose').addEventListener('click', close);
   m.addEventListener('click', (e) => { if (e.target === m) close(); });
@@ -551,10 +568,13 @@ const GUARD = (() => {
   const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead';
   const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead';
   const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
-  const TERMS = ['talaj és szerkezet', 'teherbíró réteg', 'talajvíz-viszonyok', 'egyenlőtlen süllyedés', 'egyenlőtlen süllyedések', 'általános állékonyság', 'teherbírási határállapot', 'használhatósági határállapot', 'puha lencse', 'szerves talaj', 'szerves agyag', 'roskadékony lösz', 'térfogatváltozó agyag', 'kút- és szekrényalapok', 'cölöppel gyámolított lemezalap', 'mélyített síkalap', 'házi feladat', 'pisai torony'];
+  const TERMS_HU = ['talaj és szerkezet', 'teherbíró réteg', 'talajvíz-viszonyok', 'egyenlőtlen süllyedés', 'egyenlőtlen süllyedések', 'általános állékonyság', 'teherbírási határállapot', 'használhatósági határállapot', 'puha lencse', 'szerves talaj', 'szerves agyag', 'roskadékony lösz', 'térfogatváltozó agyag', 'kút- és szekrényalapok', 'cölöppel gyámolított lemezalap', 'mélyített síkalap', 'házi feladat', 'pisai torony'];
+  const TERMS_EN = ['soil and structure', 'bearing stratum', 'groundwater conditions', 'differential settlement', 'differential settlements', 'overall stability', 'ultimate limit state', 'ultimate limit states', 'serviceability limit state', 'serviceability limit states', 'soft lens', 'organic soil', 'organic clay', 'collapsible loess', 'expansive clay', 'piled raft', 'raft foundation', 'shallow foundation', 'shallow foundations', 'deep foundation', 'deep foundations', 'caisson foundations', 'Leaning Tower', 'ground investigation'];
+  const TERMS = EN ? TERMS_EN : TERMS_HU;
   const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
   const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
-  const NUMW = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  const NUMW_HU = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  const NUMW = EN ? /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]irst|[Ss]econd|[Tt]hird|[Bb]oth|[Ee]ach))(?=\s\S)\s/g : NUMW_HU;
   function textPass(s) {
     if (!/[ \-–·]/.test(s)) return s;
     s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
@@ -565,16 +585,16 @@ const GUARD = (() => {
     s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
     s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
     s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
-    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(EN ? /(^|[\s(\u00A0])(e\.g\.|i\.e\.|approx\.|c\.|No\.|Fig\.|max\.|min\.|Dr\.) (?=\S)/g : /(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
-    for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“])(a|an|A|An|the|The|of|to|in|on|at|by|or|and|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
     s = s.replace(NUMW, '$1$2' + NB);
     s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     return s;
   }
-  const SHORTEND = new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“])(a|an|A|An|the|The|of|to|in|on|at|by|or|and|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[.,]\\d+)?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
   function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
     if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
     const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
@@ -586,7 +606,8 @@ const GUARD = (() => {
     while ((m = sepRx.exec(full))) { segs.push([last, m.index, lastSep, m[0]]); last = m.index + m[0].length; lastSep = m[0]; } segs.push([last, full.length, lastSep, '']);
     if (segs.length > 1) for (const [a, b, before, after] of segs) { const t = full.slice(a, b).replace(/[\u2060\u00AD]/g, '').trim(); const dashOnly = (before === ' – ' || before === '') && (after === ' – ' || after === '') && (before || after); const lim = dashOnly ? Math.min(22, segMax) : segMax; if (t.length > 0 && t.length < lim) mark(a, b); }
     const pr = /\(([^()]{1,30})\)/g; while ((m = pr.exec(full))) { if (m[0].replace(/[\u2060\u00AD]/g, '').length <= parMax) mark(m.index, m.index + m[0].length); }
-    termRx.lastIndex = 0; while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    // szakkifejezés-kötés csak akkor, ha a kifejezés elfér egy sor felében (nagy betűs címben, keskeny hasábban nem köt – különben kilógna)
+    termRx.lastIndex = 0; while ((m = termRx.exec(full))) if (m[0].length <= 0.5 * cpl) mark(m.index, m.index + m[0].length);
     return bind;
   }
   function textNodes(root) { const out = []; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) { let p = n.parentNode; while (p && p !== root) { if (SKIP.has(p.nodeName)) return NodeFilter.FILTER_REJECT; p = p.parentNode; } return NodeFilter.FILTER_ACCEPT; } }); let n; while ((n = w.nextNode())) out.push(n); return out; }
@@ -608,7 +629,7 @@ const GUARD = (() => {
   function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
   function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
   function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
-    const H = window.Hyphenopoly; if (H && H.hyphenators && H.hyphenators.hu) H.hyphenators.hu.then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+    const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
   return { start, run };
 })();
 

@@ -68,6 +68,17 @@ main .rag, footer .rag{text-align:left!important}
 .tbtn:hover{background:rgba(255,255,255,.1)}
 .tbtn svg{width:19px; height:19px}
 .menu-btn{display:none}
+/* nyelvváltó: HU | EN */
+.lang{display:inline-flex; align-items:stretch; height:36px; padding:3px; gap:2px; border-radius:999px; border:1px solid var(--nline); background:rgba(255,255,255,.04); text-decoration:none; flex:none; font:800 11.5px/1 var(--fd); letter-spacing:.05em}
+.lang b, .lang span{display:grid; place-items:center; padding:0 9px; border-radius:999px; font:inherit}
+.lang b{background:var(--accent); color:#1a1206}
+.lang span{color:var(--nmuted); transition:.2s}
+.lang:hover span, .lang:focus-visible span{color:var(--nink); background:rgba(255,255,255,.1)}
+/* angol változat: a tárgynév két sorban; „magyar nyelvű” jelzés a még magyar tananyagokon */
+html[lang^=en] .hero h1{font-size:clamp(34px, 4.9vw, 72px); line-height:.98}
+@media (max-width: 880px){ html[lang^=en] .hero h1{font-size:clamp(32px, 11.4vw, 92px)} }
+html[lang^=en] .brand b{display:block; font-size:13px; line-height:1.15; letter-spacing:.005em}
+.inhu{display:inline-block; margin-left:6px; padding:2px 6px 1px; border-radius:5px; border:1px solid currentColor; font:700 9.5px/1.25 var(--fm); letter-spacing:.06em; text-transform:uppercase; opacity:.75; vertical-align:2px; white-space:nowrap}
 .drawer{position:fixed; inset:var(--hh) 0 auto 0; z-index:49; background:var(--night2); color:var(--nink); border-bottom:1px solid var(--nline); padding:14px var(--pad) 20px; display:none; max-height:calc(100vh - var(--hh)); overflow:auto}
 .drawer.open{display:block}
 .drawer a{display:flex; gap:12px; align-items:center; padding:11px 4px; text-decoration:none; border-bottom:1px solid var(--nline); font-weight:600}
@@ -550,3 +561,15 @@ footer .fb{max-width:46ch}
 .ar-tb{display:none; align-items:center; gap:6px; height:40px; padding:0 13px 0 11px; margin-left:auto; border-radius:999px; border:1px solid rgba(95,227,255,.5); background:rgba(95,227,255,.1); color:var(--holo); font:800 13px/1 var(--fd); letter-spacing:.04em; text-decoration:none; flex:none}
 .ar-tb svg{width:16px; height:16px}
 @media (max-width: 880px){ .ar-tb{display:inline-flex} .ar-tb + .menu-btn{margin-left:-6px} }
+/* mobilon: a nyelvváltó egyetlen kör alakú gomb (a másik nyelv kódja), a témaváltó a menübe kerül */
+@media (max-width: 880px){
+  .top .wrap{gap:8px}
+  .ar-tb + .menu-btn{margin-left:0}
+  .ar-tb{padding:0 11px 0 9px}
+  .lang{width:40px; height:40px; padding:0; justify-content:center}
+  .lang b{display:none}
+  .lang span{padding:0; width:100%; color:var(--nink); font-size:12px}
+  #themeBtn{display:none}
+}
+.drawer button.d-theme{display:flex; width:100%; gap:12px; align-items:center; padding:11px 4px; background:none; border:0; border-bottom:1px solid var(--nline); color:inherit; font:600 16px/1.3 var(--fb); cursor:pointer; text-align:left}
+.drawer button.d-theme i{width:30px; height:30px; border-radius:50%; display:grid; place-items:center; flex:none; font-style:normal; background:#2b3440; font-size:15px}
