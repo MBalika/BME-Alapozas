@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/helyszinelok/">
+<title>Geotechnical CSI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Real and typical foundation failure cases: work out from the clues what happened and what would have prevented it. With a crack-reading game.">
+<link rel="alternate" hreflang="hu" href="https://bme-alapozas.vercel.app/helyszinelok">
+<link rel="alternate" hreflang="en" href="https://bme-alapozas.vercel.app/helyszinelok/en">
+<link rel="alternate" hreflang="x-default" href="https://bme-alapozas.vercel.app/helyszinelok">
+<style>
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/saira-extra-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/saira-extra-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/saira-extra-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Saira Extra Condensed';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/saira-extra-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/instrument-sans-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/instrument-sans-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/instrument-sans-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/instrument-sans-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/instrument-sans-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/instrument-sans-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/ibm-plex-mono-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/ibm-plex-mono-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+</style>
+<style>
+/* ===== Geotechnikai helyszínelők – éjszakai helyszíni dosszié, sárga bizonyítékjelölők, egyetlen helyszínelő-szalag ===== */
+:root{
+  --bg:#eef0f1; --bg2:#e2e6e9; --card:#ffffff; --ink:#14181d; --ink2:#36404a; --muted:#5d6872; --line:rgba(20,24,29,.12); --line2:rgba(20,24,29,.22);
+  --scene:#121820; --scene2:#1a222c; --sink:#e9ecef; --smuted:#9aa6b2; --sline:rgba(255,255,255,.12);
+  --mark:#f5c518; --mark-ink:#1b1600; --mark-dk:#9b7a00; --red:#d8432f; --redbg:rgba(216,67,47,.1); --ok:#23905a; --okbg:rgba(35,144,90,.12); --steel:#5b7ea0;
+  --r:14px; --w:1280px; --pad:28px; --hh:58px;
+  --fd:'Saira Extra Condensed', 'Arial Narrow', 'Roboto Condensed', system-ui, sans-serif; --fb:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; --fm:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.06), 0 10px 26px rgba(16,20,26,.08);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0d1116; --bg2:#141a21; --card:#161d25; --ink:#e8ebee; --ink2:#c6ccd2; --muted:#93a0ab; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --mark-dk:#f5c518; --red:#ef6550; --redbg:rgba(239,101,80,.13); --ok:#43c07e; --okbg:rgba(67,192,126,.14); --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px rgba(0,0,0,.35); color-scheme: dark; } }
+:root[data-theme="dark"]{
+  --bg:#0d1116; --bg2:#141a21; --card:#161d25; --ink:#e8ebee; --ink2:#c6ccd2; --muted:#93a0ab; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --mark-dk:#f5c518; --red:#ef6550; --redbg:rgba(239,101,80,.13); --ok:#43c07e; --okbg:rgba(67,192,126,.14); --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px rgba(0,0,0,.35); color-scheme: dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+body{margin:0; background:var(--bg); color:var(--ink); font:400 17px/1.6 var(--fb); overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:var(--scene)}
+a{color:inherit}
+button{font:inherit; color:inherit}
+.wrap{max-width:var(--w); margin:0 auto; padding-block:0; padding-left:max(var(--pad), env(safe-area-inset-left, 0px)); padding-right:max(var(--pad), env(safe-area-inset-right, 0px))}
+.nw{white-space:nowrap; hyphens:none}
+sub, sup{font-size:.72em; line-height:0}
+:focus-visible{outline:3px solid var(--mark); outline-offset:2px; border-radius:6px}
+main p, main li, main .note, main .fb, footer p, .lead{ text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty }
+h1,h2,h3,h4,.btn,.chip,label,button,.kick,.mono{hyphens:none; -webkit-hyphens:none}
+main .rag, footer .rag, .lead.rag{text-align:left!important}
+
+/* ===== fejléc és nyitás ===== */
+.top{position:sticky; top:env(safe-area-inset-top, 0px); z-index:50; height:var(--hh); background:rgba(18,24,32,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); color:var(--sink); border-bottom:1px solid var(--sline)}
+.top .wrap{height:100%; display:flex; align-items:center; gap:14px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--sink); min-width:0}
+.brand .mk{flex:none; width:30px; height:30px}
+.brand b{font:800 21px/1 var(--fd); letter-spacing:.02em; text-transform:uppercase; white-space:nowrap}
+.rankmini{margin-left:auto; display:flex; align-items:center; gap:10px; font:500 13px/1 var(--fm); color:var(--smuted); white-space:nowrap}
+.rankmini b{color:var(--mark); font:800 18px/1 var(--fd); letter-spacing:.03em; text-transform:uppercase}
+.hero{background:var(--scene); color:var(--sink); position:relative; overflow:hidden}
+.hero .wrap{padding-block:clamp(26px, 4vw, 48px) clamp(26px, 4vw, 44px); position:relative; z-index:1}
+.tape{height:34px; background:repeating-linear-gradient(-45deg, var(--mark) 0 26px, #111 26px 52px); display:flex; align-items:center; overflow:hidden; border-block:2px solid #111}
+.tape span{font:800 17px/1 var(--fd); letter-spacing:.24em; color:#111; background:var(--mark); padding:4px 14px; margin-left:clamp(16px, 6vw, 90px); text-transform:uppercase; white-space:nowrap}
+.kick{display:flex; flex-wrap:wrap; gap:10px; align-items:center; font:500 12.5px/1.3 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--smuted)}
+.hero-grid{display:grid; grid-template-columns:minmax(0, 1.4fr) minmax(0, 1fr); gap:clamp(18px, 3vw, 36px); align-items:stretch; margin-top:12px}
+h1{font:800 clamp(46px, 8vw, 104px)/.86 var(--fd); letter-spacing:.005em; text-transform:uppercase; margin:0; text-wrap:balance}
+h1 em{font-style:normal; color:var(--mark)}
+.lead{font-size:clamp(16px, 1.6vw, 18.5px); opacity:.92; margin:16px 0 0}
+.badge{border:1px solid var(--sline); border-radius:var(--r); background:var(--scene2); padding:18px; display:flex; flex-direction:column; gap:12px}
+.badge .row{display:flex; align-items:center; gap:14px}
+.badge .star{flex:none; width:64px; height:64px}
+.badge small{display:block; font:500 11px/1.2 var(--fm); letter-spacing:.08em; text-transform:uppercase; color:var(--smuted)}
+.badge .rk{font:800 34px/1 var(--fd); text-transform:uppercase; letter-spacing:.02em; color:var(--mark)}
+.badge .meter{height:8px; border-radius:8px; background:rgba(255,255,255,.08); overflow:hidden}
+.badge .meter i{display:block; height:100%; background:var(--mark); width:0; transition:width .6s}
+.badge .stats{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px}
+.badge .stats div{border:1px solid var(--sline); border-radius:10px; padding:8px 10px}
+.badge .stats b{display:block; font:800 24px/1 var(--fd); font-variant-numeric:tabular-nums}
+.badge .stats span{display:block; font:500 11px/1.25 var(--fm); color:var(--smuted); margin-top:3px}
+.badge p{margin:0; font-size:14.5px; color:var(--smuted); line-height:1.5}
+
+/* ===== ügyek táblája ===== */
+.sec{padding-block:clamp(30px, 4vw, 52px) 0}
+.sec h2{font:800 clamp(30px, 4vw, 46px)/.95 var(--fd); text-transform:uppercase; letter-spacing:.01em; margin:0 0 8px}
+.sec > p{margin:0 0 18px; color:var(--ink2)}
+.board{display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:14px}
+.case{position:relative; text-align:left; border:1px solid var(--line); border-radius:var(--r); background:var(--card); box-shadow:var(--shadow); padding:0; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; min-width:0}
+.case:hover{border-color:var(--mark-dk)}
+.case[aria-current="true"]{outline:3px solid var(--mark); outline-offset:-1px}
+.case .thumb{aspect-ratio:16/10; background:var(--scene); max-width:100%}
+.case .thumb svg{display:block; width:100%; height:100%}
+.case .bd{padding:12px 14px 14px; display:flex; flex-direction:column; gap:6px; flex:1}
+.case .t{font:800 23px/1 var(--fd); text-transform:uppercase; letter-spacing:.01em}
+.case .m{font:500 12.5px/1.35 var(--fm); color:var(--muted)}
+.case .ft{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; margin-top:auto; padding-top:6px; font:600 12.5px/1 var(--fm)}
+.case .ft .st{margin-left:auto; white-space:nowrap}
+.case .ft .st.ok{color:var(--ok)}
+.tent{position:absolute; left:10px; top:10px; width:34px; height:30px; z-index:2}
+.tent svg{width:100%; height:100%; display:block}
+.tagreal{border:1px solid var(--line2); border-radius:999px; padding:3px 8px; font:600 11px/1 var(--fm); color:var(--muted); letter-spacing:.03em; white-space:nowrap}
+.tagreal.real{border-color:var(--red); color:var(--red)}
+
+/* ===== ügy lapja ===== */
+.file{margin-top:22px; display:grid; grid-template-columns:minmax(0, 1.12fr) minmax(0, 1fr); gap:20px; align-items:start}
+.file .left{display:flex; flex-direction:column; gap:14px; position:sticky; top:calc(var(--hh) + env(safe-area-inset-top, 0px) + 14px)}
+.scene{position:relative; border-radius:var(--r); overflow:hidden; background:var(--scene); border:1px solid var(--line); aspect-ratio:16/10; max-width:100%}
+.scene svg{display:block; width:100%; height:100%}
+.scene .cap{position:absolute; left:12px; top:10px; font:500 11.5px/1.2 var(--fm); color:var(--smuted); background:rgba(18,24,32,.75); border-radius:6px; padding:5px 8px}
+.ftitle{display:flex; flex-direction:column; gap:6px}
+.ftitle .k{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font:500 12.5px/1.2 var(--fm); color:var(--muted); letter-spacing:.04em}
+.ftitle h3{margin:0; font:800 clamp(34px, 4vw, 50px)/.92 var(--fd); text-transform:uppercase}
+.clues{display:grid; gap:10px}
+.clue{display:grid; grid-template-columns:40px minmax(0, 1fr); gap:12px; align-items:start; border:1px solid var(--line); border-radius:12px; background:var(--card); padding:12px 14px}
+.clue .n{width:36px; height:32px; display:block}
+.clue h4{margin:0 0 3px; font:700 13px/1.2 var(--fm); text-transform:uppercase; letter-spacing:.06em; color:var(--muted)}
+.clue p{margin:0; font-size:15.5px}
+.clue.locked{border-style:dashed; background:transparent; color:var(--muted)}
+.clue.locked p{font-style:italic}
+.right{display:flex; flex-direction:column; gap:14px; min-width:0}
+.q{border:1px solid var(--line); border-radius:var(--r); background:var(--card); box-shadow:var(--shadow); padding:16px 18px; display:flex; flex-direction:column; gap:12px}
+.q.done{border-color:var(--ok)}
+.q h4{margin:0; font:700 12.5px/1.2 var(--fm); text-transform:uppercase; letter-spacing:.07em; color:var(--mark-dk); display:flex; gap:10px; align-items:center}
+.q h4 .pts{margin-left:auto; color:var(--ok)}
+.q .qq{margin:0; font-weight:600; font-size:17px}
+.opts{display:grid; gap:8px}
+.opt{display:flex; gap:10px; align-items:flex-start; text-align:left; border:1px solid var(--line2); background:var(--bg); border-radius:12px; padding:10px 12px; cursor:pointer; font-size:15.5px; line-height:1.42}
+.opt .k{flex:none; width:24px; height:24px; border-radius:6px; display:grid; place-items:center; font:600 12px/1 var(--fm); background:var(--card); border:1px solid var(--line2)}
+.opt:hover{border-color:var(--mark-dk)}
+.opt.ok{border-color:var(--ok); background:var(--okbg)}
+.opt.ok .k{background:var(--ok); border-color:var(--ok); color:#fff}
+.opt.bad{border-color:var(--red); background:var(--redbg)}
+.opt.bad .k{background:var(--red); border-color:var(--red); color:#fff}
+.opt[disabled]{cursor:default}
+.fb{margin:0; font-size:15.5px; padding:10px 12px; border-radius:10px}
+.fb.ok{background:var(--okbg)}
+.fb.bad{background:var(--redbg)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--line2); background:var(--card); color:var(--ink); border-radius:999px; padding:10px 16px; font:700 15px/1 var(--fb); text-decoration:none; cursor:pointer}
+.btn:hover{border-color:var(--mark-dk)}
+.btn.pri{background:var(--mark); border-color:var(--mark); color:var(--mark-ink)}
+.btn svg{width:14px; height:14px}
+.btn[disabled]{opacity:.45; cursor:not-allowed}
+.btns{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.verdict{border:2px solid var(--ink); border-radius:var(--r); background:var(--card); padding:18px; display:flex; flex-direction:column; gap:10px; position:relative}
+.verdict .stamp{position:absolute; right:14px; top:14px; transform:rotate(7deg); border:3px solid var(--red); color:var(--red); font:800 20px/1 var(--fd); letter-spacing:.12em; text-transform:uppercase; padding:5px 10px; border-radius:6px}
+.verdict h4{margin:0; font:800 30px/1 var(--fd); text-transform:uppercase; padding-right:150px}
+.verdict h5{margin:6px 0 0; font:700 12.5px/1.2 var(--fm); text-transform:uppercase; letter-spacing:.07em; color:var(--muted)}
+.verdict p{margin:0}
+.verdict .facts{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px}
+.verdict .facts div{border:1px solid var(--line); border-radius:10px; padding:9px 11px; background:var(--bg)}
+.verdict .facts b{display:block; font:800 24px/1 var(--fd); font-variant-numeric:tabular-nums}
+.verdict .facts span{display:block; font:500 11.5px/1.3 var(--fm); color:var(--muted); margin-top:3px}
+
+/* ===== repedésolvasó ===== */
+.crack{display:grid; grid-template-columns:minmax(0, 1.12fr) minmax(0, 1fr); gap:20px; align-items:stretch}
+.facade{border-radius:var(--r); overflow:hidden; background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow); display:flex; flex-direction:column}
+.facade .pic{flex:1; position:relative; min-height:280px; background:#dfe6ec}
+.facade .pic svg{position:absolute; inset:0; display:block; width:100%; height:100%}
+.facade .bar{display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-top:1px solid var(--line); font:500 13px/1.2 var(--fm); color:var(--muted)}
+.dots{display:flex; gap:6px}
+.dots i{width:10px; height:10px; border-radius:50%; background:var(--line2)}
+.dots i.ok{background:var(--ok)}
+.dots i.bad{background:var(--red)}
+.dots i.cur{box-shadow:0 0 0 3px var(--mark)}
+.modes{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px}
+.mode{border:1px solid var(--line2); border-radius:12px; background:var(--card); padding:10px; cursor:pointer; display:flex; flex-direction:column; gap:6px; text-align:left}
+.mode svg{width:100%; height:auto; display:block}
+.mode span{font:600 14.5px/1.3 var(--fb)}
+.mode:hover{border-color:var(--mark-dk)}
+.mode.ok{border-color:var(--ok); background:var(--okbg)}
+.mode.bad{border-color:var(--red); background:var(--redbg)}
+.mode[disabled]{cursor:default}
+.crack .side{display:flex; flex-direction:column; gap:12px; min-width:0}
+.rule{border:1px dashed var(--line2); border-radius:12px; padding:12px 14px; font-size:15px}
+.rule p{margin:0}
+
+footer.wrap{border-top:1px solid var(--line); margin-top:44px; padding-block:18px 28px; color:var(--muted); font-size:14px}
+footer p{margin:0}
+
+@media (max-width: 1100px){ .board{grid-template-columns:repeat(2, minmax(0, 1fr))} }
+@media (max-width: 920px){
+  .hero-grid, .file, .crack{grid-template-columns:1fr}
+  .file .left{position:relative; top:0}
+  .facade .pic{flex:none; min-height:0; aspect-ratio:16/9}
+}
+@media (max-width: 560px){
+  :root{--pad:16px}
+  .board{grid-template-columns:1fr 1fr; gap:10px}
+  .case .t{font-size:19px}
+  .case .bd{padding:10px 11px 12px}
+  .verdict h4{padding-right:0; margin-top:34px}
+  .verdict .facts{grid-template-columns:1fr 1fr 1fr}
+  .verdict .facts b{font-size:19px}
+  .rankmini span{display:none}
+  .brand b{font-size:18px}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+
+
+/* nyelvváltó (HU | EN): a kitöltött az aktuális nyelv; mobilon csak a másik nyelv kódja */
+.langbtn{flex:none; display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid rgba(255,255,255,.22); border-radius:999px; text-decoration:none; color:inherit; font:500 12px/1 var(--fm); letter-spacing:.04em}
+.langbtn b, .langbtn span{display:inline-grid; place-items:center; min-width:30px; padding:5px 8px; border-radius:999px}
+.langbtn b{background:#eef1f4; color:#141a20; font-weight:600}
+.langbtn span{opacity:.75}
+.langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
+@media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
+</style>
+<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
+<script>Hyphenopoly.config({ require: { "en-gb": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Geotechnical CSI – back to top"><svg class="mk" viewBox="0 0 34 30" aria-hidden="true"><path d="M17 2 L32 28 H2 Z" fill="#f5c518" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/><text x="17" y="24" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="13" font-weight="900" fill="#111">G</text></svg><b>Geotechnical CSI</b></a>
+    <div class="rankmini" aria-live="polite"><span>rank:</span><b id="rkTop">Trainee</b><span id="ptTop">0 pts</span></div>
+    <a class="langbtn" id="langSw" href="./" hreflang="hu" lang="hu" aria-label="Magyar változat"><span>HU</span><b>EN</b></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="tape" aria-hidden="true"><span>Investigation in progress · do not cross</span></div>
+  <div class="wrap">
+    <div class="kick"><span>BME Foundation Engineering</span><span>·</span><span>failure cases</span></div>
+    <div class="hero-grid">
+      <div>
+        <h1>Geotechnical <em>CSI</em></h1>
+        <p class="lead">The ground tipped a silo to 27° in a single day. A tower block fell onto its side in one piece. The riverbed ran out from under a bridge pier. You are the expert: from the clues you have to work out what happened and what would have prevented it. Every case belongs to a lecture of the course. The fewer clues you need to solve it, the more points you get.</p>
+      </div>
+      <div class="badge" aria-label="Your rank">
+        <div class="row"><svg class="star" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3l7.6 15.4 17 2.5-12.3 12 2.9 16.9L32 41.8 16.8 49.8l2.9-16.9-12.3-12 17-2.5z" fill="#f5c518" stroke="#111" stroke-width="2" stroke-linejoin="round"/><circle cx="32" cy="29" r="8" fill="#111"/></svg><div><small>your rank</small><div class="rk" id="rk">Trainee</div></div></div>
+        <div class="meter" aria-hidden="true"><i id="rkBar"></i></div>
+        <div class="stats"><div><b id="stCases">0/8</b><span>cases solved</span></div><div><b id="stPts">0</b><span>points</span></div><div><b id="stCrack">0/6</b><span>crack patterns</span></div></div>
+        <p id="rkNext">Next rank: Scene investigator (15 points).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="sec wrap" id="ugyek">
+    <h2>Open cases</h2>
+    <p>Choose a case. The first clue is free; open the others only if you need them.</p>
+    <div class="board" id="board"></div>
+    <div id="file"></div>
+  </section>
+
+  <section class="sec wrap" id="repedes">
+    <h2>Crack reader</h2>
+    <p>The cracks in a wall reveal how the foundation beneath it has moved. Look at the façade and decide which settlement shape caused it.</p>
+    <div class="crack" id="crack"></div>
+  </section>
+</main>
+<footer class="wrap"><p>BME Department of Engineering Geology and Geotechnics · Foundation Engineering · The figures are schematic. The typical cases are invented, but they occur regularly in Hungarian practice.</p></footer>
+
+<script>
+(() => {
+'use strict';
+const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const U = (u) => 'https://' + u;
+const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>';
+const tent = (n) => `<svg viewBox="0 0 36 32" aria-hidden="true"><path d="M18 2 L34 30 H2 Z" fill="#f5c518" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/><text x="18" y="26" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="14" font-weight="900" fill="#111">${n}</text></svg>`;
+
+/* ================= HELYSZÍNI VÁZLATOK (SVG, 640 × 400) ================= */
+const C = { sky: '#121820', sky2: '#1a2430', fill: '#8a7f6e', clay: '#6a645b', clay2: '#7d7466', sand: '#cfae74', loess: '#d6bd8c', grav: '#a2957f', rock: '#5d5046', water: '#3d9ad6', conc: '#c9c6bd', wall: '#e8e1d0', dark: '#2b3038', crack: '#d8432f', mark: '#f5c518', grass: '#4f7a3c' };
+const svgWrap = (inner, label) => `<svg viewBox="0 0 640 400" role="img" aria-label="${label}"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.sky}"/><stop offset="1" stop-color="${C.sky2}"/></linearGradient><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8 L8 0" stroke="rgba(0,0,0,.18)" stroke-width="1"/></pattern><pattern id="dotp" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.2" fill="rgba(60,40,20,.35)"/><circle cx="8" cy="8" r="1" fill="rgba(60,40,20,.3)"/></pattern><pattern id="clayp" width="22" height="10" patternUnits="userSpaceOnUse"><path d="M2 5h10" stroke="rgba(20,24,30,.38)" stroke-width="1.4"/></pattern><pattern id="loessp" width="10" height="16" patternUnits="userSpaceOnUse"><path d="M5 2v9" stroke="rgba(90,60,20,.28)" stroke-width="1.2"/></pattern></defs><rect width="640" height="400" fill="url(#sk)"/>${inner}</svg>`;
+const layer = (y0, y1, col, pat) => `<rect x="0" y="${y0}" width="640" height="${y1 - y0}" fill="${col}"/>${pat ? `<rect x="0" y="${y0}" width="640" height="${y1 - y0}" fill="url(#${pat})"/>` : ''}`;
+const lab = (x, y, t, a = 'start', col = '#fff') => `<text x="${x}" y="${y}" text-anchor="${a}" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="${col}" style="paint-order:stroke; stroke:rgba(8,10,14,.8); stroke-width:3px">${t}</text>`;
+const marker = (x, y, n) => `<g transform="translate(${x - 13},${y - 24})"><path d="M13 1 L26 23 H0 Z" fill="${C.mark}" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/><text x="13" y="20" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="11" font-weight="900" fill="#111">${n}</text></g>`;
+const crackPath = (pts, w0, w1, col = C.crack) => { // ékesen szélesedő repedés
+  const L = pts.length; const left = [], right = []; for (let i = 0; i < L; i++) { const [x, y] = pts[i]; const [xa, ya] = pts[Math.max(0, i - 1)], [xb, yb] = pts[Math.min(L - 1, i + 1)]; const dx = xb - xa, dy = yb - ya, l = Math.hypot(dx, dy) || 1; const w = (w0 + (w1 - w0) * i / (L - 1)) / 2; left.push([x - dy / l * w, y + dx / l * w]); right.push([x + dy / l * w, y - dx / l * w]); }
+  return `<polygon points="${[...left, ...right.reverse()].map(p => p.map(v => v.toFixed(1)).join(',')).join(' ')}" fill="${col}"/>`; };
+const jag = (x0, y0, x1, y1, n = 7, amp = 4, seed = 1) => { const p = []; let s = seed; for (let i = 0; i <= n; i++) { s = (s * 9301 + 49297) % 233280; const r = s / 233280 - 0.5; const t = i / n; p.push([x0 + (x1 - x0) * t + (i && i < n ? r * amp : 0), y0 + (y1 - y0) * t + (i && i < n ? -r * amp * 0.6 : 0)]); } return p; };
+
+const SCENES = {
+  transcona: (sv) => svgWrap(`${layer(250, 400, C.clay2, 'clayp')}${layer(330, 400, C.clay, 'clayp')}
+    <path d="M60 250 C 110 250 120 222 170 226 C 200 229 214 250 250 250" fill="${C.clay2}" stroke="rgba(0,0,0,.25)"/>
+    <g transform="rotate(-27 430 262)"><rect x="180" y="128" width="300" height="134" fill="${C.conc}" stroke="#7a776f" stroke-width="2"/>${Array.from({ length: 10 }, (_, i) => `<rect x="${188 + i * 29}" y="136" width="24" height="118" rx="11" fill="#d8d5cd" stroke="#9a978f"/>`).join('')}<rect x="172" y="262" width="316" height="12" fill="#9a978f"/><rect x="430" y="70" width="44" height="60" fill="#b9b6ae" stroke="#7a776f" stroke-width="2"/></g>
+    ${sv ? `<path d="M190 330 C 260 380 420 380 470 290" fill="none" stroke="${C.crack}" stroke-width="3" stroke-dasharray="9 6"/>` : ''}
+    <rect x="0" y="246" width="640" height="5" fill="${C.grass}"/>${marker(150, 222, 1)}${marker(520, 250, 2)}${lab(14, 390, 'lake clay')}`, 'Tilted grain elevator with clay bulging out of the ground'),
+  lotus: () => svgWrap(`${layer(270, 400, C.clay2, 'clayp')}${layer(340, 400, C.clay, 'clayp')}
+    <path d="M0 270 L60 270 L80 292 L130 292 L150 270" fill="${C.water}" opacity=".85"/><path d="M60 270 L80 292 L130 292 L150 270" fill="none" stroke="#2a6d9a" stroke-width="2"/>
+    <path d="M160 270 L210 160 L280 160 L330 270 Z" fill="#8f7d62" stroke="#6e5f4a" stroke-width="2"/>${lab(204, 150, 'approx. 10 m')}
+    ${Array.from({ length: 6 }, (_, i) => `<rect x="${352 + i * 14}" y="270" width="6" height="${16 + (i % 3) * 6}" fill="${C.conc}"/>`).join('')}
+    <g transform="translate(440 262) rotate(90)"><rect x="-28" y="-176" width="36" height="176" fill="${C.wall}" stroke="#8d8576" stroke-width="2"/>${Array.from({ length: 13 }, (_, i) => `<rect x="-22" y="${-170 + i * 13}" width="24" height="7" fill="#4b6274"/>`).join('')}</g>
+    <path d="M520 270 L540 300 L620 300 L640 270" fill="#3b3226"/><path d="M520 270 L540 300 L620 300 L640 270" fill="none" stroke="#6e5f4a" stroke-width="2"/>${lab(546, 322, 'pit 4.6 m')}
+    <rect x="0" y="266" width="160" height="5" fill="${C.grass}"/><rect x="330" y="266" width="190" height="5" fill="${C.grass}"/>
+    ${marker(240, 154, 1)}${marker(372, 262, 2)}${marker(590, 266, 3)}${lab(14, 260, 'creek')}`, 'Tower block lying on its side, with a spoil heap and an excavation beside it'),
+  pisa: () => svgWrap(`${layer(290, 400, C.sand, 'dotp')}${layer(318, 400, C.clay, 'clayp')}${layer(372, 400, C.sand, 'dotp')}
+    <line x1="0" y1="306" x2="640" y2="306" stroke="${C.water}" stroke-width="2.5" stroke-dasharray="8 6"/>${lab(14, 300, 'groundwater 1–2 m', 'start', '#9fd7ff')}
+    <g transform="rotate(5.5 320 296)"><rect x="276" y="70" width="88" height="226" fill="#ece5d6" stroke="#a69c88" stroke-width="2"/>${Array.from({ length: 7 }, (_, i) => `<rect x="272" y="${88 + i * 29}" width="96" height="5" fill="#cfc6b3"/>${Array.from({ length: 5 }, (_, k) => `<rect x="${282 + k * 17}" y="${96 + i * 29}" width="9" height="16" rx="4" fill="#9a8f7b"/>`).join('')}`).join('')}<rect x="284" y="46" width="72" height="26" fill="#e4dccb" stroke="#a69c88" stroke-width="2"/><rect x="262" y="294" width="116" height="14" fill="#9a978f"/></g>
+    <line x1="320" y1="40" x2="320" y2="300" stroke="rgba(255,255,255,.4)" stroke-dasharray="4 5"/>${lab(330, 36, 'vertical')}
+    <rect x="0" y="286" width="640" height="5" fill="${C.grass}"/>${marker(392, 120, 1)}${lab(14, 352, 'soft clay')}`, 'Tilted tower on soft clay layers, with a high water table'),
+  agyag: (sv) => svgWrap(`${layer(270, 400, '#c7a15a', 'clayp')}
+    ${Array.from({ length: 14 }, (_, i) => `<path d="M${20 + i * 45} 270 l6 ${10 + (i % 3) * 6} l-4 8" stroke="#6b4f22" stroke-width="2" fill="none"/>`).join('')}
+    <circle cx="560" cy="70" r="30" fill="#f5c518" opacity=".9"/>
+    <rect x="130" y="170" width="300" height="100" fill="${C.wall}" stroke="#8d8576" stroke-width="2"/><path d="M118 172 L280 110 L442 172 Z" fill="#8a4f3a"/>
+    ${[160, 230, 330, 380].map(x => `<rect x="${x}" y="196" width="34" height="38" fill="#4b6274"/>`).join('')}
+    ${crackPath(jag(150, 255, 182, 196, 6, 5, 3), 1, 5)}${crackPath(jag(412, 255, 380, 196, 6, 5, 7), 1, 5)}
+    <rect x="124" y="270" width="312" height="22" fill="${C.conc}"/>
+    ${sv ? `<path d="M100 292 C 200 300 300 300 440 300 C 470 300 500 330 520 360" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 5" opacity=".7"/>${lab(530, 372, 'desiccation zone', 'start', '#ffe7a8')}` : ''}
+    <rect x="512" y="150" width="12" height="120" fill="#5a4232"/><circle cx="518" cy="140" r="40" fill="#2f5a3a"/><circle cx="500" cy="118" r="26" fill="#3d7049"/>
+    <rect x="0" y="266" width="640" height="5" fill="#7a8a3c"/>${marker(166, 190, 1)}${marker(518, 96, 2)}`, 'Single-storey house with cracked walls on dried-out clay, a tree nearby'),
+  losz: () => svgWrap(`${layer(270, 400, C.loess, 'loessp')}
+    <g transform="rotate(2.2 140 290)"><rect x="140" y="170" width="300" height="100" fill="${C.wall}" stroke="#8d8576" stroke-width="2"/><path d="M128 172 L290 110 L452 172 Z" fill="#8a4f3a"/>${[170, 240, 340, 390].map(x => `<rect x="${x}" y="196" width="34" height="38" fill="#4b6274"/>`).join('')}${crackPath(jag(350, 268, 404, 176, 8, 6, 5), 6, 1)}<rect x="134" y="270" width="312" height="26" fill="${C.conc}"/></g>
+    <path d="M440 300 L560 300" stroke="#8aa0b4" stroke-width="6"/><circle cx="470" cy="300" r="5" fill="${C.water}"/>${[0, 1, 2, 3, 4].map(i => `<path d="M${462 + i * 7} ${312 + i * 9} q3 6 0 10 q-3 -4 0 -10z" fill="${C.water}"/>`).join('')}
+    <path d="M400 300 C 440 360 520 370 560 330" fill="rgba(61,154,214,.25)" stroke="${C.water}" stroke-dasharray="5 4"/>
+    <rect x="0" y="266" width="640" height="5" fill="${C.grass}"/>${marker(470, 290, 1)}${marker(420, 160, 2)}${lab(14, 390, 'loess')}`, 'House settled at one corner on loess, with a leaking pipe next to the corner'),
+  fagy: (sv) => svgWrap(`${layer(250, 400, '#8d8a7c', 'clayp')}<rect x="0" y="238" width="640" height="14" fill="#eef3f6"/>
+    ${sv ? `<line x1="0" y1="300" x2="640" y2="300" stroke="#9fd7ff" stroke-width="2.5" stroke-dasharray="9 6"/>${lab(470, 318, 'frost line 0.8 m', 'start', '#9fd7ff')}` : ''}
+    ${Array.from({ length: 16 }, (_, i) => `<ellipse cx="${30 + i * 38}" cy="${262 + (i % 3) * 10}" rx="14" ry="2.6" fill="#cfefff" opacity=".9"/>`).join('')}
+    <g transform="rotate(-1.6 380 250)"><rect x="200" y="140" width="220" height="110" fill="#b9c3cc" stroke="#7f8c99" stroke-width="2"/><rect x="190" y="128" width="240" height="14" fill="#4b5560"/><rect x="236" y="168" width="148" height="82" fill="#6f7c88" stroke="#4b5560" stroke-width="2"/>${crackPath(jag(410, 248, 420, 150, 6, 4, 2), 1, 4)}<rect x="196" y="250" width="228" height="22" fill="${C.conc}"/></g>
+    <rect x="198" y="124" width="236" height="8" fill="#fff" opacity=".9"/>${marker(310, 200, 1)}${marker(110, 268, 2)}`, 'Unheated garage on a shallow foundation, ice lenses in the ground'),
+  hid: () => svgWrap(`<path d="M0 230 L80 230 L120 250 L520 250 L560 230 L640 230 L640 400 L0 400 Z" fill="${C.sand}"/><rect x="0" y="230" width="640" height="170" fill="url(#dotp)"/>
+    <path d="M120 250 L120 338 L520 338 L520 250 Z" fill="${C.water}" opacity=".85"/><path d="M130 318 Q 320 300 510 318" fill="none" stroke="#fff" stroke-dasharray="7 6" opacity=".6"/>
+    <path d="M120 338 L180 352 L300 362 L420 352 L520 338" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="8 5"/>${lab(330, 384, 'former bed level', 'middle', '#ffe7a8')}
+    ${[0, 1, 2].map(i => `<path d="M${160 + i * 120} 284 l40 0 m-8 -5 l8 5 l-8 5" stroke="#dff2ff" stroke-width="2.5" fill="none"/>`).join('')}
+    <rect x="0" y="196" width="250" height="12" fill="#5a6672"/><rect x="390" y="196" width="250" height="12" fill="#5a6672"/>
+    ${[0, 1, 2, 3, 4].map(i => `<path d="M${i * 50} 196 l25 -26 l25 26" fill="none" stroke="#7b8794" stroke-width="3"/>`).join('')}${[8, 9, 10, 11, 12].map(i => `<path d="M${i * 50 - 10} 196 l25 -26 l25 26" fill="none" stroke="#7b8794" stroke-width="3"/>`).join('')}
+    <rect x="220" y="208" width="26" height="130" fill="#9a8f7b"/><rect x="404" y="208" width="26" height="130" fill="#9a8f7b"/>
+    <g transform="rotate(14 330 340)"><rect x="318" y="226" width="26" height="114" fill="#9a8f7b"/></g><path d="M250 202 L300 300 L330 300" stroke="#5a6672" stroke-width="12" fill="none"/>
+    ${marker(330, 230, 1)}${marker(150, 300, 2)}${lab(14, 222, 'Douro')}`, 'Collapsed bridge span and a toppled pier in the flooded river'),
+  nicoll: () => svgWrap(`${layer(170, 400, C.clay, 'clayp')}${layer(330, 400, C.sand, 'dotp')}
+    <rect x="0" y="160" width="640" height="12" fill="#3a3d42"/>
+    <path d="M220 172 L420 172 L420 392 L220 392 Z" fill="#0f141a"/>
+    <path d="M420 172 L424 392" stroke="${C.conc}" stroke-width="10"/>${[210, 250, 290, 330].map(y => `<rect x="226" y="${y}" width="192" height="6" fill="#8aa0b4"/>`).join('')}
+    <path d="M220 172 C 236 240 268 290 290 392" stroke="${C.conc}" stroke-width="10" fill="none"/><path d="M190 172 C 210 240 250 300 280 392 L220 392 L220 172 Z" fill="${C.clay2}" opacity=".9"/>
+    <path d="M262 290 L330 270 L300 300" stroke="#8aa0b4" stroke-width="6" fill="none"/><path d="M250 250 L340 236 L320 262" stroke="#8aa0b4" stroke-width="6" fill="none"/>
+    ${crackPath(jag(120, 160, 200, 176, 5, 4, 9), 6, 2)}${lab(14, 196, 'soft marine clay')}${lab(430, 150, 'excavation approx. 30 m deep')}
+    ${marker(300, 252, 1)}${marker(150, 152, 2)}`, 'Collapsed strutted excavation in soft clay'),
+};
+
+/* ================= ÜGYEK ================= */
+const CASES = [
+  { id: 'transcona', t: 'The leaning grain elevator', where: 'Winnipeg, Canada · 1913', real: true, st: [3, 'Bearing resistance of shallow foundations', 'sikalapok-teherbirasszamitasa.vercel.app/en'],
+    clues: [['The site', 'A huge reinforced concrete grain elevator on a single 23.5 × 59.5 m raft. On its first filling, at 87.5 % of capacity, it settled 30 cm in an hour, and within a day it had tilted to about 27°.'],
+      ['The ground', 'Beneath the raft lies thick lake clay. The deeper layers are softer: their undrained shear strength is about 30 kPa.'],
+      ['The structure', 'The silo was hardly damaged; it rotated as a whole, like a rigid body. Next to the side that went down, the ground heaved up.'],
+      ['The back-analysis', 'The bearing resistance calculated with the undrained shear strength came out at about 307 kPa. The contact pressure actually acting at failure was about 297 kPa.']],
+    q1: ['What happened to the silo?', ['Bearing failure: the load reached the bearing resistance of the clay, and a slip surface formed beneath the raft', 'Consolidation settlement that built up over years', 'The reinforced concrete structure broke and tipped over', 'An earthquake shook the ground'], 0,
+      'Rotation to one side within a day, heaving ground, an intact structure: this is the fingerprint of bearing failure. Consolidation takes months or years, and a structural failure would have torn the silo apart.'],
+    q2: ['What would have prevented it?', ['A thicker, stiffer raft', 'Checking the bearing resistance with the undrained shear strength, or carrying the load down to the deeper bearing stratum', 'Stronger concrete in the silo walls', 'A taller silo with a smaller footprint'], 1,
+      'The stiffness of the raft and the strength of the concrete do not increase the bearing resistance of the ground. On soft clay under rapid loading, the undrained bearing resistance governs, and it has to be checked.'],
+    story: 'In 1914 the silo was tilted back: 14 piers were taken down to rock beneath the raised side, and the structure was brought back to vertical by about 3.7 m. It still works as a grain store today.',
+    lesson: 'The Transcona elevator became one of the most important confirmations of soil mechanics: the failure load back-calculated with the undrained shear strength hardly differed from the actual one.', facts: [['27°', 'tilt within a day'], ['297 kPa', 'contact pressure at failure'], ['3.7 m', 'raised back in 1914']] },
+  { id: 'lotus', t: 'The toppled tower block', where: 'Shanghai, China · 2009', real: true, st: [4, 'Stability of shallow foundations', 'sikalapokallekonysagvizsgalata.vercel.app/en'],
+    clues: [['The site', 'A 13-storey residential building, not yet handed over, fell onto its side in one piece at dawn. Its structure stayed almost intact.'],
+      ['The foundation', 'Prestressed concrete pipe piles, 33 m long and 40 cm in diameter. Beneath the building the piles broke near their heads.'],
+      ['The surroundings', 'On the south side of the building, about 7 m away, a 4.6 m deep excavation was being dug for an underground garage. The excavated soil was piled up on the north side, barely 1 m from the building, to a height of about 10 m.'],
+      ['The weather', 'It had rained for days beforehand. The plot lies on the bank of a creek, and the upper layers are soft, saturated clays. The building fell towards the excavation, to the south.']],
+    q1: ['What toppled the building?', ['The piles were too short, and the building slowly sank under its own weight', 'The soft ground under the spoil heap slipped and was squeezed sideways under the building: the piles were loaded laterally, and the building tipped towards the excavation', 'The building broke in two because of poor-quality concrete', 'An earthquake'], 1,
+      'The building rotated as a whole towards the excavation, and the piles broke at their heads. This was not slow settlement: the 10 m high spoil heap caused a general bearing failure in the soaked, soft clay, and the slipping soil was pushed under the building towards the excavation.'],
+    q2: ['What is the most important lesson?', ['A tower block may only be placed on a shallow foundation', 'Concrete must not be placed in the rain', 'No large spoil heaps next to buildings and excavations – and piles are also loaded by lateral ground movement', 'Longer piles are always needed'], 2,
+      'A pile carries vertical load well, but soil moving past it bends it sideways. On soft ground a spoil heap behaves like a slope: its stability should also have been verified.'],
+    story: 'According to the investigation, the excavated soil was piled up next to the building and the pit was dug on the other side. Later analyses found that after the rain an undrained bearing failure developed under the spoil heap, and the pressure of the slipping soil tipped the building over. One worker died.',
+    lesson: 'A “messy” construction site is a geotechnical issue too: the spoil heap is a load, the excavation is unloading, and together they add up in the worst possible place.', facts: [['13', 'storeys'], ['≈ 10 m', 'spoil heap next to the building'], ['4.6 m', 'deep pit on the far side']] },
+  { id: 'pisa', t: 'The leaning tower', where: 'Pisa, Italy · 1173–2001', real: true, st: [5, 'Settlement of shallow foundations', 'sikalapok-sullyedesszamitasa.vercel.app'],
+    clues: [['The history', 'Construction of the bell tower began in 1173, and the tilt appeared during construction. With two long pauses the work lasted nearly 200 years, and the builders tried to compensate by building the later storeys at an angle.'],
+      ['The ground', 'Beneath the tower lie soft, compressible layers of clay and silt, with groundwater 1–2 m below the surface. Under the south side the ground is slightly more compressible.'],
+      ['The foundation', 'A relatively shallow, ring-shaped foundation beneath a tall, slender tower with a mass of about 14 500 t.'],
+      ['The measurements', 'The tilt accelerated in the 20th century. In 1993 the foundation was inclined at 5.4°, and the top cornice overhung by 4.1 m.']],
+    q1: ['What causes the tilt?', ['A bearing failure that happened in a single day', 'The masonry crushed under the load', 'Uneven compression of the soft clay: the south side settled slightly more, and the tilt itself increased the load on that side', 'An earthquake'], 2,
+      'This is a slow process over centuries: differential settlement tilted the tower, and the centre of gravity of the leaning tower moved towards the lower side, putting even more load on the ground there. A tall, slender structure is especially sensitive to this.'],
+    q2: ['How was it stabilised between 1999 and 2001?', ['Soil was extracted from under the north side through inclined boreholes, so that this side would settle slightly', 'The south side was raised by grouting', 'The whole tower was placed on piles', 'The upper storeys were dismantled and rebuilt'], 0,
+      'Controlled settlement of the opposite side is the least intrusive intervention: the tower received no new load, and the weaker south side was not disturbed.'],
+    story: 'Soil was extracted from dozens of inclined boreholes under the north side, reducing the tilt by about 0.5°. The tower was closed in 1990 and reopened in 2001 after the work.',
+    lesson: 'With settlement it is not just the amount that matters: differential settlement and how easily the structure tips decide together whether there will be trouble.', facts: [['5.4°', 'tilt in 1993'], ['4.1 m', 'overhang at the top'], ['≈ 0.5°', 'reduction by soil extraction']] },
+  { id: 'agyag', t: 'Cracks after the drought', where: 'Great Hungarian Plain · typical Hungarian case', real: false, st: [6, 'Foundations on unfavourable ground', 'kedvezotlen-altalaj.vercel.app/en'],
+    clues: [['The site', 'A single-storey family house on 0.8 m deep strip footings, on yellow, high-plasticity clay. After a summer of drought, diagonal cracks appeared at the corners and the doors stick.'],
+      ['The garden', 'A row of 15-year-old poplars stands 4 m from the corner of the house.'],
+      ['The seasons', 'In autumn, after the rains, the cracks partly closed, and the following summer they opened again.'],
+      ['The survey', 'The corners settled the most, the middle of the long walls the least. The difference is 2–3 cm.']],
+    q1: ['What causes the cracks?', ['The clay shrank under the edges of the house as it dried out in summer, especially towards the trees, and it swells again in the wet season', 'Bearing failure under the house', 'Frost heave at the corners', 'Thermal expansion of the masonry'], 0,
+      'Expansive clay changes its volume together with its water content. The 0.8 m deep foundation lies within the drying zone, and the tree roots dry the ground out even deeper. Recurring seasonal movement is typical of this soil.'],
+    q2: ['What is the lasting solution?', ['Grouting the ground around the house', 'Plastering over the cracks and repainting', 'Taking the foundation below the desiccation zone, for example by mass concrete underpinning or micropiles, and keeping trees away from the house', 'Planting more trees around the house'], 2,
+      'The movement is caused by the drying zone. As long as the foundation stays within it, the cracks come back every dry summer. Grouting and plastering do not remove the cause.'],
+    story: 'This kind of damage appears on a large scale in drought years in the clay areas of the Great Plain. The solution is always to get the foundation out of the zone where the water content changes with the seasons.',
+    lesson: 'On expansive clay the frost line is not deep enough: the foundation level must be below the desiccation zone, and the water uptake of trees must also be taken into account.', facts: [['0.8 m', 'original foundation depth'], ['4 m', 'distance to the trees'], ['2–3 cm', 'differential settlement']] },
+  { id: 'losz', t: 'A corner that sank in a week', where: 'Transdanubian loess plateau · typical Hungarian case', real: false, st: [6, 'Foundations on unfavourable ground', 'kedvezotlen-altalaj.vercel.app/en'],
+    clues: [['The site', 'A single-storey house, standing for twenty years on 1.0 m deep strip footings on loess. Within a week one corner of the house settled 8 cm, and the wall cracked diagonally.'],
+      ['Background', 'Before the settlement, the water pipe in the garden burst, and water leaked next to the corner for days.'],
+      ['The ground', 'Dry loess stands even in vertical faces. Crumbled by hand it is loose and porous, and riddled with tiny vertical channels.'],
+      ['The laboratory', 'The sample was soaked under load: it compressed suddenly and by a large amount.']],
+    q1: ['What happened to the corner?', ['The loess swelled and lifted the rest of the house', 'The water soaking in dissolved the bonds holding the grains together, and the loess collapsed beneath the corner', 'Frost heave', 'Overloading caused a bearing failure'], 1,
+      'Collapsible loess is strong when dry, but its loose skeleton collapses when it is soaked. Sudden settlement concentrated around the water source points to this, and the laboratory test confirms it.'],
+    q2: ['What needs to be done?', ['Eliminating the water source, draining rainwater away and strengthening the corner by mass concrete underpinning or micropiles', 'Tying the walls together with steel straps; there is no need to deal with the ground', 'Waiting until the loess swells back by itself', 'Raising the groundwater level'], 0,
+      'First the path of the water has to be cut off, because the collapse can continue until then. After that, the foundation has to be taken below the soaked, collapsed zone.'],
+    story: 'In loess areas, a burst pipe, poor rainwater drainage or overwatering the garden often causes sudden damage, decades later, to a house that had been fine until then.',
+    lesson: 'On loess, water is the greatest enemy: drainage and watertight paving are part of the foundation.', facts: [['8 cm', 'settlement in a week'], ['1.0 m', 'foundation depth'], ['20 years', 'without damage before']] },
+  { id: 'fagy', t: 'The jammed garage door', where: 'Budapest area · typical Hungarian case', real: false, st: [7, 'External effects on shallow foundations', 'sikalapokaterohatasok.vercel.app'],
+    clues: [['The site', 'An unheated, lightweight garden garage on 40 cm deep strip footings in silty clay. At the end of January the up-and-over door jammed, and a crack opened in the corner.'],
+      ['In spring', 'The door started working again by itself, and the crack partly closed.'],
+      ['The water', 'The drain next to the garage got blocked in winter, and the water ran down beside the wall.'],
+      ['On digging', 'Horizontal ice lenses were found in the ground, 10–30 cm deep.']],
+    q1: ['What lifted the garage?', ['Summer drying of the swelling clay', 'Frost heave: ice lenses grew in the moist, silty soil above the frost line and lifted the foundation', 'Collapse', 'Bearing failure'], 1,
+      'It moved in winter and recovered in spring: this is frost. Silty soil draws water up into the frozen zone, where it freezes into ice lenses and lifts whatever is above it.'],
+    q2: ['What would the correct foundation have been?', ['A shallower foundation, so that less soil freezes beneath it', 'A lighter roof on the garage', 'Spreading gravel on the surface', 'Foundation level below the frost line – in Budapest at least 0.8 m – and draining the water away from the wall'], 3,
+      'Ice lenses cannot lift a foundation placed below the frost line. Frost lifts a light building even more easily, so weight is no protection.'],
+    story: 'Unheated outbuildings, fence footings and garden retaining walls are the most common victims: under a heated house the ground freezes less deeply, but beside them it freezes to the full depth.',
+    lesson: 'The frost line applies to every foundation, and to light buildings in particular. Silt is the most frost-susceptible soil.', facts: [['40 cm', 'foundation depth'], ['0.8 m', 'the frost line'], ['10–30 cm', 'depth of the ice lenses']] },
+  { id: 'hid', t: 'The collapsed bridge', where: 'Entre-os-Rios, Portugal · 2001', real: true, st: [7, 'External effects on shallow foundations', 'sikalapokaterohatasok.vercel.app'],
+    clues: [['The site', 'A steel bridge over the Douro, built in 1886. On the evening of 4 March 2001 the fourth pier collapsed, and a bus and three cars fell into the river.'],
+      ['The flood', 'The winter brought months of flooding: for three months the discharge was above 2000 m³/s.'],
+      ['The riverbed', 'From the 1970s, large quantities of sand were extracted from the river. Next to the pier, the riverbed deepened by a total of about 13 m between 1913 and 1989.'],
+      ['The pier', 'Damage to the pier foundation had already been visible earlier.']],
+    q1: ['What brought the pier down?', ['Fatigue of the steel structure', 'Traffic overloaded the bridge', 'An earthquake', 'Scour: the flood carried away the sediment around the pier, and in a riverbed already deepened by sand extraction the ground ran out from under the pier'], 3,
+      'Over decades the deepening riverbed took away the embedment of the pier foundation, and the flood washed out the rest. The pier failed from its foundation, not from the superstructure.'],
+    q2: ['What protects against scour?', ['Taking the pier foundations below the expected scour depth, protecting the riverbed with rock armour and surveying the riverbed regularly', 'Rebuilding the bridge from lighter materials', 'Strengthening only the abutments', 'Extracting more sand to deepen the riverbed'], 0,
+      'Scour is countered by foundation depth and by protecting the riverbed. Changes in the riverbed have to be monitored, because sand extraction and floods alter it year by year.'],
+    story: '59 people died in the disaster. The minister of transport resigned the next day. The new bridge, 7 m further up the river, was opened in 2002.',
+    lesson: 'The movement of water is a load on foundations: a foundation standing in a riverbed has to be designed against scour just as it is for vertical load.', facts: [['1886', 'year built'], ['≈ 13 m', 'drop in bed level'], ['59', 'victims']] },
+  { id: 'nicoll', t: 'The collapsed excavation', where: 'Singapore · 2004', real: true, st: [9, 'Excavation support', 'munkaterhatarolasok.vercel.app'],
+    clues: [['The site', 'Construction of a metro station and tunnel: a strutted excavation about 30 m deep in soft marine clay, next to a busy main road.'],
+      ['The support system', 'The walls of the excavation were supported by steel struts and walings. The collapse started with the failure of a waling–strut connection and then spread like a chain reaction.'],
+      ['The measurements', 'Weeks earlier, the instruments measuring the wall movements had shown displacements larger than allowed – and the alarm level was raised.'],
+      ['The design', 'The undrained behaviour of the soft clay was modelled in a way that gave a higher shear strength than the real one.']],
+    q1: ['What caused the collapse?', ['Hydraulic failure at the base of the excavation', 'An undersized connection in the strutting failed: the wrongly calculated, too-low forces and the ignored measurements together led to the chain-reaction collapse', 'An earthquake', 'The load of the traffic on the surface'], 1,
+      'The weak point was the waling–strut connection, and because of the over-optimistic soil model the forces calculated for the wall and the struts were lower than the real ones. The measurements signalled the trouble, but the limit was raised instead of stopping the work.'],
+    q2: ['What is the main lesson?', ['The alarm level has to be raised if the measured value exceeds it', 'Fewer instruments are needed, so that they do not disturb the work', 'A deeper excavation has to be dug', 'Monitoring is part of the design: if the measured movement exceeds the limit, you have to stop and redesign'], 3,
+      'The observational method only protects you if decisions are based on the measured data. The safety of an excavation is the joint responsibility of design, construction and monitoring.'],
+    story: 'Four people died. The committee of inquiry found human and organisational errors. The route of the metro line was changed, and the station was built elsewhere.',
+    lesson: 'In a deep excavation, monitoring is not paperwork: wall movement is the first sign, and it has to be taken seriously.', facts: [['≈ 30 m', 'excavation depth'], ['4', 'victims'], ['weeks', 'earlier, the readings gave warning']] },
+];
+
+/* ================= ÁLLAPOT ================= */
+const KEY = 'alap-helyszin-v1'; const blank = () => ({ cases: {}, crack: {}, open: null });
+let S = blank(); try { const o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && typeof o === 'object') S = { ...blank(), ...o }; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const cs = (id) => (S.cases[id] = S.cases[id] || { clues: 1, w1: [], w2: [], ok1: false, ok2: false, p1: 0, p2: 0 });
+const pts = () => Object.values(S.cases).reduce((a, c) => a + (c.p1 || 0) + (c.p2 || 0), 0) + Object.values(S.crack).reduce((a, c) => a + (c.p || 0), 0);
+const solved = (id) => { const c = S.cases[id]; return !!(c && c.ok1 && c.ok2); };
+const RANKS = [[0, 'Trainee'], [15, 'Scene investigator'], [35, 'Detective'], [55, 'Inspector'], [70, 'Chief inspector']];
+const MAXP = CASES.length * 8 + 6 * 2;
+function rank() { const p = pts(); let i = 0; RANKS.forEach((r, k) => { if (p >= r[0]) i = k; }); return { p, i, name: RANKS[i][1], next: RANKS[i + 1] }; }
+function renderRank() { const r = rank(); $('#rk').textContent = r.name; $('#rkTop').textContent = r.name; $('#ptTop').textContent = `${r.p} pt${r.p === 1 ? '' : 's'}`; $('#stPts').textContent = r.p; $('#stCases').textContent = `${CASES.filter(c => solved(c.id)).length}/${CASES.length}`; $('#stCrack').textContent = `${Object.values(S.crack).filter(c => c.ok).length}/6`;
+  const lo = RANKS[r.i][0], hi = r.next ? r.next[0] : MAXP; $('#rkBar').style.width = Math.min(100, (r.p - lo) / Math.max(1, hi - lo) * 100) + '%'; $('#rkNext').textContent = r.next ? `Next rank: ${r.next[1]} (${r.next[0]} points).` : `The highest rank. ${r.p} points out of ${MAXP}.`; }
+
+/* ================= ÜGYTÁBLA ================= */
+function renderBoard() {
+  $('#board').innerHTML = CASES.map((c, i) => { const st = S.cases[c.id]; const sv = solved(c.id); const p = st ? (st.p1 || 0) + (st.p2 || 0) : 0;
+    return `<button type="button" class="case" data-id="${c.id}" aria-current="${S.open === c.id}"><span class="tent">${tent(i + 1)}</span><div class="thumb">${SCENES[c.id](sv)}</div><div class="bd"><div class="t">${c.t}</div><div class="m">${c.where}</div><div class="ft"><span class="tagreal${c.real ? ' real' : ''}">${c.real ? 'real case' : 'typical case'}</span><span class="tagreal">Lecture ${c.st[0]}</span><span class="st${sv ? ' ok' : ''}">${sv ? `solved · ${p} pt${p === 1 ? '' : 's'}` : st ? 'in progress' : 'open'}</span></div></div></button>`; }).join('');
+}
+$('#board').addEventListener('click', (e) => { const b = e.target.closest('.case'); if (!b) return; S.open = b.dataset.id; save(); renderBoard(); renderFile(); setTimeout(() => $('#file').scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); });
+
+/* ================= ÜGY LAPJA ================= */
+const scoreQ1 = (st) => Math.max(1, 5 - (st.clues - 1) - 2 * st.w1.length);
+function renderFile() {
+  const host = $('#file'); const c = CASES.find(x => x.id === S.open); if (!c) { host.innerHTML = ''; return; }
+  const st = cs(c.id), n = CASES.indexOf(c) + 1;
+  const clues = c.clues.map(([h, p], i) => i < st.clues ? `<div class="clue"><span class="n">${tent(i + 1)}</span><div><h4>${h}</h4><p>${p}</p></div></div>` : `<div class="clue locked"><span class="n" style="opacity:.35">${tent(i + 1)}</span><div><h4>Clue ${i + 1}</h4><p>Still locked.</p></div></div>`).join('');
+  const more = st.clues < c.clues.length && !st.ok1 ? `<button class="btn" type="button" id="moreClue">Next clue (−1 point)</button>` : '';
+  const optsH = (q, wrong, ok, key) => `<div class="opts">${q[1].map((o, k) => `<button type="button" class="opt${ok && k === q[2] ? ' ok' : wrong.includes(k) ? ' bad' : ''}" data-q="${key}" data-k="${k}"${ok ? ' disabled' : ''}><span class="k">${'ABCD'[k]}</span><span class="t">${o}</span></button>`).join('')}</div>`;
+  let right = `<div class="q${st.ok1 ? ' done' : ''}"><h4>Question 1 · the culprit<span class="pts">${st.ok1 ? `+${st.p1} pt${st.p1 === 1 ? '' : 's'}` : ''}</span></h4><p class="qq">${c.q1[0]}</p>${optsH(c.q1, st.w1, st.ok1, 1)}${st.ok1 ? `<p class="fb ok"><b>Got it.</b> ${c.q1[3]}</p>` : st.w1.length ? '<p class="fb bad"><b>That is not the culprit.</b> Look at the clues again (−2 points).</p>' : ''}</div>`;
+  if (st.ok1) right += `<div class="q${st.ok2 ? ' done' : ''}"><h4>Question 2 · prevention<span class="pts">${st.ok2 ? `+${st.p2} pt${st.p2 === 1 ? '' : 's'}` : ''}</span></h4><p class="qq">${c.q2[0]}</p>${optsH(c.q2, st.w2, st.ok2, 2)}${st.ok2 ? `<p class="fb ok"><b>That’s right.</b> ${c.q2[3]}</p>` : st.w2.length ? '<p class="fb bad"><b>Not this one.</b> Try again.</p>' : ''}</div>`;
+  if (st.ok1 && st.ok2) right += `<div class="verdict"><span class="stamp">Case closed</span><h4>What really happened?</h4><p>${c.story}</p><div class="facts">${c.facts.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('')}</div><h5>Lesson</h5><p>${c.lesson}</p><div class="btns"><a class="btn" href="${U(c.st[2])}" target="_blank" rel="noopener">Lecture ${c.st[0]}: ${c.st[1]}${/\/en$/.test(c.st[2]) ? '' : ' (in Hungarian)'} ${ARROW}</a>${nextCase(c) ? `<button class="btn pri" type="button" data-next="${nextCase(c).id}">Next case</button>` : ''}</div></div>`;
+  host.innerHTML = `<div class="file"><div class="left"><div class="ftitle"><div class="k"><span>Case ${n}</span><span class="tagreal${c.real ? ' real' : ''}">${c.real ? 'real case' : 'typical case'}</span><span>${c.where}</span></div><h3>${c.t}</h3></div><div class="scene">${SCENES[c.id](st.ok1)}<span class="cap">sketch · the yellow markers show where the clues are</span></div></div><div class="right"><div class="clues">${clues}</div><div class="btns">${more}</div>${right}</div></div>`;
+  const mb = $('#moreClue'); if (mb) mb.addEventListener('click', () => { st.clues++; save(); renderFile(); });
+  $$('.opt', host).forEach(b => b.addEventListener('click', () => { const k = +b.dataset.k, q = +b.dataset.q; const Q = q === 1 ? c.q1 : c.q2;
+    if (k === Q[2]) { if (q === 1) { st.ok1 = true; st.p1 = scoreQ1(st); } else { st.ok2 = true; st.p2 = st.w2.length ? 1 : 3; } }
+    else { const w = q === 1 ? st.w1 : st.w2; if (!w.includes(k)) w.push(k); }
+    save(); renderFile(); renderBoard(); renderRank(); }));
+  const nb = host.querySelector('[data-next]'); if (nb) nb.addEventListener('click', () => { S.open = nb.dataset.next; save(); renderBoard(); renderFile(); $('#file').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+}
+const nextCase = (c) => { const i = CASES.indexOf(c); for (let k = 1; k <= CASES.length; k++) { const x = CASES[(i + k) % CASES.length]; if (!solved(x.id)) return x; } return null; };
+
+/* ================= REPEDÉSOLVASÓ ================= */
+const MODES = [
+  { id: 'R', t: 'The right end settled' }, { id: 'L', t: 'The left end settled' }, { id: 'S', t: 'The middle settled (sagging)' }, { id: 'H', t: 'The ends settled, or the middle rose (hogging)' },
+];
+const modeIcon = (id) => { const pts = { R: [[10, 20], [60, 20], [110, 34]], L: [[10, 34], [60, 20], [110, 20]], S: [[10, 18], [60, 34], [110, 18]], H: [[10, 34], [60, 18], [110, 34]] }[id];
+  const d = pts.map((p, i) => (i ? 'L' : 'M') + p.join(' ')).join(' ');
+  return `<svg viewBox="0 0 120 46" aria-hidden="true"><path d="M10 20 L110 20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" opacity=".4"/><path d="${id === 'S' || id === 'H' ? `M10 ${pts[0][1]} Q60 ${id === 'S' ? 50 : 2} 110 ${pts[2][1]}` : d}" stroke="#d8432f" stroke-width="4" fill="none" stroke-linecap="round"/>${id === 'R' ? '<path d="M110 24 v12 m-4 -5 l4 5 l4 -5" stroke="currentColor" stroke-width="1.6" fill="none"/>' : id === 'L' ? '<path d="M10 24 v12 m-4 -5 l4 5 l4 -5" stroke="currentColor" stroke-width="1.6" fill="none"/>' : id === 'S' ? '<path d="M60 26 v12 m-4 -5 l4 5 l4 -5" stroke="currentColor" stroke-width="1.6" fill="none"/>' : '<path d="M60 26 v-12 m-4 5 l4 -5 l4 5" stroke="currentColor" stroke-width="1.6" fill="none"/>'}</svg>`; };
+// homlokzat: 2 szint, ablakok; a repedéseket a süllyedési alak szabja meg
+function facade(mode, v) {
+  const W = 640, H = 360, x0 = 60, x1 = 580, gy = 300, y0 = 70; const wins = []; for (let f = 0; f < 2; f++) for (let c = 0; c < 6; c++) wins.push([x0 + 38 + c * 82, y0 + 34 + f * 108]);
+  let cracks = '';
+  const diag = (cx, up, len = 120, seed = 1, wTop = 6, wBot = 1) => { const dx = up * len * 0.62; return crackPath(jag(cx - dx / 2, gy - 8, cx + dx / 2, gy - 8 - len, 7, 6, seed), wBot, wTop); };
+  const vert = (cx, wTop, wBot, seed) => crackPath(jag(cx, gy - 6, cx + 6, y0 + 14, 9, 7, seed), wBot, wTop);
+  if (mode === 'R') { cracks = diag(470 - v * 30, +1, 150, 3, 6, 2) + diag(520, +1, 100, 5, 4, 1); }
+  if (mode === 'L') { cracks = diag(170 + v * 30, -1, 150, 4, 6, 2) + diag(120, -1, 100, 6, 4, 1); }
+  if (mode === 'S') { cracks = vert(318 + v * 20, 1, 7, 8) + diag(150, +1, 110, 2, 3, 1) + diag(490, -1, 110, 9, 3, 1); }
+  if (mode === 'H') { cracks = vert(318 - v * 20, 7, 1, 11) + diag(140, -1, 120, 12, 5, 1) + diag(500, +1, 120, 13, 5, 1); }
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Cracked façade"><rect width="${W}" height="${H}" fill="#dfe6ec"/><rect x="0" y="${gy}" width="${W}" height="${H - gy}" fill="#a89a80"/><rect x="0" y="${gy}" width="${W}" height="${H - gy}" fill="url(#dp2)"/>
+    <defs><pattern id="dp2" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.1" fill="rgba(60,40,20,.35)"/></pattern><pattern id="brick" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 12h24M0 6h24M12 0v6M0 6v6M24 6v6" stroke="rgba(120,100,80,.18)" stroke-width="1" fill="none"/></pattern></defs>
+    <rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${gy - y0}" fill="#efe6d6"/><rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${gy - y0}" fill="url(#brick)"/><rect x="${x0 - 12}" y="${y0 - 16}" width="${x1 - x0 + 24}" height="16" fill="#6a6f75"/>
+    ${wins.map(([x, y]) => `<rect x="${x}" y="${y}" width="44" height="56" fill="#4b6274" stroke="#3a4a58" stroke-width="2"/>`).join('')}<rect x="${x0 + 38 + 2 * 82}" y="${gy - 80}" width="44" height="80" fill="#6a4a36"/>
+    <rect x="${x0 - 6}" y="${gy}" width="${x1 - x0 + 12}" height="22" fill="#b9b6ae"/>${cracks}</svg>`;
+}
+const ROUNDS = [['R', 0], ['S', 0], ['L', 1], ['H', 0], ['R', 1], ['H', 1]];
+const EXPL = { R: 'Diagonal cracks rise towards the larger settlement – here up to the right. The right-hand part of the wall moved down relative to the left-hand part.',
+  L: 'Diagonal cracks rise towards the larger settlement – here up to the left. The left-hand part of the wall settled more.',
+  S: 'In the middle the crack is wider at the bottom: the bottom fibre of the wall is in tension, like that of a sagging beam. The diagonal cracks rise towards the middle.',
+  H: 'In the middle the crack is wider at the top: the top fibre of the wall is in tension. The diagonal cracks rise towards the corners. Typical of houses on shrinking clay, where the ground dries out under the corners.' };
+let cr = 0;
+function renderCrack() {
+  const host = $('#crack'); const [m, v] = ROUNDS[cr]; const st = S.crack[cr] || {};
+  host.innerHTML = `<div class="facade"><div class="pic">${facade(m, v)}</div><div class="bar"><span>Façade ${cr + 1} of 6</span><span class="dots">${ROUNDS.map((_, i) => `<i class="${(S.crack[i] || {}).ok ? 'ok' : (S.crack[i] || {}).w ? 'bad' : ''}${i === cr ? ' cur' : ''}"></i>`).join('')}</span></div></div>
+    <div class="side"><div class="modes">${MODES.map(o => `<button type="button" class="mode${st.ok && o.id === m ? ' ok' : (st.w || []).includes(o.id) ? ' bad' : ''}" data-m="${o.id}"${st.ok ? ' disabled' : ''}>${modeIcon(o.id)}<span>${o.t}</span></button>`).join('')}</div>
+    ${st.ok ? `<p class="fb ok"><b>Correct${st.p === 2 ? ', +2 points' : ', +1 point'}.</b> ${EXPL[m]}</p>` : (st.w || []).length ? '<p class="fb bad"><b>Not this one.</b> Look at which way the diagonal cracks rise, and where the middle crack is wider.</p>' : ''}
+    <div class="rule"><p><b>Rule of thumb:</b> a diagonal crack rises towards the larger settlement; a vertical crack is wider where the wall is in tension – at the bottom for a sagging shape, at the top for a hogging one.</p></div>
+    <div class="btns"><button class="btn" type="button" id="crPrev"${cr === 0 ? ' disabled' : ''}>Previous</button><button class="btn pri" type="button" id="crNext"${cr === ROUNDS.length - 1 ? ' disabled' : ''}>Next façade</button></div></div>`;
+  $$('.mode', host).forEach(b => b.addEventListener('click', () => { const s = S.crack[cr] = S.crack[cr] || { w: [] }; if (b.dataset.m === m) { s.ok = true; s.p = (s.w || []).length ? 1 : 2; } else { s.w = [...new Set([...(s.w || []), b.dataset.m])]; } save(); renderCrack(); renderRank(); }));
+  $('#crPrev').addEventListener('click', () => { cr = Math.max(0, cr - 1); renderCrack(); }); $('#crNext').addEventListener('click', () => { cr = Math.min(ROUNDS.length - 1, cr + 1); renderCrack(); });
+}
+
+renderRank(); renderBoard(); renderFile(); renderCrack();
+window.__hely = { CASES, ROUNDS };
+
+/* nyelvváltó: a választás megmarad (alap-lang), a másik nyelvű oldal ugyanott nyílik meg (alap-pos) */
+(() => {
+  const sw = $('#langSw'), KEY = 'alap-pos'; const hh = () => { const t = $('.top'); return t ? t.offsetHeight : 0; };
+  if (sw) sw.addEventListener('click', () => {
+    try { localStorage.setItem('alap-lang', EN ? 'hu' : 'en'); } catch (e) {}
+    const H0 = hh(); let best = null; document.querySelectorAll('main [id]').forEach((n) => { if (n.closest('svg')) return; const r = n.getBoundingClientRect(); if (r.height && r.top <= H0 + 1 && r.bottom > H0) best = n; });
+    try { sessionStorage.setItem(KEY, JSON.stringify({ id: best ? best.id : '', off: best ? H0 - best.getBoundingClientRect().top : 0, y: scrollY, t: Date.now() })); } catch (e) {}
+    sw.setAttribute('href', (EN ? './' : 'en') + (location.hash || ''));
+  });
+  let p = null; try { p = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
+  if (p && Date.now() - p.t < 20000) { if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    const go = () => { const n = p.id && document.getElementById(p.id); const y = n ? n.getBoundingClientRect().top + scrollY - hh() + p.off : p.y; scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
+    requestAnimationFrame(go); addEventListener('load', () => { go(); setTimeout(go, 600); }, { once: true }); }
+})();
+
+const GUARD = (() => {
+  const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
+  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead, .lead, main .opt .t, main .mode span';
+  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead, .lead';
+  const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
+  const TERMS = ['soil and structure', 'bearing stratum', 'groundwater conditions', 'differential settlement', 'differential settlements', 'overall stability', 'ultimate limit state', 'serviceability limit state', 'soft lens', 'organic soil', 'organic clay', 'collapsible loess', 'expansive clay', 'caisson foundations', 'piled raft', 'deepened shallow foundation', 'design project', 'Tower of Pisa'];
+  const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
+  const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
+  const NUMW = EN ? /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]ourteen|[Ff]irst|[Ss]econd|[Tt]hird|[Ff]ourth|[Bb]oth|[Aa]ll|[Ss]everal|[Aa] few))(?=\s\S)\s/g : /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  function textPass(s) {
+    if (!/[ \-–·]/.test(s)) return s;
+    s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
+    s = s.replace(/ ([=≤≥≈→←×±<>⇒↔]) /g, NB + '$1' + NB);
+    s = s.replace(/([\p{N}\p{L})\]′″°²³]) ([+−]) (?=[\p{N}\p{L}(])/gu, '$1' + NB + '$2' + NB);
+    s = s.replace(/(^|[(\[„])([=≤≥≈<>±~]) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/ · (?=(\S+))/g, (m, nxt) => { const w = nxt.replace(/^[(„"]/, ''); if (/^\p{L}{3,}/u.test(w) && !MULT_SYM.test(w)) return m; return NB + '·' + NB; });
+    s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
+    s = s.replace(/(\S) ([–—]) /g, '$1' + NB + '$2 ');   // a gondolatjel nem kezdhet sort
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.|e\.g\.|i\.e\.|approx\.|cf\.|No\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“‘])(a|an|the|A|An|The|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(NUMW, '$1$2' + NB);
+    s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    return s;
+  }
+  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|the|A|An|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[,.]\\d+)?\\.?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
+    if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
+    const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
+    const me = / ([=≤≥≈→←×±<>⇒+−/]) $/.exec(a.nodeValue); if (me && /^\S/.test(b.nodeValue)) a.nodeValue = a.nodeValue.slice(0, -3) + NB + me[1] + NB; } }
+  function bindPositions(full, cpl = 70) {
+    const bind = new Set(); const segMax = Math.max(14, Math.min(38, 0.42 * cpl)), parMax = Math.max(10, Math.min(24, 0.30 * cpl));
+    const mark = (a, b) => { for (let i = a; i < b; i++) if (full[i] === ' ') bind.add(i); };
+    const sepRx = / · |; | – /g; let last = 0, m, lastSep = ''; const segs = [];
+    while ((m = sepRx.exec(full))) { segs.push([last, m.index, lastSep, m[0]]); last = m.index + m[0].length; lastSep = m[0]; } segs.push([last, full.length, lastSep, '']);
+    if (segs.length > 1) for (const [a, b, before, after] of segs) { const t = full.slice(a, b).replace(/[\u2060\u00AD]/g, '').trim(); const dashOnly = (before === ' – ' || before === '') && (after === ' – ' || after === '') && (before || after); const lim = dashOnly ? Math.min(22, segMax) : segMax; if (t.length > 0 && t.length < lim) mark(a, b); }
+    const pr = /\(([^()]{1,30})\)/g; while ((m = pr.exec(full))) { if (m[0].replace(/[\u2060\u00AD]/g, '').length <= parMax) mark(m.index, m.index + m[0].length); }
+    termRx.lastIndex = 0; while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    return bind;
+  }
+  function textNodes(root) { const out = []; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) { let p = n.parentNode; while (p && p !== root) { if (SKIP.has(p.nodeName)) return NodeFilter.FILTER_REJECT; p = p.parentNode; } return NodeFilter.FILTER_ACCEPT; } }); let n; while ((n = w.nextNode())) out.push(n); return out; }
+  let hyph = null; const done = new WeakMap();
+  function processBlock(el) {
+    if (!el.isConnected) return; if (el.closest('svg')) return; const cur = el.textContent; if (done.get(el) === cur) return;
+    const nodes = textNodes(el); for (const n of nodes) { const v = textPass(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; } crossPass(nodes);
+    const full = nodes.map(n => n.nodeValue).join(''); const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const cpl = el.clientWidth > 40 ? el.clientWidth / (fs * 0.52) : 70;
+    const bind = bindPositions(full, cpl);
+    if (bind.size) { let off = 0; for (const n of nodes) { const v = n.nodeValue; let o = '', ch = false; for (let i = 0; i < v.length; i++) { if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i]; } off += v.length; if (ch) n.nodeValue = o; } }
+    if (hyph && el.matches(HYPH)) { for (const n of textNodes(el)) { if (n.parentElement && n.parentElement.closest(NOHY) && n.parentElement.closest(NOHY) !== el) continue; const parts = n.nodeValue.split(/( )/); let ch = false;
+      for (let i = 0; i < parts.length; i += 2) { const t = parts[i]; if (!t || !/\p{L}{6,}/u.test(t)) continue; const clean = t.replace(/[\u00AD\u200B]/g, ''); let hh;
+        if (t.includes(WJ)) { const vis = clean.replace(/[\u2060]/g, ''); if (vis.length <= 16 || /^\(.*\)[.,;:!?]*$/.test(vis)) continue; const k = Math.max(clean.lastIndexOf('\u00A0'), clean.lastIndexOf(WJ)); const tail = clean.slice(k + 1); if (!/\p{L}{6,}/u.test(tail)) continue; hh = clean.slice(0, k + 1) + hyph(tail); } else hh = hyph(clean);
+        hh = hh.replace(/\u200B/g, ''); if (hh !== t) { parts[i] = hh; ch = true; } } if (ch) n.nodeValue = parts.join(''); } }
+    done.set(el, el.textContent);
+  }
+  let obs = null, pend = new Set(), sched = false;
+  function observe() { obs.observe(document.body, { childList: true, subtree: true, characterData: true }); }
+  function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
+  function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
+  function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
+    const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+  return { start, run };
+})();
+
+/* RAG3 – lyukas sorkizárt blokk tartaléka (formázás skill): (1) ha a szép tördelés (text-wrap: pretty) lyukas,
+   előbb sima tördeléssel (text-wrap: wrap, .twr) próbálja – a blokk sorkizárt marad; (2) csak ha így is lyukas,
+   balra zárt lesz (.rag). Az összetartozó egységek (NBSP/U+2060 kötések) érintetlenek maradnak.
+   Idempotens: a döntést szélesség + szöveg szerint megjegyzi, ismételt futáskor nem mér újra. */
+const RAG3 = (() => {
+  try { const st = document.createElement('style'); st.textContent = '.twr{text-wrap:wrap!important}'; document.head.appendChild(st); } catch (e) {}
+  const memo = new WeakMap();
+  const sig = (el) => el.textContent;   // a teljes szöveg (az elválasztás után is újramér)
+  function bad(el, strict) {
+    const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return false;
+    let lastTop = -1e9; for (const r of rs) if (r.width && r.top > lastTop) lastTop = r.top; let big = 0, mid = 0;
+    // sima tördelésnél (strict): egy nem utolsó, nagyon rövid sor (pl. hosszú, nem törhető képlet előtt) is rossz – a sorokat
+    // függőleges átfedés szerint vonjuk össze, így az alsó/felső index nem számít külön sornak; <br>-es blokknál nem vizsgáljuk
+    if (strict && !el.querySelector('br')) { const L = []; for (const r of rs) { if (!r.width || !r.height) continue; let l = L.find((q) => Math.min(q.b, r.bottom) - Math.max(q.t, r.top) > 0.5 * Math.min(q.b - q.t, r.height));
+      if (!l) L.push({ t: r.top, b: r.bottom, l: r.left, r: r.right }); else { l.t = Math.min(l.t, r.top); l.b = Math.max(l.b, r.bottom); l.l = Math.min(l.l, r.left); l.r = Math.max(l.r, r.right); } }
+      L.sort((a, b) => a.t - b.t); for (let i = 0; i < L.length - 1; i++) if (L[i].r - L[i].l < el.clientWidth * 0.35) return true; }
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { const c = t[i]; if (c !== ' ' && c !== '\u00A0') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
+    return big > 0 || mid >= 2;
+  }
+  function check(el) {
+    if (!el || !el.isConnected || !el.offsetParent) return;
+    const w = el.clientWidth, s = sig(el), m = memo.get(el);
+    if (m && m.w === w && m.s === s) { el.classList.toggle('twr', m.res === 'twr'); el.classList.toggle('rag', m.res === 'rag'); return; }
+    el.classList.remove('rag', 'twr'); let res = 'ok';
+    if (getComputedStyle(el).textAlign === 'justify' && bad(el)) { el.classList.add('twr'); res = 'twr'; if (bad(el, true)) { el.classList.remove('twr'); el.classList.add('rag'); res = 'rag'; } }
+    memo.set(el, { w, s, res });
+  }
+  return { check };
+})();
+
+const RAG = (() => {
+  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead, .lead';
+  const check = (el) => RAG3.check(el);
+  const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
+  let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
+  document.addEventListener('click', () => { clearTimeout(tm); tm = setTimeout(run, 120); });
+  return { run };
+})();
+GUARD.start();
+setTimeout(() => RAG.run(), 400);
+{ const iv = setInterval(() => { if (window.__fmtHyphReady) { clearInterval(iv); requestAnimationFrame(() => { RAG.run(); window.__ragDone = true; }); } }, 100); setTimeout(() => clearInterval(iv), 8000); }
+})();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+# Geotechnikai helyszínelők → Geotechnical CSI
+640e576	Geotechnical CSI
+9a85c01	Real and typical foundation failure cases: work out from the clues what happened and what would have prevented it. With a crack-reading game.
+545cf86	Geotechnical CSI – back to top
+cf7324f	<span>rank:</span><b id="rkTop">Trainee</b><span id="ptTop">0 pts</span>
+4cab866	<span>Investigation in progress · do not cross</span>
+7016ff0	<span>BME Foundation Engineering</span><span>·</span><span>failure cases</span>
+4301b49	Geotechnical <em>CSI</em>
+bdd5bd2	The ground tipped a silo to 27° in a single day. A tower block fell onto its side in one piece. The riverbed ran out from under a bridge pier. You are the expert: from the clues you have to work out what happened and what would have prevented it. Every case belongs to a lecture of the course. The fewer clues you need to solve it, the more points you get.
+51fbf31	Your rank
+4af539a	your rank
+5eb2aea	Trainee
+c292623	<b id="stCases">0/8</b><span>cases solved</span>
+65df5da	<b id="stPts">0</b><span>points</span>
+12cc20f	<b id="stCrack">0/6</b><span>crack patterns</span>
+c681cb5	Next rank: Scene investigator (15 points).
+3e63346	Open cases
+0d3e3d9	Choose a case. The first clue is free; open the others only if you need them.
+b502e51	Crack reader
+9b38e9d	The cracks in a wall reveal how the foundation beneath it has moved. Look at the façade and decide which settlement shape caused it.
+d12df1f	BME Department of Engineering Geology and Geotechnics · Foundation Engineering · The figures are schematic. The typical cases are invented, but they occur regularly in Hungarian practice.
+a20c256	lake clay
+3f9953d	Tilted grain elevator with clay bulging out of the ground
+9860078	approx. 10 m
+e693cf3	pit 4.6 m
+f3f0903	Tower block lying on its side, with a spoil heap and an excavation beside it
+1026812	creek
+b9ecf21	groundwater 1–2 m
+0698920	vertical
+c438bd7	soft clay
+9d91ee4	Tilted tower on soft clay layers, with a high water table
+a96cb65	desiccation zone
+310e458	Single-storey house with cracked walls on dried-out clay, a tree nearby
+89147bf	loess
+fe7b2ee	House settled at one corner on loess, with a leaking pipe next to the corner
+0095df6	frost line 0.8 m
+4c94b01	Unheated garage on a shallow foundation, ice lenses in the ground
+81f4787	former bed level
+c5b1561	Collapsed bridge span and a toppled pier in the flooded river
+93b5a65	soft marine clay
+92991cb	excavation approx. 30 m deep
+53990cd	Collapsed strutted excavation in soft clay
+32000b6	" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Cracked façade"><rect width="
+06d533a	The leaning grain elevator
+ddaa074	Winnipeg, Canada · 1913
+66b8ae1	Bearing resistance of shallow foundations
+1d35554	The site
+2ec6d9b	A huge reinforced concrete grain elevator on a single 23.5 × 59.5 m raft. On its first filling, at 87.5 % of capacity, it settled 30 cm in an hour, and within a day it had tilted to about 27°.
+bcfb4e2	The ground
+dc8a287	Beneath the raft lies thick lake clay. The deeper layers are softer: their undrained shear strength is about 30 kPa.
+186f3cc	The structure
+e7e951c	The silo was hardly damaged; it rotated as a whole, like a rigid body. Next to the side that went down, the ground heaved up.
+39a2bc1	The back-analysis
+1ece893	The bearing resistance calculated with the undrained shear strength came out at about 307 kPa. The contact pressure actually acting at failure was about 297 kPa.
+8d593fd	What happened to the silo?
+91758b2	Bearing failure: the load reached the bearing resistance of the clay, and a slip surface formed beneath the raft
+2f5fc1d	Consolidation settlement that built up over years
+0af0c75	The reinforced concrete structure broke and tipped over
+a95aacf	An earthquake shook the ground
+114bff6	Rotation to one side within a day, heaving ground, an intact structure: this is the fingerprint of bearing failure. Consolidation takes months or years, and a structural failure would have torn the silo apart.
+7d19fd5	What would have prevented it?
+65eeb97	A thicker, stiffer raft
+37eed70	Checking the bearing resistance with the undrained shear strength, or carrying the load down to the deeper bearing stratum
+d39f24e	Stronger concrete in the silo walls
+b956b88	A taller silo with a smaller footprint
+257d4bd	The stiffness of the raft and the strength of the concrete do not increase the bearing resistance of the ground. On soft clay under rapid loading, the undrained bearing resistance governs, and it has to be checked.
+2b4d817	In 1914 the silo was tilted back: 14 piers were taken down to rock beneath the raised side, and the structure was brought back to vertical by about 3.7 m. It still works as a grain store today.
+9856453	The Transcona elevator became one of the most important confirmations of soil mechanics: the failure load back-calculated with the undrained shear strength hardly differed from the actual one.
+5c6e4d4	tilt within a day
+961b81b	contact pressure at failure
+e1c2cfd	raised back in 1914
+586d6ae	The toppled tower block
+2d97dca	Shanghai, China · 2009
+50a8ce1	A 13-storey residential building, not yet handed over, fell onto its side in one piece at dawn. Its structure stayed almost intact.
+315d8e6	The foundation
+7542dc4	Prestressed concrete pipe piles, 33 m long and 40 cm in diameter. Beneath the building the piles broke near their heads.
+cf8af90	The surroundings
+04298d8	On the south side of the building, about 7 m away, a 4.6 m deep excavation was being dug for an underground garage. The excavated soil was piled up on the north side, barely 1 m from the building, to a height of about 10 m.
+978f587	The weather
+fac2ce9	It had rained for days beforehand. The plot lies on the bank of a creek, and the upper layers are soft, saturated clays. The building fell towards the excavation, to the south.
+5411bf0	What toppled the building?
+b4fc570	The piles were too short, and the building slowly sank under its own weight
+4b65c86	The soft ground under the spoil heap slipped and was squeezed sideways under the building: the piles were loaded laterally, and the building tipped towards the excavation
+61bca65	The building broke in two because of poor-quality concrete
+22f69b7	An earthquake
+a619898	The building rotated as a whole towards the excavation, and the piles broke at their heads. This was not slow settlement: the 10 m high spoil heap caused a general bearing failure in the soaked, soft clay, and the slipping soil was pushed under the building towards the excavation.
+34ee734	What is the most important lesson?
+d77b1ea	A tower block may only be placed on a shallow foundation
+23a380d	Concrete must not be placed in the rain
+88ca73f	No large spoil heaps next to buildings and excavations – and piles are also loaded by lateral ground movement
+a5dd50d	Longer piles are always needed
+e31b080	A pile carries vertical load well, but soil moving past it bends it sideways. On soft ground a spoil heap behaves like a slope: its stability should also have been verified.
+db0d2bb	According to the investigation, the excavated soil was piled up next to the building and the pit was dug on the other side. Later analyses found that after the rain an undrained bearing failure developed under the spoil heap, and the pressure of the slipping soil tipped the building over. One worker died.
+9d5fb86	A “messy” construction site is a geotechnical issue too: the spoil heap is a load, the excavation is unloading, and together they add up in the worst possible place.
+0cb34cf	spoil heap next to the building
+51a79b6	deep pit on the far side
+5e077b0	storeys
+49bdb28	The leaning tower
+d304144	Pisa, Italy · 1173–2001
+cc15e42	The history
+2b11446	Construction of the bell tower began in 1173, and the tilt appeared during construction. With two long pauses the work lasted nearly 200 years, and the builders tried to compensate by building the later storeys at an angle.
+fc9553d	Beneath the tower lie soft, compressible layers of clay and silt, with groundwater 1–2 m below the surface. Under the south side the ground is slightly more compressible.
+85b0258	The foundation
+ce62643	A relatively shallow, ring-shaped foundation beneath a tall, slender tower with a mass of about 14 500 t.
+9216562	The measurements
+3f20ed9	The tilt accelerated in the 20th century. In 1993 the foundation was inclined at 5.4°, and the top cornice overhung by 4.1 m.
+8bffb52	What causes the tilt?
+1266232	A bearing failure that happened in a single day
+bc4fd0e	The masonry crushed under the load
+cde98b2	Uneven compression of the soft clay: the south side settled slightly more, and the tilt itself increased the load on that side
+0d8c967	This is a slow process over centuries: differential settlement tilted the tower, and the centre of gravity of the leaning tower moved towards the lower side, putting even more load on the ground there. A tall, slender structure is especially sensitive to this.
+01267ff	How was it stabilised between 1999 and 2001?
+97c1fab	Soil was extracted from under the north side through inclined boreholes, so that this side would settle slightly
+f6830d6	The south side was raised by grouting
+f877f3e	The whole tower was placed on piles
+a45049e	The upper storeys were dismantled and rebuilt
+1ce6fa0	Controlled settlement of the opposite side is the least intrusive intervention: the tower received no new load, and the weaker south side was not disturbed.
+5e87dfc	Soil was extracted from dozens of inclined boreholes under the north side, reducing the tilt by about 0.5°. The tower was closed in 1990 and reopened in 2001 after the work.
+9a31f79	With settlement it is not just the amount that matters: differential settlement and how easily the structure tips decide together whether there will be trouble.
+07fca1e	tilt in 1993
+e9e67b4	overhang at the top
+44a5348	reduction by soil extraction
+a923a02	Cracks after the drought
+bc4e76b	Great Hungarian Plain · typical Hungarian case
+b430c1e	A single-storey family house on 0.8 m deep strip footings, on yellow, high-plasticity clay. After a summer of drought, diagonal cracks appeared at the corners and the doors stick.
+94ccfd8	The garden
+5bd9d1b	A row of 15-year-old poplars stands 4 m from the corner of the house.
+31d73bc	The seasons
+743ab20	In autumn, after the rains, the cracks partly closed, and the following summer they opened again.
+c9ba140	The survey
+3c49ec9	The corners settled the most, the middle of the long walls the least. The difference is 2–3 cm.
+1286c6b	What causes the cracks?
+a40ffa1	The clay shrank under the edges of the house as it dried out in summer, especially towards the trees, and it swells again in the wet season
+e15a2b7	Bearing failure under the house
+17f6517	Frost heave at the corners
+542a93e	Thermal expansion of the masonry
+75fc1d7	Expansive clay changes its volume together with its water content. The 0.8 m deep foundation lies within the drying zone, and the tree roots dry the ground out even deeper. Recurring seasonal movement is typical of this soil.
+245ffae	What is the lasting solution?
+6e8afc0	Grouting the ground around the house
+4755453	Plastering over the cracks and repainting
+43cfc6e	Taking the foundation below the desiccation zone, for example by mass concrete underpinning or micropiles, and keeping trees away from the house
+4174793	Planting more trees around the house
+9b569a3	The movement is caused by the drying zone. As long as the foundation stays within it, the cracks come back every dry summer. Grouting and plastering do not remove the cause.
+12eb687	This kind of damage appears on a large scale in drought years in the clay areas of the Great Plain. The solution is always to get the foundation out of the zone where the water content changes with the seasons.
+47ff139	On expansive clay the frost line is not deep enough: the foundation level must be below the desiccation zone, and the water uptake of trees must also be taken into account.
+b2cdd55	original foundation depth
+4859cde	distance to the trees
+4a699ec	differential settlement
+d6f2b96	A corner that sank in a week
+f746845	Transdanubian loess plateau · typical Hungarian case
+ca01ce4	A single-storey house, standing for twenty years on 1.0 m deep strip footings on loess. Within a week one corner of the house settled 8 cm, and the wall cracked diagonally.
+8fd9288	Background
+409bd34	Before the settlement, the water pipe in the garden burst, and water leaked next to the corner for days.
+5d977f3	Dry loess stands even in vertical faces. Crumbled by hand it is loose and porous, and riddled with tiny vertical channels.
+d49dbf1	The laboratory
+e9781d2	The sample was soaked under load: it compressed suddenly and by a large amount.
+3082078	What happened to the corner?
+5f5dd5a	The loess swelled and lifted the rest of the house
+ae34aa8	The water soaking in dissolved the bonds holding the grains together, and the loess collapsed beneath the corner
+281f922	Frost heave
+2511bf7	Overloading caused a bearing failure
+ecbcc0a	Collapsible loess is strong when dry, but its loose skeleton collapses when it is soaked. Sudden settlement concentrated around the water source points to this, and the laboratory test confirms it.
+6385e65	What needs to be done?
+38f5132	Eliminating the water source, draining rainwater away and strengthening the corner by mass concrete underpinning or micropiles
+cd7d500	Tying the walls together with steel straps; there is no need to deal with the ground
+d445091	Waiting until the loess swells back by itself
+f44c142	Raising the groundwater level
+ccc47ac	First the path of the water has to be cut off, because the collapse can continue until then. After that, the foundation has to be taken below the soaked, collapsed zone.
+acb92ac	In loess areas, a burst pipe, poor rainwater drainage or overwatering the garden often causes sudden damage, decades later, to a house that had been fine until then.
+f9a1197	On loess, water is the greatest enemy: drainage and watertight paving are part of the foundation.
+5c5cad0	settlement in a week
+ee4705d	20 years
+b35d4a0	without damage before
+10bb665	The jammed garage door
+db038a0	Budapest area · typical Hungarian case
+83c7e16	An unheated, lightweight garden garage on 40 cm deep strip footings in silty clay. At the end of January the up-and-over door jammed, and a crack opened in the corner.
+0bdb8d4	In spring
+cee68ab	The door started working again by itself, and the crack partly closed.
+9a5dabb	The water
+cd37666	The drain next to the garage got blocked in winter, and the water ran down beside the wall.
+0026604	On digging
+a265e29	Horizontal ice lenses were found in the ground, 10–30 cm deep.
+815a5a9	What lifted the garage?
+daedffd	Summer drying of the swelling clay
+43edb2b	Frost heave: ice lenses grew in the moist, silty soil above the frost line and lifted the foundation
+147ec48	Collapse
+a6f117f	Bearing failure
+623bd0c	It moved in winter and recovered in spring: this is frost. Silty soil draws water up into the frozen zone, where it freezes into ice lenses and lifts whatever is above it.
+abe9e3f	What would the correct foundation have been?
+ed2075a	A shallower foundation, so that less soil freezes beneath it
+12827fc	A lighter roof on the garage
+af534f6	Spreading gravel on the surface
+15ed2b1	Foundation level below the frost line – in Budapest at least 0.8 m – and draining the water away from the wall
+37ebaa7	Ice lenses cannot lift a foundation placed below the frost line. Frost lifts a light building even more easily, so weight is no protection.
+e49d806	Unheated outbuildings, fence footings and garden retaining walls are the most common victims: under a heated house the ground freezes less deeply, but beside them it freezes to the full depth.
+726aa1a	The frost line applies to every foundation, and to light buildings in particular. Silt is the most frost-susceptible soil.
+b103d61	the frost line
+d1fa658	depth of the ice lenses
+a7034c8	The collapsed bridge
+cf9d545	Entre-os-Rios, Portugal · 2001
+7a88dda	A steel bridge over the Douro, built in 1886. On the evening of 4 March 2001 the fourth pier collapsed, and a bus and three cars fell into the river.
+485fdb9	The flood
+2991ba7	The winter brought months of flooding: for three months the discharge was above 2000 m³/s.
+2660b1b	The riverbed
+1b66830	From the 1970s, large quantities of sand were extracted from the river. Next to the pier, the riverbed deepened by a total of about 13 m between 1913 and 1989.
+aa2eaf7	The pier
+9b3f5a6	Damage to the pier foundation had already been visible earlier.
+5424c16	What brought the pier down?
+7309b97	Fatigue of the steel structure
+3ce4907	Traffic overloaded the bridge
+9aadeb0	Scour: the flood carried away the sediment around the pier, and in a riverbed already deepened by sand extraction the ground ran out from under the pier
+12d6485	Over decades the deepening riverbed took away the embedment of the pier foundation, and the flood washed out the rest. The pier failed from its foundation, not from the superstructure.
+3932bd9	What protects against scour?
+879de07	Taking the pier foundations below the expected scour depth, protecting the riverbed with rock armour and surveying the riverbed regularly
+5a75367	Rebuilding the bridge from lighter materials
+c50d40e	Strengthening only the abutments
+7f0e7c6	Extracting more sand to deepen the riverbed
+adbb4ba	Scour is countered by foundation depth and by protecting the riverbed. Changes in the riverbed have to be monitored, because sand extraction and floods alter it year by year.
+4f75162	59 people died in the disaster. The minister of transport resigned the next day. The new bridge, 7 m further up the river, was opened in 2002.
+65da5ab	The movement of water is a load on foundations: a foundation standing in a riverbed has to be designed against scour just as it is for vertical load.
+150840c	year built
+22b68fe	drop in bed level
+1499ada	victims
+a2e0fca	The collapsed excavation
+85a40ea	Singapore · 2004
+efb2aea	Construction of a metro station and tunnel: a strutted excavation about 30 m deep in soft marine clay, next to a busy main road.
+d8efa50	The support system
+77d1c90	The walls of the excavation were supported by steel struts and walings. The collapse started with the failure of a waling–strut connection and then spread like a chain reaction.
+6487e52	Weeks earlier, the instruments measuring the wall movements had shown displacements larger than allowed – and the alarm level was raised.
+ea7f0d4	The design
+fd19e33	The undrained behaviour of the soft clay was modelled in a way that gave a higher shear strength than the real one.
+cd1e80b	What caused the collapse?
+0f15df7	Hydraulic failure at the base of the excavation
+7d27c3e	An undersized connection in the strutting failed: the wrongly calculated, too-low forces and the ignored measurements together led to the chain-reaction collapse
+91e2386	The load of the traffic on the surface
+5b09b68	The weak point was the waling–strut connection, and because of the over-optimistic soil model the forces calculated for the wall and the struts were lower than the real ones. The measurements signalled the trouble, but the limit was raised instead of stopping the work.
+c7d5bff	What is the main lesson?
+5f88e1b	The alarm level has to be raised if the measured value exceeds it
+da0ec04	Fewer instruments are needed, so that they do not disturb the work
+c3d34a5	A deeper excavation has to be dug
+54acbfa	Monitoring is part of the design: if the measured movement exceeds the limit, you have to stop and redesign
+98cce9b	The observational method only protects you if decisions are based on the measured data. The safety of an excavation is the joint responsibility of design, construction and monitoring.
+7335545	Four people died. The committee of inquiry found human and organisational errors. The route of the metro line was changed, and the station was built elsewhere.
+e76b199	In a deep excavation, monitoring is not paperwork: wall movement is the first sign, and it has to be taken seriously.
+dec714b	excavation depth
+bdff2eb	weeks
+db4d8c6	earlier, the readings gave warning
+840ef2e	Scene investigator
+db7e2b3	Detective
+7abbe1e	Inspector
+ac39a04	Chief inspector
+dfd2b89	${r.p} pts
+a0c8117	Next rank: ${r.next[1]} (${r.next[0]} points).
+068932e	The highest rank. ${r.p} points out of ${MAXP}.
+0f62de1	real case
+5377269	typical case
+b43d815	solved · ${p} pts
+c7b0041	in progress
+18a4433	open
+0f1ff65	<div class="clue locked"><span class="n" style="opacity:.35">${tent(i + 1)}</span><div><h4>Clue ${i + 1}</h4><p>Still locked.</p></div></div>
+bc95e81	<button class="btn" type="button" id="moreClue">Next clue (−1 point)</button>
+35e5ad5	"><h4>Question 1 · the culprit<span class="pts">
+e722220	+${st.p1} pts
+15ad09a	<p class="fb ok"><b>Got it.</b> ${c.q1[3]}</p>
+cd8460e	<p class="fb bad"><b>That is not the culprit.</b> Look at the clues again (−2 points).</p>
+d9cccb4	"><h4>Question 2 · prevention<span class="pts">
+5839bde	+${st.p2} pts
+b23c9f2	<p class="fb ok"><b>That’s right.</b> ${c.q2[3]}</p>
+64a89fb	<p class="fb bad"><b>Not this one.</b> Try again.</p>
+452b3ff	<div class="verdict"><span class="stamp">Case closed</span><h4>What really happened?</h4><p>
+2bb6bbc	</div><h5>Lesson</h5><p>
+847c337	<button class="btn pri" type="button" data-next="${nextCase(c).id}">Next case</button>
+3fe0992	<div class="file"><div class="left"><div class="ftitle"><div class="k"><span>Case ${n}</span><span class="tagreal${c.real ? ' real' : ''}">${c.real ? 'valós ügy' : 'tipikus eset'}</span><span>${c.where}</span></div><h3>${c.t}</h3></div><div class="scene">${SCENES[c.id](st.ok1)}<span class="cap">sketch · the yellow markers show where the clues are</span></div></div><div class="right"><div class="clues">${clues}</div><div class="btns">${more}</div>${right}</div></div>
+7ea67af	The right end settled
+26d691d	The left end settled
+040bf9e	The middle settled (sagging)
+e93d747	The ends settled, or the middle rose (hogging)
+ac89f1b	Diagonal cracks rise towards the larger settlement – here up to the right. The right-hand part of the wall moved down relative to the left-hand part.
+fb8ed02	Diagonal cracks rise towards the larger settlement – here up to the left. The left-hand part of the wall settled more.
+cadf8d6	In the middle the crack is wider at the bottom: the bottom fibre of the wall is in tension, like that of a sagging beam. The diagonal cracks rise towards the middle.
+2d83c4b	In the middle the crack is wider at the top: the top fibre of the wall is in tension. The diagonal cracks rise towards the corners. Typical of houses on shrinking clay, where the ground dries out under the corners.
+c41b029	<p class="fb ok"><b>Correct${st.p === 2 ? ', +2 pont' : ', +1 pont'}.</b> ${EXPL[m]}</p>
+50b8c41	, +2 points
+2dc1b78	, +1 point
+5d5f9dc	<p class="fb bad"><b>Not this one.</b> Look at which way the diagonal cracks rise, and where the middle crack is wider.</p>
+0b91996	⏎    <div class="rule"><p><b>Rule of thumb:</b> a diagonal crack rises towards the larger settlement; a vertical crack is wider where the wall is in tension – at the bottom for a sagging shape, at the top for a hogging one.</p></div>⏎    <div class="btns"><button class="btn" type="button" id="crPrev"
+a51ccd6	>Previous</button><button class="btn pri" type="button" id="crNext"
+18aa1ce	>Next façade</button></div></div>

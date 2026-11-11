@@ -1,0 +1,165 @@
+# Vizsgaszimulátor → Exam simulator
+44077e9	Foundation Engineering exam simulator
+723d2f4	Worked problems generated with random data and checked step by step, plus a true-or-false card deck covering the whole course.
+555c9e9	Exam simulator – back to top
+9652fa5	Exam simulator
+6dbd527	Sections
+5d2d9b7	<a href="#szamitas" class="on">Worked problems</a><a href="#pakli">True or false</a>
+c0de2f0	BME Foundation Engineering · exam preparation
+c26b51a	Exam <em>simulator</em>
+da65895	Every problem is generated afresh with random data, so you can practise as often as you like. You enter the solution step by step, and the page shows exactly which step went wrong – and also when your method is right but you carried forward an earlier wrong result. The results follow the first-generation Eurocode 7 and DA-2*.
+d94b518	Key
+de10f42	<span class="mk" style="color:#45c283">✓</span><span>Correct step</span>
+fbfd25f	<span class="mk" style="color:#e7a43c">↳</span><span>Method correct, but an earlier wrong value was carried forward</span>
+2eb9a12	<span class="mk" style="color:#ff6d63">✗</span><span>Wrong step: this is where the calculation went wrong</span>
+5a311af	Problem types
+ba20c08	True or false?
+c752763	A quick revision of the whole course: decide for each statement whether it is true. The cards come in a new order every round.
+4f04386	BME Department of Engineering Geology and Geotechnics · Foundation Engineering · Practice problems; the exact exam requirements are given in the lectures.
+61d9cd8	" role="img" aria-label="Sketch of the footing"><rect x="0" y="
+3782c69	<line x1="0" y1="${gy + Math.min(150, gw * sc)}" x2="${W}" y2="${gy + Math.min(150, gw * sc)}" stroke="#3d9ad6" stroke-width="2" stroke-dasharray="7 5"/><text x="10" y="${gy + Math.min(150, gw * sc) - 6}" font-size="13" fill="#3d9ad6" font-family="JBMono, monospace">groundwater</text>
+65adaea	" role="img" aria-label="Sketch of the basement"><rect x="0" y="
+94a03d8	" font-size="13" fill="#3d9ad6" font-family="JBMono, monospace">groundwater −
+d1d052f	Bearing resistance of a pad footing
+bd0bde5	Lecture 3
+d4969ae	Lecture 4
+52264ac	Lecture 5
+aff05da	Lecture 9
+fe8b745	footing size
+50de4f1	foundation depth
+4209adb	shear strength
+580cd2c	permanent load (incl. footing)
+ede7beb	variable load
+97e7698	Centrally loaded square pad footing in sand. The groundwater is deep and its effect can be neglected. Verify the bearing resistance to DA-2* (γ<sub>G</sub> = 1.35; γ<sub>Q</sub> = 1.5; γ<sub>R;v</sub> = 1.4).
+7a273ff	Effective stress at foundation level: q′
+185799c	Shape factor: s<sub>q</sub>
+6cbb81f	Shape factor: s<sub>γ</sub>
+835e74b	Unit bearing resistance: R<sub>k</sub>/A′
+2d7db53	Design bearing resistance: R<sub>d</sub>
+fbd66ac	Design load: V<sub>d</sub>
+ddde5bb	Utilisation: Λ = V<sub>d</sub>/R<sub>d</sub>
+7f54348	satisfied
+2018a83	not satisfied
+8cd447a	Bearing resistance of a strip footing
+6051099	footing width
+594bfda	Centrally loaded strip footing; the groundwater is deep. For a strip footing the shape factors are 1. Verify the bearing resistance for a 1 m length, to DA-2*.
+e4bf773	q′ at foundation level
+ffc5fe8	R<sub>d</sub> per metre
+f486ec7	V<sub>d</sub> per metre
+3e93ac4	Sliding
+4db140b	vertical permanent load
+ffab737	vertical variable load
+2866f8a	horizontal wind load
+388193f	soil below foundation level
+e227ddd	cast-in-situ concrete
+7c92090	Sliding check of a pad footing in the drained case, to DA-2* (γ<sub>R;h</sub> = 1.1). The passive earth resistance is neglected, on the safe side. Careful: only the permanent load counts in the stabilising force.
+485a27b	tan δ<sub>k</sub> (for cast-in-situ concrete δ<sub>k</sub> = φ′<sub>k</sub>)
+5de0472	Sliding resistance: R<sub>d</sub>
+f460b42	Design horizontal force: H<sub>d</sub>
+d3232db	Settlement
+58d1d9d	load (characteristic, incl. footing)
+7f302b7	influence depth
+3601755	layers
+f05f94c	influence factors (i) at mid-layer
+ede5978	Settlement of a square pad footing by summation over layers. The groundwater is deep. Down to the influence depth we take four equal layers; at the middle of each layer the additional stress is Δσ<sub>z</sub> = i · σ<sub>0</sub>, where i is the given influence factor (Steinbrenner, below the centre of the footing).
+af439be	Contact pressure: σ<sub>base</sub>
+0d8a3d0	σ<sub>base</sub> = ${f(p.F, 0)} / ${f(p.B * p.B, 2)} = ${f(p.F / (p.B * p.B), 1)} kPa
+e9ff27f	Net contact pressure: σ<sub>0</sub>
+d0681c1	σ<sub>0</sub> = σ<sub>base</sub> − γ · D = ${f(v.st, 1)} − ${f(p.g * p.D, 1)} = ${f(v.st - p.g * p.D, 1)} kPa
+610c3ac	Additional stress at the middle of layer 1: Δσ<sub>1</sub>
+80a8fe0	Settlement: s = Σ h · Δσ<sub>i</sub> / E<sub>oed</sub>
+3280f72	Uplift
+a15de81	underside of the base slab
+5781a4f	groundwater level
+48297b7	permanent load of the structure
+60a872f	partial factors (UPL)
+ba1a6ae	Uplift check of a watertight basement during construction, per 1 m². Side friction is neglected, on the safe side.
+de3838d	Water head below the slab: h<sub>w</sub>
+61efece	Water pressure: u = U<sub>dst;d</sub>
+623b319	Stabilising load: G<sub>stb;d</sub>
+341c4a0	not satisfied: the basement would float up
+00457d6	Active earth pressure
+66b93cc	wall height
+2dfff66	sand behind the wall
+d441802	other
+d38baf1	vertical, smooth wall, horizontal ground surface, no groundwater
+c81efd1	Calculate the active earth pressure (Rankine) on a 1 m length of the wall, and its moment about the base of the wall.
+9d221dc	Active earth pressure coefficient: K<sub>a</sub>
+426ce44	Earth pressure at the base of the wall: e<sub>a</sub>(H)
+0787deb	Resultant: E<sub>a</sub>
+16cd532	Moment about the base of the wall: M
+0a13e78	<h2>Problem types</h2>
+e65c47f	✓ correct
+399c728	↳ method correct; an earlier wrong value was carried forward
+f80c6d9	✗ this is where it went wrong
+f5b80b0	 · problem #
+5962cd3	<div class="row"><button class="btn pri" type="button" id="check">Check</button><button class="btn" type="button" id="sol">${a.sol ? 'A megoldás elrejtése' : 'A megoldás megmutatása'}</button><button class="btn" type="button" id="new">New problem, new data</button></div>
+4b0957e	Hide the solution
+91cb2a1	Show the solution
+d27dc08	Flawless solution. Ask for a new problem or switch to another type!
+5e2f7ad	The first problem is at step ${first + 1}. Correct it and check again – the remaining steps are recalculated with the corrected value.
+01ba27c	Fill in all the steps.
+753e682	In Budapest, in cohesive soil, the foundation level must be at least 0.8 m deep because of frost.
+24a1b30	Ice lenses cannot lift a foundation placed below the frost line. The rule applies to light outbuildings too.
+f318487	Fill of unknown composition can be treated as a bearing stratum if it is thick enough.
+5966763	Unknown fill is heterogeneous and compressible, and its thickness does not help. You have to found below it or treat it by ground improvement.
+851c36b	The bearing capacity factors increase linearly, in proportion to the angle of shearing resistance.
+d8e7838	They increase steeply: from 30° to 35°, N<sub>q</sub> nearly doubles; from 20° to 35°, N<sub>γ</sub> increases more than tenfold.
+782e746	In DA-2*, the actions are taken at their characteristic values and the partial factors are applied at the end.
+91ad30d	That is why the eccentricity and the effective foundation dimensions are also determined from characteristic loads.
+4942605	A rise in the groundwater level increases the bearing resistance of a shallow foundation.
+7164a77	It reduces it: below water the effective unit weight of the soil drops to about half, so the weight-dependent terms of the bearing resistance formula decrease too.
+0b3256e	For undrained bearing resistance we work in total stresses.
+f882963	Under rapid loading, the pore water in a saturated cohesive soil cannot drain away, so we use the undrained shear strength and total stresses.
+36da07d	If the resultant of the loads falls outside the middle third of the base (e > B/6), no pressure is transmitted under part of the base.
+93ff163	Part of the base “lifts off”. The effective foundation dimension is then considerably smaller than the actual one.
+c991057	In a sliding check, the variable load is also included in the stabilising vertical force.
+2abfd3e	Only the permanent load counts: the variable load may be absent exactly when the horizontal force acts.
+95e7577	Under the Hungarian National Annex, overall stability is verified with DA-3.
+b504259	In DA-3 the shear strength parameters are divided by partial factors.
+eb77099	Uplift of a watertight basement is a threat only once the building is complete.
+327e8f0	It is most dangerous during construction: the structure is still light while the water pressure is already at full value. That is why dewatering has to be maintained until the weight is sufficient.
+8354ccf	The influence depth is where the additional stress drops to 20 % of the effective overburden stress.
+54462c0	Below the influence depth the compression of the soil is negligible.
+7283701	Uniform settlement is always more dangerous than differential settlement.
+0a03d3a	The other way round: the structure is cracked by differential settlement and angular distortion. A building that settles uniformly can tolerate even several centimetres without damage.
+413457b	A diagonal crack rises towards the part of the wall that has settled more.
+fe1a5aa	From this crack pattern you can work backwards to where the foundation settled more.
+4e4cd9d	Grouting permanently stops the movements caused by shrinking and swelling clay.
+69147d3	The movement is caused by the seasonal change in water content. The only lasting solution is to take the foundation below the desiccation zone.
+81b1c91	On loess, water soaking in from a burst pipe can cause sudden, large settlement.
+bfc8042	Collapsible loess is strong when dry, but when soaked its loose skeleton collapses.
+7806883	The compression of peat is complete shortly after loading.
+09fef1c	Peat creeps for years, so its settlement is often much larger than the value measured in the first months.
+e4f68d6	Frost lifts the foundation of a light, unheated outbuilding less than that of a heavy house.
+3f861d5	Quite the opposite: ice lenses lift a light building more easily, and the ground beneath it freezes to the full depth.
+5a3a1ba	Vibration from driven piling can densify the sand beneath neighbouring buildings and cause settlement.
+465dbb7	That is why bored or vibration-free techniques are chosen next to existing buildings.
+c5e78bf	When a CFA pile is drilled, the borehole wall is supported by casing or slurry.
+b3ea494	The soil between the flights of the auger supports the wall, and the concrete is pumped in from the bottom as the auger is withdrawn.
+be7cf24	An end-bearing pile transmits most of its load through the base.
+852fd5f	For an end-bearing pile, the base resistance is at least two thirds of the total resistance; for a friction pile, the shaft resistance is.
+48f4bb6	If the bearing stratum is deep, a deep foundation can be more economical than a shallow one.
+6afdeaa	The pile carries the load through the weak layers into the bearing stratum.
+c33207b	A soldier pile wall (Berlin wall) is a watertight form of excavation support.
+b957152	Water seeps through the gaps between the lagging boards, so it can only be used above the water table or together with dewatering.
+632920c	A diaphragm wall can be part of the permanent basement wall.
+18b7989	A reinforced concrete diaphragm wall is watertight and stiff, so after supporting the excavation it remains part of the basement structure.
+a61942e	The fixed length of a ground anchor must lie within the potential slip surface.
+670dd75	It must lie beyond the slip surface, outside the sliding wedge, in a competent stratum – otherwise the anchor moves together with the soil.
+663b46f	For a pad footing, the investigation depth is 2 m regardless of the footing width.
+51d3dcd	Below foundation level the investigation must reach at least three times the footing width, and at least 6 m.
+00f048e	<span class="lec">end of round</span><p class="s">${d.ok} correct answers out of ${CARDS.length}.</p><p class="e">${d.ok >= CARDS.length * 0.9 ? 'Kiváló – ezekből a kérdésekből felkészültél.' : d.ok >= CARDS.length * 0.75 ? 'Jó eredmény. Nézd át újra azokat a témákat, ahol tévedtél.' : 'Érdemes átnézni az előadások anyagát, aztán újrakezdeni.'}</p><div class="acts"><button class="btn pri" type="button" id="restart">New round, new order</button></div>
+0ec2384	Excellent – you are well prepared on these questions.
+b5a2f55	Good result. Go over the topics where you went wrong once more.
+66f6fdd	Worth reviewing the lecture material, then starting again.
+86975d6	<div class="res ${d.cur}">${d.cur === 'ok' ? '✓ Így van' : '✗ Nem így van'} – ${c[2] ? 'igaz' : 'hamis'}</div><p class="e">${c[3]}</p><div class="acts"><button class="btn pri" type="button" id="nextc">Next card</button></div>
+36c12da	✓ Right
+f43f5e7	✗ Wrong
+9ef2cee	it is true
+4670909	it is false
+08293c0	<div class="acts"><button class="btn pri" type="button" data-v="1">True</button><button class="btn" type="button" data-v="0">False</button></div>
+bae1ca7	<h3>This round</h3><div class="nums"><div><b>${d.ok}</b><span>correct</span></div><div><b>${d.bad}</b><span>wrong</span></div><div><b>${CARDS.length - Math.min(CARDS.length, d.i + (d.cur ? 1 : 0))}</b><span>to go</span></div></div><div class="bar"><i style="width:${n ? d.ok / n * 100 : 0}%"></i></div><p>The cards cover the whole course, from ground investigation to excavation support. Each answer is followed by a short explanation.</p>
+413c75e	sand
+c2c1c25	soil
+82f8cb1	footing

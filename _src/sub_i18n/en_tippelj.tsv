@@ -1,0 +1,77 @@
+# Tippelj, aztán számolj → Guess, then calculate
+5fd76fc	Guess, then calculate
+a0ee2e3	Estimation questions for every lecture of Foundation Engineering: guess first, then see the calculation. Projector mode with a QR code.
+2bca90b	Guess, then calculate – back to top
+2d4d209	<span>points</span><b id="pts">0</b><span>spot on</span><b id="hits">0</b>
+3c0bbd8	Projector mode
+7b87b95	BME Foundation Engineering · estimates lecture by lecture
+82d6e48	Guess, <em>then calculate</em>
+e646cc1	A good engineer knows what to expect before doing the calculation. For each question, first drag the slider to where you think the result lies, and only then look at the calculation. The scale is logarithmic: being out by an order of magnitude is the same distance whether you are too high or too low.
+9e8a236	Scoring
+447ebde	<i style="background:var(--hit)"></i><span>Spot on: within 20 %</span><span>3 points</span>
+330c85b	<i style="background:var(--near)"></i><span>Right ballpark: within a factor of two</span><span>1 point</span>
+366d805	<i style="background:var(--far)"></i><span>Way off: worth rethinking</span><span>0 points</span>
+0d173a9	Questions
+47ac61b	Projector
+2c1f6a4	Guess on your phone!
+fa8e6de	In the lecture
+50557e4	1. Projector mode
+e04b0eb	Switch it on with the button in the header: the screen shows only the question and a QR code, and the students use the code to open exactly this question on their phones.
+3054254	2. Everyone guesses
+50f194a	Give it half a minute. Everyone drags the slider on their own phone and locks in their guess – nobody sees the others’ guesses, so they do not influence each other.
+582550d	3. Reveal
+b811ee4	On the screen, the “Reveal” button shows the result and how it is calculated; the students see on their own phones how close they came.
+b6303eb	BME Department of Engineering Geology and Geotechnics · Foundation Engineering · Your estimates and guesses are stored only in this browser.
+f9cb36d	Course home page
+6df6ead	What is the total weight of a ten-storey reinforced concrete residential building with a 20 × 20 m footprint?
+aa785fc	Floors, walls, columns and finishes, plus the people and furniture in the building.
+9df0cc9	For a framed building, a good first estimate is that every storey transmits roughly 10 kN, i.e. about 1 tonne, per square metre. This is what the ground has to carry, and if a raft covers the whole plan, the contact pressure is about 10 kPa per storey – about 100 kPa for ten storeys.
+58a5700	G + Q ≈ 10 storeys · 400 m² · 10 kN/m² = 40 000 kN
+da7a000	At least how deep below foundation level must you drill next to a 2.0 m wide pad footing?
+df4caaa	Average ground conditions; the depth of the bearing stratum is not yet known.
+884b25e	For pad and strip footings, the investigation depth below foundation level is at least three times the footing width, and at least 6 m. The stress from the footing load still reaches this depth, and the influence depth also lies within it.
+4b87de7	If the angle of shearing resistance of a sand increases from 30° to 35°, by what factor does the bearing capacity factor N<sub>q</sub> increase?
+205610e	A difference of only 5 degrees, which can occur even between two tests.
+02988b2	The bearing capacity factors increase very rapidly with the friction angle. That is why a reliable value of φ′ is decisive: an error of a few degrees means far more than ten or twenty per cent in bearing resistance.
+a678468	And if φ′ increases from 20° to 35°: by what factor does N<sub>γ</sub> increase?
+a938604	This factor appears in the term proportional to the footing width.
+ff4ec09	N<sub>γ</sub> increases even more steeply than N<sub>q</sub>. Between a loose, low-friction soil and a dense sand there is an order of magnitude – the same footing passes comfortably on one and fails on the other.
+220a166	What water pressure acts from below on the base slab of a basement 7.6 m deep if the groundwater is 3.0 m below ground level?
+64eb1ab	A two-level underground car park with a watertight diaphragm wall and base slab.
+55daa7e	Water pressure depends only on the depth below the water table: 10 kPa per metre. 46 kPa is about 4.6 t/m² of uplift – the weight of the building has to hold it down, otherwise the basement can float up during construction.
+36d649d	How much does a 2.0 × 2.0 m pad footing on medium-dense sand settle under a load of about 1100 kN?
+a902379	Foundation level −1.8 m, oedometer modulus of the sand E<sub>oed</sub> = 25 MPa, groundwater at −3.0 m.
+1065ce9	Most students guess much more. Good sand is stiff: under a pad footing like this the settlement is less than two centimetres, and most of it comes from the first two metres below the base.
+81fafe2	influence depth: Δσ<sub>z</sub> = 0.2 · σ′<sub>z0</sub> → m<sub>0</sub> ≈ 5.0 m
+221e964	For the same footing, how deep below foundation level is the influence depth?
+9560af4	Where the additional stress drops to 20 % of the effective overburden stress.
+b6b25a9	Under a pad footing the stress spreads quickly: it is worth calculating down to about two and a half times the footing width. Under a wide raft, however, the influence depth is much deeper.
+d4a9b55	Δσ<sub>z</sub>(z) by Steinbrenner, below the centre of the footing
+9936086	How much does a 3.1 m thick peat layer compress under an additional stress of 90 kPa?
+1f09433	Oedometer modulus of the peat: E<sub>oed</sub> = 0.8 MPa.
+9f28e3c	Thirty-five centimetres – many times the allowable value, and the peat keeps creeping for years afterwards. That is why a shallow foundation cannot be placed on peat: the load has to be carried through it by piles.
+cdbe419	By what percentage does the volume of water increase when it freezes?
+56e58de	This is one cause of frost heave – the other is the growth of ice lenses.
+704d5d0	Ice has about 9 % more volume than water. Yet most of the heave is caused by ice lenses: silty soil keeps drawing water up into the frozen zone, where it freezes into more ice.
+74ed31a	ρ<sub>water</sub> ≈ 1000 kg/m³, ρ<sub>ice</sub> ≈ 917 kg/m³
+ad5d58b	1000 / 917 = 1.09 → approx. 9 %
+b7ae703	What is the base resistance of an 80 cm diameter CFA pile whose base is 17 m deep in dense sandy gravel?
+8f8e4be	Illustrative unit base resistance at this depth: q<sub>b</sub> ≈ 5850 kPa.
+e91546a	About 300 tonnes on a single base of half a square metre. In a good bearing stratum the base carries most of the pile load – that is why the pile has to be embedded in the bearing stratum.
+a5f1f7a	What active earth pressure acts on a 1 m length of a 6 m high wall in sand, with no groundwater?
+3f8185a	About 11 tonnes on every metre run, and the pressure increases with depth: the lower third of the wall carries the most. Below the water table, water pressure is added, which can multiply the load.
+305ff30	Spot on
+0ab8cf4	A perfect estimate by engineering standards.
+85b9068	Right ballpark
+12702f2	Within a factor of two – the order of magnitude is right.
+5bbbd7a	Way off
+a5edbc9	Worth thinking about where the difference comes from.
+d738bbd	<line x1="${X(a)}" x2="${X(a)}" y1="${Y - 30}" y2="${Y + 12}" stroke="#16a196" stroke-width="4"/><circle cx="${X(a)}" cy="${Y}" r="7" fill="#16a196"/><text x="${X(a)}" y="${Y - 38}" text-anchor="middle" font-size="15" font-weight="700" fill="#16a196" font-family="Figtree, sans-serif">calculated: ${fmtN(a)} ${q.unit}</text>
+84d4ea2	<div class="qhead"><span>Question ${cur + 1} of ${Q.length}</span><span class="lec">Lecture ${q.lec} · ${q.lt}</span></div>⏎    <p class="qtext">${q.q}</p><p class="qctx">${q.ctx}</p>
+92aeaf1	<button class="btn" type="button" id="again">Guess again</button>
+5c9187d	<button class="btn pri" type="button" id="lock">Lock in my guess</button>
+add23b6	<button class="btn" type="button" id="hide">Hide</button>
+7665257	<button class="btn pri" type="button" id="reveal">Reveal</button>
+59f5498	<div class="verdict ${a.r}"><b>${t}</b><span>${d} Your guess: ${fmtN(a.tip)} ${q.unit}; the calculation: ${fmtN(q.ans)} ${q.unit}.</span></div>
+5fc4c28	<div class="why"><h4>Where does it come from?</h4><p>
+771f6c5	<div class="nav"><button class="btn" type="button" id="prev"${cur === 0 ? ' disabled' : ''}>Previous</button><button class="btn" type="button" id="next"${cur === Q.length - 1 ? ' disabled' : ''}>Next question</button></div>

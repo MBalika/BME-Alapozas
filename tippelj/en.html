@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/tippelj/">
+<title>Guess, then calculate</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Estimation questions for every lecture of Foundation Engineering: guess first, then see the calculation. Projector mode with a QR code.">
+<link rel="alternate" hreflang="hu" href="https://bme-alapozas.vercel.app/tippelj">
+<link rel="alternate" hreflang="en" href="https://bme-alapozas.vercel.app/tippelj/en">
+<link rel="alternate" hreflang="x-default" href="https://bme-alapozas.vercel.app/tippelj">
+<style>
+@font-face{font-family:'Anton';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/anton-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Anton';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/anton-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/figtree-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/figtree-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/figtree-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/figtree-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/figtree-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/figtree-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Martian Mono';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/martian-mono-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Martian Mono';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/martian-mono-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Martian Mono';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/martian-mono-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Martian Mono';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/martian-mono-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+</style>
+<style>
+/* elrendezés: mérnöki becslőlap – bal oldalt a kérdéssor előadásonként, középen egy nagy kérdéskártya logaritmikus skálával */
+:root{
+  --paper:#f1f3ef; --paper2:#e5e9e3; --card:#ffffff; --ink:#0f2524; --ink2:#2f4644; --muted:#5b6f6c; --line:rgba(15,37,36,.12); --line2:rgba(15,37,36,.24);
+  --deep:#0f2524; --deep2:#173331; --dink:#e8efed; --dmuted:#9db3af; --dline:rgba(255,255,255,.12);
+  --acc:#ff5a3c; --acc-ink:#9a2a14; --teal:#16a196; --hit:#1f9d61; --near:#d99a16; --far:#d4483a;
+  --r:16px; --w:1240px; --pad:28px; --hh:58px;
+  --fd:'Anton', 'Impact', 'Arial Narrow', sans-serif; --fb:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif; --fm:'Martian Mono', ui-monospace, Menlo, monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.05), 0 10px 26px rgba(15,37,36,.08);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0b1716; --paper2:#112120; --card:#132625; --ink:#e6eeec; --ink2:#c3d1ce; --muted:#8fa6a2; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --acc-ink:#ff9b85; --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px rgba(0,0,0,.35); color-scheme: dark; } }
+:root[data-theme="dark"]{
+  --paper:#0b1716; --paper2:#112120; --card:#132625; --ink:#e6eeec; --ink2:#c3d1ce; --muted:#8fa6a2; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --acc-ink:#ff9b85; --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 30px rgba(0,0,0,.35); color-scheme: dark; }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+body{margin:0; background:var(--paper); color:var(--ink); font:400 17px/1.6 var(--fb); overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:var(--deep)}
+a{color:inherit}
+button, input{font:inherit; color:inherit}
+.wrap{max-width:var(--w); margin:0 auto; padding-block:0; padding-left:max(var(--pad), env(safe-area-inset-left, 0px)); padding-right:max(var(--pad), env(safe-area-inset-right, 0px))}
+.nw{white-space:nowrap; hyphens:none}
+sub, sup{font-size:.72em; line-height:0}
+:focus-visible{outline:3px solid var(--acc); outline-offset:2px; border-radius:6px}
+main p, main li, footer p, .lead{ text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty }
+h1,h2,h3,button,label,.mono,output{hyphens:none; -webkit-hyphens:none}
+main .rag, footer .rag, .lead.rag{text-align:left!important}
+
+.top{position:sticky; top:env(safe-area-inset-top, 0px); z-index:50; height:var(--hh); background:rgba(15,37,36,.94); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); color:var(--dink); border-bottom:1px solid var(--dline)}
+.top .wrap{height:100%; display:flex; align-items:center; gap:14px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--dink); min-width:0}
+.brand svg{flex:none; width:30px; height:30px}
+.brand b{font:400 22px/1 var(--fd); letter-spacing:.02em; text-transform:uppercase; white-space:nowrap}
+.tscore{margin-left:auto; display:flex; gap:14px; align-items:center; font:400 12px/1 var(--fm); color:var(--dmuted); white-space:nowrap}
+.tscore b{font:400 20px/1 var(--fd); color:var(--dink); letter-spacing:.02em}
+.modebtn{border:1px solid var(--dline); background:transparent; color:var(--dink); border-radius:999px; padding:8px 13px; font:600 13.5px/1 var(--fb); cursor:pointer; white-space:nowrap}
+.modebtn[aria-pressed="true"]{background:var(--acc); border-color:var(--acc); color:#1a0700}
+
+.hero{background:var(--deep); color:var(--dink)}
+.hero .wrap{padding-block:clamp(24px, 4vw, 44px) clamp(22px, 3.4vw, 36px)}
+.hero-grid{display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:clamp(18px, 3vw, 36px); align-items:end}
+.kick{font:400 12px/1.3 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--dmuted)}
+h1{font:400 clamp(48px, 8.5vw, 112px)/.9 var(--fd); text-transform:uppercase; letter-spacing:.005em; margin:10px 0 0; text-wrap:balance}
+h1 em{font-style:normal; color:var(--acc)}
+.lead{margin:14px 0 0; font-size:clamp(16px, 1.6vw, 18.5px); opacity:.92}
+.scale{border:1px solid var(--dline); border-radius:var(--r); padding:16px 18px; background:var(--deep2)}
+.scale h2{margin:0 0 10px; font:400 11.5px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--dmuted)}
+.scale ul{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.scale li{display:grid; grid-template-columns:16px minmax(0, 1fr) auto; gap:10px; align-items:center; font-size:15px; text-align:left}
+.scale i{width:14px; height:14px; border-radius:50%}
+.scale span:last-child{font:400 12px/1 var(--fm); color:var(--dmuted)}
+
+.game{padding-block:26px 10px}
+.ggrid{display:grid; grid-template-columns:280px minmax(0, 1fr); gap:22px; align-items:start}
+.deck{position:sticky; top:calc(var(--hh) + env(safe-area-inset-top, 0px) + 14px); display:flex; flex-direction:column; gap:4px; max-height:calc(100vh - var(--hh) - 40px); overflow:auto; padding-right:4px}
+.deck h3{margin:10px 0 2px; font:400 11px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.deck h3:first-child{margin-top:0}
+.qbtn{display:grid; grid-template-columns:28px minmax(0, 1fr) 14px; gap:10px; align-items:center; text-align:left; border:1px solid transparent; background:transparent; border-radius:12px; padding:8px 10px; cursor:pointer; font-size:14.5px; line-height:1.3}
+.qbtn .n{width:28px; height:28px; border-radius:8px; display:grid; place-items:center; font:400 15px/1 var(--fd); background:var(--paper2); color:var(--ink2)}
+.qbtn .st{width:12px; height:12px; border-radius:50%; background:var(--line2)}
+.qbtn .st.hit{background:var(--hit)} .qbtn .st.near{background:var(--near)} .qbtn .st.far{background:var(--far)}
+.qbtn:hover{background:var(--card)}
+.qbtn[aria-current="true"]{background:var(--card); border-color:var(--line2); box-shadow:var(--shadow)}
+.qbtn[aria-current="true"] .n{background:var(--acc); color:#1a0700}
+
+.qcard{background:var(--card); border:1px solid var(--line); border-radius:22px; box-shadow:var(--shadow); padding:clamp(18px, 3vw, 32px); display:flex; flex-direction:column; gap:18px; min-width:0}
+.qhead{display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; font:400 12px/1.3 var(--fm); color:var(--muted); letter-spacing:.04em}
+.qhead .lec{border:1px solid var(--line2); border-radius:999px; padding:4px 10px; color:var(--ink2)}
+.qtext{margin:0; font:700 clamp(22px, 2.7vw, 32px)/1.22 var(--fb); text-wrap:pretty; text-align:left}
+.qctx{margin:0; color:var(--ink2)}
+.readout{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.readout output{font:400 clamp(54px, 8vw, 92px)/1 var(--fd); letter-spacing:.01em; font-variant-numeric:tabular-nums; color:var(--ink)}
+.readout .u{font:600 22px/1 var(--fb); color:var(--muted)}
+.slider{position:relative; padding-top:6px}
+.slider input[type=range]{width:100%; accent-color:var(--acc); height:30px}
+.ticks{display:flex; justify-content:space-between; font:400 11.5px/1 var(--fm); color:var(--muted); margin-top:2px}
+.row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--line2); background:var(--card); color:var(--ink); border-radius:999px; padding:12px 18px; font:700 15.5px/1 var(--fb); text-decoration:none; cursor:pointer}
+.btn:hover{border-color:var(--acc)}
+.btn.pri{background:var(--acc); border-color:var(--acc); color:#1a0700}
+.btn svg{width:14px; height:14px}
+.btn[disabled]{opacity:.45; cursor:not-allowed}
+.gauge svg{width:100%; height:auto; display:block}
+.verdict{display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; border-radius:14px; padding:12px 16px}
+.verdict b{font:400 30px/1 var(--fd); text-transform:uppercase; letter-spacing:.02em; white-space:nowrap}
+.verdict span{flex:1 1 260px; min-width:0}
+.verdict span{font-size:15.5px}
+.verdict.hit{background:rgba(31,157,97,.12)} .verdict.hit b{color:var(--hit)}
+.verdict.near{background:rgba(217,154,22,.14)} .verdict.near b{color:var(--near)}
+.verdict.far{background:rgba(212,72,58,.11)} .verdict.far b{color:var(--far)}
+.why{border-top:1px dashed var(--line2); padding-top:14px; display:flex; flex-direction:column; gap:10px}
+.why h4{margin:0; font:400 11.5px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.why p{margin:0}
+.eq{font:400 14px/1.75 var(--fm); overflow-x:auto; background:var(--paper); border-radius:12px; padding:10px 14px}
+.eq div{white-space:nowrap}
+.nav{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+
+/* kivetítő mód */
+body.present .deck, body.present .hero, body.present .notes{display:none}
+body.present .ggrid{grid-template-columns:minmax(0, 1fr) 300px}
+body.present .qtext{font-size:clamp(30px, 3.6vw, 52px)}
+.presentside{display:none}
+body.present .presentside{display:flex; flex-direction:column; gap:14px; position:sticky; top:calc(var(--hh) + 14px)}
+.qrbox{background:#fff; border-radius:18px; padding:16px; display:flex; flex-direction:column; align-items:center; gap:10px; border:1px solid var(--line)}
+.qrbox #qr{width:240px; height:240px}
+.qrbox #qr img, .qrbox #qr canvas{width:240px!important; height:240px!important}
+.qrbox p{margin:0; font:600 14px/1.35 var(--fb); color:#0f2524; text-align:center}
+.qrbox code{font:400 12px/1.3 var(--fm); color:#5b6f6c; word-break:break-all; text-align:center}
+body.present .tipzone{display:none}
+.presenterReveal{display:none}
+body.present .presenterReveal{display:flex}
+
+.notes{padding-block:30px 0}
+.notes h2{font:400 clamp(28px, 3.4vw, 40px)/1 var(--fd); text-transform:uppercase; margin:0 0 12px}
+.ngrid{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px}
+.ncard{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px}
+.ncard h3{margin:0 0 6px; font:700 16px/1.3 var(--fb)}
+.ncard p{margin:0; color:var(--ink2); font-size:15.5px}
+footer.wrap{border-top:1px solid var(--line); margin-top:36px; padding-block:18px 28px; color:var(--muted); font-size:14px}
+footer p{margin:0}
+
+@media (max-width: 980px){
+  .ggrid, body.present .ggrid{grid-template-columns:1fr}
+  .deck{position:relative; top:0; max-height:none; flex-direction:row; flex-wrap:nowrap; overflow-x:auto; padding-bottom:6px}
+  .deck h3{display:none}
+  .qbtn{grid-template-columns:28px; padding:6px}
+  .qbtn .t, .qbtn .st{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .ngrid{grid-template-columns:1fr}
+  body.present .presentside{position:relative; top:0}
+}
+@media (max-width: 560px){ :root{--pad:16px} .tscore{display:none} .brand b{font-size:18px; white-space:normal; line-height:.95} .modebtn{margin-left:auto} }
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+
+/* nyelvváltó (HU | EN): a kitöltött az aktuális nyelv; mobilon csak a másik nyelv kódja */
+.langbtn{flex:none; display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid rgba(255,255,255,.22); border-radius:999px; text-decoration:none; color:inherit; font:500 12px/1 var(--fm); letter-spacing:.04em}
+.langbtn b, .langbtn span{display:inline-grid; place-items:center; min-width:30px; padding:5px 8px; border-radius:999px}
+.langbtn b{background:#eef1f4; color:#141a20; font-weight:600}
+.langbtn span{opacity:.75}
+.langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
+@media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
+</style>
+<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
+<script>Hyphenopoly.config({ require: { "en-gb": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Guess, then calculate – back to top"><svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="8" fill="#ff5a3c"/><path d="M5 21 A10 10 0 0 1 25 21" fill="none" stroke="#0f2524" stroke-width="2.4"/><path d="M15 21 L21 12" stroke="#0f2524" stroke-width="2.6" stroke-linecap="round"/><circle cx="15" cy="21" r="2.4" fill="#0f2524"/></svg><b>Guess, then calculate</b></a>
+    <div class="tscore" aria-live="polite"><span>points</span><b id="pts">0</b><span>spot on</span><b id="hits">0</b></div>
+    <button class="modebtn" type="button" id="modeBtn" aria-pressed="false">Projector mode</button>
+    <a class="langbtn" id="langSw" href="./" hreflang="hu" lang="hu" aria-label="Magyar változat"><span>HU</span><b>EN</b></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kick">BME Foundation Engineering · estimates lecture by lecture</div>
+      <h1>Guess, <em>then calculate</em></h1>
+      <p class="lead">A good engineer knows what to expect before doing the calculation. For each question, first drag the slider to where you think the result lies, and only then look at the calculation. The scale is logarithmic: being out by an order of magnitude is the same distance whether you are too high or too low.</p>
+    </div>
+    <div class="scale" aria-label="Scoring">
+      <h2>Scoring</h2>
+      <ul>
+        <li><i style="background:var(--hit)"></i><span>Spot on: within 20 %</span><span>3 points</span></li>
+        <li><i style="background:var(--near)"></i><span>Right ballpark: within a factor of two</span><span>1 point</span></li>
+        <li><i style="background:var(--far)"></i><span>Way off: worth rethinking</span><span>0 points</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="game wrap" id="game">
+    <div class="ggrid">
+      <nav class="deck" id="deck" aria-label="Questions"></nav>
+      <div class="qcard" id="qcard" aria-live="polite"></div>
+      <aside class="presentside" aria-label="Projector"><div class="qrbox"><div id="qr"></div><p>Guess on your phone!</p><code id="qrurl"></code></div></aside>
+    </div>
+  </section>
+  <section class="notes wrap">
+    <h2>In the lecture</h2>
+    <div class="ngrid">
+      <div class="ncard"><h3>1. Projector mode</h3><p>Switch it on with the button in the header: the screen shows only the question and a QR code, and the students use the code to open exactly this question on their phones.</p></div>
+      <div class="ncard"><h3>2. Everyone guesses</h3><p>Give it half a minute. Everyone drags the slider on their own phone and locks in their guess – nobody sees the others’ guesses, so they do not influence each other.</p></div>
+      <div class="ncard"><h3>3. Reveal</h3><p>On the screen, the “Reveal” button shows the result and how it is calculated; the students see on their own phones how close they came.</p></div>
+    </div>
+  </section>
+</main>
+<footer class="wrap"><p>BME Department of Engineering Geology and Geotechnics · Foundation Engineering · Your estimates and guesses are stored only in this browser.</p></footer>
+
+<script>
+(() => {
+'use strict';
+const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const U = (u) => 'https://' + u;
+const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>';
+const fmtN = (v) => { const a = Math.abs(v); const d = a >= 100 ? 0 : a >= 10 ? 1 : a >= 1 ? 2 : 2; let s = (Math.round(v * 10 ** d) / 10 ** d).toFixed(d); if (d && /\.\d*?0+$/.test(s)) s = s.replace(/0+$/, '').replace(/\.$/, ''); const [i, f] = s.split('.'); const ii = i.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); return f ? ii + (EN ? '.' : ',') + f : ii; };
+
+/* ================= KÉRDÉSEK ================= */
+const Q = [
+  { id: 'q1', lec: 1, lt: 'Introduction', app: ['Course home page', 'bme-alapozas.vercel.app/en'],
+    q: 'What is the total weight of a ten-storey reinforced concrete residential building with a 20 × 20 m footprint?', ctx: 'Floors, walls, columns and finishes, plus the people and furniture in the building.', unit: 't', min: 100, max: 100000, ans: 4080,
+    why: 'For a framed building, a good first estimate is that every storey transmits roughly 10 kN, i.e. about 1 tonne, per square metre. This is what the ground has to carry, and if a raft covers the whole plan, the contact pressure is about 10 kPa per storey – about 100 kPa for ten storeys.',
+    eq: ['A = 20 · 20 = 400 m²', 'G + Q ≈ 10 storeys · 400 m² · 10 kN/m² = 40 000 kN', '40 000 kN / 9.81 ≈ 4 080 t'] },
+  { id: 'q2', lec: 2, lt: 'Ground investigation', app: ['Ground investigation', 'talajfelderites.vercel.app/en'],
+    q: 'At least how deep below foundation level must you drill next to a 2.0 m wide pad footing?', ctx: 'Average ground conditions; the depth of the bearing stratum is not yet known.', unit: 'm', min: 0.5, max: 50, ans: 6,
+    why: 'For pad and strip footings, the investigation depth below foundation level is at least three times the footing width, and at least 6 m. The stress from the footing load still reaches this depth, and the influence depth also lies within it.',
+    eq: ['z ≥ 3 · b = 3 · 2.0 = 6.0 m', 'z ≥ 6 m', 'z = 6.0 m'] },
+  { id: 'q3', lec: 3, lt: 'Design of shallow foundations', app: ['Bearing resistance of shallow foundations', 'sikalapok-teherbirasszamitasa.vercel.app/en'],
+    q: 'If the angle of shearing resistance of a sand increases from 30° to 35°, by what factor does the bearing capacity factor N<sub>q</sub> increase?', ctx: 'A difference of only 5 degrees, which can occur even between two tests.', unit: '×', min: 1, max: 20, ans: 1.81,
+    why: 'The bearing capacity factors increase very rapidly with the friction angle. That is why a reliable value of φ′ is decisive: an error of a few degrees means far more than ten or twenty per cent in bearing resistance.',
+    eq: ['N<sub>q</sub> = e<sup>π · tan φ</sup> · tan²(45° + φ/2)', 'φ = 30°: N<sub>q</sub> = 18.40', 'φ = 35°: N<sub>q</sub> = 33.30', '33.30 / 18.40 = 1.81'] },
+  { id: 'q4', lec: 3, lt: 'Design of shallow foundations', app: ['Bearing resistance of shallow foundations', 'sikalapok-teherbirasszamitasa.vercel.app/en'],
+    q: 'And if φ′ increases from 20° to 35°: by what factor does N<sub>γ</sub> increase?', ctx: 'This factor appears in the term proportional to the footing width.', unit: '×', min: 1, max: 100, ans: 11.5,
+    why: 'N<sub>γ</sub> increases even more steeply than N<sub>q</sub>. Between a loose, low-friction soil and a dense sand there is an order of magnitude – the same footing passes comfortably on one and fails on the other.',
+    eq: ['N<sub>γ</sub> = 2 · (N<sub>q</sub> − 1) · tan φ', 'φ = 20°: N<sub>γ</sub> = 2 · 5.40 · 0.364 = 3.93', 'φ = 35°: N<sub>γ</sub> = 2 · 32.30 · 0.700 = 45.23', '45.23 / 3.93 = 11.5'] },
+  { id: 'q5', lec: 4, lt: 'Stability of shallow foundations', app: ['Stability of shallow foundations', 'sikalapokallekonysagvizsgalata.vercel.app/en'],
+    q: 'What water pressure acts from below on the base slab of a basement 7.6 m deep if the groundwater is 3.0 m below ground level?', ctx: 'A two-level underground car park with a watertight diaphragm wall and base slab.', unit: 'kPa', min: 1, max: 500, ans: 46,
+    why: 'Water pressure depends only on the depth below the water table: 10 kPa per metre. 46 kPa is about 4.6 t/m² of uplift – the weight of the building has to hold it down, otherwise the basement can float up during construction.',
+    eq: ['h<sub>w</sub> = 7.6 − 3.0 = 4.6 m', 'u = γ<sub>w</sub> · h<sub>w</sub> = 10 · 4.6 = 46 kPa'] },
+  { id: 'q6', lec: 5, lt: 'Settlement of shallow foundations', app: ['Settlement of shallow foundations', 'sikalapok-sullyedesszamitasa.vercel.app'],
+    q: 'How much does a 2.0 × 2.0 m pad footing on medium-dense sand settle under a load of about 1100 kN?', ctx: 'Foundation level −1.8 m, oedometer modulus of the sand E<sub>oed</sub> = 25 MPa, groundwater at −3.0 m.', unit: 'mm', min: 1, max: 1000, ans: 18.5,
+    why: 'Most students guess much more. Good sand is stiff: under a pad footing like this the settlement is less than two centimetres, and most of it comes from the first two metres below the base.',
+    eq: ['σ<sub>0</sub> = (896.4 + 220) / 4.0 − 31.2 = 247.9 kPa', 'influence depth: Δσ<sub>z</sub> = 0.2 · σ′<sub>z0</sub> → m<sub>0</sub> ≈ 5.0 m', 's = Σ Δh · Δσ / E<sub>oed</sub> ≈ 18.5 mm'] },
+  { id: 'q7', lec: 5, lt: 'Settlement of shallow foundations', app: ['Settlement of shallow foundations', 'sikalapok-sullyedesszamitasa.vercel.app'],
+    q: 'For the same footing, how deep below foundation level is the influence depth?', ctx: 'Where the additional stress drops to 20 % of the effective overburden stress.', unit: 'm', min: 0.2, max: 50, ans: 4.96,
+    why: 'Under a pad footing the stress spreads quickly: it is worth calculating down to about two and a half times the footing width. Under a wide raft, however, the influence depth is much deeper.',
+    eq: ['Δσ<sub>z</sub>(z) by Steinbrenner, below the centre of the footing', 'Δσ<sub>z</sub> = 0.2 · σ′<sub>z0</sub> → z ≈ 4.96 m', 'm<sub>0</sub> ≈ 2.5 · B'] },
+  { id: 'q8', lec: 6, lt: 'Unfavourable ground', app: ['Foundations on unfavourable ground', 'kedvezotlen-altalaj.vercel.app/en'],
+    q: 'How much does a 3.1 m thick peat layer compress under an additional stress of 90 kPa?', ctx: 'Oedometer modulus of the peat: E<sub>oed</sub> = 0.8 MPa.', unit: 'mm', min: 1, max: 3000, ans: 349,
+    why: 'Thirty-five centimetres – many times the allowable value, and the peat keeps creeping for years afterwards. That is why a shallow foundation cannot be placed on peat: the load has to be carried through it by piles.',
+    eq: ['s = Δσ · h / E<sub>oed</sub>', 's = 90 · 3.1 / 800 = 0.349 m ≈ 349 mm'] },
+  { id: 'q9', lec: 7, lt: 'External effects on shallow foundations', app: ['External effects on shallow foundations', 'sikalapokaterohatasok.vercel.app'],
+    q: 'By what percentage does the volume of water increase when it freezes?', ctx: 'This is one cause of frost heave – the other is the growth of ice lenses.', unit: '%', min: 0.1, max: 100, ans: 9,
+    why: 'Ice has about 9 % more volume than water. Yet most of the heave is caused by ice lenses: silty soil keeps drawing water up into the frozen zone, where it freezes into more ice.',
+    eq: ['ρ<sub>water</sub> ≈ 1000 kg/m³, ρ<sub>ice</sub> ≈ 917 kg/m³', '1000 / 917 = 1.09 → approx. 9 %'] },
+  { id: 'q10', lec: 8, lt: 'Deep foundations', app: ['Deep foundations', 'melyalapozasok.vercel.app'],
+    q: 'What is the base resistance of an 80 cm diameter CFA pile whose base is 17 m deep in dense sandy gravel?', ctx: 'Illustrative unit base resistance at this depth: q<sub>b</sub> ≈ 5850 kPa.', unit: 'kN', min: 10, max: 30000, ans: 2941,
+    why: 'About 300 tonnes on a single base of half a square metre. In a good bearing stratum the base carries most of the pile load – that is why the pile has to be embedded in the bearing stratum.',
+    eq: ['A<sub>b</sub> = π · 0.8² / 4 = 0.503 m²', 'R<sub>b</sub> = 5850 · 0.503 ≈ 2941 kN'] },
+  { id: 'q11', lec: 9, lt: 'Excavation support', app: ['Excavation support', 'munkaterhatarolasok.vercel.app'],
+    q: 'What active earth pressure acts on a 1 m length of a 6 m high wall in sand, with no groundwater?', ctx: 'γ = 19 kN/m³, φ′ = 30°, c′ = 0.', unit: 'kN/m', min: 5, max: 3000, ans: 114,
+    why: 'About 11 tonnes on every metre run, and the pressure increases with depth: the lower third of the wall carries the most. Below the water table, water pressure is added, which can multiply the load.',
+    eq: ['K<sub>a</sub> = tan²(45° − φ/2) = tan² 30° = 0.333', 'E<sub>a</sub> = 0.5 · K<sub>a</sub> · γ · H² = 0.5 · 0.333 · 19 · 6² = 114 kN/m'] },
+];
+
+/* ================= ÁLLAPOT ================= */
+const KEY = 'alap-tippelj-v1'; let S = { a: {} };
+try { const o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && o.a) S = o; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+let cur = 0, present = false, presRevealed = false;
+const rate = (tip, ans) => { const r = tip / ans; if (r >= 1 / 1.2 && r <= 1.2) return 'hit'; if (r >= 0.5 && r <= 2) return 'near'; return 'far'; };
+const PTS = { hit: 3, near: 1, far: 0 };
+const VERD = { hit: ['Spot on', 'A perfect estimate by engineering standards.'], near: ['Right ballpark', 'Within a factor of two – the order of magnitude is right.'], far: ['Way off', 'Worth thinking about where the difference comes from.'] };
+
+/* logaritmikus csúszka: 0–1000 lépés */
+const toV = (q, s) => q.min * Math.pow(q.max / q.min, s / 1000);
+const toS = (q, v) => Math.round(1000 * Math.log(v / q.min) / Math.log(q.max / q.min));
+const nice = (v) => { const p = Math.pow(10, Math.floor(Math.log10(v))); const m = v / p; const r = m < 1.5 ? 1 : m < 2.25 ? 2 : m < 3.5 ? 2.5 : m < 4.5 ? 4 : m < 7.5 ? 5 : 10; const k = r * p; return v >= 10 ? Math.round(k) : +k.toPrecision(2); };
+const snap = (v) => { const p = Math.pow(10, Math.floor(Math.log10(v)) - 1); return Math.round(v / p) * p; };
+
+function renderScore() { const vals = Object.values(S.a); $('#pts').textContent = vals.reduce((a, x) => a + PTS[x.r], 0); $('#hits').textContent = vals.filter(x => x.r === 'hit').length; }
+function renderDeck() {
+  let h = '', last = 0;
+  Q.forEach((q, i) => { if (q.lec !== last) { h += `<h3>${q.lec}. ${q.lt}</h3>`; last = q.lec; } const a = S.a[q.id];
+    h += `<button type="button" class="qbtn" data-i="${i}" aria-current="${i === cur}" aria-label="Question ${i + 1}"><span class="n">${i + 1}</span><span class="t">${q.q.replace(/<[^>]+>/g, '')}</span><span class="st ${a ? a.r : ''}"></span></button>`; });
+  $('#deck').innerHTML = h;
+}
+$('#deck').addEventListener('click', (e) => { const b = e.target.closest('.qbtn'); if (b) go(+b.dataset.i); });
+
+function gaugeSVG(q, tip) {
+  const W = Math.round(Math.max(330, Math.min(760, ($('#qcard') || {}).clientWidth - 40 || 760))), H = 150, L = 30, R = 30, Y = 86; const X = (v) => L + (W - L - R) * Math.log(v / q.min) / Math.log(q.max / q.min);
+  let g = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your guess and the correct value on the logarithmic scale">`;
+  const a = q.ans; const z = (lo, hi, col, op) => `<rect x="${X(Math.max(q.min, lo)).toFixed(1)}" y="${Y - 12}" width="${(X(Math.min(q.max, hi)) - X(Math.max(q.min, lo))).toFixed(1)}" height="24" rx="4" fill="${col}" opacity="${op}"/>`;
+  g += `<line x1="${L}" x2="${W - R}" y1="${Y}" y2="${Y}" stroke="currentColor" stroke-width="2" opacity=".35"/>`;
+  g += z(a / 2, a * 2, '#d99a16', 0.28) + z(a / 1.2, a * 1.2, '#1f9d61', 0.45);
+  const e0 = Math.ceil(Math.log10(q.min)), e1 = Math.floor(Math.log10(q.max));
+  for (let e = e0; e <= e1; e++) { const v = Math.pow(10, e); g += `<line x1="${X(v)}" x2="${X(v)}" y1="${Y + 14}" y2="${Y + 24}" stroke="currentColor" opacity=".5"/><text x="${X(v)}" y="${Y + 40}" text-anchor="middle" font-size="13" fill="currentColor" opacity=".7" font-family="Martian Mono, monospace">${fmtN(v)}</text>`; }
+  g += `<line x1="${X(a)}" x2="${X(a)}" y1="${Y - 30}" y2="${Y + 12}" stroke="#16a196" stroke-width="4"/><circle cx="${X(a)}" cy="${Y}" r="7" fill="#16a196"/><text x="${X(a)}" y="${Y - 38}" text-anchor="middle" font-size="15" font-weight="700" fill="#16a196" font-family="Figtree, sans-serif">calculated: ${fmtN(a)} ${q.unit}</text>`;
+  if (tip != null) { const xt = X(tip), up = Math.abs(xt - X(a)) < 120; g += `<path d="M${xt} ${Y + 12} l-8 14 h16 z" fill="#ff5a3c"/><text x="${xt}" y="${up ? Y + 62 : Y + 62}" text-anchor="middle" font-size="14" font-weight="700" fill="#ff5a3c" font-family="Figtree, sans-serif">guess: ${fmtN(tip)}</text>`; }
+  return g + '</svg>';
+}
+
+function render() {
+  const q = Q[cur], a = S.a[q.id]; const host = $('#qcard');
+  const s0 = a ? toS(q, a.tip) : toS(q, Math.sqrt(q.min * q.max));
+  const showAns = present ? presRevealed : !!a;
+  const ticks = [q.min, Math.sqrt(q.min * q.max), q.max].map(v => fmtN(nice(v)));
+  let h = `<div class="qhead"><span>Question ${cur + 1} of ${Q.length}</span><span class="lec">Lecture ${q.lec} · ${q.lt}</span></div>
+    <p class="qtext">${q.q}</p><p class="qctx">${q.ctx}</p>`;
+  if (!present) h += `<div class="tipzone"><div class="readout"><output id="tipOut" for="tip">${fmtN(snap(toV(q, s0)))}</output><span class="u">${q.unit}</span></div>
+    <div class="slider"><input type="range" id="tip" min="0" max="1000" step="1" value="${s0}" aria-label="Your guess"${a ? ' disabled' : ''}><div class="ticks"><span>${ticks[0]}</span><span>${ticks[1]}</span><span>${ticks[2]}</span></div></div>
+    <div class="row" style="margin-top:10px">${a ? '<button class="btn" type="button" id="again">Guess again</button>' : '<button class="btn pri" type="button" id="lock">Lock in my guess</button>'}</div></div>`;
+  else h += `<div class="row presenterReveal">${presRevealed ? '<button class="btn" type="button" id="hide">Hide</button>' : '<button class="btn pri" type="button" id="reveal">Reveal</button>'}</div>`;
+  if (showAns) {
+    h += `<div class="gauge">${gaugeSVG(q, present ? null : a.tip)}</div>`;
+    if (!present) { const [t, d] = VERD[a.r]; h += `<div class="verdict ${a.r}"><b>${t}</b><span>${d} Your guess: ${fmtN(a.tip)} ${q.unit}; the calculation: ${fmtN(q.ans)} ${q.unit}.</span></div>`; }
+    h += `<div class="why"><h4>Where does it come from?</h4><p>${q.why}</p><div class="eq">${q.eq.map(l => `<div>${l}</div>`).join('')}</div><div class="row"><a class="btn" href="${U(q.app[1])}" target="_blank" rel="noopener">Lecture ${q.lec}: ${q.app[0]}${/\/en$/.test(q.app[1]) ? '' : ' (in Hungarian)'} ${ARROW}</a></div></div>`;
+  }
+  h += `<div class="nav"><button class="btn" type="button" id="prev"${cur === 0 ? ' disabled' : ''}>Previous</button><button class="btn" type="button" id="next"${cur === Q.length - 1 ? ' disabled' : ''}>Next question</button></div>`;
+  host.innerHTML = h;
+  const r = $('#tip'); if (r && !a) r.addEventListener('input', () => { $('#tipOut').textContent = fmtN(snap(toV(q, +r.value))); });
+  const lk = $('#lock'); if (lk) lk.addEventListener('click', () => { const tip = snap(toV(q, +$('#tip').value)); S.a[q.id] = { tip, r: rate(tip, q.ans) }; save(); render(); renderDeck(); renderScore(); });
+  const ag = $('#again'); if (ag) ag.addEventListener('click', () => { delete S.a[q.id]; save(); render(); renderDeck(); renderScore(); });
+  const rv = $('#reveal'); if (rv) rv.addEventListener('click', () => { presRevealed = true; render(); });
+  const hd = $('#hide'); if (hd) hd.addEventListener('click', () => { presRevealed = false; render(); });
+  $('#prev').addEventListener('click', () => go(cur - 1)); $('#next').addEventListener('click', () => go(cur + 1));
+  if (present) renderQR();
+}
+function go(i) { cur = Math.max(0, Math.min(Q.length - 1, i)); presRevealed = false; try { history.replaceState(null, '', '#' + Q[cur].id); } catch (e) {} renderDeck(); render(); }
+
+/* ================= KIVETÍTŐ MÓD ================= */
+let qrLib = null;
+function loadQR() { if (qrLib) return qrLib; qrLib = new Promise((res) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'; s.onload = () => res(window.QRCode || null); s.onerror = () => res(null); document.head.appendChild(s); }); return qrLib; }
+function renderQR() {
+  const url = location.href.split('#')[0] + '#' + Q[cur].id; $('#qrurl').textContent = url.replace(/^https?:\/\//, '');
+  loadQR().then((QR) => { const box = $('#qr'); box.innerHTML = ''; if (!QR) { box.textContent = ''; return; } try { new QR(box, { text: url, width: 480, height: 480, correctLevel: QR.CorrectLevel.M }); } catch (e) {} });
+}
+$('#modeBtn').addEventListener('click', () => { present = !present; presRevealed = false; document.body.classList.toggle('present', present); $('#modeBtn').setAttribute('aria-pressed', String(present)); render(); $('#game').scrollIntoView({ block: 'start' }); });
+
+/* ================= INDULÁS ================= */
+const fromHash = () => { const id = (location.hash || '').slice(1); const i = Q.findIndex(q => q.id === id); return i; };
+{ const i = fromHash(); if (i >= 0) cur = i; }
+addEventListener('hashchange', () => { const i = fromHash(); if (i >= 0 && i !== cur) { cur = i; presRevealed = false; renderDeck(); render(); } });
+renderScore(); renderDeck(); render();
+window.__tipp = { Q };
+
+/* nyelvváltó: a választás megmarad (alap-lang), a másik nyelvű oldal ugyanott nyílik meg (alap-pos) */
+(() => {
+  const sw = $('#langSw'), KEY = 'alap-pos'; const hh = () => { const t = $('.top'); return t ? t.offsetHeight : 0; };
+  if (sw) sw.addEventListener('click', () => {
+    try { localStorage.setItem('alap-lang', EN ? 'hu' : 'en'); } catch (e) {}
+    const H0 = hh(); let best = null; document.querySelectorAll('main [id]').forEach((n) => { if (n.closest('svg')) return; const r = n.getBoundingClientRect(); if (r.height && r.top <= H0 + 1 && r.bottom > H0) best = n; });
+    try { sessionStorage.setItem(KEY, JSON.stringify({ id: best ? best.id : '', off: best ? H0 - best.getBoundingClientRect().top : 0, y: scrollY, t: Date.now() })); } catch (e) {}
+    sw.setAttribute('href', (EN ? './' : 'en') + (location.hash || ''));
+  });
+  let p = null; try { p = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
+  if (p && Date.now() - p.t < 20000) { if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    const go = () => { const n = p.id && document.getElementById(p.id); const y = n ? n.getBoundingClientRect().top + scrollY - hh() + p.off : p.y; scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
+    requestAnimationFrame(go); addEventListener('load', () => { go(); setTimeout(go, 600); }, { once: true }); }
+})();
+
+const GUARD = (() => {
+  const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
+  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead, .lead, main .qtext, main .qctx';
+  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead, .lead';
+  const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
+  const TERMS = ['soil and structure', 'bearing stratum', 'groundwater conditions', 'differential settlement', 'differential settlements', 'overall stability', 'ultimate limit state', 'serviceability limit state', 'soft lens', 'organic soil', 'organic clay', 'collapsible loess', 'expansive clay', 'caisson foundations', 'piled raft', 'deepened shallow foundation', 'design project', 'Tower of Pisa'];
+  const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
+  const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
+  const NUMW = EN ? /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]ourteen|[Ff]irst|[Ss]econd|[Tt]hird|[Ff]ourth|[Bb]oth|[Aa]ll|[Ss]everal|[Aa] few))(?=\s\S)\s/g : /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  function textPass(s) {
+    if (!/[ \-–·]/.test(s)) return s;
+    s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
+    s = s.replace(/ ([=≤≥≈→←×±<>⇒↔]) /g, NB + '$1' + NB);
+    s = s.replace(/([\p{N}\p{L})\]′″°²³]) ([+−]) (?=[\p{N}\p{L}(])/gu, '$1' + NB + '$2' + NB);
+    s = s.replace(/(^|[(\[„])([=≤≥≈<>±~]) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/ · (?=(\S+))/g, (m, nxt) => { const w = nxt.replace(/^[(„"]/, ''); if (/^\p{L}{3,}/u.test(w) && !MULT_SYM.test(w)) return m; return NB + '·' + NB; });
+    s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
+    s = s.replace(/(\S) ([–—]) /g, '$1' + NB + '$2 ');   // a gondolatjel nem kezdhet sort
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.|e\.g\.|i\.e\.|approx\.|cf\.|No\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“‘])(a|an|the|A|An|The|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(NUMW, '$1$2' + NB);
+    s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    return s;
+  }
+  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|the|A|An|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[,.]\\d+)?\\.?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
+    if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
+    const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
+    const me = / ([=≤≥≈→←×±<>⇒+−/]) $/.exec(a.nodeValue); if (me && /^\S/.test(b.nodeValue)) a.nodeValue = a.nodeValue.slice(0, -3) + NB + me[1] + NB; } }
+  function bindPositions(full, cpl = 70) {
+    const bind = new Set(); const segMax = Math.max(14, Math.min(38, 0.42 * cpl)), parMax = Math.max(10, Math.min(24, 0.30 * cpl));
+    const mark = (a, b) => { for (let i = a; i < b; i++) if (full[i] === ' ') bind.add(i); };
+    const sepRx = / · |; | – /g; let last = 0, m, lastSep = ''; const segs = [];
+    while ((m = sepRx.exec(full))) { segs.push([last, m.index, lastSep, m[0]]); last = m.index + m[0].length; lastSep = m[0]; } segs.push([last, full.length, lastSep, '']);
+    if (segs.length > 1) for (const [a, b, before, after] of segs) { const t = full.slice(a, b).replace(/[\u2060\u00AD]/g, '').trim(); const dashOnly = (before === ' – ' || before === '') && (after === ' – ' || after === '') && (before || after); const lim = dashOnly ? Math.min(22, segMax) : segMax; if (t.length > 0 && t.length < lim) mark(a, b); }
+    const pr = /\(([^()]{1,30})\)/g; while ((m = pr.exec(full))) { if (m[0].replace(/[\u2060\u00AD]/g, '').length <= parMax) mark(m.index, m.index + m[0].length); }
+    termRx.lastIndex = 0; while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    return bind;
+  }
+  function textNodes(root) { const out = []; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) { let p = n.parentNode; while (p && p !== root) { if (SKIP.has(p.nodeName)) return NodeFilter.FILTER_REJECT; p = p.parentNode; } return NodeFilter.FILTER_ACCEPT; } }); let n; while ((n = w.nextNode())) out.push(n); return out; }
+  let hyph = null; const done = new WeakMap();
+  function processBlock(el) {
+    if (!el.isConnected) return; if (el.closest('svg')) return; const cur = el.textContent; if (done.get(el) === cur) return;
+    const nodes = textNodes(el); for (const n of nodes) { const v = textPass(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; } crossPass(nodes);
+    const full = nodes.map(n => n.nodeValue).join(''); const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const cpl = el.clientWidth > 40 ? el.clientWidth / (fs * 0.52) : 70;
+    const bind = bindPositions(full, cpl);
+    if (bind.size) { let off = 0; for (const n of nodes) { const v = n.nodeValue; let o = '', ch = false; for (let i = 0; i < v.length; i++) { if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i]; } off += v.length; if (ch) n.nodeValue = o; } }
+    if (hyph && el.matches(HYPH)) { for (const n of textNodes(el)) { if (n.parentElement && n.parentElement.closest(NOHY) && n.parentElement.closest(NOHY) !== el) continue; const parts = n.nodeValue.split(/( )/); let ch = false;
+      for (let i = 0; i < parts.length; i += 2) { const t = parts[i]; if (!t || !/\p{L}{6,}/u.test(t)) continue; const clean = t.replace(/[\u00AD\u200B]/g, ''); let hh;
+        if (t.includes(WJ)) { const vis = clean.replace(/[\u2060]/g, ''); if (vis.length <= 16 || /^\(.*\)[.,;:!?]*$/.test(vis)) continue; const k = Math.max(clean.lastIndexOf('\u00A0'), clean.lastIndexOf(WJ)); const tail = clean.slice(k + 1); if (!/\p{L}{6,}/u.test(tail)) continue; hh = clean.slice(0, k + 1) + hyph(tail); } else hh = hyph(clean);
+        hh = hh.replace(/\u200B/g, ''); if (hh !== t) { parts[i] = hh; ch = true; } } if (ch) n.nodeValue = parts.join(''); } }
+    done.set(el, el.textContent);
+  }
+  let obs = null, pend = new Set(), sched = false;
+  function observe() { obs.observe(document.body, { childList: true, subtree: true, characterData: true }); }
+  function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
+  function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
+  function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
+    const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+  return { start, run };
+})();
+
+/* RAG3 – lyukas sorkizárt blokk tartaléka (formázás skill): (1) ha a szép tördelés (text-wrap: pretty) lyukas,
+   előbb sima tördeléssel (text-wrap: wrap, .twr) próbálja – a blokk sorkizárt marad; (2) csak ha így is lyukas,
+   balra zárt lesz (.rag). Az összetartozó egységek (NBSP/U+2060 kötések) érintetlenek maradnak.
+   Idempotens: a döntést szélesség + szöveg szerint megjegyzi, ismételt futáskor nem mér újra. */
+const RAG3 = (() => {
+  try { const st = document.createElement('style'); st.textContent = '.twr{text-wrap:wrap!important}'; document.head.appendChild(st); } catch (e) {}
+  const memo = new WeakMap();
+  const sig = (el) => el.textContent;   // a teljes szöveg (az elválasztás után is újramér)
+  function bad(el, strict) {
+    const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return false;
+    let lastTop = -1e9; for (const r of rs) if (r.width && r.top > lastTop) lastTop = r.top; let big = 0, mid = 0;
+    // sima tördelésnél (strict): egy nem utolsó, nagyon rövid sor (pl. hosszú, nem törhető képlet előtt) is rossz – a sorokat
+    // függőleges átfedés szerint vonjuk össze, így az alsó/felső index nem számít külön sornak; <br>-es blokknál nem vizsgáljuk
+    if (strict && !el.querySelector('br')) { const L = []; for (const r of rs) { if (!r.width || !r.height) continue; let l = L.find((q) => Math.min(q.b, r.bottom) - Math.max(q.t, r.top) > 0.5 * Math.min(q.b - q.t, r.height));
+      if (!l) L.push({ t: r.top, b: r.bottom, l: r.left, r: r.right }); else { l.t = Math.min(l.t, r.top); l.b = Math.max(l.b, r.bottom); l.l = Math.min(l.l, r.left); l.r = Math.max(l.r, r.right); } }
+      L.sort((a, b) => a.t - b.t); for (let i = 0; i < L.length - 1; i++) if (L[i].r - L[i].l < el.clientWidth * 0.35) return true; }
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { const c = t[i]; if (c !== ' ' && c !== '\u00A0') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
+    return big > 0 || mid >= 2;
+  }
+  function check(el) {
+    if (!el || !el.isConnected || !el.offsetParent) return;
+    const w = el.clientWidth, s = sig(el), m = memo.get(el);
+    if (m && m.w === w && m.s === s) { el.classList.toggle('twr', m.res === 'twr'); el.classList.toggle('rag', m.res === 'rag'); return; }
+    el.classList.remove('rag', 'twr'); let res = 'ok';
+    if (getComputedStyle(el).textAlign === 'justify' && bad(el)) { el.classList.add('twr'); res = 'twr'; if (bad(el, true)) { el.classList.remove('twr'); el.classList.add('rag'); res = 'rag'; } }
+    memo.set(el, { w, s, res });
+  }
+  return { check };
+})();
+
+const RAG = (() => {
+  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead, .lead';
+  const check = (el) => RAG3.check(el);
+  const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
+  let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
+  document.addEventListener('click', () => { clearTimeout(tm); tm = setTimeout(run, 120); });
+  return { run };
+})();
+GUARD.start();
+setTimeout(() => RAG.run(), 400);
+{ const iv = setInterval(() => { if (window.__fmtHyphReady) { clearInterval(iv); requestAnimationFrame(() => { RAG.run(); window.__ragDone = true; }); } }, 100); setTimeout(() => clearInterval(iv), 8000); }
+})();
+
+</script>
+
+</body>
+</html>

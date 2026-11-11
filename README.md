@@ -9,6 +9,7 @@ a tárgy útja kilenc állomásban (görgetésre felépülő, ráközelítő met
 - Formázás: sorkizárás + magyar elválasztás (Hyphenopoly hu.wasm), nem törő egységek őre, keskeny dobozban lyuk esetén balra zárt tartalék.
 - A bevezető videó forrása: `Claude videók/_forras/bevezeto_forras.zip` (a kit a `hatasok_forras.zip`-ben van).
 - Átfogó tananyagok almappákban: `telek/` (Egy telek, egy félév – esettanulmány 3D-makettel) és `helyszinelok/` (Geotechnikai helyszínelők – kárügyek). Mindkettő önálló, kész oldal; a forrásuk nem itt van.
+- **Angol változat (/en):** a nyitóoldalé az `_src/i18n_en.py` párjaival készül (`python3 build.py` → `../en.html`). A három extra – `helyszinelok/` (Geotechnical CSI), `tippelj/` (Guess, then calculate), `vizsga/` (Exam simulator) – angolul is elérhető (`<app>/en.html` → `/<app>/en`): `cd _src && python3 build_sub.py` (előfeltétel: `cd _src/sub_i18n && npm install`). A fordítások: `_src/sub_i18n/en_*.tsv` (azonosító = a magyar szöveg sha1-ének első 7 jegye); ha a magyar szöveg változik, a build leáll, a hiányzók: `_src/sub_i18n/missing.tsv`. A magyar `index.html`-ekben benne van a HU | EN nyelvváltó, az `EN` jelző és az angol tördelési szabályok; ha valamelyiket külső forrásból újragenerálják, `python3 sub_prep_hu.py` visszateszi ezeket. Az `Egy telek, egy félév` (`telek/`) még csak magyarul van.
 
 
 ## Videók zenéje

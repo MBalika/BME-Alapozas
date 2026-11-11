@@ -1523,13 +1523,13 @@ const XS = (() => {
   // az egész félévet átfogó tananyagok: széles kártyák a rács végén
   const X = [
     { t: 'Egy telek, egy félév', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Kilenc állomás egyetlen telken: te vagy a geotechnikus, és minden megoldott feladattal tovább épül a két ház 3D-makettje, a talaj megismerésétől az utolsó födémig.' },
-    { t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },
-    { t: 'Tippelj, aztán számolj', u: 'bme-alapozas.vercel.app/tippelj', img: 'tippelj', lab: '1–9', d: 'Becslős kérdések minden előadáshoz: előbb tippelsz egy logaritmikus skálán, aztán megnézed a számítást. Előadáson kivetítő módban, QR-kóddal.' },
-    { t: 'Vizsgaszimulátor', u: 'bme-alapozas.vercel.app/vizsga', img: 'vizsga', lab: '2–9', d: 'Véletlen adatokkal generált számpéldák lépésenkénti ellenőrzéssel – megmutatja, melyik lépésnél csúsztál el –, és igaz–hamis kártyapakli az egész tárgyból.' },
+    { t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', en: 'bme-alapozas.vercel.app/helyszinelok/en', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },
+    { t: 'Tippelj, aztán számolj', u: 'bme-alapozas.vercel.app/tippelj', en: 'bme-alapozas.vercel.app/tippelj/en', img: 'tippelj', lab: '1–9', d: 'Becslős kérdések minden előadáshoz: előbb tippelsz egy logaritmikus skálán, aztán megnézed a számítást. Előadáson kivetítő módban, QR-kóddal.' },
+    { t: 'Vizsgaszimulátor', u: 'bme-alapozas.vercel.app/vizsga', en: 'bme-alapozas.vercel.app/vizsga/en', img: 'vizsga', lab: '2–9', d: 'Véletlen adatokkal generált számpéldák lépésenkénti ellenőrzéssel – megmutatja, melyik lépésnél csúsztál el –, és igaz–hamis kártyapakli az egész tárgyból.' },
     { t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Hat 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma, a pisai torony a rétegsorával, CFA-cölöp, horgonyzott munkagödör és a kész telek. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },
   ];
-  X.forEach(a => { el('a', { cls: 'ac wide', href: U(a.u), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${a.u}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
-    el('li', {}, fl, `<i>${a.lab}</i><a href="${U(a.u)}" target="_blank" rel="noopener">${a.t}</a>${EN ? ' <span class="inhu">HU</span>' : ''}`); }); }
+  X.forEach(a => { el('a', { cls: 'ac wide', href: AU(a), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${AT(a)}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
+    el('li', {}, fl, `<i>${a.lab}</i><a href="${AU(a)}" target="_blank" rel="noopener">${a.t}</a>${EN && !a.en ? ' <span class="inhu">HU</span>' : ''}`); }); }
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;
