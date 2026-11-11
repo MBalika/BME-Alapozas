@@ -1255,11 +1255,14 @@ const XS = (() => {
   const svg = $('#xs'); const X = (x) => (x + 66) * 6, Y = (y) => (40 - y) * 6;
   const P = (pts) => pts.map(([x, y]) => `${X(x).toFixed(1)},${Y(y).toFixed(1)}`).join(' ');
   const lerpx = (a, b, t) => a + (b - a) * t;
-  const ysurf = (x) => x >= -44 ? 0 : x <= -51.5 ? -5 : lerpx(0, -5, (-44 - x) / 7.5);
+  // folyóparti telek (a bevezető animációval egyezően): rézsű a ház mellett (−36 → −43,5), a lábánál folyó (meder −8, vízszint −5,6)
+  const SURF = [[-66, -5], [-59, -5], [-57, -8], [-47, -8], [-45, -5], [-43.5, -5], [-36, 0], [66, 0]], WL = -5.6;
+  const ysurf = (x) => { for (let i = 1; i < SURF.length; i++) if (x <= SURF[i][0]) { const [x0, y0] = SURF[i - 1], [x1, y1] = SURF[i]; return x1 === x0 ? y1 : lerpx(y0, y1, (x - x0) / (x1 - x0)); } return 0; };
+  const sm = (u) => { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); };
   const xb = (y) => lerpx(-6, 4, (-1.2 - y) / 7.8);
-  const gwY = (x) => x >= -40 ? -3 : Math.min(ysurf(x) - 0.05, lerpx(-3, -5.05, Math.min(1, (-40 - x) / 11.5)));
+  const gwY = (x) => x >= -30 ? -3 : x > -45 ? Math.min(ysurf(x) - 0.25, lerpx(-3, WL, sm((-30 - x) / 15))) : WL;
   // nézetek állomásonként: [x0, x1, y_felső] – a képarány 16:10
-  const VIEWS = { 1: [-50, 6, 15], 2: [-62, 54, 30], 3: [-40, -2, 8], 4: [-60, 38, 24], 5: [-42, -4, 11], 6: [-4, 50, 30], 7: [-62, 6, 17], 8: [-6, 46, 12], 9: [-22, 54, 29] };
+  const VIEWS = { 1: [-50, 6, 15], 2: [-62, 54, 30], 3: [-40, -2, 8], 4: [-60, 38, 24], 5: [-43, -3, 13.6], 6: [-4, 50, 30], 7: [-62, 6, 17], 8: [-6, 46, 12], 9: [-22, 54, 29] };
   const vb = (n) => { const [x0, x1, yt] = VIEWS[n]; const w = (x1 - x0) * 6; return [X(x0), Y(yt), w, w * 0.625]; };
   const KF = (n) => (VIEWS[n][1] - VIEWS[n][0]) / 116;     // a feliratok mérete a nézet szélességéhez igazodik
   const defs = h('defs', {}, svg);
@@ -1270,6 +1273,7 @@ const XS = (() => {
   pat('pP', 16, 8, p => h('path', { d: 'M0 4 q4 -3 8 0 t8 0', stroke: 'rgba(240,210,160,.45)', fill: 'none', 'stroke-width': 1.1, style: 'vector-effect:none' }, p));
   pat('pF', 14, 12, p => { h('path', { d: 'M2 3l5 3', stroke: 'rgba(40,30,20,.5)', 'stroke-width': 1.2, style: 'vector-effect:none' }, p); h('circle', { cx: 10, cy: 9, r: 1.2, fill: 'rgba(40,30,20,.4)' }, p); });
   pat('pU', 40, 40, p => { h('text', { x: 20, y: 26, 'text-anchor': 'middle', 'font-size': 18, fill: 'rgba(255,255,255,.10)', 'font-family': 'var(--fm)', 'font-weight': 700, text: '?' }, p); });
+  { const cp = h('clipPath', { id: 'xsSoil' }, defs); h('polygon', { points: [[-66, -5], [-59, -5], [-57, -8], [-47, -8], [-45, -5], [-43.5, -5], [-36, 0], [66, 0], [66, -31], [-66, -31]].map(([x, y]) => `${((x + 66) * 6).toFixed(1)},${((40 - y) * 6).toFixed(1)}`).join(' ') }, cp); }
   const sky = h('linearGradient', { id: 'xsSky', x1: 0, y1: 0, x2: 0, y2: 1 }, defs); h('stop', { offset: 0, 'stop-color': '#121b27' }, sky); h('stop', { offset: 1, 'stop-color': '#1c2633' }, sky);
   const glass = h('linearGradient', { id: 'xsGl', x1: 0, y1: 0, x2: 1, y2: 1 }, defs); h('stop', { offset: 0, 'stop-color': '#6f8fa8' }, glass); h('stop', { offset: .55, 'stop-color': '#34506a' }, glass); h('stop', { offset: 1, 'stop-color': '#4b6a82' }, glass);
   h('rect', { x: -200, y: -200, width: 1300, height: 900, fill: 'url(#xsSky)' }, svg);
@@ -1288,19 +1292,23 @@ const XS = (() => {
     h('line', { x1: bx0, y1: by0, x2: ax - Math.cos(an) * L * 0.8, y2: ay - Math.sin(an) * L * 0.8, stroke: col, 'stroke-width': w, 'stroke-linecap': 'round' }, g);
     h('path', { d: `M${ax} ${ay} L${ax - Math.cos(an - .45) * L} ${ay - Math.sin(an - .45) * L} L${ax - Math.cos(an + .45) * L} ${ay - Math.sin(an + .45) * L}Z`, fill: col }, g); };
   // ---- fák (háttér)
-  const trees = h('g', {}, svg); for (const [x, s] of [[-58, .8], [-40, 1], [-2, .9], [36, .9], [48, 1.05], [58, .85]]) { const y = ysurf(x); rect(trees, x - .25, x + .25, y, y + 4 * s, { fill: '#4a3a2c' }); h('ellipse', { cx: X(x), cy: Y(y + 6 * s), rx: 17 * s, ry: 21 * s, fill: '#2f5a3a' }, trees); h('ellipse', { cx: X(x) - 5, cy: Y(y + 6.6 * s), rx: 9 * s, ry: 11 * s, fill: '#3d7049' }, trees); }
+  const trees = h('g', {}, svg); for (const [x, s] of [[-62.5, .8], [-40, 1], [-2, .9], [36, .9], [48, 1.05], [58, .85]]) { const y = ysurf(x); rect(trees, x - .25, x + .25, y, y + 4 * s, { fill: '#4a3a2c' }); h('ellipse', { cx: X(x), cy: Y(y + 6 * s), rx: 17 * s, ry: 21 * s, fill: '#2f5a3a' }, trees); h('ellipse', { cx: X(x) - 5, cy: Y(y + 6.6 * s), rx: 9 * s, ry: 11 * s, fill: '#3d7049' }, trees); }
   // ---- talaj: ismeretlen (1) és feltárt (2–)
-  const body = [[-66, -5], [-51.5, -5], [-44, 0], [66, 0], [66, -31], [-66, -31]];
+  const body = [...SURF, [66, -31], [-66, -31]];
   const gU = G(1, 2); poly(gU, body, { fill: '#2b3038' }); poly(gU, body, { fill: 'url(#pU)' });
   const gL = G(2, 99);
   const L = (pts, fill, p) => { poly(gL, pts, { fill }); if (p) poly(gL, pts, { fill: `url(#${p})` }); };
-  L([[-66, -5], [-51.5, -5], [-44, 0], [66, 0], [66, -1.2], [-44, -1.2], [-51.5, -6.2], [-66, -6.2]], '#8a7f6e', 'pF');
-  L([[-66, -6.2], [-51.5, -6.2], [-44, -1.2], [xb(-1.2), -1.2], [xb(-9), -9], [-66, -9]], '#cfae74', 'pS');
+  L([[-45.8, -6.2], [-45, -5], [-43.5, -5], [-36, 0], [66, 0], [66, -1.2], [-36, -1.2], [-43.5, -6.2]], '#8a7f6e', 'pF');
+  L([[-66, -5], [-59, -5], [-58.2, -6.2], [-66, -6.2]], '#8a7f6e', 'pF');
+  L([[-66, -6.2], [-58.2, -6.2], [-57, -8], [-47, -8], [-45.8, -6.2], [-43.5, -6.2], [-36, -1.2], [xb(-1.2), -1.2], [xb(-9), -9], [-66, -9]], '#cfae74', 'pS');
   L([[xb(-1.2), -1.2], [66, -1.2], [66, -9], [xb(-9), -9]], '#6a645b', 'pC');
   { const pts = []; for (let i = 0; i < 48; i++) { const a = i / 48 * Math.PI * 2; pts.push([19 + 10.5 * Math.cos(a), -4.3 + 1.55 * Math.sin(a)]); } L(pts, '#3d2d20', 'pP'); }
   L([[-66, -9], [66, -9], [66, -18], [-66, -18]], '#a2957f', 'pG');
   L([[-66, -18], [66, -18], [66, -31], [-66, -31]], '#5d5046', 'pC');
-  const surf = h('g', {}, svg); line(surf, [[-66, -5], [-51.5, -5], [-44, 0], [-13, 0]], { stroke: '#4f8a3c', 'stroke-width': 3.5 }); line(surf, [[-3, 0], [66, 0]], { stroke: '#4f8a3c', 'stroke-width': 3.5 }); line(surf, [[-13, 0], [-3, 0]], { stroke: '#3a3d42', 'stroke-width': 4.5 });
+  const surf = h('g', {}, svg); line(surf, [[-66, -5], [-59, -5]], { stroke: '#4f8a3c', 'stroke-width': 3.5 }); line(surf, [[-59, -5], [-57, -8], [-47, -8], [-45, -5]], { stroke: '#8d7d63', 'stroke-width': 3 }); line(surf, [[-45, -5], [-43.5, -5], [-36, 0], [-13, 0]], { stroke: '#4f8a3c', 'stroke-width': 3.5 });
+  // a folyó (a metszetre merőlegesen folyik) – minden állomáson látszik
+  { const gR = h('g', {}, svg); poly(gR, [[-58.6, WL], [-57, -8], [-47, -8], [-45.4, WL]], { fill: '#2b6f8f', opacity: .86 }); line(gR, [[-58.6, WL], [-45.4, WL]], { stroke: '#9fd8ff', 'stroke-width': 2 });
+    for (const x of [-55, -51, -48.6]) line(gR, [[x - 1.1, WL - 0.9], [x + 1.1, WL - 0.9]], { stroke: 'rgba(207,239,255,.55)', 'stroke-width': 1.4, class: 'flow' }); } line(surf, [[-3, 0], [66, 0]], { stroke: '#4f8a3c', 'stroke-width': 3.5 }); line(surf, [[-13, 0], [-3, 0]], { stroke: '#3a3d42', 'stroke-width': 4.5 });
   // ---- 2: fúrások, CPT, talajvíz, rétegnevek
   const gB = G(2, 3);
   for (const x of [-26, -1, 20]) { const col = (y) => (y > ysurf(x) - 1.2 ? '#8a7f6e' : y > -9 ? (x < xb(y) ? '#e9c77d' : ((x - 19) ** 2 / 110 + (y + 4.3) ** 2 / 2.4 < 1 ? '#5b3b22' : '#8d9aa6')) : y > -18 ? '#d9c7a3' : '#7c8792');
@@ -1315,54 +1323,115 @@ const XS = (() => {
   // ---- A ház: hologram (1–4), kész (5–)
   const A = { x0: -34, x1: -16 }, FX = [-33, -25, -17];
   const gHA = G(1, 5); rect(gHA, A.x0, A.x1, 0.3, 10.5, { class: 'holo' }); for (const y of [3.6, 6.9]) line(gHA, [[A.x0, y], [A.x1, y]], { stroke: '#8ff0ff', 'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: .7 });
-  const gA = G(5, 99);
+  const gA = G(6, 99);
   rect(gA, A.x0, A.x1, 0.3, 10.5, { fill: '#efe5cf', stroke: '#8d8576', 'stroke-width': 1 }); rect(gA, A.x0 - .2, A.x1 + .2, 10.2, 10.8, { fill: '#6a6f75' });
   for (let f = 0; f < 3; f++) for (let c = 0; c < 6; c++) { const cx = A.x0 + 1.5 + c * 3; rect(gA, cx - .7, cx + .7, 1.6 + f * 3.3, 2.8 + f * 3.3, { fill: '#4b6274' }); }
   rect(gA, -25.8, -24.2, 0.3, 2.7, { fill: '#5a4232' });
-  const gF = G(3, 99); for (const x of FX) { rect(gF, x - 1, x + 1, -1.8, -1.2, { fill: '#cfcac0', stroke: '#6f6a62', 'stroke-width': 1 }); rect(gF, x - .25, x + .25, -1.2, 0.3, { fill: '#bdb7ac' }); }
+  const gF = G(6, 99); for (const x of FX) { rect(gF, x - 1, x + 1, -1.8, -1.2, { fill: '#cfcac0', stroke: '#6f6a62', 'stroke-width': 1 }); rect(gF, x - .25, x + .25, -1.2, 0.3, { fill: '#bdb7ac' }); }
   // ---- 1: kölcsönhatás
   const g1 = G(1, 2);
   for (const x of [-32, -28.5, -25, -21.5, -18]) arr(g1, x, 4, x, 0.6, '#f2a531', 2.6);
   for (const [ry, a] of [[4.5, .95], [8.5, .7], [13, .45]]) h('path', { d: `M${X(A.x0)} ${Y(0)} C ${X(A.x0)} ${Y(-ry * 1.25)}, ${X(A.x1)} ${Y(-ry * 1.25)}, ${X(A.x1)} ${Y(0)}`, fill: 'none', stroke: '#f2a531', 'stroke-width': 2.2, opacity: a, 'stroke-dasharray': '7 5' }, g1);
   tag(g1, -25, -17.2, 'feszültségek a talajban', '#f2a531');
-  // ---- 3: alapsík, talajtörés
+  // alaptest + falcsonk (dy: süllyedés, lefelé pozitív)
+  const foot = (g, x, dy = 0) => { rect(g, x - 1, x + 1, -1.8 - dy, -1.2 - dy, { fill: '#cfcac0', stroke: '#6f6a62', 'stroke-width': 1 }); rect(g, x - .25, x + .25, -1.2 - dy, 0.3 - dy, { fill: '#bdb7ac' }); };
+  const red = '#ef5a43';
+  // ---- 3: alapsík, talajtörés – a csúszólapok a terepszintig, felpúposodás, a szélső alaptest besüllyed
   const g3 = G(3, 4);
-  line(g3, [[-37, -1.8], [-9, -1.8]], { stroke: '#fff', 'stroke-width': 1.4, 'stroke-dasharray': '6 5' }); lbl(g3, -8.6, -2.3, 'alapsík', '#fff', 'start');
-  { const xc = -17, yb = -1.8, b = 1, f = Math.PI / 6, al = Math.PI / 4 + f / 2, Ax = xc, Ay = yb - b * Math.tan(al);
+  line(g3, [[-39.8, -1.8], [-6, -1.8]], { stroke: '#fff', 'stroke-width': 1.4, 'stroke-dasharray': '6 5', opacity: .8 }); lbl(g3, -39.6, -1.0, 'alapsík', '#fff', 'start');
+  foot(g3, -33); foot(g3, -25); foot(g3, -17, 0.6);
+  { const xc = -17, yb = -1.8, b = 1, f = Math.PI / 6, al = Math.PI / 4 + f / 2, be = Math.PI / 4 - f / 2, Ax = xc, Ay = yb - b * Math.tan(al);
+    arr(g3, xc, 4.2, xc, 0.9, '#f2a531', 3);
     for (const s of [1, -1]) { const E = [xc + s * b, yb], r0 = b / Math.cos(al), th0 = s > 0 ? Math.PI + al : -al; const sp = [];
       for (let i = 0; i <= 24; i++) { const d = i / 24 * Math.PI / 2, th = s > 0 ? th0 + d : th0 - d, r = r0 * Math.exp(d * Math.tan(f)); sp.push([E[0] + r * Math.cos(th), E[1] + r * Math.sin(th)]); }
-      const Pp = sp[sp.length - 1], tq = (yb - Pp[1]) / Math.sin(Math.PI / 4 - f / 2); const Q = [Pp[0] + s * tq * Math.cos(Math.PI / 4 - f / 2), yb];
-      line(g3, [E, [Ax, Ay]], { stroke: '#ef5a43', 'stroke-width': 2.4 }); line(g3, sp, { stroke: '#ef5a43', 'stroke-width': 2.8 }); line(g3, [Pp, Q], { stroke: '#ef5a43', 'stroke-width': 2.8 });
-      arr(g3, Q[0] - s * 1.6, Q[1] - 0.6, Q[0] - s * 0.5, Q[1] + 1.0, '#ef5a43', 2.4); }
-    tag(g3, -17, -6.8, 'talajtörés', '#ef5a43'); }
-  // ---- 4: állékonyság
+      const Pp = sp[sp.length - 1], ts = (0 - Pp[1]) / Math.sin(be); const Qs = [Pp[0] + s * ts * Math.cos(be), 0];
+      // felpúposodás a terepszinten (torzítva)
+      const xe = xc + s * (b + 0.05), hp = []; for (let i = 0; i <= 24; i++) { const u = i / 24; hp.push([lerpx(xe, Qs[0], u), 0.95 * Math.sin(Math.PI * u) * (1.15 - 0.45 * u)]); }
+      poly(g3, hp.concat([[Qs[0], 0], [xe, 0]]), { fill: '#a8916a' }); line(g3, hp, { stroke: '#4f8a3c', 'stroke-width': 3 });
+      line(g3, [E, [Ax, Ay]], { stroke: red, 'stroke-width': 2.4 }); line(g3, sp, { stroke: red, 'stroke-width': 2.8 }); line(g3, [Pp, Qs], { stroke: red, 'stroke-width': 2.8 });
+      for (const fi of [8, 16]) line(g3, [E, sp[fi]], { stroke: red, 'stroke-width': 1.4, opacity: .6 });
+      const q0 = [lerpx(Pp[0], Qs[0], .45) - s * 1.0, lerpx(Pp[1], Qs[1], .45) - 0.9]; arr(g3, q0[0], q0[1], q0[0] + s * 1.5, q0[1] + 1.1, red, 2.4); }
+    tag(g3, -17, -7.0, 'talajtörés', red); tag(g3, -7.4, 2.9, 'felpúposodás', '#e8cf98'); }
+  // ---- 4: állékonyság – hirdetőoszlop (elcsúszás, felborulás), medence (felúszás), csúszólap a szélső alaptest alatt
   const g4 = G(4, 5);
-  arr(g4, -16.2, -1.5, -10.8, -1.5, '#ef5a43', 3); tag(g4, -9, -4.4, 'elcsúszás', '#ef5a43');
-  for (const y of [3, 6, 9]) arr(g4, -42, y, -34.6, y, '#cfe8ff', 2.6); tag(g4, -40, 12.6, 'felborulás (szél)', '#cfe8ff');
-  rect(g4, 8, 30, -7.6, 0.3, { class: 'holo' }); for (let i = 0; i < 6; i++) { const x = 9.8 + i * 3.7; arr(g4, x, -11, x, -8, '#5cc2f2', 2.6); } tag(g4, 19, -13.4, 'felúszás', '#5cc2f2');
-  { const cx = -48.7, cy = 9, r = 14.76, a0 = Math.atan2(-9, 11.7), a1 = Math.atan2(-14, -4.8); const arc = []; for (let i = 0; i <= 30; i++) { const a = a0 + (a1 - a0) * i / 30; arc.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
-    const m = arc.slice(); for (let x = -53.5; x <= -37; x += .5) m.push([x, ysurf(x)]); poly(g4, m, { fill: 'rgba(239,90,67,.22)' }); line(g4, arc, { stroke: '#ef5a43', 'stroke-width': 2.6, 'stroke-dasharray': '8 6' }); tag(g4, -41, -10.2, 'általános állékonyság', '#ef5a43'); }
-  // ---- 5: süllyedés
+  for (const x of FX) foot(g4, x);
+  { const P = { x: -14, r: 0.62, h: 3.7, fB: 2, fh: 0.6, base: -0.85 }, px = P.x + P.fB / 2, py = P.base, y0 = P.base + P.fh + 0.5;
+    rect(g4, P.x - P.fB / 2, P.x + P.fB / 2, P.base, P.base + P.fh, { fill: 'none', stroke: '#fff', 'stroke-width': 1, 'stroke-dasharray': '4 3', opacity: .7 });
+    const gp = h('g', { transform: `translate(${0.5 * 6} 0) rotate(8 ${X(px)} ${Y(py)})` }, g4);
+    rect(gp, P.x - P.fB / 2, P.x + P.fB / 2, P.base, P.base + P.fh, { fill: '#cfcac0', stroke: '#6f6a62', 'stroke-width': 1 });
+    rect(gp, P.x - P.r - .1, P.x + P.r + .1, P.base + P.fh, y0, { fill: '#3b4046' });
+    ['#e4553f', '#2e73c9', '#f2a531', '#158e9c'].forEach((c, i) => rect(gp, P.x - P.r + i * P.r / 2, P.x - P.r + (i + 1) * P.r / 2, y0, y0 + P.h, { fill: c }));
+    rect(gp, P.x - P.r, P.x + P.r, y0, y0 + P.h, { fill: 'none', stroke: '#2a2d31', 'stroke-width': 1 }); rect(gp, P.x - P.r - .12, P.x + P.r + .12, y0 + P.h, y0 + P.h + .2, { fill: '#3b4046' });
+    h('path', { d: `M${X(P.x - P.r)} ${Y(y0 + P.h + .2)} Q ${X(P.x)} ${Y(y0 + P.h + 1.0)} ${X(P.x + P.r)} ${Y(y0 + P.h + .2)} Z`, fill: '#3b4046' }, gp);
+    for (const y of [1.0, 2.2, 3.4]) arr(g4, -21, y, -15.6, y, '#cfe8ff', 2.4); lbl(g4, -21.4, 4.6, 'szél', '#cfe8ff', 'start');
+    arr(g4, -12.4, -0.55, -9.4, -0.55, red, 3); tag(g4, -8.6, -3.6, 'elcsúszás', red);
+    h('path', { d: `M${X(-15.6)} ${Y(4.6)} A ${3.6 * 6} ${3.6 * 6} 0 0 1 ${X(-10.2)} ${Y(2.2)}`, fill: 'none', stroke: red, 'stroke-width': 2.6 }, g4); arr(g4, -10.6, 2.9, -10.1, 2.0, red, 2.6);
+    tag(g4, -12.6, 8.4, 'felborulás', red); }
+  { const R = 1.6; rect(g4, 8, 30, -7.6, -7.6 + R, { fill: 'rgba(92,194,242,.38)' }); rect(g4, 8, 30, -7.6 + R, 0.3 + R, { class: 'holo' });
+    for (let i = 0; i < 7; i++) { const x = 9.6 + i * 3.1; arr(g4, x, -10.8, x, -7.8 + R, '#5cc2f2', 2.6); } lbl(g4, 31, -10.2, 'U', '#5cc2f2', 'start');
+    arr(g4, 24, 5.4 + R, 24, 1.0 + R, '#f2a531', 2.6); lbl(g4, 25, 3.6 + R, 'G', '#f2a531', 'start'); tag(g4, 19, -13.6, 'felúszás', '#5cc2f2'); }
+  { const cx = -40.21, cy = 7.22, r = 12.92, a0 = Math.atan2(0 - cy, -29.5 - cx), a1 = Math.atan2(-5 - cy, -44.4 - cx); const arc = []; for (let i = 0; i <= 40; i++) { const a = a0 + (a1 - a0) * i / 40; arc.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
+    const m = arc.slice(); for (let x = -44.4; x <= -29.5 + 1e-6; x += .5) m.push([x, ysurf(x)]); poly(g4, m, { fill: 'rgba(239,90,67,.24)' }); line(g4, arc, { stroke: red, 'stroke-width': 2.6, 'stroke-dasharray': '8 6' });
+    arr(g4, -36.4, -3.0, -40.8, -4.9, red, 2.6); tag(g4, -37, -10.4, 'általános állékonyság', red); }
+  // ---- 5: süllyedés – a középső alaptest jobban terhelt, a ház közepe jobban süllyed (torzítva)
   const g5 = G(5, 6);
-  for (const x of FX) for (const [kk, a] of [[1, .95], [2, .7], [3.3, .45]]) h('path', { d: `M${X(x - 1)} ${Y(-1.8)} C ${X(x - 1 - .35 * kk)} ${Y(-1.8 - 1.6 * kk)}, ${X(x + 1 + .35 * kk)} ${Y(-1.8 - 1.6 * kk)}, ${X(x + 1)} ${Y(-1.8)}`, fill: 'none', stroke: '#f2a531', 'stroke-width': 2, opacity: a }, g5);
-  h('path', { d: `M${X(-34.5)} ${Y(-1.8)} C ${X(-37)} ${Y(-11)}, ${X(-13)} ${Y(-11)}, ${X(-15.5)} ${Y(-1.8)}`, fill: 'none', stroke: '#e0702e', 'stroke-width': 2.2, opacity: .85 }, g5);
-  line(g5, [[-40, -8.6], [-8, -8.6]], { stroke: '#ffd36b', 'stroke-width': 1.8, 'stroke-dasharray': '7 5' }); lbl(g5, -8.4, -10, 'határmélység', '#ffd36b', 'end');
-  arr(g5, -14.6, 1.6, -14.6, -0.4, '#ffffff', 2.2); lbl(g5, -13.9, 0.3, 's', '#fff', 'start'); tag(g5, -25, 13.2, 'feszültség és süllyedés', '#f2a531');
-  // ---- 6: kedvezőtlen talaj
+  { const sE = 0.35, sM = 1.6, sag = (x) => { const u = (x + 25) / 9; return sE + (sM - sE) * (Math.abs(u) >= 1 ? 0 : Math.cos(u * Math.PI / 2) ** 2); };
+    const xs = []; for (let x = A.x0; x <= A.x1 + 1e-6; x += 0.5) xs.push(x);
+    poly(g5, xs.map(x => [x, 10.5 - sag(x)]).concat(xs.slice().reverse().map(x => [x, 0.3 - sag(x)])), { class: 'holo' });
+    for (const y of [3.6, 6.9]) line(g5, xs.map(x => [x, y - sag(x)]), { stroke: '#8ff0ff', 'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: .7 });
+    FX.forEach((x, i) => { foot(g5, x, sag(x)); const kk = i === 1 ? 1.75 : 1;
+      for (const [q, a] of [[1, .95], [2, .7], [3.3, .45]]) { const k2 = q * kk; h('path', { d: `M${X(x - 1)} ${Y(-1.8 - sag(x))} C ${X(x - 1 - .35 * k2)} ${Y(-1.8 - sag(x) - 1.6 * k2)}, ${X(x + 1 + .35 * k2)} ${Y(-1.8 - sag(x) - 1.6 * k2)}, ${X(x + 1)} ${Y(-1.8 - sag(x))}`, fill: 'none', stroke: '#f2a531', 'stroke-width': i === 1 ? 2.4 : 2, opacity: a }, g5); }
+      const L = i === 1 ? 4.6 : 2.6; arr(g5, x, 1.2 + L - sag(x), x, 1.0 - sag(x), '#f2a531', i === 1 ? 4.2 : 2.4); });
+    lbl(g5, -24.2, 6.6 - sag(-25), 'nagyobb teher', '#f2a531', 'start');
+    h('path', { d: `M${X(-34.5)} ${Y(-2.2)} C ${X(-38)} ${Y(-13.5)}, ${X(-12)} ${Y(-13.5)}, ${X(-15.5)} ${Y(-2.2)}`, fill: 'none', stroke: '#e0702e', 'stroke-width': 2.2, opacity: .85 }, g5);
+    line(g5, [[-40, -10.4], [-8, -10.4]], { stroke: '#ffd36b', 'stroke-width': 1.8, 'stroke-dasharray': '7 5' }); lbl(g5, -8.4, -9.7, 'határmélység', '#ffd36b', 'end');
+    line(g5, [[-37, 0], [-13, 0]], { stroke: '#fff', 'stroke-width': 1.2, 'stroke-dasharray': '6 5', opacity: .75 });
+    line(g5, xs.map(x => [x, -sag(x)]), { stroke: red, 'stroke-width': 2.8 }); line(g5, [[A.x0, -sE], [A.x1, -sE]], { stroke: '#fff', 'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: .7 });
+    arr(g5, -21.6, -sE + 0.2, -21.6, -sag(-21.6) - 0.05, '#fff', 1.8); lbl(g5, -21.0, -0.6, 'Δs', '#fff', 'start');
+    arr(g5, -14.4, 1.6, -14.4, -sE, '#ffffff', 2.2); lbl(g5, -13.7, 0.5, 's', '#fff', 'start');
+    tag(g5, -25, 12.6, 'egyenlőtlen süllyedés', '#f2a531'); }
+  // ---- 6: kedvezőtlen talaj – négy talaj kis metszetben; síkalap ezeken is lehet, csak több szabállyal
   const g6 = G(6, 7);
-  { const gg = h('g', { transform: `rotate(4.2 ${X(8)} ${Y(-0.4)})` }, g6); rect(gg, 8, 30, 0.3, 26.7, { class: 'holo' }); rect(gg, 7, 31, -1.2, -0.4, { class: 'holo' }); for (let i = 1; i < 8; i++) line(gg, [[8, 0.3 + i * 3.3], [30, 0.3 + i * 3.3]], { stroke: '#8ff0ff', 'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: .6 }); }
-  { const pts = []; for (let i = 0; i <= 48; i++) { const a = i / 48 * Math.PI * 2; pts.push([19 + 10.5 * Math.cos(a), -4.3 + 1.55 * Math.sin(a)]); } line(g6, pts, { stroke: '#ff9a5a', 'stroke-width': 3, class: 'pulse' }); }
-  { const s = KF(6) * 6; h('path', { d: `M${X(36)} ${Y(23)} l${4 * s} ${4 * s} M${X(36) + 4 * s} ${Y(23)} l${-4 * s} ${4 * s}`, stroke: '#ef5a43', 'stroke-width': 7, 'stroke-linecap': 'round' }, g6); }
-  tag(g6, 40, -2.4, 'tőzeg, puha agyag', '#ff9a5a'); tag(g6, 42, 14, 'TORZÍTVA', '#f2a531');
-  // ---- 7: külső hatások
+  { rect(g6, -6, 52, -5, 32, { fill: 'rgba(8,10,14,.62)' }); tag(g6, 35.6, 28.0, 'síkalap is lehet – több szabállyal', '#f2a531');
+    const W = 25.2, Hh = 12.2, cells = [[-2.8, 25.4], [23.6, 25.4], [-2.8, 12.4], [23.6, 12.4]], names = ['Térfogatváltozó agyag', 'Roskadékony lösz', 'Feltöltés', 'Szerves talaj, tőzeg'];
+    cells.forEach(([x0, yt], i) => { const x1 = x0 + W, yb = yt - Hh, ys = yt - 6.4, fx = x0 + W * (i === 3 ? 0.3 : 0.58);
+      rect(g6, x0, x1, yb, yt, { fill: 'rgba(14,16,19,.94)', stroke: 'rgba(242,165,49,.5)', 'stroke-width': 1.2, rx: 6 });
+      lbl(g6, x0 + 1.0, yt - 2.1, names[i], '#fff', 'start');
+      const sf = [ '#8d877a', '#cdb071', '#867a68', '#3f2d20' ][i], pt = [ 'pC', null, 'pF', 'pP' ][i];
+      const top = i === 1 ? ys - 0.9 : i === 3 ? ys - 1.0 : ys; rect(g6, x0 + 0.6, x1 - 0.6, yb + 0.6, top, { fill: sf }); if (pt) rect(g6, x0 + 0.6, x1 - 0.6, yb + 0.6, top, { fill: `url(#${pt})` });
+      if (i === 0) { for (const cx of [x0 + 3, x0 + 9, x0 + 15.5, x0 + 21]) line(g6, [[cx, top], [cx + .4, top - 1.2], [cx - .3, top - 2.4], [cx + .2, top - 3.4]], { stroke: '#1d1712', 'stroke-width': 2 });
+        h('circle', { cx: X(x1 - 2.2), cy: Y(top + 2.4), r: 6, fill: '#ffd36b' }, g6); h('circle', { cx: X(x0 + 3.0), cy: Y(top + 2.0), r: 4, fill: '#5cc2f2' }, g6); arr(g6, fx + 3.6, top + 0.2, fx + 3.6, top + 2.0, '#5cc2f2', 2); arr(g6, fx + 4.6, top + 2.0, fx + 4.6, top + 0.2, '#ffd36b', 2); }
+      if (i === 1) { for (let xx = x0 + 1.2; xx < x1 - 0.8; xx += 0.9) line(g6, [[xx, yb + 0.8], [xx, top - 0.3]], { stroke: 'rgba(90,64,28,.7)', 'stroke-width': 1 });
+        for (let k2 = 0; k2 < 6; k2++) { const cx2 = x0 + 2.2 + k2 * 3.9; if (Math.abs(cx2 - fx) < 2.8) continue; h('circle', { cx: X(cx2), cy: Y(ys + 1.0 + (k2 % 2) * 0.8), r: 3, fill: '#5cc2f2' }, g6); } arr(g6, fx + 3.8, top + 2.2, fx + 3.8, top + 0.2, red, 2.2); }
+      if (i === 2) { const hs = (a, b) => { const v = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return v - Math.floor(v); }; for (let k2 = 0; k2 < 30; k2++) { const xx = x0 + 1.2 + hs(k2, 1) * (W - 3.4), yy = yb + 1.0 + hs(k2, 2) * (top - yb - 1.8); if (k2 % 3 === 0) rect(g6, xx, xx + 1.6, yy, yy + 0.7, { fill: '#b4523b' }); else if (k2 % 3 === 1) poly(g6, [[xx, yy], [xx + 1.2, yy + 0.4], [xx + 0.8, yy + 1.0]], { fill: '#a7a39b' }); else h('ellipse', { cx: X(xx), cy: Y(yy), rx: 6, ry: 3.5, fill: '#1b1612' }, g6); } }
+      if (i === 3) { const X0 = x0 + W * 0.62, Y0 = yt - 3.4, Wc = W * 0.3, Hc = 4.6; line(g6, [[X0, Y0], [X0, Y0 - Hc]], { stroke: 'rgba(255,255,255,.6)', 'stroke-width': 1.2 }); line(g6, [[X0, Y0], [X0 + Wc, Y0]], { stroke: 'rgba(255,255,255,.6)', 'stroke-width': 1.2 });
+        const cv2 = []; for (let q = 0; q <= 1.0001; q += 0.05) cv2.push([X0 + Wc * q, Y0 - Hc * (1 - Math.exp(-q * 4)) / (1 - Math.exp(-4))]); line(g6, cv2, { stroke: '#ff9a5a', 'stroke-width': 2.4 }); lbl(g6, X0 + Wc, Y0 + 0.7, 'évek', '#c9cdd2', 'end'); }
+      const tilt = i === 2 ? -5 : 0; const gfx = h('g', { transform: `rotate(${tilt} ${X(fx)} ${Y(top)})` }, g6); rect(gfx, fx - 2.4, fx + 2.4, top, top + 1.0, { fill: '#cfcac0', stroke: '#3a3d42', 'stroke-width': 1 }); rect(gfx, fx - 0.6, fx + 0.6, top + 1.0, top + 2.6, { fill: '#cfcac0', stroke: '#3a3d42', 'stroke-width': 1 }); }); }
+  // ---- 7: külső hatások – cölöpverés (rezgés), földrengés, üreg a ház alatt, kimosás a folyó felé, fagyhatár
   const g7 = G(7, 8);
-  for (const r of [3, 6, 9]) h('path', { d: `M${X(-8 - r)} ${Y(0)} A ${r * 6} ${r * 4.8} 0 0 0 ${X(-8 + r)} ${Y(0)}`, fill: 'none', stroke: '#f2a531', 'stroke-width': 2.2, opacity: 1 - r / 12, class: 'pulse' }, g7);
-  tag(g7, -8, 3.6, 'rezgés', '#f2a531');
-  for (const [r, c] of [[48, '#ffe066'], [40, '#f2a531']]) h('path', { d: `M${X(-66)} ${Y(-30 + r * .32)} Q ${X(-20)} ${Y(-30 + r * .62)} ${X(30)} ${Y(-30 + r * .32)}`, fill: 'none', stroke: c, 'stroke-width': 2.4, opacity: .85 }, g7);
-  tag(g7, -26, -22.5, 'földrengés', '#ffe066');
-  h('path', { d: `M${X(-10.2)} ${Y(-5.6)} V${Y(-4.2)} A ${2.2 * 6} ${2.2 * 6} 0 0 1 ${X(-5.8)} ${Y(-4.2)} V${Y(-5.6)} Z`, fill: '#120e0b', stroke: '#8a5a42', 'stroke-width': 3 }, g7); tag(g7, -8, -8, 'üreg', '#d99a6c');
-  for (let i = 0; i < 4; i++) arr(g7, -40 - i * 2.2, -3.6 - i * 0.25, -42.6 - i * 2.2, -4.1 - i * 0.3, '#5cc2f2', 2.2); tag(g7, -47, -8.6, 'kimosás', '#5cc2f2');
-  line(g7, [[-44, -0.8], [-13.5, -0.8]], { stroke: '#9fd8ff', 'stroke-width': 2.2, 'stroke-dasharray': '7 5' }); tag(g7, -38, 2.6, '❄ fagyhatár', '#9fd8ff');
+  { // cölöpverő a szomszéd telken: alapgép, vezetőoszlop, verőkos, cölöp
+    const rx = 0.8; rect(g7, rx - 1.85, rx + 1.85, 0, 1.2, { fill: '#3a3d42' }); rect(g7, rx - 1.6, rx + 1.6, 1.2, 3.2, { fill: '#c8452b' }); rect(g7, rx + 0.5, rx + 1.6, 3.2, 4.8, { fill: '#9fd2ff', opacity: .7 });
+    rect(g7, rx - 0.36, rx + 0.36, 0, 16, { fill: 'none', stroke: '#f2b300', 'stroke-width': 1.6 }); for (let y = 0.6; y < 15.4; y += 1.2) line(g7, [[rx - 0.36, y], [rx + 0.36, y + 1.2]], { stroke: '#f2b300', 'stroke-width': 1 });
+    line(g7, [[rx - 1.2, 3.2], [rx - 0.2, 12]], { stroke: '#f2b300', 'stroke-width': 1.6 }); rect(g7, rx - 0.55, rx + 0.55, 16, 16.6, { fill: '#f2b300' });
+    rect(g7, rx - 0.5, rx + 0.5, 2.8, 5.2, { fill: '#2b2f35' }); rect(g7, rx - 0.2, rx + 0.2, -7.5, 2.8, { fill: '#c9c3b8', stroke: '#6f6a62', 'stroke-width': 1 });
+    const gr = h('g', { 'clip-path': 'url(#xsSoil)' }, g7); for (const r of [3, 6, 9.5, 13]) h('circle', { cx: X(rx), cy: Y(-7.5), r: r * 6, fill: 'none', stroke: '#f2a531', 'stroke-width': 2.2, opacity: 1 - r / 15, class: 'pulse' }, gr);
+    tag(g7, rx - 5.8, 14.6, 'cölöpverés', '#f2a531'); tag(g7, -8.5, -5.2, 'rezgés', '#f2a531'); }
+  { // földrengés: hullámfrontok a mélyből, a ház ide-oda leng
+    const gq = h('g', { 'clip-path': 'url(#xsSoil)' }, g7); for (const [r, c, w] of [[74, '#ffe066', 2.6], [80, '#f2a531', 3.2], [86, '#ffe066', 2.2]]) h('circle', { cx: X(-28), cy: Y(-96), r: r * 6, fill: 'none', stroke: c, 'stroke-width': w, opacity: .9 }, gq);
+    tag(g7, -48, -19.6, 'földrengés', '#ffe066');
+    for (const s of [-1, 1]) { const gs = h('g', { transform: `rotate(${s * 2.6} ${X(-25)} ${Y(0.3)})` }, g7); rect(gs, A.x0, A.x1, 0.3, 10.5, { fill: 'none', stroke: '#ffe066', 'stroke-width': 1, 'stroke-dasharray': '5 4', opacity: .55 }); }
+    arr(g7, -25, 12.4, -20.6, 12.4, '#ffe066', 2.2); arr(g7, -25, 12.4, -29.4, 12.4, '#ffe066', 2.2); }
+  { // üreg közvetlenül a ház alatt, beszakadó boltozattal
+    const xc = -19.5, w = 3.4, fl = -6.4, spr = -5.0; h('path', { d: `M${X(xc - w / 2)} ${Y(fl)} V${Y(spr)} A ${w / 2 * 6} ${w / 2 * 6} 0 0 1 ${X(xc + w / 2)} ${Y(spr)} V${Y(fl)} Z`, fill: '#120e0b', stroke: '#8a5a42', 'stroke-width': 3 }, g7);
+    poly(g7, [[xc - w / 2 + 0.2, spr], [xc - 1.7, -2.2], [xc - 0.6, -1.95], [xc + 0.9, -2.05], [xc + 1.9, -2.3], [xc + w / 2 - 0.2, spr]], { fill: 'rgba(18,14,11,.88)' });
+    poly(g7, [[xc - w / 2 + 0.1, fl], [xc, fl + 0.9], [xc + w / 2 - 0.1, fl]], { fill: '#8a6d48' }); tag(g7, xc, -8.4, 'üreg', '#d99a6c'); }
+  { // kimosás a folyó felé: szivárgás, finom szemcsék, fellazult zóna a szélső alaptest alatt
+    const P1 = [[-33.6, -2.6], [-37.5, -3.6], [-41.5, -4.7], [-45.4, -5.75]], P2 = [[-32.4, -3.3], [-36.5, -4.4], [-41, -5.3], [-45.8, -6.1]];
+    poly(g7, P1.map(([x, y]) => [x, y + 0.5]).concat(P2.slice().reverse().map(([x, y]) => [x, y - 0.4])), { fill: 'rgba(40,26,12,.6)' });
+    for (const [x0, y0, x1, y1] of [[-34.5, -2.6, -38.5, -3.8], [-38.6, -3.6, -42.6, -4.9], [-41.6, -4.9, -45.2, -5.9]]) arr(g7, x0, y0, x1, y1, '#5cc2f2', 2.2);
+    for (let i = 0; i < 14; i++) { const u = i / 13, x = lerpx(-33.2, -48.5, u), y = (u < .8 ? lerpx(-3.0, -5.9, u / .8) : lerpx(-5.9, -6.8, (u - .8) / .2)) + ((i * 37) % 7 - 3) * 0.12; h('circle', { cx: X(x), cy: Y(y), r: 2.4, fill: '#e8cf98' }, g7); }
+    tag(g7, -40, -10.0, 'kimosás', '#e8cf98'); lbl(g7, -52, -9.6, 'folyó', '#9fd8ff'); }
+  line(g7, [[-35.5, -0.8], [-13.5, -0.8]], { stroke: '#9fd8ff', 'stroke-width': 2.2, 'stroke-dasharray': '7 5' }); line(g7, [[-1.6, -0.8], [6, -0.8]], { stroke: '#9fd8ff', 'stroke-width': 2.2, 'stroke-dasharray': '7 5' }); tag(g7, -8.2, 2.4, '❄ fagyhatár', '#9fd8ff');
   // ---- 8: mélyalapozás
   const g8h = G(8, 9); rect(g8h, 8, 30, -7.6, 26.7, { class: 'holo' }); for (let i = 1; i < 8; i++) line(g8h, [[8, 0.3 + i * 3.3], [30, 0.3 + i * 3.3]], { stroke: '#8ff0ff', 'stroke-width': 1, 'stroke-dasharray': '4 4', opacity: .6 });
   const gP = G(8, 99); for (const x of [10.6, 14.8, 19, 23.2, 27.4]) rect(gP, x - .4, x + .4, -17, -7.6, { fill: '#c9c3b8', stroke: '#6f6a62', 'stroke-width': 1 });
