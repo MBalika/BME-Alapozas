@@ -371,6 +371,7 @@ JS = [
     ("en: 'kedvezotlen-altalaj.vercel.app/en', img: 'kedvezotlen' }", "en: 'kedvezotlen-altalaj.vercel.app/en', img: 'kedvezotlen-en' }"),
     ("en: 'sikalapok-sullyedesszamitasa.vercel.app/en', img: 'sullyedes' }", "en: 'sikalapok-sullyedesszamitasa.vercel.app/en', img: 'sullyedes-en' }"),
     ("en: 'vedekezesakarossullyedesekellen.vercel.app/en', img: 'vedekezes',", "en: 'vedekezesakarossullyedesekellen.vercel.app/en', img: 'vedekezes-en',"),
+    ("en: 'sikalapokaterohatasok.vercel.app/en', img: 'hatasok' }", "en: 'sikalapokaterohatasok.vercel.app/en', img: 'hatasok-en' }"),
     ("en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese' }", "en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese-en' }"),
     ("en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras',", "en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras-en',"),
     ('alt="Bevezetés – nyitókép"', 'alt="Introduction – opening screen"'),
