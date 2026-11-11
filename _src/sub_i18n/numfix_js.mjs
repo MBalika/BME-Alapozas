@@ -6,7 +6,8 @@ for (const f of process.argv.slice(2)) {
   const src = fs.readFileSync(f, 'utf8'); let ast;
   try { ast = acorn.parse(src, { ecmaVersion: 'latest', sourceType: process.env.MODULE || f.includes('sim3d') || f.includes('calc3d') ? 'module' : 'script', ranges: true }); } catch (e) { console.error(f, e.message); process.exit(1); }
   const edits = [];
-  const fix = (s, e, raw) => { if (!/\d,\d/.test(raw) || SKIP.test(raw)) return; const nr = raw.replace(/(\d),(?=\d)/g, '$1.'); if (process.env.LIST) console.log(f + '\t' + raw.slice(0, 120)); edits.push([s, e, nr]); };
+  const fix = (s, e, raw) => { if (!/\d,\d/.test(raw) || SKIP.test(raw)) return; const nr = raw.replace(/(\d),(?=\d)/g, (m, d, off) => /[MLHVCSQTAmlhvcsqta]-?[\d.]*$/.test(raw.slice(0, off + 1)) || /\{\d*$/.test(raw.slice(0, off + 1)) ? m : d + '.');   // SVG-útvonal (l8,11) és regex-kvantor ({0,5}) kivétel
+  if (nr === raw) return; if (process.env.LIST) console.log(f + '\t' + raw.slice(0, 120)); edits.push([s, e, nr]); };
   walk.full(ast, (n) => {
     if (n.type === 'Literal' && typeof n.value === 'string') fix(n.start + 1, n.end - 1, src.slice(n.start + 1, n.end - 1));
     else if (n.type === 'TemplateElement') fix(n.start, n.end, src.slice(n.start, n.end));
