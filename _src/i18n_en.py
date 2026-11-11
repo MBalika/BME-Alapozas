@@ -364,6 +364,7 @@ JS = [
     # gyűjtőrács
     ('img/apps/bevezetes.jpg', 'img/apps/bevezetes-en.jpg'),
     ("en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese' }", "en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese-en' }"),
+    ("en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras',", "en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras-en',"),
     ('alt="Bevezetés – nyitókép"', 'alt="Introduction – opening screen"'),
     ('<b>Bevezetés – ez az oldal</b>', '<b>Introduction – this page</b>'),
     ('<p class="acd">A tárgy felépítése, a kilenc állomás és az összes tananyag egy helyen – innen indul az út.</p><em>Itt vagy most ↑</em>',
