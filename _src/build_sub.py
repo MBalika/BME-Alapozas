@@ -18,7 +18,7 @@ if os.environ.get('ONLY'): APPS = os.environ['ONLY'].split(',')   # csak a megad
 # az angolul is elérhető tananyagok (a többi magyar marad, „(in Hungarian)” jelzéssel)
 EN_SITES = ['bme-alapozas.vercel.app', 'talajfelderites.vercel.app', 'sikalapoktervezese.vercel.app', 'sikalapok-teherbirasszamitasa.vercel.app',
             'sikalapokallekonysagvizsgalata.vercel.app', 'kedvezotlen-altalaj.vercel.app', 'sikalapok-sullyedesszamitasa.vercel.app', 'vedekezesakarossullyedesekellen.vercel.app',
-            'sikalapokaterohatasok.vercel.app']
+            'sikalapokaterohatasok.vercel.app', 'melyalapozasok.vercel.app']
 
 # a még csak magyar tananyagra mutató link után: „(in Hungarian)”
 HUNOTE = "${{{0}}}${{/\\/en$/.test({1}) ? '' : ' (in Hungarian)'}}"
