@@ -1,4 +1,4 @@
-# A három átfogó extra (helyszinelok, tippelj, vizsga) magyar forrásának előkészítése az angol változathoz:
+# Az átfogó extrák (helyszinelok, tippelj, vizsga, telek, ar-labor) magyar forrásának előkészítése az angol változathoz:
 # EN jelző, nyelvfüggő tizedesjel, a sortörés-őr angol szabályai, en-gb elválasztás, HU | EN nyelvváltó, hreflang, átirányítás.
 # A magyar oldal szövege és működése nem változik. Idempotens: a már előkészített fájlt kihagyja. Ha valamelyik index.html-t
 # egy külső forrásból újragenerálják, ezzel lehet az angol változathoz szükséges kapcsokat visszatenni (utána: python3 build_sub.py).
@@ -43,21 +43,31 @@ SH_HU = r"""const SHORTEND = new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e
 SH_EN = r"""const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|the|A|An|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[,.]\\d+)?\\.?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');"""
 HY_HU = "const H = window.Hyphenopoly; if (H && H.hyphenators && H.hyphenators.hu) H.hyphenators.hu.then("
 HY_EN = "const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then("
+# telek: keskeny kijelzőn a nyelvváltóval együtt is kiférjen a fejléc (a logó elmarad, kisebb közök)
+TELEK_CSS = '@media (max-width: 420px){ .top .wrap{gap:10px} .score{gap:8px} .top .brand svg{display:none} }\n'
 # a fejlécben a nyelvváltó helye (utána kerül) és a mobil kiegészítés
 ANCHOR = {
   'tippelj': '<button class="modebtn" type="button" id="modeBtn" aria-pressed="false">Kivetítő mód</button>',
   'helyszinelok': None,   # a .rankmini </div>-ja után
   'vizsga': '<a href="#pakli">Igaz vagy hamis</a></nav>',
+  'telek': '<span><b id="sPts">0</b> pont</span></div>',
+  'ar-labor': '<span class="tag">kiterjesztett valóság</span>',
+}
+# az EN jelző helye (utána kerül) – alapból a szkript eleje
+EN_AT = {
+  'telek': "import { OrbitControls } from 'three/addons/controls/OrbitControls.js';\n",
+  'ar-labor': "<script>\n(() => {\n",
 }
 DEC = {
   'tippelj': ("return f ? ii + ',' + f : ii; };", "return f ? ii + (EN ? '.' : ',') + f : ii; };"),
   'vizsga': ("return fr ? ii + ',' + fr : ii; };", "return fr ? ii + (EN ? '.' : ',') + fr : ii; };"),
+  'telek': (".toFixed(d).replace('.', ',').replace('-', '−');", ".toFixed(d).replace('.', EN ? '.' : ',').replace('-', '−');"),
 }
 
 def rep(t, a, b, n=1):
     c = t.count(a); assert c == n, (a[:70], c); return t.replace(a, b)
 
-for app in ['helyszinelok', 'tippelj', 'vizsga']:
+for app in ['helyszinelok', 'tippelj', 'vizsga', 'telek', 'ar-labor']:
     p = f'{REPO}/{app}/index.html'; t = open(p, encoding='utf-8').read()
     if 'id="langSw"' in t: print(app, 'már előkészítve'); continue
     # fej: hreflang + átirányítás (ha legutóbb az angolt választották; /?hu kikerüli)
@@ -70,10 +80,11 @@ for app in ['helyszinelok', 'tippelj', 'vizsga']:
     if ANCHOR[app]: t = rep(t, ANCHOR[app], ANCHOR[app] + '\n    ' + PILL)
     else:
         m = re.search(r'<div class="rankmini"[^\n]*</div>\n', t); assert m; t = t[:m.end()] + '    ' + PILL + '\n' + t[m.end():]
-    css = CSS + ('@media (max-width: 560px){ .top .langbtn{margin-left:auto} }\n' if app == 'vizsga' else '')
+    css = CSS + ('@media (max-width: 560px){ .top .langbtn{margin-left:auto} }\n' if app == 'vizsga' else '.kick .langbtn{margin-left:auto; text-transform:none}\n' if app == 'ar-labor' else TELEK_CSS if app == 'telek' else '')
     i = t.index('</style>\n<script src="vendor/hyphenopoly'); t = t[:i] + css + t[i:]
     # EN jelző a szkript elején
-    t = rep(t, "(() => {\n'use strict';\n", "(() => {\n'use strict';\nconst EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');\n")
+    at = EN_AT.get(app, "(() => {\n'use strict';\n")
+    t = rep(t, at, at + "const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');\n")
     if app in DEC: t = rep(t, *DEC[app])
     # sortörés-őr: angol szabályok
     t = rep(t, NUMW_HU, NUMW_EN); t = rep(t, ABBR_HU, ABBR_EN); t = rep(t, ART_HU, ART_EN); t = rep(t, SH_HU, SH_EN); t = rep(t, HY_HU, HY_EN)

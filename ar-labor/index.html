@@ -6,6 +6,10 @@
 <title>Alapozás AR labor</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Az Alapozás tárgy 3D-modelljei kiterjesztett valóságban: telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.">
+<link rel="alternate" hreflang="hu" href="https://bme-alapozas.vercel.app/ar-labor">
+<link rel="alternate" hreflang="en" href="https://bme-alapozas.vercel.app/ar-labor/en">
+<link rel="alternate" hreflang="x-default" href="https://bme-alapozas.vercel.app/ar-labor">
+<script>/*nyelv*/try{if(localStorage.getItem('alap-lang')==='en'&&!/[?&]hu\b/.test(location.search))location.replace('en'+location.hash)}catch(e){}</script>
 <base href="/ar-labor/">
 <style>
 @font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -146,6 +150,15 @@ footer p{margin:0}
 }
 @media (max-width: 520px){ :root{--pad:16px} .fact b{font-size:15px} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+
+/* nyelvváltó (HU | EN): a kitöltött az aktuális nyelv; mobilon csak a másik nyelv kódja */
+.langbtn{flex:none; display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid rgba(255,255,255,.22); border-radius:999px; text-decoration:none; color:inherit; font:500 12px/1 var(--fm); letter-spacing:.04em}
+.langbtn b, .langbtn span{display:inline-grid; place-items:center; min-width:30px; padding:5px 8px; border-radius:999px}
+.langbtn b{background:#eef1f4; color:#141a20; font-weight:600}
+.langbtn span{opacity:.75}
+.langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
+@media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
+.kick .langbtn{margin-left:auto; text-transform:none}
 </style>
 <script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
 <script>Hyphenopoly.config({ require: { "hu": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
@@ -154,7 +167,8 @@ footer p{margin:0}
 <body>
 <header class="lab">
   <div class="wrap">
-    <div class="kick"><span>BME Alapozás</span><span class="tag">kiterjesztett valóság</span></div>
+    <div class="kick"><span>BME Alapozás</span><span class="tag">kiterjesztett valóság</span>
+    <a class="langbtn" id="langSw" href="en" hreflang="en" lang="en" aria-label="English version"><b>HU</b><span>EN</span></a></div>
     <div class="head">
       <h1>Alapozás <em>AR labor</em></h1>
       <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A feliratokat a „Feliratok a modellen” kapcsolóval lehet bekapcsolni; ilyenkor a térbeli nézetben is látszanak.</p>
@@ -209,6 +223,7 @@ footer p{margin:0}
 <script type="module" src="vendor/model-viewer.min.js"></script>
 <script>
 (() => {
+const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const mv = $('#mv');
 const EMB = window.__EMBED || null;
@@ -298,6 +313,21 @@ customElements.whenDefined('model-viewer').then(() => { mv.addEventListener('loa
 mv.addEventListener('ar-status', (e) => { if (e.detail.status === 'failed') setStatus('status no', 'Az AR nem indult el ezen az eszközön. Próbáld meg Chrome-ban (Android) vagy Safariban (iPhone).'); });
 window.__arlabor = { M };
 
+/* nyelvváltó: a választás megmarad (alap-lang), a másik nyelvű oldal ugyanott nyílik meg (alap-pos) */
+(() => {
+  const sw = $('#langSw'), KEY = 'alap-pos'; const hh = () => { const t = $('.top'); return t ? t.offsetHeight : 0; };
+  if (sw) sw.addEventListener('click', () => {
+    try { localStorage.setItem('alap-lang', EN ? 'hu' : 'en'); } catch (e) {}
+    const H0 = hh(); let best = null; document.querySelectorAll('main [id]').forEach((n) => { if (n.closest('svg')) return; const r = n.getBoundingClientRect(); if (r.height && r.top <= H0 + 1 && r.bottom > H0) best = n; });
+    try { sessionStorage.setItem(KEY, JSON.stringify({ id: best ? best.id : '', off: best ? H0 - best.getBoundingClientRect().top : 0, y: scrollY, t: Date.now() })); } catch (e) {}
+    sw.setAttribute('href', (EN ? './' : 'en') + (location.hash || ''));
+  });
+  let p = null; try { p = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
+  if (p && Date.now() - p.t < 20000) { if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    const go = () => { const n = p.id && document.getElementById(p.id); const y = n ? n.getBoundingClientRect().top + scrollY - hh() + p.off : p.y; scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
+    requestAnimationFrame(go); addEventListener('load', () => { go(); setTimeout(go, 600); }, { once: true }); }
+})();
+
 const GUARD = (() => {
   const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
@@ -307,7 +337,7 @@ const GUARD = (() => {
   const TERMS = ['talaj és szerkezet', 'teherbíró réteg', 'talajvíz-viszonyok', 'egyenlőtlen süllyedés', 'egyenlőtlen süllyedések', 'általános állékonyság', 'teherbírási határállapot', 'használhatósági határállapot', 'puha lencse', 'szerves talaj', 'szerves agyag', 'roskadékony lösz', 'térfogatváltozó agyag', 'kút- és szekrényalapok', 'cölöppel gyámolított lemezalap', 'mélyített síkalap', 'házi feladat', 'pisai torony'];
   const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
   const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
-  const NUMW = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  const NUMW = EN ? /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]ourteen|[Ff]irst|[Ss]econd|[Tt]hird|[Ff]ourth|[Bb]oth|[Aa]ll|[Ss]everal|[Aa] few))(?=\s\S)\s/g : /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
   function textPass(s) {
     if (!/[ \-–·]/.test(s)) return s;
     s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
@@ -318,16 +348,17 @@ const GUARD = (() => {
     s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
     s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
     s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
-    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(\S) ([–—]) /g, '$1' + NB + '$2 ');   // a gondolatjel nem kezdhet sort
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.|e\.g\.|i\.e\.|approx\.|cf\.|No\.) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
-    for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“‘])(a|an|the|A|An|The|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
     s = s.replace(NUMW, '$1$2' + NB);
     s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     return s;
   }
-  const SHORTEND = new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|the|A|An|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[,.]\\d+)?\\.?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
   function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
     if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
     const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
@@ -361,7 +392,7 @@ const GUARD = (() => {
   function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
   function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
   function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
-    const H = window.Hyphenopoly; if (H && H.hyphenators && H.hyphenators.hu) H.hyphenators.hu.then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+    const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
   return { start, run };
 })();
 

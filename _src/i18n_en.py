@@ -68,7 +68,8 @@ HTML = [
     ('<span><i>8</i>CFA-cölöp</span>', '<span><i>8</i>CFA pile</span>'),
     ('<span><i>9</i>Munkagödör</span>', '<span><i>9</i>Excavation</span>'),
     ('<div class="kick">Az egész félévet átfogó extrák</div>', '<div class="kick">Extras for the whole semester</div>'),
-    ('<b>Egy telek, egy félév</b><span>Te vagy a geotechnikus: kilenc feladat egyetlen telken.</span>', '<b>One site, one semester ' + HU_ONLY + '</b><span>You are the geotechnical engineer: nine tasks on a single site.</span>'),
+    ('<b>Egy telek, egy félév</b><span>Te vagy a geotechnikus: kilenc feladat egyetlen telken.</span>', '<b>One site, one semester</b><span>You are the geotechnical engineer: nine tasks on a single site.</span>'),
+    ('<a class="xt" href="https://bme-alapozas.vercel.app/telek/" target="_blank" rel="noopener"><img src="img/apps/telek.jpg"', '<a class="xt" href="https://bme-alapozas.vercel.app/telek/en" target="_blank" rel="noopener"><img src="img/apps/telek-en.jpg"'),
     ('<a class="xt" href="https://bme-alapozas.vercel.app/helyszinelok/" target="_blank" rel="noopener"><img src="img/apps/helyszinelok.jpg"', '<a class="xt" href="https://bme-alapozas.vercel.app/helyszinelok/en" target="_blank" rel="noopener"><img src="img/apps/helyszinelok-en.jpg"'),
     ('<a class="xt" href="https://bme-alapozas.vercel.app/tippelj/" target="_blank" rel="noopener"><img src="img/apps/tippelj.jpg"', '<a class="xt" href="https://bme-alapozas.vercel.app/tippelj/en" target="_blank" rel="noopener"><img src="img/apps/tippelj-en.jpg"'),
     ('<a class="xt" href="https://bme-alapozas.vercel.app/vizsga/" target="_blank" rel="noopener"><img src="img/apps/vizsga.jpg"', '<a class="xt" href="https://bme-alapozas.vercel.app/vizsga/en" target="_blank" rel="noopener"><img src="img/apps/vizsga-en.jpg"'),
@@ -202,6 +203,8 @@ HTML = [
     ('aria-label="Bevezető animáció"', 'aria-label="Introductory animation"'),
     ('title="A tárgy felépítése – bevezető animáció"', 'title="The course structure – introductory animation"'),
     ('<span>A tárgy felépítése – bevezető animáció · 3:10 · Esc: bezárás</span><button id="vmClose">Bezárás ✕</button>', '<span>The course structure – introductory animation · 3:10 · Esc: close</span><button id="vmClose">Close ✕</button>'),
+    # az AR labor angolul is elérhető
+    ('https://bme-alapozas.vercel.app/ar-labor/', 'https://bme-alapozas.vercel.app/ar-labor/en'),
 ]
 
 # ---------------------------------------------------------------- CSS (style.css)
@@ -251,7 +254,7 @@ JS = [
     ("`<i>AR</i>Alapozás AR labor ↗`", "`<i>AR</i>Foundation Engineering AR lab ↗`"),
     ("${s.title}${a ? ' ↗' : ''}`", "${s.title}${a ? (a.en ? ' ↗' : ' <span class=\"inhu\">HU</span> ↗') : ''}`"),
     ("[['telek', 'Egy telek, egy félév'], ['helyszinelok', 'Geotechnikai helyszínelők'], ['tippelj', 'Tippelj, aztán számolj'], ['vizsga', 'Vizsgaszimulátor']].forEach(([u, t]) => el('a', { href: U('bme-alapozas.vercel.app/' + u + '/'), target: '_blank', rel: 'noopener' }, d, `<i style=\"background:var(--accent);color:#1b1206\">★</i>${t} ↗`));",
-     "[['telek', 'One site, one semester', 0], ['helyszinelok', 'Geotechnical CSI', 1], ['tippelj', 'Guess, then calculate', 1], ['vizsga', 'Exam simulator', 1]].forEach(([u, t, en]) => el('a', { href: U('bme-alapozas.vercel.app/' + u + (en ? '/en' : '/')), target: '_blank', rel: 'noopener' }, d, `<i style=\"background:var(--accent);color:#1b1206\">★</i>${t}${en ? '' : ' <span class=\"inhu\">HU</span>'} ↗`));"),
+     "[['telek', 'One site, one semester', 1], ['helyszinelok', 'Geotechnical CSI', 1], ['tippelj', 'Guess, then calculate', 1], ['vizsga', 'Exam simulator', 1]].forEach(([u, t, en]) => el('a', { href: U('bme-alapozas.vercel.app/' + u + (en ? '/en' : '/')), target: '_blank', rel: 'noopener' }, d, `<i style=\"background:var(--accent);color:#1b1206\">★</i>${t}${en ? '' : ' <span class=\"inhu\">HU</span>'} ↗`));"),
     ("'<i>◐</i>Világos vagy sötét téma'", "'<i>◐</i>Light or dark theme'"),
     # útvonalsáv
     ("s.n === 1 ? 'itt vagy most' : (s.apps.filter(x => !x.here).length > 1 ? s.apps.filter(x => !x.here).length + ' tananyag' : 'tananyag ↗')",
@@ -373,6 +376,7 @@ JS = [
     ("en: 'vedekezesakarossullyedesekellen.vercel.app/en', img: 'vedekezes',", "en: 'vedekezesakarossullyedesekellen.vercel.app/en', img: 'vedekezes-en',"),
     ("en: 'sikalapokaterohatasok.vercel.app/en', img: 'hatasok' }", "en: 'sikalapokaterohatasok.vercel.app/en', img: 'hatasok-en' }"),
     ("en: 'melyalapozasok.vercel.app/en', img: 'melyalapozasok' }", "en: 'melyalapozasok.vercel.app/en', img: 'melyalapozasok-en' }"),
+    ("en: 'munkaterhatarolasok.vercel.app/en', img: 'munkater' }", "en: 'munkaterhatarolasok.vercel.app/en', img: 'munkater-en' }"),
     ("en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese' }", "en: 'sikalapoktervezese.vercel.app/en', img: 'sikalapoktervezese-en' }"),
     ("en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras',", "en: 'sikalapok-teherbirasszamitasa.vercel.app/en', img: 'teherbiras-en',"),
     ('alt="Bevezetés – nyitókép"', 'alt="Introduction – opening screen"'),
@@ -383,7 +387,7 @@ JS = [
     ("<em>${'Megnyitás'} ↗</em>", "<em>${a.en ? 'Open' : 'Open · in Hungarian'} ↗</em>"),
     ('<em>Megnyitás ↗</em>', "<em>${a.en ? 'Open' : '" + OPEN_HU + "'} ↗</em>"),
     ("{ t: 'Egy telek, egy félév', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Kilenc állomás egyetlen telken: te vagy a geotechnikus, és minden megoldott feladattal tovább épül a két ház 3D-makettje, a talaj megismerésétől az utolsó födémig.' },",
-     "{ t: 'One site, one semester', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Nine stations on a single site: you are the geotechnical engineer, and with every task you solve the 3D model of the two buildings grows further, from investigating the ground to the last floor slab.' },"),
+     "{ t: 'One site, one semester', u: 'bme-alapozas.vercel.app/telek', en: 'bme-alapozas.vercel.app/telek/en', img: 'telek-en', lab: '1–9', d: 'Nine stations on a single site: you are the geotechnical engineer, and with every task you solve the 3D model of the two buildings grows further, from investigating the ground to the last floor slab.' },"),
     ("{ t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', en: 'bme-alapozas.vercel.app/helyszinelok/en', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },",
      "{ t: 'Geotechnical CSI', u: 'bme-alapozas.vercel.app/helyszinelok', en: 'bme-alapozas.vercel.app/helyszinelok/en', img: 'helyszinelok-en', lab: '3–9', d: 'Real and typical foundation failure cases: work out from the clues what happened and what would have prevented it. With ranks, points and a crack-reading game.' },"),
     ("{ t: 'Tippelj, aztán számolj', u: 'bme-alapozas.vercel.app/tippelj', en: 'bme-alapozas.vercel.app/tippelj/en', img: 'tippelj', lab: '1–9', d: 'Becslős kérdések minden előadáshoz: előbb tippelsz egy logaritmikus skálán, aztán megnézed a számítást. Előadáson kivetítő módban, QR-kóddal.' },",
@@ -391,5 +395,6 @@ JS = [
     ("{ t: 'Vizsgaszimulátor', u: 'bme-alapozas.vercel.app/vizsga', en: 'bme-alapozas.vercel.app/vizsga/en', img: 'vizsga', lab: '2–9', d: 'Véletlen adatokkal generált számpéldák lépésenkénti ellenőrzéssel – megmutatja, melyik lépésnél csúsztál el –, és igaz–hamis kártyapakli az egész tárgyból.' },",
      "{ t: 'Exam simulator', u: 'bme-alapozas.vercel.app/vizsga', en: 'bme-alapozas.vercel.app/vizsga/en', img: 'vizsga-en', lab: '2–9', d: 'Problems generated with random data and checked step by step – it shows you at which step you went wrong – plus a true/false card deck covering the whole course.' },"),
     ("{ t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Hat 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma, a pisai torony a rétegsorával, CFA-cölöp, horgonyzott munkagödör és a kész telek. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },",
-     "{ t: 'Foundation Engineering AR lab', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Six 3D models in augmented reality – bearing failure, the pressure bulb, the Leaning Tower of Pisa with its soil profile, a CFA pile, an anchored excavation and the finished site. On a phone you can place them on a table or the floor and walk around them.' },"),
+     "{ t: 'Foundation Engineering AR lab', u: 'bme-alapozas.vercel.app/ar-labor', en: 'bme-alapozas.vercel.app/ar-labor/en', img: 'ar-labor-en', lab: '1–9', d: 'Six 3D models in augmented reality – bearing failure, the pressure bulb, the Leaning Tower of Pisa with its soil profile, a CFA pile, an anchored excavation and the finished site. On a phone you can place them on a table or the floor and walk around them.' },"),
+    ("href: U('bme-alapozas.vercel.app/ar-labor/')", "href: U('bme-alapozas.vercel.app/ar-labor/en')"),
 ]

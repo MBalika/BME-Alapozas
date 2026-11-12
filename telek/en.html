@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/telek/">
+<title>One site, one semester</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="The nine stations of the Foundation Engineering course on a single site: you are the geotechnical engineer, and with every task you solve, the two buildings grow further.">
+<link rel="alternate" hreflang="hu" href="https://bme-alapozas.vercel.app/telek">
+<link rel="alternate" hreflang="en" href="https://bme-alapozas.vercel.app/telek/en">
+<link rel="alternate" hreflang="x-default" href="https://bme-alapozas.vercel.app/telek">
+<style>
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/unbounded-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/unbounded-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/unbounded-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/unbounded-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/manrope-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/manrope-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/manrope-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/manrope-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/manrope-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/manrope-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
+</style>
+<style>
+/* ===== Egy telek, egy félév – a nyitóoldal testvére: éjszakai makett-színpad + papír tervlap, állomásszínek ===== */
+:root{
+  --paper:#f4f0e6; --paper2:#ebe5d6; --card:#fffdf7; --ink:#15181c; --ink2:#363c44; --muted:#5f666e; --line:rgba(21,24,28,.13); --line2:rgba(21,24,28,.22);
+  --night:#0c1015; --night2:#121820; --night3:#19212b; --nink:#eeeae1; --nmuted:#a6adb5; --nline:rgba(255,255,255,.11);
+  --accent:#e8952a; --accent-2:#f2b354; --accent-ink:#8a4f08; --ok:#2f9d62; --okbg:rgba(47,157,98,.12); --bad:#d4483a; --badbg:rgba(212,72,58,.1); --water:#3d9ad6;
+  --c1:#f2a531; --c2:#ee7a33; --c3:#e4553f; --c4:#d23c6a; --c5:#b23a93; --c6:#8446b8; --c7:#5552c9; --c8:#2e73c9; --c9:#158e9c;
+  --r:16px; --w:1320px; --pad:28px; --hh:60px;
+  --fd:'Unbounded', 'Arial Black', system-ui, sans-serif; --fb:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; --fm:'JetBrains Mono', 'JBMono', ui-monospace, Menlo, monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.06), 0 8px 28px rgba(18,20,24,.08);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#10151b; --paper2:#151c23; --card:#18202a; --ink:#ebe7de; --ink2:#cdc8be; --muted:#9aa2aa; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --accent-ink:#f5c06e; --ok:#46c07f; --okbg:rgba(70,192,127,.14); --bad:#f0695b; --badbg:rgba(240,105,91,.13); --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+  --c6:#9a63d9; --c7:#7673e6; --c8:#4b8fe0; --c9:#22a9b8; color-scheme: dark; } }
+:root[data-theme="dark"]{
+  --paper:#10151b; --paper2:#151c23; --card:#18202a; --ink:#ebe7de; --ink2:#cdc8be; --muted:#9aa2aa; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
+  --accent-ink:#f5c06e; --ok:#46c07f; --okbg:rgba(70,192,127,.14); --bad:#f0695b; --badbg:rgba(240,105,91,.13); --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+  --c6:#9a63d9; --c7:#7673e6; --c8:#4b8fe0; --c9:#22a9b8; color-scheme: dark; }
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+body{margin:0; background:var(--paper); color:var(--ink); font:400 17px/1.62 var(--fb); overflow-x:hidden}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:var(--night)}
+a{color:inherit}
+button, input{font:inherit; color:inherit}
+.wrap{max-width:var(--w); margin:0 auto; padding-block:0; padding-left:max(var(--pad), env(safe-area-inset-left, 0px)); padding-right:max(var(--pad), env(safe-area-inset-right, 0px))}
+.nw{white-space:nowrap; hyphens:none}
+sub, sup{font-size:.72em; line-height:0}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:6px}
+.sr{position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* sorkizárás (formázás) */
+main p, main li, main .note, main .expl, main .fb, footer p, .lead, .sit p{ text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty }
+h1,h2,h3,h4,.btn,.chip,label,button,td,th,.kick,.mono,output{hyphens:none; -webkit-hyphens:none}
+main .rag, footer .rag, .lead.rag{text-align:left!important}
+
+/* ===== fejléc ===== */
+.top{position:sticky; top:env(safe-area-inset-top, 0px); z-index:50; height:var(--hh); background:rgba(12,16,21,.9); backdrop-filter:saturate(1.4) blur(12px); -webkit-backdrop-filter:saturate(1.4) blur(12px); border-bottom:1px solid var(--nline); color:var(--nink)}
+.top .wrap{height:100%; display:flex; align-items:center; gap:16px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--nink); flex:none; min-width:0}
+.brand svg{width:30px; height:30px; flex:none}
+.brand b{font:800 15px/1 var(--fd); letter-spacing:-.01em; white-space:nowrap}
+.brand span{font:600 11px/1 var(--fm); color:var(--nmuted); letter-spacing:.06em; text-transform:uppercase; display:block; margin-top:4px; white-space:nowrap}
+.score{margin-left:auto; display:flex; align-items:center; gap:14px; font:600 13px/1 var(--fm); color:var(--nmuted); white-space:nowrap}
+.score b{color:var(--nink); font:800 15px/1 var(--fd); font-variant-numeric:tabular-nums}
+.score .bar{width:110px; height:6px; border-radius:6px; background:var(--night3); overflow:hidden}
+.score .bar i{display:block; height:100%; width:0; background:linear-gradient(90deg, var(--c1), var(--c5), var(--c9)); transition:width .6s}
+
+/* ===== bevezető ===== */
+.hero{background:radial-gradient(110% 120% at 85% 0%, #1d2834 0%, var(--night) 60%); color:var(--nink); padding-block:clamp(26px, 4vw, 46px) clamp(20px, 3vw, 30px)}
+.kick{display:flex; flex-wrap:wrap; align-items:center; gap:10px; font:600 12.5px/1.3 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--nmuted)}
+.kick .tag{border:1px solid var(--nline); border-radius:999px; padding:3px 10px; color:var(--accent-2)}
+.hero-grid{display:grid; grid-template-columns:minmax(0, 1.25fr) minmax(0, 1fr); gap:clamp(18px, 3vw, 40px); align-items:stretch; margin-top:14px}
+h1{font:800 clamp(32px, 5.4vw, 64px)/1.02 var(--fd); letter-spacing:-.025em; margin:0; text-wrap:balance}
+h1 em{font-style:normal; color:var(--accent)}
+.lead{font-size:clamp(16px, 1.6vw, 18px); color:var(--nink); opacity:.92; margin:16px 0 0}
+.titleblock{border:1.5px solid rgba(238,234,225,.55); border-radius:4px; display:grid; grid-template-columns:1fr 1fr; font:500 12.5px/1.35 var(--fm); color:var(--nink); background:rgba(12,16,21,.35); align-self:stretch}
+.titleblock > div{padding:9px 12px; border-right:1px solid rgba(238,234,225,.25); border-bottom:1px solid rgba(238,234,225,.25); min-width:0}
+.titleblock > div:nth-child(2n){border-right:0}
+.titleblock > div.full{grid-column:1 / -1; border-right:0}
+.titleblock > div:nth-last-child(-n+2){border-bottom:0}
+.titleblock small{display:block; font:600 10px/1.2 var(--fm); letter-spacing:.08em; text-transform:uppercase; color:var(--nmuted); margin-bottom:3px}
+.titleblock b{font:700 14px/1.25 var(--fb)}
+.titleblock .big b{font:800 22px/1.1 var(--fd); font-variant-numeric:tabular-nums}
+.hero-cta{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--line2); background:var(--card); color:var(--ink); border-radius:999px; padding:11px 18px; font:700 15px/1 var(--fb); text-decoration:none; cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent); border-color:var(--accent); color:#1b1206}
+.btn.dark{background:rgba(255,255,255,.06); border-color:var(--nline); color:var(--nink)}
+.btn svg{width:14px; height:14px}
+.btn[disabled]{opacity:.45; cursor:not-allowed}
+
+/* ===== állomássín ===== */
+.rail{background:var(--night); border-bottom:1px solid var(--nline)}
+.rail .wrap{padding-block:12px 14px}
+.rail ol{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(9, minmax(0, 1fr)); gap:6px; position:relative}
+.rail li{min-width:0}
+.rail button{width:100%; border:0; background:transparent; color:var(--nmuted); display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer; padding:4px 2px; border-radius:12px}
+.rail .dot{width:38px; height:38px; border-radius:50%; display:grid; place-items:center; font:800 15px/1 var(--fd); color:var(--nmuted); background:var(--night2); border:2px solid var(--nline); position:relative; transition:transform .2s}
+.rail .nm{font:600 11.5px/1.2 var(--fb); text-align:center; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.rail button.open .dot{border-color:var(--sc); color:var(--nink)}
+.rail button.done .dot{background:var(--sc); border-color:var(--sc); color:#fff}
+.rail button.done .dot::after{content:""; position:absolute; right:-3px; bottom:-3px; width:14px; height:14px; border-radius:50%; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.6 2.6L12 5.6' fill='none' stroke='%232f9d62' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.rail button.cur{background:rgba(255,255,255,.05)}
+.rail button.cur .dot{transform:scale(1.12); box-shadow:0 0 0 4px rgba(255,255,255,.08)}
+.rail button.cur .nm{color:var(--nink)}
+.rail button.locked{cursor:not-allowed; opacity:.5}
+.rail button.locked .dot{border-style:dashed}
+
+/* ===== munkaterület: makett + állomáslap ===== */
+.work{padding-block:22px 10px}
+.work-grid{display:grid; grid-template-columns:minmax(0, 1.35fr) minmax(0, 1fr); gap:22px; align-items:start}
+.stagewrap{position:sticky; top:calc(var(--hh) + env(safe-area-inset-top, 0px) + 14px)}
+.stage{position:relative; height:calc(100vh - var(--hh) - 120px); min-height:440px; max-height:780px; border-radius:20px; overflow:hidden; background:var(--night); border:1px solid var(--nline); box-shadow:var(--shadow)}
+.stage canvas{display:block; width:100%; height:100%; touch-action:none}
+.stage .hud{position:absolute; left:12px; top:12px; right:12px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; pointer-events:none}
+.stage .hud .tag{font:600 11.5px/1.2 var(--fm); color:var(--nmuted); background:rgba(12,16,21,.66); border:1px solid var(--nline); border-radius:8px; padding:6px 9px; letter-spacing:.03em}
+.stage .tools{position:absolute; right:12px; bottom:12px; display:flex; gap:8px}
+.stage .tools button{border:1px solid var(--nline); background:rgba(12,16,21,.72); color:var(--nink); border-radius:999px; padding:8px 12px; font:600 13px/1 var(--fb); cursor:pointer}
+.stage .tools button:hover{border-color:var(--accent)}
+.stage .note3d{position:absolute; left:12px; bottom:12px; font:500 11.5px/1.3 var(--fm); color:var(--nmuted); pointer-events:none}
+.lbl3d{position:absolute; left:0; top:0; transform:translate(-50%, -50%); font:700 11.5px/1.15 var(--fm); color:#fff; background:rgba(10,13,17,.82); border:1px solid var(--lc, rgba(255,255,255,.35)); border-radius:6px; padding:4px 7px; white-space:nowrap; pointer-events:none; transition:opacity .25s; will-change:transform}
+.lbl3d.plain{background:none; border:0; padding:0; text-shadow:0 1px 3px rgba(0,0,0,.95), 0 0 8px rgba(0,0,0,.7)}
+.lbl3d.hide{opacity:0}
+.stamp3d{position:absolute; left:50%; top:46%; transform:translate(-50%, -50%) rotate(-8deg) scale(.6); font:800 clamp(22px, 3.6vw, 40px)/1 var(--fd); letter-spacing:.06em; color:var(--sc, var(--ok)); border:4px solid currentColor; border-radius:10px; padding:10px 18px; opacity:0; pointer-events:none; text-transform:uppercase; background:rgba(12,16,21,.45)}
+.stamp3d.on{animation:stamp 1.7s ease forwards}
+@keyframes stamp{0%{opacity:0; transform:translate(-50%, -50%) rotate(-8deg) scale(1.6)} 18%{opacity:1; transform:translate(-50%, -50%) rotate(-8deg) scale(1)} 70%{opacity:1} 100%{opacity:0; transform:translate(-50%, -50%) rotate(-8deg) scale(1)}}
+
+.panel{display:flex; flex-direction:column; gap:16px; min-width:0}
+.st-head{display:flex; flex-direction:column; gap:8px}
+.st-kick{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font:600 12px/1.2 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.st-kick .n{display:inline-grid; place-items:center; width:28px; height:28px; border-radius:9px; background:var(--sc); color:#fff; font:800 14px/1 var(--fd); letter-spacing:0}
+.st-head h2{font:800 clamp(22px, 2.6vw, 30px)/1.12 var(--fd); letter-spacing:-.015em; margin:0; text-wrap:balance}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); padding:18px; min-width:0}
+.sit h3, .data h3, .task h3{margin:0 0 8px; font:700 12px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.sit p{margin:0}
+.sit p + p{margin-top:8px}
+.data dl{display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:6px 14px; margin:0; font-size:15px}
+.data dt{color:var(--ink2)}
+.data dd{margin:0; font:600 14.5px/1.5 var(--fm); text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums}
+.task{display:flex; flex-direction:column; gap:12px; border-left:4px solid var(--line2)}
+.task.ok{border-left-color:var(--ok)}
+.task .q{margin:0; font-weight:600}
+.task .tnum{display:flex; align-items:center; gap:10px; font:700 12px/1 var(--fm); color:var(--sc); letter-spacing:.06em}
+.opts{display:grid; gap:8px}
+.opt{display:flex; gap:10px; align-items:flex-start; text-align:left; border:1px solid var(--line2); background:var(--paper); border-radius:12px; padding:10px 12px; cursor:pointer; font-size:15.5px; line-height:1.4}
+.opt .k{flex:none; width:24px; height:24px; border-radius:7px; display:grid; place-items:center; font:700 12px/1 var(--fm); background:var(--card); border:1px solid var(--line2)}
+.opt:hover{border-color:var(--sc)}
+.opt.ok{border-color:var(--ok); background:var(--okbg)}
+.opt.ok .k{background:var(--ok); color:#fff; border-color:var(--ok)}
+.opt.bad{border-color:var(--bad); background:var(--badbg)}
+.opt.bad .k{background:var(--bad); color:#fff; border-color:var(--bad)}
+.opt[disabled]{cursor:default}
+.numrow{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.numrow .inp{display:flex; align-items:center; border:1px solid var(--line2); border-radius:12px; background:var(--paper); overflow:hidden}
+.numrow input{width:130px; border:0; background:transparent; padding:11px 12px; font:600 17px/1 var(--fm); font-variant-numeric:tabular-nums; outline:none}
+.numrow .u{padding:0 12px; font:600 14px/1 var(--fm); color:var(--muted); border-left:1px solid var(--line)}
+.numrow .inp:focus-within{border-color:var(--sc); box-shadow:0 0 0 3px rgba(232,149,42,.18)}
+.numrow input.badin{color:var(--bad)}
+.tlinks{display:flex; flex-wrap:wrap; gap:14px; font:600 14px/1 var(--fb)}
+.tlinks button{border:0; background:none; padding:0; color:var(--muted); text-decoration:underline; text-underline-offset:3px; cursor:pointer}
+.tlinks button:hover{color:var(--ink)}
+.fb{margin:0; font-size:15.5px; padding:10px 12px; border-radius:10px}
+.fb.ok{background:var(--okbg); color:var(--ink)}
+.fb.bad{background:var(--badbg); color:var(--ink)}
+.fb b{font-weight:800}
+.hint, .sol{font-size:15px; border-radius:12px; padding:12px 14px; background:var(--paper); border:1px dashed var(--line2)}
+.hint p, .sol p{margin:0}
+.sol{display:flex; flex-direction:column; gap:6px}
+.sol .eq{font:500 14.5px/1.6 var(--fm); overflow-x:auto}
+.sol .eq div{white-space:nowrap}
+.sol p{margin:0}
+.pts{font:700 12px/1 var(--fm); color:var(--ok); margin-left:auto}
+.tip input[type=range]{width:100%; accent-color:var(--accent)}
+.tipval{font:800 26px/1 var(--fd); font-variant-numeric:tabular-nums}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{border:1px solid var(--line2); background:var(--paper); border-radius:999px; padding:9px 14px; font:600 14.5px/1.1 var(--fb); cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--sc); color:#fff; border-color:var(--sc)}
+.order .pool, .order .seq{display:grid; gap:8px}
+.order .seq{counter-reset:o}
+.order .it{display:flex; gap:10px; align-items:center; text-align:left; border:1px solid var(--line2); background:var(--paper); border-radius:12px; padding:10px 12px; cursor:pointer; font-size:15px; line-height:1.35}
+.order .seq .it{counter-increment:o; cursor:default; background:var(--card)}
+.order .seq .it::before{content:counter(o); flex:none; width:24px; height:24px; border-radius:7px; display:grid; place-items:center; background:var(--sc); color:#fff; font:700 12px/1 var(--fm)}
+.order .seq .it.bad{border-color:var(--bad); background:var(--badbg)}
+.order .seq .it.ok{border-color:var(--ok); background:var(--okbg)}
+.order .lbl{font:600 12px/1 var(--fm); color:var(--muted); letter-spacing:.05em; text-transform:uppercase}
+.logs .tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px}
+.logs .tabs button{border:1px solid var(--line2); background:var(--paper); border-radius:999px; padding:8px 14px; font:700 14px/1 var(--fm); cursor:pointer}
+.logs .tabs button[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.logview{display:grid; grid-template-columns:120px minmax(0, 1fr); gap:14px; align-items:start}
+.logview svg{width:120px; height:auto; display:block}
+.logview ul{list-style:none; margin:0; padding:0; display:grid; gap:4px; font-size:14.5px}
+.logview li{display:grid; grid-template-columns:14px minmax(0, 1fr) auto; gap:8px; align-items:center; text-align:left}
+.logview li i{width:14px; height:14px; border-radius:4px}
+.logview li span:last-child{font:500 13px/1.3 var(--fm); color:var(--muted); white-space:nowrap}
+.calc{display:grid; gap:12px}
+.calc .row{display:grid; grid-template-columns:auto minmax(0, 1fr) auto; gap:12px; align-items:center}
+.calc input[type=range]{width:100%; accent-color:var(--sc)}
+.calc output{font:700 16px/1 var(--fm); font-variant-numeric:tabular-nums}
+.reads{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px}
+.rd{border:1px solid var(--line); border-radius:12px; padding:9px 11px; background:var(--paper)}
+.rd small{display:block; font:600 11px/1.2 var(--fm); color:var(--muted); letter-spacing:.04em}
+.rd b{display:block; font:800 18px/1.15 var(--fd); font-variant-numeric:tabular-nums; margin-top:4px}
+.verdict{border-radius:12px; padding:10px 12px; font-weight:700; font-size:15px}
+.verdict.ok{background:var(--okbg); color:var(--ok)}
+.verdict.bad{background:var(--badbg); color:var(--bad)}
+.chart svg{width:100%; height:auto; display:block}
+.tbl{overflow-x:auto}
+.tbl table{border-collapse:collapse; width:100%; font:500 13.5px/1.4 var(--fm); font-variant-numeric:tabular-nums}
+.tbl th, .tbl td{padding:5px 8px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap}
+.tbl th{font-weight:700; color:var(--muted); font-size:12px}
+.tbl tr.tot td{font-weight:800; border-bottom:0}
+.learn{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.learn .lbl{font:600 12px/1 var(--fm); color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-right:2px}
+.done-card{border:2px solid var(--sc); background:var(--card); border-radius:var(--r); padding:18px; display:flex; flex-direction:column; gap:10px; position:relative; overflow:hidden}
+.done-card h3{margin:0; font:800 19px/1.2 var(--fd); padding-right:130px}
+.done-card p{margin:0}
+.done-card .stmp{position:absolute; right:16px; top:16px; transform:rotate(8deg); font:800 13px/1 var(--fd); letter-spacing:.08em; color:var(--sc); border:2.5px solid currentColor; border-radius:6px; padding:5px 8px; text-transform:uppercase}
+.locked-card{border:1px dashed var(--line2); border-radius:var(--r); padding:22px; text-align:center; color:var(--muted)}
+
+/* ===== tervezői napló ===== */
+.journal{padding-block:clamp(26px, 4vw, 44px) 10px}
+.journal h2{font:800 clamp(22px, 2.6vw, 30px)/1.12 var(--fd); margin:0 0 6px}
+.journal > p{margin:0 0 16px; color:var(--ink2)}
+.jgrid{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px}
+.jcell{border:1px solid var(--line); border-radius:14px; background:var(--card); padding:13px 14px; display:flex; flex-direction:column; gap:6px; min-width:0}
+.jcell .h{display:flex; align-items:center; gap:8px; font:700 13.5px/1.2 var(--fb)}
+.jcell .h i{flex:none; width:22px; height:22px; border-radius:7px; display:grid; place-items:center; font:800 11px/1 var(--fd); font-style:normal; color:#fff; background:var(--sc)}
+.jcell .h .p{margin-left:auto; font:600 12px/1 var(--fm); color:var(--muted)}
+.jcell .b{font-size:14.5px; line-height:1.5; color:var(--ink2)}
+.jcell.empty .b{color:var(--muted); font-style:italic}
+.tips{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:12px}
+.tipcmp{border:1px solid var(--line); border-radius:14px; background:var(--card); padding:14px 16px}
+.tipcmp h3{margin:0 0 8px; font:700 12px/1.3 var(--fm); letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+.tipcmp .vs{display:flex; gap:18px; align-items:baseline; flex-wrap:wrap}
+.tipcmp .vs div small{display:block; font:600 11px/1 var(--fm); color:var(--muted)}
+.tipcmp .vs div b{font:800 22px/1.2 var(--fd)}
+.reset{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:18px}
+.reset .ask{display:none; gap:10px; align-items:center; flex-wrap:wrap; font-size:15px}
+.reset.asking .ask{display:flex}
+.reset.asking > .btn{display:none}
+footer.wrap{border-top:1px solid var(--line); margin-top:26px; padding-block:18px 28px; color:var(--muted); font-size:14px}
+footer p{margin:0}
+
+@media (max-width: 1100px){ .jgrid{grid-template-columns:repeat(2, minmax(0, 1fr))} }
+@media (max-width: 960px){
+  .work-grid{grid-template-columns:1fr}
+  .stagewrap{position:relative; top:0}
+  .stage{height:min(62vh, 560px); min-height:340px}
+  .hero-grid{grid-template-columns:1fr}
+  .rail ol{grid-template-columns:repeat(9, 74px); overflow-x:auto; padding-bottom:4px; scrollbar-width:thin}
+  .rail .wrap{overflow-x:auto}
+}
+@media (max-width: 620px){
+  :root{--pad:16px}
+  .score .bar, .score .lb{display:none}
+  .score{gap:10px}
+  .brand b{font-size:14px}
+  .brand span{display:none}
+  .jgrid, .tips{grid-template-columns:1fr}
+  .reads{grid-template-columns:repeat(3, minmax(0, 1fr))}
+  .rd b{font-size:15px}
+  .logview{grid-template-columns:96px minmax(0, 1fr)}
+  .logview svg{width:96px}
+  .titleblock .big b{font-size:19px}
+  .done-card h3{padding-right:96px; font-size:17px}
+  .done-card .stmp{font-size:10.5px; padding:4px 6px}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+
+
+/* nyelvváltó (HU | EN): a kitöltött az aktuális nyelv; mobilon csak a másik nyelv kódja */
+.langbtn{flex:none; display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid rgba(255,255,255,.22); border-radius:999px; text-decoration:none; color:inherit; font:500 12px/1 var(--fm); letter-spacing:.04em}
+.langbtn b, .langbtn span{display:inline-grid; place-items:center; min-width:30px; padding:5px 8px; border-radius:999px}
+.langbtn b{background:#eef1f4; color:#141a20; font-weight:600}
+.langbtn span{opacity:.75}
+.langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
+@media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
+@media (max-width: 420px){ .top .wrap{gap:10px} .score{gap:8px} .top .brand svg{display:none} }
+</style>
+<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
+<script>Hyphenopoly.config({ require: { "en-gb": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
+<script type="importmap">{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/" } }</script>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="One site, one semester – back to top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#19212b"/><rect x="12" y="13" width="16" height="22" rx="1.5" fill="#efe5cf"/><rect x="34" y="7" width="18" height="28" rx="1.5" fill="#5d7f9c"/><rect x="6" y="37" width="52" height="7" fill="#cfae74"/><rect x="6" y="46" width="52" height="5" fill="#a2957f"/><rect x="6" y="53" width="52" height="5" fill="#5d5046"/><rect x="38" y="35" width="3" height="18" fill="#c9c6bd"/><rect x="46" y="35" width="3" height="18" fill="#c9c6bd"/></svg>
+      <div><b>One site, one semester</b><span>Foundation Engineering · design project</span></div>
+    </a>
+    <div class="score" aria-live="polite"><span><b id="sDone">0</b>/9<span class="lb"> stations</span></span><div class="bar" aria-hidden="true"><i id="sBar"></i></div><span><b id="sPts">0</b> pts</span></div>
+    <a class="langbtn" id="langSw" href="./" hreflang="hu" lang="hu" aria-label="Magyar változat"><span>HU</span><b>EN</b></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kick"><span>BME Foundation Engineering</span><span class="tag">9 stations · 2 buildings · 1 site</span></div>
+    <div class="hero-grid">
+      <div>
+        <h1>One site, <em>one semester</em></h1>
+        <p class="lead">You are the geotechnical engineer. Two buildings are going up on an imaginary site in Budapest: a three-storey residential building and an eight-storey office building with two basement levels. Each of the nine lectures of the course is a station, and at each one you have to solve a real design question. With every approved station the model grows too, from getting to know the ground to the last floor slab.</p>
+        <div class="hero-cta"><button class="btn pri" type="button" id="goBtn">Start at station 1</button><a class="btn dark" href="#naplo">Design log</a></div>
+      </div>
+      <div class="titleblock" aria-label="Drawing title block">
+        <div class="full"><small>Project</small><b>Budapest, imaginary site · Foundations of Building A and Building B</b></div>
+        <div><small>Client</small><b>Plot Ltd.</b></div>
+        <div><small>Geotechnical designer</small><b>you</b></div>
+        <div><small>Standard</small><b>MSZ EN 1997‑1, DA‑2*</b></div>
+        <div><small>Groundwater</small><b>−3.0 m</b></div>
+        <div class="big"><small>Approved stations</small><b id="tbDone">0 / 9</b></div>
+        <div class="big"><small>Score</small><b id="tbPts">0</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="rail" aria-label="Stations">
+  <div class="wrap"><ol id="rail"></ol></div>
+</nav>
+
+<main>
+  <section class="work wrap" id="work" aria-label="Workspace">
+    <div class="work-grid">
+      <div class="stagewrap">
+        <div class="stage" id="stage">
+          <div class="hud"><span class="tag" id="hudTag">Section through the site · drag to rotate</span></div>
+          <div class="stamp3d" id="stamp">Approved</div>
+          <div class="tools"><button type="button" id="viewBtn">⟲ View</button><button type="button" id="allBtn">The whole site</button></div>
+        </div>
+      </div>
+      <div class="panel" id="panel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="journal wrap" id="naplo">
+    <h2>Design log</h2>
+    <p>After every approved station, what you decided and what you calculated is recorded here. By the end of the semester it adds up to the geotechnical design of the two buildings. Your progress is saved in this browser.</p>
+    <div class="jgrid" id="jgrid"></div>
+    <div class="tips" id="tips"></div>
+    <div class="reset" id="reset"><button class="btn" type="button" id="resetBtn">Start again from the beginning</button><div class="ask"><span>Are you sure you want to delete your progress?</span><button class="btn pri" type="button" id="resetYes">Yes, delete it</button><button class="btn" type="button" id="resetNo">Cancel</button></div></div>
+  </section>
+</main>
+<footer class="wrap"><p>BME Department of Engineering Geology and Geotechnics · Foundation Engineering · The calculations are illustrative exercises and must not be used for real design.</p></footer>
+
+<script type="module">
+/* ================= 3D MAKETT: a telek metszete, a két ház, a gépek ================= */
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), lerp = (a, b, t) => a + (b - a) * t;
+const ease = (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const V3 = (x, y, z) => new THREE.Vector3(x, y, z);
+
+// ---- a telek geometriája (méterben, a nyitóoldal „A tárgy útja” metszetével azonos) ----
+const X0 = -60, X1 = 56, ZB = -12, ZF = 15, YB = -24;
+const ysurf = (x) => x >= -44 ? 0 : x <= -51.5 ? -5 : lerp(0, -5, (-44 - x) / 7.5);
+const xb = (y) => lerp(-6, 4, (-1.2 - y) / 7.8);
+const gwY = (x) => x >= -40 ? -3 : Math.min(ysurf(x) - 0.05, lerp(-3, -5.05, Math.min(1, (-40 - x) / 11.5)));
+const PIT = { x0: 8, x1: 30, z0: 3, y: -7.6 };
+const A = { x0: -34, x1: -16, z0: 3, z1: 15, FX: [-33, -25, -17], FZ: [5, 14] };
+const PILES = [10.5, 15, 19.5, 24, 28.5];
+
+// ---- anyagok, egyszerű testek (a CFA-animáció machines.js-éből átvéve) ----
+const matCache = new Map();
+function M(color, opts = {}) { const key = JSON.stringify([color, opts]); if (matCache.has(key)) return matCache.get(key); const m = new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0.05, ...opts }); matCache.set(key, m); return m; }
+function box(w, h, d, mat, x = 0, y = 0, z = 0, shadow = true) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); m.castShadow = shadow; m.receiveShadow = shadow; return m; }
+function boxR(x0, x1, y0, y1, z0, z1, mat, shadow = true) { return box(x1 - x0, y1 - y0, z1 - z0, mat, (x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2, shadow); }
+function cyl(rt, rb, h, mat, x = 0, y = 0, z = 0, seg = 24, shadow = true) { const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat); m.position.set(x, y, z); m.castShadow = shadow; m.receiveShadow = shadow; return m; }
+function cylZ(r, h, mat, x = 0, y = 0, z = 0, seg = 24) { const m = cyl(r, r, h, mat, x, y, z, seg); m.rotation.x = Math.PI / 2; return m; }
+function cylX(r, h, mat, x = 0, y = 0, z = 0, seg = 24) { const m = cyl(r, r, h, mat, x, y, z, seg); m.rotation.z = Math.PI / 2; return m; }
+function setRod(m, a, b) { const dir = new THREE.Vector3().subVectors(b, a); const len = dir.length(); m.position.copy(a).addScaledVector(dir, 0.5); m.scale.set(1, len, 1); m.quaternion.setFromUnitVectors(V3(0, 1, 0), dir.clone().normalize()); }
+function rod(a, b, r, mat, seg = 8) { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, seg), mat); m.castShadow = true; setRod(m, a, b); return m; }
+function mergeGeoms(geoms) {
+  let nV = 0, nI = 0; for (const g of geoms) { nV += g.attributes.position.count; nI += g.index.count; }
+  const pos = new Float32Array(nV * 3), nor = new Float32Array(nV * 3), idx = new Uint32Array(nI); let vo = 0, io = 0;
+  for (const g of geoms) { pos.set(g.attributes.position.array, vo * 3); nor.set(g.attributes.normal.array, vo * 3); const gi = g.index.array; for (let i = 0; i < gi.length; i++) idx[io + i] = gi[i] + vo; vo += g.attributes.position.count; io += gi.length; }
+  const out = new THREE.BufferGeometry(); out.setAttribute('position', new THREE.BufferAttribute(pos, 3)); out.setAttribute('normal', new THREE.BufferAttribute(nor, 3)); out.setIndex(new THREE.BufferAttribute(idx, 1)); return out;
+}
+function gridSurface(nu, nv, fn) { const pos = [], idx = []; for (let i = 0; i <= nu; i++) for (let j = 0; j <= nv; j++) { const p = fn(i / nu, j / nv); pos.push(p[0], p[1], p[2]); } for (let i = 0; i < nu; i++) for (let j = 0; j < nv; j++) { const a = i * (nv + 1) + j, b = a + nv + 1; idx.push(a, b, a + 1, b, b + 1, a + 1); } const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals(); return g; }
+function helixRibbon(rIn, rOut, pitch, turns, th = 0.03, segPerTurn = 40) {
+  const nu = Math.max(2, Math.round(turns * segPerTurn));
+  const P = (u, v, dy) => { const t = u * turns * Math.PI * 2; const r = rIn + v * (rOut - rIn); return [r * Math.cos(t), u * turns * pitch + dy, -r * Math.sin(t)]; };
+  const g = mergeGeoms([gridSurface(nu, 2, (u, v) => P(u, v, th / 2)), gridSurface(nu, 2, (u, v) => P(u, 1 - v, -th / 2)), gridSurface(nu, 1, (u, v) => P(u, 1, th / 2 - v * th))]); g.computeVertexNormals(); return g;
+}
+function buildAuger(length = 20, flightR = 0.4, pitch = 0.6, stemR = 0.14) {
+  const g = new THREE.Group(); const steel = M(0x6d7580, { metalness: 0.55, roughness: 0.45 });
+  g.add(cyl(stemR, stemR, length, steel, 0, length / 2, 0, 20));
+  const flight = new THREE.Mesh(helixRibbon(stemR * 0.98, flightR, pitch, (length - 0.6) / pitch, 0.035, 30), M(0x8d949c, { metalness: 0.5, roughness: 0.5, side: THREE.DoubleSide })); flight.position.y = 0.45; flight.castShadow = true; g.add(flight);
+  g.add(cyl(stemR * 1.05, stemR * 0.55, 0.45, steel, 0, 0.225, 0, 16));
+  g.add(cyl(flightR * 0.93, flightR * 0.93, length, M(0x6f5a3e, { roughness: 1 }), 0, length / 2, 0, 28)); // a menetek teljesen tele talajjal
+  return g;
+}
+function seatedOperator() {
+  const g = new THREE.Group(); const vest = M(0xff7a00), pants = M(0x2c3e66), skin = M(0xe0b090), seat = M(0x26292e);
+  g.add(box(0.5, 0.12, 0.5, seat, 0, 0.45, -0.25)); g.add(box(0.5, 0.7, 0.1, seat, 0, 0.8, -0.5));
+  g.add(box(0.34, 0.16, 0.45, pants, 0, 0.6, -0.12)); g.add(box(0.34, 0.45, 0.14, pants, 0, 0.32, 0.12));
+  g.add(box(0.42, 0.56, 0.24, vest, 0, 0.98, -0.32)); g.add(cyl(0.07, 0.07, 0.1, skin, 0, 1.31, -0.32, 10));
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(0.13, 14, 10), skin).translateY(1.46).translateZ(-0.32));
+  const hel = new THREE.Mesh(new THREE.SphereGeometry(0.145, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), M(0xffffff)); hel.position.set(0, 1.5, -0.32); g.add(hel);
+  for (const sx of [-1, 1]) { g.add(box(0.1, 0.06, 0.45, seat, sx * 0.3, 0.72, -0.15)); g.add(box(0.09, 0.3, 0.09, vest, sx * 0.26, 0.98, -0.34)); g.add(box(0.08, 0.08, 0.3, vest, sx * 0.3, 0.8, -0.12)); g.add(cyl(0.015, 0.015, 0.12, M(0x111111), sx * 0.3, 0.8, 0.08, 8)); g.add(new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 10), skin).translateX(sx * 0.3).translateY(0.86).translateZ(0.08)); }
+  return g;
+}
+function worker() { const g = new THREE.Group(); const vest = M(0xff7a00), pants = M(0x2c3e66), skin = M(0xe0b090);
+  g.add(box(0.36, 0.8, 0.22, pants, 0, 0.4, 0)); g.add(box(0.44, 0.62, 0.26, vest, 0, 1.11, 0)); g.add(cyl(0.12, 0.12, 0.2, skin, 0, 1.52, 0, 10));
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(0.16, 12, 10), M(0xffffff)).translateY(1.7)); g.add(box(0.1, 0.55, 0.1, vest, -0.28, 1.12, 0)); g.add(box(0.1, 0.55, 0.1, vest, 0.28, 1.12, 0)); return g; }
+function buildRig() {
+  const body = M(0xf4f4f2, { roughness: 0.5 }), accent = M(0x1e63b8, { roughness: 0.5 }), dark = M(0x2b2f36, { roughness: 0.7 }), steel = M(0x9aa3ad, { metalness: 0.5, roughness: 0.45 }), glass = M(0x8fc7ff, { roughness: 0.15, metalness: 0.2, transparent: true, opacity: 0.6 });
+  const rig = new THREE.Group(); const tracks = new THREE.Group(); rig.add(tracks);
+  for (const sx of [-1, 1]) { const x = sx * 2.0; tracks.add(box(0.9, 0.6, 7.6, dark, x, 0.75, 0)); const belt = box(1.0, 1.25, 8.2, M(0x1d2024, { roughness: 0.9 }), x, 0.65, 0); tracks.add(belt); for (const z of [-3.7, 3.7]) tracks.add(cylX(0.62, 1.02, dark, x, 0.65, z, 20)); }
+  tracks.add(box(3.6, 0.6, 3.4, dark, 0, 1.2, -0.3));
+  const upper = new THREE.Group(); upper.position.y = 1.5; rig.add(upper);
+  upper.add(cyl(1.7, 1.7, 0.35, steel, 0, 0.17, -0.3, 32)); upper.add(box(3.4, 0.35, 7.0, body, 0, 0.5, -1.3)); upper.add(box(3.2, 1.9, 3.6, body, 0, 1.6, -2.0)); upper.add(box(3.25, 0.25, 3.65, accent, 0, 2.6, -2.0));
+  upper.add(box(3.4, 1.7, 1.5, dark, 0, 1.55, -4.55)); upper.add(box(3.45, 0.3, 1.55, accent, 0, 2.55, -4.55));
+  const cab = new THREE.Group(); cab.position.set(-1.05, 0.7, 1.2); upper.add(cab);
+  cab.add(box(1.5, 0.5, 2.2, body, 0, 0.25, 0)); cab.add(box(1.5, 1.7, 2.2, glass, 0, 1.35, 0)); cab.add(box(1.55, 0.18, 2.25, body, 0, 2.28, 0));
+  const op = seatedOperator(); op.position.set(0, 0.5, 0.1); cab.add(op);
+  const mastX = 0.35, mastZ = 5.6;
+  for (const sx of [-0.9, 0.9]) { upper.add(rod(V3(mastX + sx, 1.0, 1.3), V3(mastX + sx, 3.2, mastZ - 0.75), 0.22, body, 10)); upper.add(rod(V3(mastX + sx, 2.8, 0.3), V3(mastX + sx, 6.8, mastZ - 0.75), 0.16, body, 10)); }
+  const mast = new THREE.Group(); mast.position.set(mastX, -1.5, mastZ); upper.add(mast); const mastH = 26;
+  mast.add(box(1.1, mastH, 0.9, body, 0, mastH / 2, -0.55)); mast.add(box(0.18, mastH, 0.22, steel, -0.62, mastH / 2, 0.02)); mast.add(box(0.18, mastH, 0.22, steel, 0.62, mastH / 2, 0.02));
+  for (let y = 1; y < mastH; y += 1.6) mast.add(box(1.16, 0.12, 0.96, accent, 0, y, -0.55));
+  mast.add(box(1.4, 1.0, 1.4, dark, 0, mastH + 0.4, -0.35)); mast.add(cylX(0.45, 1.5, steel, 0, mastH + 0.9, -0.1, 20)); mast.add(box(2.4, 0.5, 1.6, dark, 0, 0.25, -0.2));
+  const head = new THREE.Group(); mast.add(head); head.add(box(1.7, 2.1, 1.3, accent, 0, 0, 0.75)); head.add(cyl(0.6, 0.6, 0.5, dark, 0, -1.25, 1.4, 24)); head.add(cyl(0.28, 0.28, 0.8, steel, 0, 1.45, 1.4, 16)); head.add(cylZ(0.5, 0.6, dark, -1.0, 0.4, 0.75, 16)); head.add(cylZ(0.5, 0.6, dark, 1.0, 0.4, 0.75, 16));
+  const ropes = [rod(V3(), V3(0, 1, 0), 0.04, dark), rod(V3(), V3(0, 1, 0), 0.04, dark)]; ropes.forEach(r => mast.add(r));
+  upper.add(rod(V3(mastX - 0.6, 2.7, -4.0), V3(mastX - 0.6, mastH - 0.5, mastZ - 0.9), 0.045, dark)); upper.add(rod(V3(mastX + 0.6, 2.7, -4.0), V3(mastX + 0.6, mastH - 0.5, mastZ - 0.9), 0.045, dark));
+  rig.userData = { head, ropes, mastH, mastX, mastZ };
+  return rig;
+}
+function setRigHead(rig, y) { const u = rig.userData; u.head.position.y = y + 1.5; setRod(u.ropes[0], V3(-0.45, u.mastH + 0.9, 0.3), V3(-0.45, y + 2.45, 0.9)); setRod(u.ropes[1], V3(0.45, u.mastH + 0.9, 0.3), V3(0.45, y + 2.45, 0.9)); }
+
+// ---- textúrák ----
+function patTex(base, draw, size = 512) {
+  const cv = document.createElement('canvas'); cv.width = cv.height = size; const g = cv.getContext('2d'); g.fillStyle = base; g.fillRect(0, 0, size, size);
+  let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }; draw(g, rnd, size);
+  const t = new THREE.CanvasTexture(cv); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t;
+}
+const dots = (cols, n, r0) => (g, rnd, S) => { for (let i = 0; i < n; i++) { g.fillStyle = cols[Math.floor(rnd() * cols.length)]; const r = r0 * (0.5 + rnd()); g.beginPath(); g.ellipse(rnd() * S, rnd() * S, r, r * (0.6 + rnd() * 0.5), rnd() * 3, 0, Math.PI * 2); g.fill(); } };
+const TEX = {
+  fill: patTex('#8a7f6e', (g, rnd, S) => { dots(['#7c7262', '#9a8f7d', '#6d6455', '#a69b88'], 1800, 3)(g, rnd, S); g.strokeStyle = 'rgba(40,30,20,.45)'; g.lineWidth = 3; for (let i = 0; i < 70; i++) { const x = rnd() * S, y = rnd() * S; g.beginPath(); g.moveTo(x, y); g.lineTo(x + 14 + rnd() * 10, y + 8 * rnd()); g.stroke(); } }),
+  sand: patTex('#cfae74', dots(['#c3a168', '#d8ba84', '#b9975e', '#e0c590'], 5200, 2.2)),
+  clay: patTex('#6a645b', (g, rnd, S) => { dots(['#625c54', '#726b62'], 600, 9)(g, rnd, S); g.strokeStyle = 'rgba(25,30,38,.42)'; g.lineWidth = 3; for (let y = 16; y < S; y += 32) for (let x = (y / 32 % 2) * 30; x < S; x += 60) { g.beginPath(); g.moveTo(x, y); g.lineTo(x + 34, y); g.stroke(); } }),
+  peat: patTex('#3d2d20', (g, rnd, S) => { g.strokeStyle = 'rgba(240,210,160,.38)'; g.lineWidth = 2.4; for (let y = 12; y < S; y += 26) { g.beginPath(); for (let x = 0; x <= S; x += 8) g.lineTo(x, y + Math.sin(x / 20 + y) * 5); g.stroke(); } }),
+  grav: patTex('#a2957f', (g, rnd, S) => { dots(['#988b76', '#ada08a', '#8c806c'], 900, 3)(g, rnd, S); g.strokeStyle = 'rgba(60,45,30,.5)'; g.lineWidth = 2; for (let i = 0; i < 260; i++) { const x = rnd() * S, y = rnd() * S, r = 5 + rnd() * 9; g.fillStyle = ['#b9ad97', '#8f8370', '#c7bca8', '#9d927d'][Math.floor(rnd() * 4)]; g.beginPath(); g.ellipse(x, y, r, r * 0.72, rnd() * 3, 0, Math.PI * 2); g.fill(); g.stroke(); } }),
+  hard: patTex('#5d5046', (g, rnd, S) => { dots(['#564a41', '#655850'], 500, 8)(g, rnd, S); g.strokeStyle = 'rgba(25,30,38,.45)'; g.lineWidth = 3; for (let y = 20; y < S; y += 36) for (let x = (y / 36 % 2) * 34; x < S; x += 68) { g.beginPath(); g.moveTo(x, y); g.lineTo(x + 38, y); g.stroke(); } }),
+  grass: patTex('#4f7a3c', dots(['#46703a', '#5b8a45', '#41652f', '#6a9750'], 3000, 3)),
+  unk: patTex('#2b3038', (g, rnd, S) => { g.fillStyle = 'rgba(255,255,255,.09)'; g.font = '700 120px monospace'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('?', S * 0.25, S * 0.3); g.fillText('?', S * 0.75, S * 0.78); g.strokeStyle = 'rgba(255,255,255,.04)'; for (let i = 0; i < S; i += 32) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, S); g.moveTo(0, i); g.lineTo(S, i); g.stroke(); } }),
+};
+const LAYERS = [
+  { key: 'fill', name: 'fill', k: 1 / 4, poly: [[X0, -5], [-51.5, -5], [-44, 0], [X1, 0], [X1, -1.2], [-44, -1.2], [-51.5, -6.2], [X0, -6.2]] },
+  { key: 'sand', name: 'sand', k: 1 / 3, poly: [[X0, -6.2], [-51.5, -6.2], [-44, -1.2], [-6, -1.2], [4, -9], [X0, -9]] },
+  { key: 'clay', name: 'soft clay', k: 1 / 5, poly: [[-6, -1.2], [X1, -1.2], [X1, -9], [4, -9]] },
+  { key: 'grav', name: 'sandy gravel', k: 1 / 5, poly: [[X0, -9], [X1, -9], [X1, -18], [X0, -18]] },
+  { key: 'hard', name: 'hard clay', k: 1 / 6, poly: [[X0, -18], [X1, -18], [X1, YB], [X0, YB]] },
+];
+const PEAT = (() => { const p = []; for (let i = 0; i < 56; i++) { const a = i / 56 * Math.PI * 2; p.push([19 + 10.5 * Math.cos(a), -4.3 + 1.55 * Math.sin(a)]); } return p; })();
+
+// Sutherland–Hodgman: sokszög vágása téglalapra
+function clipRect(poly, x0, x1, y0, y1) {
+  const edges = [[(p) => p[0] >= x0, (a, b) => [x0, a[1] + (b[1] - a[1]) * (x0 - a[0]) / (b[0] - a[0])]], [(p) => p[0] <= x1, (a, b) => [x1, a[1] + (b[1] - a[1]) * (x1 - a[0]) / (b[0] - a[0])]],
+    [(p) => p[1] >= y0, (a, b) => [a[0] + (b[0] - a[0]) * (y0 - a[1]) / (b[1] - a[1]), y0]], [(p) => p[1] <= y1, (a, b) => [a[0] + (b[0] - a[0]) * (y1 - a[1]) / (b[1] - a[1]), y1]]];
+  let out = poly;
+  for (const [inside, inter] of edges) { const inp = out; out = []; if (!inp.length) break; for (let i = 0; i < inp.length; i++) { const cur = inp[i], prev = inp[(i + inp.length - 1) % inp.length]; const ci = inside(cur), pi = inside(prev); if (ci) { if (!pi) out.push(inter(prev, cur)); out.push(cur); } else if (pi) out.push(inter(prev, cur)); } }
+  const clean = []; for (const p of out) { const q = clean[clean.length - 1]; if (!q || Math.hypot(q[0] - p[0], q[1] - p[1]) > 1e-6) clean.push(p); }
+  if (clean.length > 2 && Math.hypot(clean[0][0] - clean[clean.length - 1][0], clean[0][1] - clean[clean.length - 1][1]) < 1e-6) clean.pop();
+  return clean.length >= 3 ? clean : null;
+}
+function extrude(poly, z0, z1, k) {
+  const sh = new THREE.Shape(poly.map(([x, y]) => new THREE.Vector2(x, y)));
+  const g = new THREE.ExtrudeGeometry(sh, { depth: z1 - z0, bevelEnabled: false, curveSegments: 1 }); g.translate(0, 0, z0);
+  const uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * k, uv.getY(i) * k); uv.needsUpdate = true; return g;
+}
+
+export function createScene(stageEl, opts = {}) {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.createElement('canvas'); stageEl.insertBefore(canvas, stageEl.firstChild);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0e141b); scene.fog = new THREE.Fog(0x0e141b, 420, 1100);
+  const camera = new THREE.PerspectiveCamera(36, 1, 0.5, 1600);
+  const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.maxPolarAngle = Math.PI * 0.56; controls.minDistance = 8; controls.maxDistance = 480; controls.screenSpacePanning = true;
+  // fények
+  scene.add(new THREE.HemisphereLight(0xdfe9ff, 0x3a3226, 0.95));
+  const sun = new THREE.DirectionalLight(0xfff0dc, 2.1); sun.position.set(50, 80, 90); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -80, right: 80, top: 60, bottom: -50, near: 10, far: 300 }); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.04; scene.add(sun);
+  const fillL = new THREE.DirectionalLight(0xbfd4ff, 0.55); fillL.position.set(-60, 30, 60); scene.add(fillL);
+  // tervlap-rács a makett alatt
+  const grid = new THREE.GridHelper(420, 84, 0x2a3644, 0x18212b); grid.position.y = YB - 0.05; scene.add(grid);
+
+  // ---- talajtest darabokból (a B ház munkagödre kivehető) ----
+  const soil = new THREE.Group(); scene.add(soil); const pitSoil = new THREE.Group(); scene.add(pitSoil);
+  const realMat = {}, unkMat = new THREE.MeshStandardMaterial({ map: TEX.unk, roughness: 0.95, color: 0xffffff }); const layerMeshes = [];
+  for (const L of LAYERS) { TEX[L.key].repeat.set(1, 1); realMat[L.key] = new THREE.MeshStandardMaterial({ map: TEX[L.key], roughness: 0.95 }); }
+  realMat.peat = new THREE.MeshStandardMaterial({ map: TEX.peat, roughness: 0.95, emissive: 0x000000 });
+  const addPiece = (poly, z0, z1, key, k, grp) => { if (!poly) return; const m = new THREE.Mesh(extrude(poly, z0, z1, k), unkMat); m.receiveShadow = true; m.userData.key = key; grp.add(m); layerMeshes.push(m); };
+  for (const L of LAYERS) {
+    addPiece(L.poly, ZB, PIT.z0, L.key, L.k, soil);
+    addPiece(clipRect(L.poly, X0, PIT.x0, YB, 5), PIT.z0, ZF, L.key, L.k, soil);
+    addPiece(clipRect(L.poly, PIT.x1, X1, YB, 5), PIT.z0, ZF, L.key, L.k, soil);
+    addPiece(clipRect(L.poly, PIT.x0, PIT.x1, YB, PIT.y), PIT.z0, ZF, L.key, L.k, soil);
+    addPiece(clipRect(L.poly, PIT.x0, PIT.x1, PIT.y, 5), PIT.z0, ZF, L.key, L.k, pitSoil);
+  }
+  const peatBack = new THREE.Mesh(extrude(PEAT, -6, PIT.z0, 1 / 4), unkMat); peatBack.userData.key = 'peat'; soil.add(peatBack); layerMeshes.push(peatBack);
+  const peatFront = new THREE.Mesh(extrude(PEAT, PIT.z0, ZF + 0.02, 1 / 4), unkMat); peatFront.userData.key = 'peat'; pitSoil.add(peatFront); layerMeshes.push(peatFront);
+  // gyep és kocsibeálló a felszínen
+  const grassPoly = [[X0, -5], [-51.5, -5], [-44, 0], [X1, 0], [X1, 0.14], [-44, 0.14], [-51.5, -4.86], [X0, -4.86]];
+  const grassMat = new THREE.MeshStandardMaterial({ map: TEX.grass, roughness: 1 });
+  const addGrass = (poly, z0, z1, grp) => { if (!poly) return; const m = new THREE.Mesh(extrude(poly, z0, z1, 1 / 3), grassMat); m.receiveShadow = true; grp.add(m); };
+  addGrass(grassPoly, ZB, PIT.z0, soil); addGrass(clipRect(grassPoly, X0, PIT.x0, -10, 5), PIT.z0, ZF, soil); addGrass(clipRect(grassPoly, PIT.x1, X1, -10, 5), PIT.z0, ZF, soil); addGrass(clipRect(grassPoly, PIT.x0, PIT.x1, -10, 5), PIT.z0, ZF, pitSoil);
+  soil.add(boxR(-13, -3, 0.14, 0.2, ZB, ZF, M(0x3a3d42, { roughness: 0.9 }), false));
+  // fák
+  for (const [x, z, s] of [[-57, -6, 0.9], [-41, -8, 1.1], [-9, -9, 0.9], [38, -7, 1], [47, 2, 1.15], [52, -9, 0.85], [-56, 8, 0.8]]) { const y = ysurf(x) + 0.14; const t = new THREE.Group(); t.add(cyl(0.22 * s, 0.3 * s, 3.4 * s, M(0x4a3a2c), 0, 1.7 * s, 0, 8)); const c = new THREE.Mesh(new THREE.IcosahedronGeometry(2.6 * s, 0), M(0x2f5a3a, { roughness: 0.9, flatShading: true })); c.position.y = 4.8 * s; c.castShadow = true; t.add(c); const c2 = new THREE.Mesh(new THREE.IcosahedronGeometry(1.7 * s, 0), M(0x3d7049, { roughness: 0.9, flatShading: true })); c2.position.set(0.9 * s, 6.0 * s, 0.5 * s); c2.castShadow = true; t.add(c2); t.position.set(x, y, z); scene.add(t); }
+
+  // ---- rajzelemek a metszet síkján (z = ZF + kicsi) ----
+  const ZS = ZF + 0.06;
+  function ribbon(pts, w, color, opts2 = {}) {
+    const { dash = 0, gap = 0, z = ZS, opacity = 1 } = opts2; const mat = new THREE.MeshBasicMaterial({ color, transparent: opacity < 1, opacity, depthWrite: opacity >= 1, side: THREE.DoubleSide });
+    const segs = []; // [a, b] pairs
+    if (!dash) for (let i = 0; i < pts.length - 1; i++) segs.push([pts[i], pts[i + 1]]);
+    else { let on = true, left = dash; for (let i = 0; i < pts.length - 1; i++) { let a = pts[i]; const b = pts[i + 1]; let L = Math.hypot(b[0] - a[0], b[1] - a[1]); while (L > 1e-6) { const s = Math.min(left, L); const t = s / L; const c = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; if (on) segs.push([a, c]); a = c; L -= s; left -= s; if (left <= 1e-6) { on = !on; left = on ? dash : gap; } } } }
+    const pos = []; for (const [a, b] of segs) { const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1, nx = -dy / l * w / 2, ny = dx / l * w / 2; pos.push(a[0] + nx, a[1] + ny, z, a[0] - nx, a[1] - ny, z, b[0] + nx, b[1] + ny, z, a[0] - nx, a[1] - ny, z, b[0] - nx, b[1] - ny, z, b[0] + nx, b[1] + ny, z); }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); const m = new THREE.Mesh(g, mat); m.renderOrder = 3; return m;
+  }
+  function arrow(x0, y0, x1, y1, color, w = 0.35, z = ZS + 0.01) {
+    const g = new THREE.Group(); const an = Math.atan2(y1 - y0, x1 - x0), L = 1.6 * (w / 0.35);
+    g.add(ribbon([[x0, y0], [x1 - Math.cos(an) * L * 0.8, y1 - Math.sin(an) * L * 0.8]], w, color, { z }));
+    const sh = new THREE.Shape([new THREE.Vector2(x1, y1), new THREE.Vector2(x1 - Math.cos(an - 0.45) * L, y1 - Math.sin(an - 0.45) * L), new THREE.Vector2(x1 - Math.cos(an + 0.45) * L, y1 - Math.sin(an + 0.45) * L)]);
+    const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide })); m.position.z = z; m.renderOrder = 3; g.add(m); return g;
+  }
+  const sectionRect = (x0, x1, y0, y1, color, z = ZF + 0.03) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, y1 - y0), new THREE.MeshStandardMaterial({ color, roughness: 0.85 })); m.position.set((x0 + x1) / 2, (y0 + y1) / 2, z); m.receiveShadow = true; return m; };
+
+  // talajvízszint
+  const gw = new THREE.Group(); scene.add(gw); { const pts = []; for (let x = X0; x <= X1; x += 1) pts.push([x, gwY(x)]); gw.add(ribbon(pts, 0.22, 0x5cc2f2)); }
+
+  // ---- fúrások, CPT (2. állomás) ----
+  const BOR = [{ x: -26, n: 'F1' }, { x: -1, n: 'F2' }, { x: 20, n: 'F3' }];
+  const COL = { fill: 0x8a7f6e, sand: 0xe9c77d, clay: 0x8d9aa6, peat: 0x5b3b22, grav: 0xd9c7a3, hard: 0x7c8792 };
+  function soilAt(x, y) { if (y > ysurf(x) - 1.2) return 'fill'; if (y > -9) { if (x < xb(y)) return 'sand'; return ((x - 19) ** 2 / 110.25 + (y + 4.3) ** 2 / 2.4025 < 1) ? 'peat' : 'clay'; } return y > -18 ? 'grav' : 'hard'; }
+  const bores = new THREE.Group(); scene.add(bores);
+  for (const B of BOR) {
+    const g = new THREE.Group(); g.add(sectionRect(B.x - 0.95, B.x + 0.95, -20, ysurf(B.x) + 0.6, 0xf6f2e8, ZF + 0.04));
+    for (let y = ysurf(B.x); y > -20; y -= 0.25) { const k = soilAt(B.x, y - 0.125); g.add(sectionRect(B.x - 0.7, B.x + 0.7, y - 0.25, y, COL[k], ZF + 0.05)); }
+    for (let d = 1; d < 20; d++) g.add(ribbon([[B.x - 0.95, ysurf(B.x) - d], [B.x - (d % 5 ? 0.5 : 0.15), ysurf(B.x) - d]], 0.07, 0x1b1d20, { z: ZF + 0.06 }));
+    g.add(cyl(0.18, 0.18, 1.6, M(0xff7a00), B.x, ysurf(B.x) + 0.8, ZF - 0.6, 10)); bores.add(g);
+  }
+  const cpt = new THREE.Group(); scene.add(cpt);
+  { cpt.add(ribbon([[1.6, 0], [1.6, -15]], 0.08, 0xffffff, { opacity: 0.55 })); const pts = []; for (let y = 0; y > -15; y -= 0.2) { const q = y > -1.2 ? 2.4 : y > -7.1 ? 0.9 + 0.22 * Math.sin(y * 7) : y > -9 ? 11 + 2.2 * Math.sin(y * 5) : 21 + 2.6 * Math.sin(y * 3); pts.push([1.6 + q * 0.32, y]); } cpt.add(ribbon(pts, 0.22, 0xffd36b)); cpt.add(cyl(0.1, 0.1, 1.4, M(0xffd36b), 1.6, 0.7, ZF - 0.6, 8)); }
+
+  // ---- hologramok (tervezett házak) ----
+  const holoMat = new THREE.MeshBasicMaterial({ color: 0x5fe3ff, transparent: true, opacity: 0.12, depthWrite: false });
+  const holoLine = new THREE.LineBasicMaterial({ color: 0x8ff0ff, transparent: true, opacity: 0.85 });
+  function holo(x0, x1, y0, y1, z0, z1) { const g = new THREE.Group(); const geo = new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0); const m = new THREE.Mesh(geo, holoMat); g.add(m); g.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), holoLine)); g.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2); return g; }
+  const holoA = holo(A.x0, A.x1, 0.3, 10.5, A.z0, A.z1); scene.add(holoA);
+  const holoBpivot = new THREE.Group(); holoBpivot.position.set(PIT.x0, 0, 9); scene.add(holoBpivot);
+  const holoB = holo(PIT.x0, PIT.x1, -7.6, 26.4, PIT.z0, ZF); holoB.position.x -= PIT.x0; holoB.position.z -= 9; holoBpivot.add(holoB);
+
+  // ---- kitűzés (1. állomás) ----
+  const stakes = new THREE.Group(); scene.add(stakes);
+  for (const [x0, x1] of [[A.x0, A.x1], [PIT.x0, PIT.x1]]) for (const x of [x0, x1]) for (const z of [A.z0, A.z1]) { stakes.add(cyl(0.06, 0.06, 1.1, M(0xe0e0e0), x, 0.69, z, 6)); stakes.add(box(0.36, 0.2, 0.03, M(0xff3fa0), x + 0.18, 1.1, z, false)); }
+  for (const [x0, x1] of [[A.x0, A.x1], [PIT.x0, PIT.x1]]) { const s = M(0xffe08a); stakes.add(rod(V3(x0, 0.5, A.z0), V3(x1, 0.5, A.z0), 0.025, s, 4)); stakes.add(rod(V3(x0, 0.5, A.z1), V3(x1, 0.5, A.z1), 0.025, s, 4)); stakes.add(rod(V3(x0, 0.5, A.z0), V3(x0, 0.5, A.z1), 0.025, s, 4)); stakes.add(rod(V3(x1, 0.5, A.z0), V3(x1, 0.5, A.z1), 0.025, s, 4)); }
+
+  // ---- A ház ----
+  const conc = M(0xcfcac0, { roughness: 0.85 }), concDk = M(0xb9b6ae, { roughness: 0.85 });
+  const footA = new THREE.Group(); scene.add(footA);
+  for (const x of A.FX) for (const z of A.FZ) { const front = z > 10; footA.add(boxR(x - 1, x + 1, -1.8, -1.2, z - 1, front ? ZF + 0.03 : z + 1, conc)); footA.add(boxR(x - 0.2, x + 0.2, -1.2, 0.3, z - 0.2, front ? ZF + 0.03 : z + 0.2, concDk)); }
+  const wallM = M(0xefe5cf, { roughness: 0.8 }), slabM = M(0x8d8576, { roughness: 0.8 }), winM = M(0x2f4558, { roughness: 0.25, metalness: 0.3 }), roofM = M(0x6a6f75, { roughness: 0.8 });
+  function floorA(k, top) {
+    const g = new THREE.Group(); const y0 = 0.3 + 3.3 * k;
+    g.add(boxR(A.x0, A.x1, 0, 3.0, A.z0, A.z1, wallM)); g.add(boxR(A.x0 - 0.1, A.x1 + 0.1, 3.0, 3.3, A.z0 - 0.1, A.z1 + 0.1, slabM));
+    for (let c = 0; c < 5; c++) { const cx = A.x0 + 2.2 + c * 3.4; if (k === 0 && c === 2) g.add(boxR(cx - 0.6, cx + 0.6, 0, 2.3, A.z1, A.z1 + 0.06, M(0x5a4232))); else g.add(boxR(cx - 0.75, cx + 0.75, 0.9, 2.3, A.z1, A.z1 + 0.05, winM, false)); }
+    for (const sx of [A.x0 - 0.05, A.x1 + 0.05]) for (const cz of [5.5, 9, 12.5]) g.add(boxR(sx - 0.03, sx + 0.03, 0.9, 2.3, cz - 0.7, cz + 0.7, winM, false));
+    if (top) { g.add(boxR(A.x0 - 0.3, A.x1 + 0.3, 3.3, 3.75, A.z0 - 0.3, A.z1 + 0.3, roofM)); g.add(boxR(-27, -22, 3.75, 5.0, 6, 10, M(0xd9d2c2))); }
+    g.position.y = y0; return g;
+  }
+  const A0 = floorA(0, false), A1 = floorA(1, false), A2 = floorA(2, true); scene.add(A0, A1, A2);
+  const plinth = boxR(A.x0, A.x1, 0, 0.3, A.z0, A.z1, M(0x9a948a)); scene.add(plinth);
+
+  // ---- B ház: cölöpök, résfal, horgonyok, pince, torony ----
+  const piles = new THREE.Group(); scene.add(piles);
+  for (const x of PILES) { piles.add(sectionRect(x - 0.4, x + 0.4, -17, PIT.y, 0xc9c6bd, ZF + 0.035)); for (const z of [5.5, 9.5, 13.5]) piles.add(cyl(0.4, 0.4, 9.4, conc, x, -12.3, z, 18)); }
+  const wallsB = new THREE.Group(); scene.add(wallsB);
+  wallsB.add(boxR(PIT.x0 - 0.6, PIT.x0, -14, 0.4, PIT.z0 - 0.6, ZF + 0.03, concDk)); wallsB.add(boxR(PIT.x1, PIT.x1 + 0.6, -14, 0.4, PIT.z0 - 0.6, ZF + 0.03, concDk)); wallsB.add(boxR(PIT.x0 - 0.6, PIT.x1 + 0.6, -14, 0.4, PIT.z0 - 0.6, PIT.z0, concDk));
+  const anchors = new THREE.Group(); scene.add(anchors);
+  const ANG = 25 * Math.PI / 180;
+  for (const [x, dir] of [[PIT.x0 - 0.6, -1], [PIT.x1 + 0.6, 1]]) for (const y of [-2.0, -5.0]) {
+    const e = [x + dir * 24 * Math.cos(ANG), y - 24 * Math.sin(ANG)], f = [x + dir * 18 * Math.cos(ANG), y - 18 * Math.sin(ANG)];
+    anchors.add(ribbon([[x, y], f], 0.12, 0xdfe6ee, { z: ZF + 0.07 })); anchors.add(ribbon([f, e], 0.5, 0x9aa7b4, { z: ZF + 0.07 }));
+    anchors.add(boxR(dir < 0 ? PIT.x0 : PIT.x1 - 0.35, dir < 0 ? PIT.x0 + 0.35 : PIT.x1, y - 0.25, y + 0.25, PIT.z0, ZF + 0.03, M(0x47505b, { metalness: 0.4 })));
+  }
+  const baseB = new THREE.Group(); scene.add(baseB);
+  baseB.add(boxR(PIT.x0, PIT.x1, -7.6, -6.6, PIT.z0, ZF + 0.03, conc)); baseB.add(boxR(PIT.x0, PIT.x1, -3.8, -3.5, PIT.z0, ZF + 0.03, conc)); baseB.add(boxR(PIT.x0 - 0.6, PIT.x1 + 0.6, -0.3, 0.3, PIT.z0 - 0.6, ZF + 0.03, conc));
+  for (const x of [12.4, 19, 25.6]) for (const z of [6, 11]) { baseB.add(boxR(x - 0.25, x + 0.25, -6.6, -3.8, z - 0.25, z + 0.25, concDk)); baseB.add(boxR(x - 0.25, x + 0.25, -3.5, -0.3, z - 0.25, z + 0.25, concDk)); }
+  baseB.add(boxR(PIT.x0 + 0.6, PIT.x0 + 3.6, -6.6, -6.55, 7, 13, M(0x3b6ea5))); // autóbeálló jelölés
+  const glassM = M(0x5d7f9c, { roughness: 0.2, metalness: 0.45 }), bandM = M(0xe9eef2, { roughness: 0.6 });
+  const towerB = []; for (let k = 0; k < 8; k++) { const g = new THREE.Group(); g.add(boxR(PIT.x0 + 0.3, PIT.x1 - 0.3, 0, 2.95, PIT.z0 + 0.3, ZF - 0.3, glassM)); g.add(boxR(PIT.x0, PIT.x1, 2.95, 3.3, PIT.z0, ZF, bandM)); for (let c = 1; c < 7; c++) g.add(boxR(PIT.x0 + c * 22 / 7 - 0.08, PIT.x0 + c * 22 / 7 + 0.08, 0, 2.95, ZF - 0.32, ZF - 0.22, bandM, false)); if (k === 7) { g.add(boxR(PIT.x0 - 0.2, PIT.x1 + 0.2, 3.3, 3.8, PIT.z0 - 0.2, ZF + 0.2, M(0x3f4a55))); g.add(boxR(13, 22, 3.8, 5.4, 5, 10, M(0xa9b4bf))); } g.position.y = 0.3 + 3.3 * k; scene.add(g); towerB.push(g); }
+
+  // ---- 7. állomás: kerékpártároló, fagyhatár, rezgés ----
+  const shed = new THREE.Group(); scene.add(shed);
+  shed.add(boxR(37, 42, 0.14, 2.6, 9, 14.6, M(0x7f8c99, { roughness: 0.6, metalness: 0.3 }))); shed.add(boxR(36.8, 42.2, 2.6, 2.75, 8.8, 14.8, M(0x4b5560)));
+  shed.add(sectionRect(36.8, 37.6, -0.9, 0.14, 0xcfcac0, ZF + 0.035)); shed.add(sectionRect(41.4, 42.2, -0.9, 0.14, 0xcfcac0, ZF + 0.035));
+  const frost = ribbon([[X0 + 16, -0.8], [X1, -0.8]], 0.16, 0x9fd7ff, { dash: 1.2, gap: 0.8, z: ZS + 0.02 }); scene.add(frost);
+  const rings = []; for (let i = 0; i < 3; i++) { const r = new THREE.Mesh(new THREE.RingGeometry(1, 1.25, 64), new THREE.MeshBasicMaterial({ color: 0xffb347, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide })); r.rotation.x = -Math.PI / 2; r.position.set(19, 0.3, 9); scene.add(r); rings.push(r); }
+
+  // ---- állomásonkénti rajzok ----
+  const ov = {}; const mkOv = (n) => { const g = new THREE.Group(); g.visible = false; scene.add(g); ov[n] = g; return g; };
+  { const g = mkOv(3); g.add(ribbon([[-37, -1.8], [-12, -1.8]], 0.12, 0xffffff, { dash: 0.8, gap: 0.6 }));
+    const xc = -25, yb = -1.8, b = 1, f = Math.PI / 180 * 32, al = Math.PI / 4 + f / 2; const Ax = xc, Ay = yb - b * Math.tan(al);
+    for (const s of [1, -1]) { const E = [xc + s * b, yb], r0 = b / Math.cos(al), th0 = s > 0 ? Math.PI + al : -al; const sp = []; for (let i = 0; i <= 28; i++) { const d = i / 28 * Math.PI / 2, th = s > 0 ? th0 + d : th0 - d, r = r0 * Math.exp(d * Math.tan(f)); sp.push([E[0] + r * Math.cos(th), E[1] + r * Math.sin(th)]); }
+      const Pp = sp[sp.length - 1], tq = (yb - Pp[1]) / Math.sin(Math.PI / 4 - f / 2); const Q = [Pp[0] + s * tq * Math.cos(Math.PI / 4 - f / 2), yb];
+      g.add(ribbon([[xc - s * b, yb], [Ax, Ay]], 0.12, 0xff6b5a)); g.add(ribbon([[Ax, Ay], ...sp.slice(1)], 0.16, 0xff6b5a)); g.add(ribbon([Pp, Q], 0.16, 0xff6b5a)); g.add(ribbon([E, Pp], 0.08, 0xff6b5a, { dash: 0.4, gap: 0.3 })); }
+    for (const x of [-25.6, -25, -24.4]) g.add(arrow(x, 4.5, x, 0.8, 0xf2a531, 0.22)); }
+  { const g = mkOv(4); const cx = -46, cy = 10, r = Math.hypot(-51.5 - cx, -5 - cy);
+    const arc = []; for (let i = 0; i <= 60; i++) { const a0 = Math.atan2(-5 - cy, -51.5 - cx), a1 = Math.atan2(0 - cy, Math.sqrt(r * r - (0 - cy) ** 2)); const a = lerp(a0, a1, i / 60); arc.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
+    g.add(ribbon(arc, 0.34, 0xff6b5a, { dash: 1.0, gap: 0.45 })); g.add(arrow(-44, 7.5, -35.5, 7.5, 0x9fd7ff, 0.3)); g.add(arrow(-44, 4.5, -35.5, 4.5, 0x9fd7ff, 0.3));
+    for (const x of [11, 15, 19, 23, 27]) g.add(arrow(x, -11.5, x, -7.9, 0x5cc2f2, 0.3)); g.add(ribbon([[PIT.x0, -7.6], [PIT.x1, -7.6]], 0.14, 0x5cc2f2, { dash: 0.7, gap: 0.4 })); }
+  { const g = mkOv(5); const xc = -25; for (const [ry, op] of [[1.6, 1], [3.0, 0.8], [4.96, 0.6]]) { const pts = []; for (let i = 0; i <= 40; i++) { const t = i / 40 * Math.PI; pts.push([xc + Math.cos(t) * (1 + ry * 0.42) * -1, -1.8 - Math.sin(t) * ry]); } g.add(ribbon(pts, 0.12, 0xf2a531, { dash: 0.5, gap: 0.3, opacity: op })); }
+    g.add(ribbon([[xc - 3.5, -1.8 - 4.96], [xc + 3.5, -1.8 - 4.96]], 0.14, 0xff6b5a)); }
+  { mkOv(6); }
+  { const g = mkOv(8); const rig = buildRig(); rig.position.set(24 - rig.userData.mastX, 0.14, 13.5 - (rig.userData.mastZ + 1.4)); setRigHead(rig, -6 + 20); g.add(rig); const aug = buildAuger(); aug.position.set(24, -6, 13.5); g.add(aug); g.userData.aug = aug;
+    const w = worker(); w.position.set(28.5, 0.14, 12.5); w.rotation.y = -1.2; g.add(w); for (const x of [10.5, 15, 19.5]) g.add(cyl(0.45, 0.45, 0.08, M(0xa9a59c), x, 0.18, 13.5, 18)); }
+  { mkOv(7); mkOv(9); mkOv(1); mkOv(2); }
+
+  // ---- feliratok (HTML a makett fölött) ----
+  const LBL = []; const lbl = (html, p, show, o = {}) => { const el = document.createElement('div'); el.className = 'lbl3d hide' + (o.plain ? ' plain' : ''); el.innerHTML = html; if (o.col) el.style.setProperty('--lc', o.col); stageEl.appendChild(el); LBL.push({ el, p: V3(...p), show }); };
+  const S = { view: 1, done: new Set() }; const D = (n) => S.done.has(n), Vw = (...ns) => ns.includes(S.view);
+  lbl('Building A', [-25, 13.2, ZF], () => !D(5) && S.view <= 5, { col: '#8ff0ff' }); lbl('Building B', [19, 28.6, ZF], () => !D(9) && (S.view <= 1 || S.view >= 6), { col: '#8ff0ff' });
+  lbl('Building A', [-25, 13.4, ZF], () => D(5) && Vw(5, 6, 7, 9, 10), { col: '#efe5cf' }); lbl('Building B', [19, 30.6, ZF], () => D(9) && Vw(9, 10), { col: '#9fc4e6' });
+  BOR.forEach((B) => lbl(B.n, [B.x, ysurf(B.x) + 2.6, ZF], () => D(1) && Vw(2, 6), { col: '#5fe3ff' })); lbl('CPT', [3.8, 1.8, ZF], () => D(1) && Vw(2), { col: '#ffd36b' });
+  for (const [t, x, y] of [['fill', -38, -0.6], ['sand', -38, -5.4], ['soft clay', 42, -5.2], ['sandy gravel', -22, -13.5], ['hard clay', 30, -21]]) lbl(t, [x, y, ZF + 0.2], () => D(2) && Vw(2, 3, 5, 6, 8), { plain: true });
+  lbl('peat', [19, -4.3, ZF + 0.2], () => D(2) && Vw(2, 6) && !D(9), { plain: true });
+  lbl('groundwater −3.0 m', [-36, -3.6, ZF + 0.2], () => D(1) && Vw(2, 3, 5), { col: '#5cc2f2' });
+  lbl('foundation level −1.8 m', [-10.5, -2.3, ZF], () => Vw(3), { plain: true }); lbl('bearing failure', [-25, -4.3, ZF], () => Vw(3), { col: '#ff6b5a' });
+  lbl('wind load', [-42, 9, ZF], () => Vw(4), { col: '#9fd7ff' }); lbl('slip surface?', [-47, -7.6, ZF], () => Vw(4), { col: '#ff6b5a' }); lbl('water pressure from below: 46 kPa', [19, -12.6, ZF], () => Vw(4), { col: '#5cc2f2' });
+  lbl('influence depth m<sub>0</sub> ≈ 5.0 m', [-25, -7.6, ZF], () => Vw(5) && D(5), { col: '#ff6b5a' }); lbl('pressure bulb', [-21, -3.5, ZF], () => Vw(5), { col: '#f2a531' });
+  lbl('~35 cm settlement on a shallow foundation', [19, 14, ZF], () => Vw(6), { col: '#ff6b5a' }); lbl('frost line −0.8 m', [-14, -0.8, ZF + 0.2], () => Vw(7), { col: '#9fd7ff' }); lbl('vibration', [19, 1.6, 9], () => Vw(7) && !D(7), { col: '#ffb347' });
+  lbl('bicycle shelter', [39.5, 4, ZF], () => D(7) && Vw(7, 10), { col: '#cfd6dd' }); lbl('CFA piles', [19, -18.4, ZF], () => D(8) && Vw(8, 9), { col: '#cfcac0' }); lbl('CFA rig', [24, 28.5, 6], () => Vw(8) && !D(9), { col: '#ffb347' });
+  lbl('diaphragm wall', [5.4, -12, ZF], () => D(9) && Vw(9), { col: '#cfcac0' }); lbl('talajhorgonyok', [-4, -11.5, ZF], () => D(9) && Vw(9), { col: '#dfe6ee' }); lbl('two basement levels', [19, -5.2, ZF], () => D(9) && Vw(9), { col: '#cfcac0' });
+
+  // ---- nézetek ----
+  // nézetek: a metszet síkján egy keret [x0, x1, y0, y1], és a kamera iránya (jobbra fordulás, emelkedés fokban); a távolságot a vászon arányához igazítjuk
+  const VIEWS = { 1: [-58, 54, -24, 27, 20, 16], 2: [-31, 24, -21, 4, 12, 8], 3: [-38, -10, -9, 12, 16, 10], 4: [-60, 26, -14, 12, 10, 12], 5: [-34, -16, -9, 5, 14, 7], 6: [2, 35, -12, 9, 18, 8], 7: [-36, 46, -4, 12, 20, 14], 8: [3, 37, -19, 28, 24, 9], 9: [-16, 54, -17, 33, 26, 12], 10: [-58, 56, -24, 33, 24, 18] };
+  let camAnim = null;
+  function goView(n, instant) { const [x0, x1, y0, y1, yaw, pitch] = VIEWS[n] || VIEWS[10]; const w = stageEl.clientWidth, h = stageEl.clientHeight; const asp = w / Math.max(1, h);
+    const T = V3((x0 + x1) / 2, (y0 + y1) / 2, ZF - 2); const ya = yaw * Math.PI / 180, pa = pitch * Math.PI / 180; const dir = V3(Math.sin(ya) * Math.cos(pa), Math.sin(pa), Math.cos(ya) * Math.cos(pa));
+    const tf = Math.tan(camera.fov * Math.PI / 360); const dist = 1.14 * Math.max((y1 - y0) / 2 / tf, (x1 - x0) / 2 / (tf * asp)) + 4;
+    const P = T.clone().addScaledVector(dir, dist);
+    if (instant || reduce) { camera.position.copy(P); controls.target.copy(T); controls.update(); camAnim = null; return; }
+    camAnim = { p0: camera.position.clone(), t0: controls.target.clone(), p1: P, t1: T, s: performance.now(), d: 1300 }; }
+
+  // ---- állapot → látható elemek; animációk ----
+  const tw = []; const anim = (fn, d = 900, delay = 0) => { if (reduce) { fn(1); return; } tw.push({ fn, s: performance.now() + delay, d }); };
+  const grow = (obj, delay = 0, d = 900) => { obj.visible = true; obj.scale.y = 0.001; anim((t) => { obj.scale.y = Math.max(0.001, ease(t)); }, d, delay); };
+  function setReveal(on) { for (const m of layerMeshes) { m.material = on ? (realMat[m.userData.key] || unkMat) : unkMat; if (m.userData.key === 'peat') m.visible = on; } }
+  function applyState(instant) {
+    const d = D; setReveal(d(2)); bores.visible = d(1) && (S.view === 2 || S.view === 6); cpt.visible = d(1) && S.view === 2; gw.visible = d(1); stakes.visible = d(1) && !d(3);
+    footA.visible = d(3); plinth.visible = d(4); A0.visible = d(4); A1.visible = d(5); A2.visible = d(5); holoA.visible = !d(5) && S.view <= 5;
+    holoBpivot.visible = !d(9) && (S.view <= 1 || S.view === 4 || S.view === 6 || S.view === 7); shed.visible = d(7); piles.visible = d(8);
+    wallsB.visible = d(9); anchors.visible = d(9); baseB.visible = d(9); pitSoil.visible = !d(9); towerB.forEach(g => g.visible = d(9));
+    for (const k in ov) ov[k].visible = (+k === S.view); ov[8].visible = S.view === 8 && !d(9); frost.visible = S.view === 7; rings.forEach(r => r.visible = S.view === 7);
+    [footA, plinth, A0, A1, A2, ...towerB].forEach(o => { if (o.visible) o.scale.y = 1; });
+    realMat.peat.emissive.setHex(0x000000);
+  }
+  function complete(n) {
+    S.done.add(n); applyState(); const st = 160;
+    if (n === 2) { for (const m of layerMeshes) m.material = unkMat; anim((t) => { if (t >= 1) setReveal(true); }, 10, 450); }
+    if (n === 3) grow(footA, 200);
+    if (n === 4) { grow(plinth, 150, 500); grow(A0, 450); }
+    if (n === 5) { grow(A1, 200); grow(A2, 200 + 700); }
+    if (n === 8) { piles.visible = true; piles.children.forEach((c, i) => { c.visible = true; c.scale.y = 0.001; anim((t) => c.scale.y = Math.max(0.001, ease(t)), 700, 150 + (i % 4) * st); }); }
+    if (n === 9) { grow(wallsB, 100, 700); anchors.visible = false; anim((t) => { if (t >= 1) anchors.visible = true; }, 10, 800); pitSoil.visible = true; anim((t) => { if (t >= 1) pitSoil.visible = false; }, 10, 1100); baseB.visible = false; anim((t) => { if (t >= 1) { baseB.visible = true; } }, 10, 1400); towerB.forEach((g, i) => grow(g, 1700 + i * 260, 520)); }
+  }
+  function setView(n, instant) { S.view = n; applyState(); goView(n, instant); }
+  function setDone(list) { S.done = new Set(list); applyState(); }
+
+  // ---- méret, ciklus ----
+  function resize() { const w = stageEl.clientWidth, h = stageEl.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  new ResizeObserver(resize).observe(stageEl); resize();
+  const v = new THREE.Vector3(); let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    for (let i = tw.length - 1; i >= 0; i--) { const a = tw[i]; const t = clamp((now - a.s) / a.d); if (now >= a.s) a.fn(t); if (t >= 1 && now >= a.s) tw.splice(i, 1); }
+    if (camAnim) { const t = ease(clamp((now - camAnim.s) / camAnim.d)); camera.position.lerpVectors(camAnim.p0, camAnim.p1, t); controls.target.lerpVectors(camAnim.t0, camAnim.t1, t); if (t >= 1) camAnim = null; }
+    controls.update();
+    if (ov[8].visible && !reduce) ov[8].userData.aug.rotation.y -= dt * Math.PI * 2 * 0.42;
+    if (S.view === 6 && !reduce) { const p = 0.5 + 0.5 * Math.sin(now / 420); realMat.peat.emissive.setRGB(0.22 * p, 0.07 * p, 0.02 * p); holoBpivot.rotation.z = -0.035 * (0.5 + 0.5 * Math.sin(now / 900)); } else holoBpivot.rotation.z = 0;
+    if (S.view === 7 && !reduce) rings.forEach((r, i) => { const t = ((now / 2600) + i / 3) % 1; r.scale.setScalar(1 + t * 16); r.material.opacity = 0.55 * (1 - t); });
+    renderer.render(scene, camera);
+    const w = stageEl.clientWidth, h = stageEl.clientHeight;
+    for (const L of LBL) { let on = false; try { on = L.show(); } catch (e) {} if (on) { v.copy(L.p).project(camera); if (v.z > 1 || Math.abs(v.x) > 1.05 || Math.abs(v.y) > 1.05) on = false; else { const x = (v.x + 1) / 2 * w, y = (1 - v.y) / 2 * h; const hw = (L.hw = L.hw || L.el.offsetWidth / 2 || 40); if (x - hw < 6 || x + hw > w - 6 || y < 40 || y > h - 48) on = false; L.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%)`; } } if (L.on !== on) { L.el.classList.toggle('hide', !on); L.on = on; } }
+    requestAnimationFrame(frame);
+  }
+  goView(1, true); requestAnimationFrame(frame);
+  return { setView, setDone, complete, goView: (n) => goView(n), resetCam: () => goView(S.view) };
+}
+
+
+/* ================= Egy telek, egy félév – állomások, feladatok, állapot ================= */
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const fmt = (v, d = 1) => (Math.round(v * 10 ** d) / 10 ** d).toFixed(d).replace('.', EN ? '.' : ',').replace('-', '−');
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const U = (u) => 'https://' + u;
+const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>';
+
+/* ---------- számítások (ugyanazok, mint a calc.py ellenőrző szkriptben) ---------- */
+const CALC = (() => {
+  const gw = 10, GWL = 3.0, D = 1.8, hf = 0.6, tFill = 1.2, gFill = 17, gS = 18, gSs = 20, phi = 32, gG = 20, gGs = 21;
+  const rad = (d) => d * Math.PI / 180;
+  const Gtot = (B, Gc = 750) => Gc + B * B * hf * 25 + B * B * (D - hf) * 18;
+  const qOver = tFill * gFill + (D - tFill) * gS;
+  const Nq = (p) => Math.exp(Math.PI * Math.tan(rad(p))) * Math.tan(rad(45 + p / 2)) ** 2;
+  const Ng = (p) => 2 * (Nq(p) - 1) * Math.tan(rad(p));
+  const gEff = (B) => { const t = GWL - D, sub = gSs - gw; if (t <= 0.5 * B) return sub; if (t >= 1.5 * B) return gS; return sub + (gS - sub) * (t - 0.5 * B) / B; };
+  function bearing(B, Qc = 220) { const sq = 1 + Math.sin(rad(phi)), sg = 0.7, ge = gEff(B); const tg = 0.5 * B * ge * Ng(phi) * sg, tq = qOver * Nq(phi) * sq; const Rk = (tg + tq) * B * B, Rd = Rk / 1.4, Vd = 1.35 * Gtot(B) + 1.5 * Qc; return { ge, tg, tq, Rk, Rd, Vd, L: Vd / Rd, G: Gtot(B) }; }
+  function Icorner(a, b, z) { if (z <= 0) return 0.25; const m = a / z, n = b / z, m2 = m * m, n2 = n * n, V = m2 + n2 + 1; const t1 = (2 * m * n * Math.sqrt(V) / (m2 + n2 + m2 * n2 + 1)) * ((m2 + n2 + 2) / V); const den = V - m2 * n2; const at = den > 0 ? Math.atan(2 * m * n * Math.sqrt(V) / den) : den < 0 ? Math.PI + Math.atan(2 * m * n * Math.sqrt(V) / den) : Math.PI / 2; return (t1 + at) / (4 * Math.PI); }
+  const dsig = (q0, B, z) => 4 * q0 * Icorner(B / 2, B / 2, z);
+  function sv(depth) { let s = 0; for (const [top, bot, g, gs] of [[0, 1.2, gFill, gFill], [1.2, 9, gS, gSs], [9, 18, gG, gGs]]) { const a = top, b = Math.min(bot, depth); if (b <= a) continue; const dry = Math.max(0, Math.min(b, GWL) - a), wet = (b - a) - dry; s += dry * g + wet * (gs - gw); } return s; }
+  const Eo = (depth) => depth < 9 ? 25000 : 60000;
+  function settle(Gc = 750, Qc = 220, B = 2) { const st = (Gtot(B, Gc) + Qc) / (B * B), q0 = st - qOver; let z = 0; while (z < 30) { z += 0.01; if (dsig(q0, B, z) <= 0.2 * sv(D + z)) break; } const m0 = z; const zs = [0]; while (zs[zs.length - 1] + 0.5 < m0 - 1e-9) zs.push(+(zs[zs.length - 1] + 0.5).toFixed(3)); zs.push(m0);
+    const rows = []; let s = 0; for (let i = 0; i < zs.length - 1; i++) { const z1 = zs[i], z2 = zs[i + 1], d1 = dsig(q0, B, z1), d2 = dsig(q0, B, z2), E = Eo(D + (z1 + z2) / 2), ds = (z2 - z1) * (d1 + d2) / 2 / E; s += ds; rows.push({ z1, z2, d1, d2, E, ds: ds * 1000 }); }
+    return { st, q0, m0, s: s * 1000, rows }; }
+  return { Gtot, qOver, Nq, Ng, bearing, settle, dsig, sv, D };
+})();
+const MID = CALC.settle(), EDGE = CALC.settle(450, 130), B2 = CALC.bearing(2);
+const BMIN = (() => { for (let i = 5; i < 40; i++) if (CALC.bearing(i / 10).L <= 1) return i / 10; })();
+const BETA = 8000 / (MID.s - EDGE.s);
+const RD_SL = CALC.Gtot(2) * Math.tan(32 * Math.PI / 180) / 1.1;
+const PILE = (() => { const A = Math.PI * 0.64 / 4, Ucir = Math.PI * 0.8, qb = Math.min(7000, 5000 + 50 * 17), qs = (Math.min(100, 69) + Math.min(100, 77)) / 2; return { Rb: qb * A, Rs: qs * Ucir * 8, Rc: 15 * Ucir * 1.4, qb, qs }; })();
+
+/* ---------- az állomások ---------- */
+const S = [
+  { n: 1, r: 'Introduction', t: 'Introduction', q: 'Why do you need to understand the ground?', c: 1, apps: [['The course path – home page', 'bme-alapozas.vercel.app/en']],
+    sit: ['A developer has bought this site in Budapest and wants to put up two buildings on it. On the left, near the slope, there will be a three-storey residential building (Building A); on the right, an eight-storey office building with two basement levels (Building B). The positions of the buildings have already been set out.', 'You are the geotechnical designer. We know nothing about the ground yet: the section is still grey. Before we find anything out, take a guess! We will compare your guesses with the results at the end of the semester.'],
+    tasks: [
+      { id: 'tipS', type: 'tipnum', q: 'How much will the foundation under one of the columns of Building A settle?', min: 0, max: 100, step: 1, def: 30, unit: 'mm' },
+      { id: 'tipB', type: 'tipchoice', q: 'And Building B? What kind of foundation do you expect?', opts: ['Pad and strip footings', 'Raft foundation', 'Pile foundation', 'Impossible to say yet'] },
+      { id: '1c', type: 'mcq', q: 'What mainly decides whether a shallow or a deep foundation is needed?', opts: ['The height of the building', 'The depth of the bearing stratum and the allowable settlement', 'The concrete grade of the footing', 'The season of construction'], a: 1,
+        e: 'The load of the structure matters, but on its own it does not decide: the same building can stand on a shallow foundation on dense gravel, but only on piles on thick soft clay. That is why you have to get to know the ground first.' },
+    ],
+    log: (st) => `Setting out done. Guesses: <b>${st.tips.tipS ?? '–'} mm</b> settlement under a column of Building A; foundation of Building B: <b>${esc(st.tips.tipB ?? '–').toLowerCase()}</b>.` },
+  { n: 2, r: 'Ground investigation', t: 'Ground investigation', q: 'What is beneath us?', c: 2, apps: [['Ground investigation', 'talajfelderites.vercel.app/en']],
+    sit: ['Three boreholes (F1, F2, F3) and a cone penetration test (CPT) have been made, each reaching below the bearing stratum. The groundwater table is at −3.0 m. You can view the borehole logs on the section and here too.'],
+    widget: 'logs',
+    tasks: [
+      { id: '2a', type: 'num', q: 'At what depth does the bearing sandy gravel start?', ans: 9.0, abs: 0.2, unit: 'm', hint: 'It starts at the same level in all three boreholes. Depth is measured from ground level.', sol: ['F1: 9.0 m · F2: 9.0 m · F3: 9.0 m', 'The top of the sandy gravel is at −9.0 m.'] },
+      { id: '2b', type: 'mcq', q: 'Which borehole went through organic soil (peat)?', opts: ['F1', 'F2', 'F3', 'None of them'], a: 2, e: 'F3 went through peat between 2.8 and 5.8 m. This is right below the footprint of Building B – one of the most important findings of the semester.' },
+      { id: '2c', type: 'mcq', q: 'The CPT cone resistance is q<sub>c</sub> ≈ 0.9 MPa between 1.2 and 7.1 m, and q<sub>c</sub> ≈ 11 MPa between 7.1 and 9.0 m. What are these two layers?', opts: ['Soft clay above, sand below', 'Sand above, soft clay below', 'Both are sand, only their water content differs', 'Peat above, sandy gravel below'], a: 0,
+        e: 'The low cone resistance points to a soft cohesive soil, the ten times greater value to a denser granular layer. The CPT stands near the boundary between the sand and the clay, so here the sand starts deeper than at F1.' },
+    ],
+    log: () => 'Soil profile: fill 0–1.2 m; sand on the left and soft clay on the right down to 9.0 m; a peat lens below Building B between 2.8 and 5.8 m; sandy gravel 9.0–18.0 m; hard clay below. Groundwater −3.0 m.' },
+  { n: 3, r: 'Shallow foundation', t: 'Design of shallow foundations', q: 'What foundation is needed, and how deep?', c: 3, apps: [['Design of shallow foundations', 'sikalapoktervezese.vercel.app/en'], ['Bearing resistance', 'sikalapok-teherbirasszamitasa.vercel.app/en']],
+    sit: ['Building A has a reinforced concrete frame with columns 8 m apart. The central column carries a permanent load of G<sub>k</sub> = 750 kN and a variable load of Q<sub>k</sub> = 220 kN. We design a square pad footing in the sand, with a 0.6 m thick reinforced concrete base.'],
+    data: [['fill: thickness · γ', '1.2 m · 17 kN/m³'], ['sand: γ · γ<sub>sat</sub>', '18 · 20 kN/m³'], ['sand: φ′<sub>k</sub> · c′<sub>k</sub>', '32° · 0'], ['groundwater level', '−3.0 m'], ['reinforced concrete · backfill', '25 · 18 kN/m³'], ['partial factors (DA‑2*)', '1.35 · 1.5 · 1.4']],
+    tasks: [
+      { id: '3a', type: 'mcq', q: 'What determines the depth of the foundation level?', opts: ['The frost line (0.8 m)', 'The bottom of the fill (1.2 m): the foundation must sit in the bearing sand', 'The groundwater table (3.0 m)', 'The top of the sandy gravel (9.0 m)'], a: 1,
+        e: 'We do not found on fill. Below the 1.2 m thick fill the footing is embedded further into the sand, so the foundation level is −1.8 m. This is below the frost line and above the groundwater.' },
+      { id: '3b', type: 'num', q: 'What is the effective vertical stress (q′) at foundation level, beside the footing?', ans: CALC.qOver, rel: 0.02, unit: 'kPa', hint: 'q′ = Σ γ·h from ground level down to foundation level. The groundwater is deeper than the foundation level.', sol: ['q′ = 1.2 · 17 + 0.6 · 18', 'q′ = 20.4 + 10.8 = 31.2 kPa'] },
+      { id: '3c', type: 'num', q: 'What is the design bearing resistance (R<sub>d</sub>) of the B = L = 2.0 m footing?', ans: B2.Rd, rel: 0.03, unit: 'kN',
+        hint: 'R<sub>k</sub>/A′ = 0.5 · B′ · γ′ · N<sub>γ</sub> · s<sub>γ</sub> + q′ · N<sub>q</sub> · s<sub>q</sub>. For φ′ = 32°, N<sub>q</sub> = 23.18 and N<sub>γ</sub> = 27.72; for a square footing s<sub>q</sub> = 1 + sin φ′ and s<sub>γ</sub> = 0.7. The groundwater is 1.2 m below the foundation level, which falls between 0.5 · B′ and 1.5 · B′, so γ′ has to be interpolated linearly between 10 and 18 kN/m³. Finally R<sub>d</sub> = R<sub>k</sub> / 1.4.',
+        sol: [`γ′ = 10 + 8 · (1.2 − 1.0) / 2.0 = ${fmt(B2.ge, 1)} kN/m³`, `γ‑term = 0.5 · 2.0 · ${fmt(B2.ge, 1)} · 27.72 · 0.7 = ${fmt(B2.tg, 1)} kPa`, `q‑term = 31.2 · 23.18 · 1.530 = ${fmt(B2.tq, 1)} kPa`, `R<sub>k</sub> = (${fmt(B2.tg, 1)} + ${fmt(B2.tq, 1)}) · 4.0 = ${fmt(B2.Rk, 0)} kN`, `R<sub>d</sub> = ${fmt(B2.Rk, 0)} / 1.4 = ${fmt(B2.Rd, 0)} kN`, `G<sub>k</sub> = 750 + 60 + 86.4 = 896.4 kN (column, footing, backfill)`, `V<sub>d</sub> = 1.35 · 896.4 + 1.5 · 220 = ${fmt(B2.Vd, 0)} kN`, `Λ = ${fmt(B2.Vd, 0)} / ${fmt(B2.Rd, 0)} = ${fmt(B2.L, 2)} – OK`] },
+      { id: '3d', type: 'num', q: 'Use the calculator to find the smallest footing width, rounded to 10 cm, for which the bearing resistance is still sufficient.', ans: BMIN, abs: 0.001, unit: 'm', needs: '3c', widget: 'bearing',
+        hint: 'Drag the slider and watch the utilisation: Λ ≤ 1 is required.', sol: [`B = ${fmt(BMIN, 1)} m: Λ = ${fmt(CALC.bearing(BMIN).L, 2)} – OK`, `B = ${fmt(BMIN - 0.1, 1)} m: Λ = ${fmt(CALC.bearing(BMIN - 0.1).L, 2)} – not OK`, 'The bearing resistance is more than enough even for the 2.0 m footing: its size is decided by settlement (station 5).'] },
+    ],
+    log: () => `Foundation level −1.8 m (below the fill, in the sand). Central pad footing 2.0 × 2.0 m: R<sub>d</sub> = ${fmt(B2.Rd, 0)} kN, V<sub>d</sub> = ${fmt(B2.Vd, 0)} kN, Λ = ${fmt(B2.L, 2)}. For bearing resistance alone, ${fmt(BMIN, 1)} m would already be enough.` },
+  { n: 4, r: 'Stability', t: 'Stability of shallow foundations', q: 'Will it slide or overturn?', c: 4, apps: [['Stability of shallow foundations', 'sikalapokallekonysagvizsgalata.vercel.app/en']],
+    sit: ['Wind applies a horizontal force to the pad footing, and the deep basement of Building B will reach into the groundwater. On the left edge of the site there is a 5 m high slope with a gradient of 1 : 1.5.'],
+    tasks: [
+      { id: '4a', type: 'num', q: 'Sliding: what is the design sliding resistance (R<sub>d</sub>) at the base of the 2.0 m footing if the wind load is H<sub>k</sub> = 40 kN?', ans: RD_SL, rel: 0.03, unit: 'kN',
+        hint: 'In drained conditions R<sub>d</sub> = V′<sub>k</sub> · tan δ<sub>k</sub> / γ<sub>R;h</sub>. V′<sub>k</sub> is only the permanent load (896.4 kN); for cast-in-place concrete δ<sub>k</sub> = φ′<sub>k</sub> = 32°, γ<sub>R;h</sub> = 1.1.',
+        sol: [`R<sub>d</sub> = 896.4 · tan 32° / 1.1 = 896.4 · 0.625 / 1.1 = ${fmt(RD_SL, 1)} kN`, `H<sub>d</sub> = 1.5 · 40 = 60 kN ≤ ${fmt(RD_SL, 0)} kN – OK (Λ = ${fmt(60 / RD_SL, 2)})`] },
+      { id: '4b', type: 'num', q: 'Uplift: the underside of the base slab of Building B will be at −7.6 m. What is the water pressure there?', ans: 46, rel: 0.02, unit: 'kPa', hint: 'u = γ<sub>w</sub> · h<sub>w</sub>, where h<sub>w</sub> is the water column above the underside of the slab. The groundwater is at −3.0 m.', sol: ['u = 10 · (7.6 − 3.0) = 46 kPa'] },
+      { id: '4c', type: 'num', q: 'During construction the basement structure (base slab and two floor slabs) has a self-weight of 40 kPa. How many kPa of permanent load are missing for safety against uplift, as a characteristic value?', ans: 46 / 0.9 - 40, abs: 0.3, unit: 'kPa',
+        hint: 'UPL: γ<sub>G;stb</sub> · G<sub>k</sub> ≥ γ<sub>G;dst</sub> · U, where γ<sub>G;stb</sub> = 0.9 and γ<sub>G;dst</sub> = 1.0.', sol: ['required G<sub>k</sub> = 46 / 0.9 = 51.1 kPa', 'shortfall = 51.1 − 40 = 11.1 kPa', 'Until at least two more storeys have been built on top, dewatering must not be switched off – or the piles must also be designed for tension.'] },
+      { id: '4d', type: 'mcq', q: 'Which design approach do we use to verify the overall stability of the slope and Building A?', opts: ['DA-1', 'DA-2*', 'DA-3', 'No verification needed, because the building is 10 m from the slope'], a: 2,
+        e: 'According to the Hungarian National Annex, overall stability is verified with DA-3: the shear strength parameters are divided by partial factors. For a building near the crest of a slope this cannot be omitted.' },
+    ],
+    log: () => `Sliding: H<sub>d</sub> = 60 kN ≤ R<sub>d</sub> = ${fmt(RD_SL, 0)} kN. Uplift of Building B: u = 46 kPa below the slab at −7.6 m; during construction 11.1 kPa of permanent load is missing, so dewatering continues until the second storey is complete. Overall stability: DA‑3.` },
+  { n: 5, r: 'Settlement', t: 'Settlement of shallow foundations', q: 'How much, and how unevenly, will it settle?', c: 5, apps: [['Settlement of shallow foundations', 'sikalapok-sullyedesszamitasa.vercel.app/en'], ['Protection against harmful settlement', 'vedekezesakarossullyedesekellen.vercel.app/en']],
+    sit: ['Now we find out how much the 2.0 × 2.0 m central pad footing settles. Settlement is calculated with the characteristic load (G<sub>k</sub> + Q<sub>k</sub>). The stress distribution below the centre of the footing is taken with Steinbrenner’s method; the influence depth is where the additional stress drops to 20 % of the effective geostatic stress.'],
+    data: [['G<sub>k</sub> (column + footing + backfill)', '896.4 kN'], ['Q<sub>k</sub>', '220 kN'], ['q′ at foundation level', '31.2 kPa'], ['sand: E<sub>oed</sub>', '25 MPa'], ['sandy gravel: E<sub>oed</sub>', '60 MPa']],
+    tasks: [
+      { id: '5a', type: 'num', q: 'What is the net contact pressure (σ<sub>0</sub>)?', ans: MID.q0, rel: 0.02, unit: 'kPa', hint: 'σ<sub>base</sub> = (G<sub>k</sub> + Q<sub>k</sub>) / A, then σ<sub>0</sub> = σ<sub>base</sub> − q′.', sol: [`σ<sub>base</sub> = (896.4 + 220) / 4.0 = ${fmt(MID.st, 1)} kPa`, `σ<sub>0</sub> = ${fmt(MID.st, 1)} − 31.2 = ${fmt(MID.q0, 1)} kPa`] },
+      { id: '5b', type: 'num', q: 'Read the influence depth (m<sub>0</sub>) off the graph, measured downwards from the foundation level!', ans: MID.m0, abs: 0.3, unit: 'm', needs: '5a', widget: 'stress', hint: 'Where the orange curve (additional stress) crosses the blue curve (20 % of the geostatic stress).', sol: [`m<sub>0</sub> ≈ ${fmt(MID.m0, 1)} m below the foundation level, i.e. about ${fmt(1.8 + MID.m0, 1)} m below ground level – still in the sand.`] },
+      { id: '5c', type: 'num', q: 'Layer summation: what is the settlement of the pad footing?', ans: MID.s, rel: 0.08, unit: 'mm', needs: '5b', widget: 'table', hint: 's = Σ Δh · Δσ<sub>mean</sub> / E<sub>oed</sub>. The table gives the stresses row by row; each row is 0.5 m thick (the last one less).', sol: [`s = Σ Δs<sub>i</sub> = ${fmt(MID.s, 1)} mm`] },
+      { id: '5d', type: 'num', q: `The edge column (G<sub>k</sub> = 450 kN, Q<sub>k</sub> = 130 kN, also on a 2.0 m footing) settles ${fmt(EDGE.s, 1)} mm; the two columns are 8 m apart. What is the angular distortion: β = 1/…?`, ans: BETA, rel: 0.05, unit: '', pre: '1 /', needs: '5c', hint: 'β = Δs / L, where Δs is the difference between the two settlements and L is the distance between the columns. Enter the denominator.', sol: [`Δs = ${fmt(MID.s, 1)} − ${fmt(EDGE.s, 1)} = ${fmt(MID.s - EDGE.s, 1)} mm`, `β = ${fmt(MID.s - EDGE.s, 1)} / 8000 = 1 / ${fmt(BETA, 0)}`, 'This is smaller than the 1/500 limit: it does the frame no harm.'] },
+    ],
+    log: (st) => `σ<sub>0</sub> = ${fmt(MID.q0, 1)} kPa; m<sub>0</sub> ≈ ${fmt(MID.m0, 1)} m; settlement of the central column ${fmt(MID.s, 1)} mm, of the edge column ${fmt(EDGE.s, 1)} mm; β = 1/${fmt(BETA, 0)} – OK. Your guess was ${st.tips.tipS ?? '–'} mm.` },
+  { n: 6, r: 'Unfavourable ground', t: 'Unfavourable ground', q: 'What if the ground is your biggest opponent?', c: 6, apps: [['Foundations on unfavourable ground', 'kedvezotlen-altalaj.vercel.app/en']],
+    sit: ['Below the footprint of Building B there is a peat lens between 2.8 and 5.8 m, surrounded by soft clay. What if Building B were also put on a shallow foundation, a raft at 1.5 m depth? Below the wide raft the additional stress is about 90 kPa even at the level of the lens.'],
+    data: [['peat: thickness at the centre of the lens', '3.1 m'], ['peat: E<sub>oed</sub>', '0.8 MPa'], ['additional stress in the lens', '≈ 90 kPa']],
+    tasks: [
+      { id: '6a', type: 'num', q: 'How much would the peat lens alone be compressed?', ans: 90 * 3.1 / 0.8, rel: 0.03, unit: 'mm', hint: 's = Δσ · h / E<sub>oed</sub>. Mind the units: 0.8 MPa = 800 kPa.', sol: ['s = 90 · 3.1 / 800 = 0.349 m ≈ 349 mm', 'This is seven times the allowable 50 mm – and the peat then goes on creeping for years.'] },
+      { id: '6b', type: 'mcq', q: 'The lens lies below only part of the building. What is the greatest danger?', opts: ['Large differential settlement: the building tilts and cracks', 'The groundwater floods the basement', 'The peat dries out and hardens', 'Nothing, because the raft evens out the difference'], a: 0, e: 'The stiffness of the raft cannot bridge such a large differential settlement. The building tilts towards the lens and the structure cracks.' },
+      { id: '6c', type: 'mcq', q: 'What is the right solution for Building B?', opts: ['Soil replacement in place of the peat', 'Preloading, then a shallow foundation six months later', 'Piled foundation down to the sandy gravel starting at −9 m', 'A wider raft'], a: 2,
+        e: 'Soil replacement would mean excavating to 5.8 m, 2.8 m below the groundwater, and the peat keeps creeping even after preloading. The piles carry the load through the peat and the soft clay into the bearing gravel.' },
+    ],
+    log: (st) => `Under a shallow foundation the peat lens would be compressed by about 35 cm, unevenly. Decision: Building B goes on piles reaching down to the sandy gravel. Your guess: ${esc(st.tips.tipB ?? '–').toLowerCase()}.` },
+  { n: 7, r: 'External effects', t: 'External effects on shallow foundations', q: 'What else acts on the foundation?', c: 7, apps: [['External effects on shallow foundations', 'sikalapokaterohatasok.vercel.app/en']],
+    sit: ['The excavation and the piles of Building B will be 15–20 m from Building A, which will already be standing. An unheated bicycle shelter will also be built next to Building B, on a light strip footing on soft clay.'],
+    tasks: [
+      { id: '7a', type: 'mcq', q: 'How deep must the foundation level of the bicycle shelter be?', opts: ['0.3 m, because the building is light', '0.5 m', 'At least 0.8 m, below the frost line', '1.8 m, as for Building A'], a: 2,
+        e: 'Clay is frost-susceptible: a foundation above the frost line is lifted by frost and dropped back in spring. In Budapest, foundations in cohesive soil must be at least 0.8 m deep – being light does not protect the building; in fact it heaves more.' },
+      { id: '7b', type: 'mcq', q: 'Which pair of techniques spares the neighbouring Building A most from vibration?', opts: ['Driven steel sheet piles and driven precast piles', 'Vibrated sheet piles and Franki piles', 'Diaphragm wall and CFA piles', 'Soldier pile wall and driven steel piles'], a: 2,
+        e: 'The diaphragm wall is excavated with a grab and the CFA pile is drilled, both without vibration. The vibration from driving and vibrating can densify the sand and cause settlement below the neighbour’s foundations.' },
+    ],
+    log: () => 'Bicycle shelter: foundation level at least 0.8 m, below the frost line. Building B is built with vibration-free techniques (diaphragm wall, CFA piles), so that Building A is not damaged.' },
+  { n: 8, r: 'Deep foundations', t: 'Deep foundations', q: 'When is a shallow foundation not enough?', c: 8, apps: [['Deep foundations', 'melyalapozasok.vercel.app/en'], ['CFA pile in 3D', 'cfa-colop-3d.vercel.app'], ['CFA pile in space (AR)', 'cfa-colop-3d.vercel.app/ar']],
+    sit: ['Building B will stand on CFA piles 80 cm in diameter. The piles run from the basement base slab (−7.6 m) down to −17.0 m: 1.4 m in soft clay and 8.0 m in sandy gravel. For the calculation we use the illustrative unit values of the simulator in the Deep foundations module – you will learn the real design of piles in a later course.'],
+    data: [['gravel: shaft resistance q<sub>s</sub>', '60 + z kPa (max. 100)'], ['gravel: base resistance q<sub>b</sub>', '5000 + 50 · z kPa (max. 7000)'], ['clay: shaft resistance q<sub>s</sub>', '15 kPa'], ['z', 'depth below ground level, m']],
+    tasks: [
+      { id: '8a', type: 'num', q: 'What is the base resistance (R<sub>b</sub>)?', ans: PILE.Rb, rel: 0.03, unit: 'kN', hint: 'At z = 17 m, q<sub>b</sub> = 5000 + 50 · 17 = 5850 kPa; R<sub>b</sub> = q<sub>b</sub> · π · D² / 4.', sol: [`A<sub>b</sub> = π · 0.8² / 4 = 0.503 m²`, `R<sub>b</sub> = 5850 · 0.503 = ${fmt(PILE.Rb, 0)} kN`] },
+      { id: '8b', type: 'num', q: 'What is the shaft resistance in the sandy gravel (R<sub>s</sub>)?', ans: PILE.Rs, rel: 0.03, unit: 'kN', hint: 'q<sub>s</sub> is 69 kPa at 9 m and 77 kPa at 17 m, with a mean of 73 kPa; R<sub>s</sub> = q<sub>s,mean</sub> · π · D · L.', sol: [`R<sub>s</sub> = 73 · π · 0.8 · 8.0 = ${fmt(PILE.Rs, 0)} kN`, `The section in the clay adds another 15 · π · 0.8 · 1.4 = ${fmt(PILE.Rc, 0)} kN.`] },
+      { id: '8c', type: 'mcq', q: 'Which part provides the greater share of the pile resistance?', opts: ['The base', 'The shaft', 'The two are roughly equal', 'The section in the clay'], a: 0,
+        e: `R<sub>b</sub> ≈ ${fmt(PILE.Rb, 0)} kN, R<sub>s</sub> ≈ ${fmt(PILE.Rs + PILE.Rc, 0)} kN: roughly two thirds of the load is transferred to the gravel by the base.` },
+    ],
+    log: () => `CFA piles: D = 80 cm, between −7.6 and −17.0 m. Illustrative resistance: R<sub>b</sub> ≈ ${fmt(PILE.Rb, 0)} kN, R<sub>s</sub> ≈ ${fmt(PILE.Rs + PILE.Rc, 0)} kN; the load is transferred to the gravel mainly by the base.` },
+  { n: 9, r: 'Excavation', t: 'Excavation support', q: 'How do we get down safely?', c: 9, apps: [['Excavation support', 'munkaterhatarolasok.vercel.app/en']],
+    sit: ['The two basement levels of Building B need a 7.6 m deep excavation, 4.6 m below the groundwater table, in soft clay, close to the site boundary and to Building A.'],
+    tasks: [
+      { id: '9a', type: 'mcq', q: 'Which excavation support do you choose?', opts: ['Sloped excavation', 'Soldier pile wall', 'Cantilever sheet pile wall', 'Anchored diaphragm wall'], a: 3,
+        e: 'There is no room for a slope, and the groundwater would not allow one either. A soldier pile wall is not watertight, and a cantilever sheet pile wall is not enough for an excavation deeper than 4–6 m. The diaphragm wall is watertight and stiff, is built without vibration and can form part of the permanent basement wall.' },
+      { id: '9b', type: 'order', q: 'Put the construction steps in order! Tap them in the right sequence.', items: ['Building the guide walls and the diaphragm wall', 'Excavation to below the first anchor row', 'Drilling and stressing the first anchor row', 'Excavation to final level, with dewatering', 'Casting the base slab on the pile heads'], shuffle: [3, 0, 4, 2, 1],
+        e: 'First the wall is completed, then excavation and anchoring follow each other level by level. Digging may only continue below an anchor row once the row above is stressed and holding.' },
+      { id: '9c', type: 'mcq', q: 'Where should the fixed (grouted) length of the ground anchors go?', opts: ['Directly behind the wall, in the soft clay', 'Beyond the potential slip surface, in the sandy gravel', 'Into the peat lens, because it is easy to drill', 'Into the fill, near the surface'], a: 1,
+        e: 'The fixed length has to lie outside the sliding soil wedge, in a bearing stratum: here, the sandy gravel. That is why the anchors are long and inclined, and why permission is needed for them to extend below the neighbouring plot.' },
+    ],
+    log: () => 'Anchored diaphragm wall, two anchor rows, fixed lengths in the sandy gravel. Sequence: diaphragm wall → excavation and anchoring level by level → dewatering → base slab on the pile heads. Then Building B goes up.' },
+];
+S.forEach((s) => s.tasks.forEach((t) => { t.st = s.n; }));
+const TASKS = S.flatMap((s) => s.tasks);
+const MAXP = TASKS.reduce((a, t) => a + (t.type.startsWith('tip') ? 1 : 3), 0);
+
+/* ---------- állapot ---------- */
+const KEY = 'alap-telek-v1';
+const blank = () => ({ cur: 1, done: [], t: {}, tips: {} });
+let ST = blank();
+try { const raw = localStorage.getItem(KEY); if (raw) { const o = JSON.parse(raw); if (o && typeof o === 'object') ST = { ...blank(), ...o }; } } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) {} };
+const tstate = (id) => (ST.t[id] = ST.t[id] || { tries: 0, hint: false, ok: false, sol: false, pts: 0 });
+const isDone = (n) => ST.done.includes(n);
+const unlocked = (n) => n === 1 || isDone(n - 1);
+const points = () => Object.values(ST.t).reduce((a, x) => a + (x.pts || 0), 0);
+const taskDone = (t) => { const x = ST.t[t.id]; return !!(x && (x.ok || x.sol)); };
+
+/* ---------- 3D ---------- */
+const SC = createScene($('#stage'));
+SC.setDone(ST.done);
+
+/* ---------- sín, fejléc ---------- */
+function renderRail() {
+  $('#rail').innerHTML = S.map((s) => { const cls = [isDone(s.n) ? 'done' : unlocked(s.n) ? 'open' : 'locked', ST.cur === s.n ? 'cur' : ''].join(' ');
+    return `<li><button type="button" class="${cls}" data-n="${s.n}" style="--sc:var(--c${s.c})" aria-current="${ST.cur === s.n ? 'step' : 'false'}" aria-label="Station ${s.n}: ${s.t}${isDone(s.n) ? ', approved' : unlocked(s.n) ? '' : ', still locked'}"><span class="dot">${s.n}</span><span class="nm">${s.r}</span></button></li>`; }).join('');
+}
+function renderScore() {
+  const d = ST.done.length, p = points(); $('#sDone').textContent = d; $('#sPts').textContent = p; $('#tbDone').textContent = `${d} / 9`; $('#tbPts').textContent = `${p} / ${MAXP}`; $('#sBar').style.width = (d / 9 * 100) + '%';
+  $('#goBtn').textContent = d === 0 && ST.cur === 1 ? 'Start at station 1' : d === 9 ? 'The finished site' : `Continue: station ${ST.cur}`;
+}
+$('#rail').addEventListener('click', (e) => { const b = e.target.closest('button[data-n]'); if (!b) return; const n = +b.dataset.n; if (!unlocked(n)) { flashLocked(n); return; } go(n); });
+function flashLocked(n) { const p = $('#panel'); const old = p.querySelector('.lockmsg'); if (old) old.remove(); const d = document.createElement('p'); d.className = 'lockmsg fb bad'; d.innerHTML = `Station ${n} opens once station ${n - 1} has been approved. The site is built in order too.`; p.prepend(d); setTimeout(() => d.remove(), 3500); }
+$('#goBtn').addEventListener('click', () => { go(ST.done.length === 9 ? 10 : ST.cur); $('#work').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+let viewN = 1;
+$('#viewBtn').addEventListener('click', () => SC.setView(viewN));
+$('#allBtn').addEventListener('click', () => SC.setView(10));
+
+function go(n) { ST.cur = Math.min(n, 9); viewN = n; save(); renderRail(); renderPanel(n); SC.setView(n); renderScore(); }
+
+/* ---------- állomáslap ---------- */
+function renderPanel(n) {
+  const p = $('#panel');
+  if (n === 10) { p.innerHTML = finalHTML(); p.style.setProperty('--sc', 'var(--c9)'); $('#hudTag').textContent = 'The finished site'; return; }
+  const s = S[n - 1]; p.style.setProperty('--sc', `var(--c${s.c})`);
+  $('#hudTag').textContent = `Station ${s.n} · ${s.t}`;
+  const apps = s.apps.map(([t, u]) => `<a class="btn" href="${U(u)}" target="_blank" rel="noopener">${t}${/\/en$/.test(u) ? '' : ' (in Hungarian)'} ${ARROW}</a>`).join('');
+  let h = `<div class="st-head"><div class="st-kick"><span class="n">${s.n}</span><span>Station ${s.n} · ${s.t}</span></div><h2>${s.q}</h2></div>`;
+  h += `<div class="card sit"><h3>Situation</h3>${s.sit.map((x) => `<p>${x}</p>`).join('')}</div>`;
+  if (s.data) h += `<div class="card data"><h3>Data sheet</h3><dl>${s.data.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl></div>`;
+  if (s.widget === 'logs') h += logsHTML();
+  s.tasks.forEach((t, i) => { h += taskHTML(t, i + 1); });
+  if (isDone(n)) h += doneHTML(s);
+  h += `<div class="learn"><span class="lbl">Learn it here</span>${apps}</div>`;
+  p.innerHTML = h;
+  s.tasks.forEach((t) => bindTask(t));
+  if (s.widget === 'logs') bindLogs();
+}
+function doneHTML(s) {
+  const nxt = s.n < 9 ? `<button class="btn pri" type="button" data-go="${s.n + 1}">On to station ${s.n + 1}</button>` : `<button class="btn pri" type="button" data-go="10">The finished site</button>`;
+  return `<div class="done-card" id="doneCard"><span class="stmp">Approved</span><h3>Station ${s.n} approved</h3><p>${s.log(ST)}</p><div>${nxt}</div></div>`;
+}
+$('#panel').addEventListener('click', (e) => { const g = e.target.closest('[data-go]'); if (g) { go(+g.dataset.go); $('#work').scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+
+function taskHTML(t, i) {
+  const x = tstate(t.id); const locked = t.needs && !taskDone(TASKS.find((q) => q.id === t.needs));
+  let h = `<div class="card task${taskDone(t) || (t.type.startsWith('tip') && ST.tips[t.id] != null) ? ' ok' : ''}" id="t-${t.id}"><div class="tnum">${t.type.startsWith('tip') ? 'GUESS' : `TASK ${i}`}<span class="pts" id="p-${t.id}">${x.pts ? `+${x.pts} pt${x.pts === 1 ? '' : 's'}` : ''}</span></div><p class="q">${t.q}</p>`;
+  if (locked) return h + `<p class="fb bad" style="background:var(--paper)">Solve the previous task first.</p></div>`;
+  if (t.widget === 'bearing') h += bearingHTML();
+  if (t.widget === 'stress') h += stressHTML();
+  if (t.widget === 'table') h += tableHTML(taskDone(t));
+  if (t.type === 'tipnum') { const v = ST.tips[t.id] ?? t.def; h += `<div class="tip"><div class="tipval" id="tv-${t.id}">${v} ${t.unit}</div><input type="range" id="tr-${t.id}" min="${t.min}" max="${t.max}" step="${t.step}" value="${v}" aria-label="${t.q}"><div class="numrow" style="margin-top:8px"><button class="btn pri" type="button" id="tb-${t.id}">${ST.tips[t.id] != null ? 'Guess recorded – change it' : 'Record my guess'}</button></div></div>`; }
+  if (t.type === 'tipchoice') h += `<div class="chips" role="group">${t.opts.map((o, k) => `<button type="button" class="chip" data-k="${k}" aria-pressed="${ST.tips[t.id] === o}">${o}</button>`).join('')}</div>`;
+  if (t.type === 'mcq') h += `<div class="opts">${t.opts.map((o, k) => { const cls = x.ok && k === t.a ? ' ok' : (x.wrong || []).includes(k) ? ' bad' : ''; return `<button type="button" class="opt${cls}" data-k="${k}"${x.ok ? ' disabled' : ''}><span class="k">${'ABCD'[k]}</span><span class="t">${o}</span></button>`; }).join('')}</div>`;
+  if (t.type === 'num') { const v = x.val != null ? esc(x.val) : ''; h += `<div class="numrow"><div class="inp">${t.pre ? `<span class="u" style="border:0;border-right:1px solid var(--line)">${t.pre}</span>` : ''}<input id="in-${t.id}" type="text" inputmode="decimal" autocomplete="off" value="${v}" aria-label="Answer"${taskDone(t) ? ' disabled' : ''}>${t.unit ? `<span class="u">${t.unit}</span>` : ''}</div><button class="btn pri" type="button" id="ck-${t.id}"${taskDone(t) ? ' disabled' : ''}>Check</button></div>`; }
+  if (t.type === 'order') h += orderHTML(t);
+  h += `<div id="fb-${t.id}">${feedbackHTML(t)}</div>`;
+  if (t.hint || t.sol) h += `<div class="tlinks">${t.hint && !taskDone(t) ? `<button type="button" data-hint="${t.id}">Hint</button>` : ''}${t.sol && !taskDone(t) ? `<button type="button" data-sol="${t.id}">Show the solution</button>` : ''}</div>`;
+  h += `<div id="hs-${t.id}">${x.hint && t.hint && !taskDone(t) ? `<div class="hint"><p>${t.hint}</p></div>` : ''}${taskDone(t) && t.sol ? solHTML(t) : ''}</div>`;
+  return h + '</div>';
+}
+const solHTML = (t) => `<div class="sol">${t.sol.map((l) => /\.$/.test(l) ? `<p>${l}</p>` : `<div class="eq"><div>${l}</div></div>`).join('')}</div>`;
+function feedbackHTML(t) {
+  const x = ST.t[t.id]; if (!x) return '';
+  if (t.type === 'mcq' && x.ok) return `<p class="fb ok"><b>Correct.</b> ${t.e}</p>`;
+  if (t.type === 'mcq' && (x.wrong || []).length) return `<p class="fb bad"><b>Not this one.</b> Think it over again and choose another.</p>`;
+  if (t.type === 'order' && x.ok) return `<p class="fb ok"><b>Correct order.</b> ${t.e}</p>`;
+  if (t.type === 'num' && x.ok) return `<p class="fb ok"><b>Correct.</b> The exact value is ${fmtAns(t)}.</p>`;
+  if (t.type === 'num' && x.sol) return `<p class="fb ok" style="background:var(--paper)">The solution steps are below. This task earns no points this time.</p>`;
+  if (t.type === 'num' && x.last === 'bad') return `<p class="fb bad"><b>Not right yet.</b> ${x.lastMsg || ''}</p>`;
+  if (t.type === 'num' && x.last === 'nan') return `<p class="fb bad">Enter a number, e.g. 31.2.</p>`;
+  return '';
+}
+const fmtAns = (t) => { const d = t.unit === '' || t.ans >= 1000 || (t.unit === 'mm' && t.ans >= 100) ? 0 : 1; return `${t.pre ? t.pre + ' ' : ''}${fmt(t.ans, d)}${t.unit ? ' ' + t.unit : ''}`; };
+
+function award(t, ok) { const x = tstate(t.id); if (ok) { x.ok = true; x.pts = Math.max(1, 3 - x.tries - (x.hint ? 1 : 0)); } else x.tries++; save(); }
+function rerenderTask(t) { const s = S[t.st - 1]; const i = s.tasks.indexOf(t) + 1; const el = $(`#t-${t.id}`); if (!el) return; el.outerHTML = taskHTML(t, i); bindTask(t); }
+function afterSolve(t) {
+  renderScore(); const s = S[t.st - 1];
+  s.tasks.forEach((q) => { if (q.needs === t.id) rerenderTask(q); });
+  if (!isDone(s.n) && s.tasks.every((q) => q.type.startsWith('tip') ? ST.tips[q.id] != null : taskDone(q))) completeStation(s);
+}
+function completeStation(s) {
+  ST.done = [...new Set([...ST.done, s.n])].sort((a, b) => a - b); if (s.n < 9) ST.cur = s.n + 1; save();
+  SC.setView(s.n, true); SC.complete(s.n);
+  const st = $('#stamp'); st.style.setProperty('--sc', `var(--c${s.c})`); st.classList.remove('on'); void st.offsetWidth; st.classList.add('on');
+  const learn = $('#panel .learn'); learn.insertAdjacentHTML('beforebegin', doneHTML(s));
+  renderRail(); renderScore(); renderJournal();
+  const narrow = innerWidth <= 960, stg = $('#stage');
+  if (narrow && stg.getBoundingClientRect().bottom < 80) stg.scrollIntoView({ behavior: 'smooth', block: 'start' }); // telefonon látszódjon, ahogy épül
+  else setTimeout(() => { const dc = $('#doneCard'); if (dc && dc.getBoundingClientRect().top > innerHeight) dc.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300);
+}
+
+function parseNum(v) { const s = String(v).replace(/\s| | /g, '').replace(',', '.').replace('−', '-'); if (!/^-?\d*\.?\d+$/.test(s)) return NaN; return parseFloat(s); }
+function bindTask(t) {
+  const x = tstate(t.id); const root = $(`#t-${t.id}`); if (!root) return;
+  root.querySelectorAll('[data-hint]').forEach((b) => b.addEventListener('click', () => { x.hint = true; save(); $(`#hs-${t.id}`).innerHTML = `<div class="hint"><p>${t.hint}</p></div>`; }));
+  root.querySelectorAll('[data-sol]').forEach((b) => b.addEventListener('click', () => { x.sol = true; x.pts = 0; save(); rerenderTask(t); afterSolve(t); }));
+  if (t.type === 'tipnum') { const r = $(`#tr-${t.id}`), v = $(`#tv-${t.id}`); if (!r) return; r.addEventListener('input', () => { v.textContent = `${r.value} ${t.unit}`; }); $(`#tb-${t.id}`).addEventListener('click', () => { const first = ST.tips[t.id] == null; ST.tips[t.id] = +r.value; if (first) x.pts = 1; save(); rerenderTask(t); afterSolve(t); renderJournal(); }); }
+  if (t.type === 'tipchoice') root.querySelectorAll('.chip').forEach((b) => b.addEventListener('click', () => { const first = ST.tips[t.id] == null; ST.tips[t.id] = t.opts[+b.dataset.k]; if (first) x.pts = 1; save(); rerenderTask(t); afterSolve(t); renderJournal(); }));
+  if (t.type === 'mcq' && !x.ok) root.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => { const k = +b.dataset.k; if (k === t.a) { award(t, true); rerenderTask(t); afterSolve(t); } else { x.wrong = [...new Set([...(x.wrong || []), k])]; award(t, false); rerenderTask(t); } }));
+  if (t.type === 'num' && !taskDone(t)) { const inp = $(`#in-${t.id}`), btn = $(`#ck-${t.id}`); if (!inp) return;
+    const check = () => { const v = parseNum(inp.value); x.val = inp.value; if (isNaN(v)) { x.last = 'nan'; save(); $(`#fb-${t.id}`).innerHTML = feedbackHTML(t); return; }
+      const ok = t.abs != null ? Math.abs(v - t.ans) <= t.abs + 1e-9 : Math.abs(v - t.ans) <= Math.abs(t.ans) * t.rel;
+      if (ok) { award(t, true); x.last = 'ok'; rerenderTask(t); afterSolve(t); return; }
+      const hi = v > t.ans; const far = Math.abs(v - t.ans) > Math.abs(t.ans) * 0.5; x.lastMsg = far ? (hi ? 'An order of magnitude too large – check the units.' : 'An order of magnitude too small – check the units.') : (hi ? 'A little larger than the correct value.' : 'A little smaller than the correct value.'); x.last = 'bad'; award(t, false); $(`#fb-${t.id}`).innerHTML = feedbackHTML(t); inp.classList.add('badin'); setTimeout(() => inp.classList.remove('badin'), 900); };
+    btn.addEventListener('click', check); inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') check(); }); }
+  if (t.type === 'order') bindOrder(t);
+  if (t.widget === 'bearing') bindBearing();
+  if (t.widget === 'stress') drawStress(taskDone(t));
+}
+
+/* ---------- sorba rendezés ---------- */
+function orderHTML(t) { const x = tstate(t.id); const seq = x.ok ? t.items.map((_, i) => i) : (x.seq || []);
+  const pool = t.shuffle.filter((i) => !seq.includes(i));
+  return `<div class="order"><div class="lbl">Your order</div><div class="seq">${seq.length ? seq.map((i, k) => `<div class="it${x.ok ? ' ok' : x.checked ? (i === k ? ' ok' : ' bad') : ''}">${t.items[i]}</div>`).join('') : '<div class="it" style="justify-content:center; color:var(--muted)">Tap the first step below</div>'}</div>${x.ok ? '' : `<div class="lbl" style="margin-top:12px">The steps</div><div class="pool">${pool.map((i) => `<button type="button" class="it" data-i="${i}">${t.items[i]}</button>`).join('')}</div><div class="numrow" style="margin-top:12px">${seq.length === t.items.length ? '<button class="btn pri" type="button" data-ord="check">Check</button>' : ''}${seq.length ? '<button class="btn" type="button" data-ord="clear">Start over</button>' : ''}</div>`}</div>`; }
+function bindOrder(t) { const x = tstate(t.id); const root = $(`#t-${t.id}`); if (x.ok) return;
+  root.querySelectorAll('.pool [data-i]').forEach((b) => b.addEventListener('click', () => { x.seq = [...(x.seq || []), +b.dataset.i]; x.checked = false; save(); rerenderTask(t); }));
+  const c = root.querySelector('[data-ord="check"]'); if (c) c.addEventListener('click', () => { const ok = x.seq.every((v, i) => v === i); x.checked = true; if (ok) { award(t, true); rerenderTask(t); afterSolve(t); } else { award(t, false); rerenderTask(t); $(`#fb-${t.id}`).innerHTML = '<p class="fb bad"><b>Not right yet.</b> The steps marked in red are not in the right place.</p>'; } });
+  const cl = root.querySelector('[data-ord="clear"]'); if (cl) cl.addEventListener('click', () => { x.seq = []; x.checked = false; save(); rerenderTask(t); });
+}
+
+/* ---------- 2. állomás: rétegsorok ---------- */
+const LOGS = {
+  F1: [['fill', 0, 1.2, '#8a7f6e'], ['sand, medium dense', 1.2, 9.0, '#e9c77d'], ['sandy gravel', 9.0, 18.0, '#d9c7a3'], ['hard clay', 18.0, 20.0, '#7c8792']],
+  F2: [['fill', 0, 1.2, '#8a7f6e'], ['soft clay', 1.2, 5.1, '#8d9aa6'], ['sand, medium dense', 5.1, 9.0, '#e9c77d'], ['sandy gravel', 9.0, 18.0, '#d9c7a3'], ['hard clay', 18.0, 20.0, '#7c8792']],
+  F3: [['fill', 0, 1.2, '#8a7f6e'], ['soft clay', 1.2, 2.8, '#8d9aa6'], ['peat', 2.8, 5.8, '#5b3b22'], ['soft clay', 5.8, 9.0, '#8d9aa6'], ['sandy gravel', 9.0, 18.0, '#d9c7a3'], ['hard clay', 18.0, 20.0, '#7c8792']],
+  CPT: [['q<sub>c</sub> ≈ 2.4 MPa – fill', 0, 1.2, '#8a7f6e'], ['q<sub>c</sub> ≈ 0.9 MPa', 1.2, 7.1, '#8d9aa6'], ['q<sub>c</sub> ≈ 11 MPa', 7.1, 9.0, '#e9c77d'], ['q<sub>c</sub> ≈ 21 MPa', 9.0, 15.0, '#d9c7a3']],
+};
+let curLog = 'F1';
+function logsHTML() { return `<div class="card logs"><h3>Borehole logs</h3><div class="tabs" role="group" aria-label="Choose an investigation point">${Object.keys(LOGS).map((k) => `<button type="button" data-log="${k}" aria-pressed="${k === curLog}">${k}</button>`).join('')}</div><div class="logview" id="logview">${logView(curLog)}</div></div>`; }
+function logView(k) { const L = LOGS[k], H = k === 'CPT' ? 15 : 20, sc = 300 / H; let svg = `<svg viewBox="0 0 120 ${H * sc + 20}" role="img" aria-label="Borehole log ${k}">`; for (const [, a, b, c] of L) svg += `<rect x="42" y="${10 + a * sc}" width="40" height="${(b - a) * sc}" fill="${c}" stroke="rgba(0,0,0,.25)" stroke-width="1"/>`;
+  for (let d = 0; d <= H; d += 5) svg += `<line x1="34" x2="42" y1="${10 + d * sc}" y2="${10 + d * sc}" stroke="currentColor" opacity=".55"/><text x="30" y="${14 + d * sc}" text-anchor="end" font-size="11" fill="currentColor" font-family="monospace">${d}</text>`;
+  if (k !== 'CPT') svg += `<line x1="84" x2="104" y1="${10 + 3 * sc}" y2="${10 + 3 * sc}" stroke="#3d9ad6" stroke-width="2"/><text x="106" y="${14 + 3 * sc}" font-size="10" fill="#3d9ad6" font-family="monospace">TV</text>`;
+  svg += '</svg>'; return svg + `<ul>${L.map(([n, a, b, c]) => `<li><i style="background:${c}"></i><span>${n}</span><span>${fmt(a, 1)}–${fmt(b, 1)} m</span></li>`).join('')}${k !== 'CPT' ? '<li><i style="background:#3d9ad6"></i><span>groundwater (standing level)</span><span>−3.0 m</span></li>' : ''}</ul>`; }
+function bindLogs() { $$('[data-log]').forEach((b) => b.addEventListener('click', () => { curLog = b.dataset.log; $$('[data-log]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); $('#logview').innerHTML = logView(curLog); })); }
+
+/* ---------- 3. állomás: teherbírás-kalkulátor ---------- */
+function bearingHTML() { return `<div class="calc"><div class="row"><label for="bB">B = L</label><input type="range" id="bB" min="1.0" max="3.0" step="0.1" value="2.0"><output id="bBo">2.0 m</output></div><div class="reads"><div class="rd"><small>V<sub>d</sub></small><b id="bVd"></b></div><div class="rd"><small>R<sub>d</sub></small><b id="bRd"></b></div><div class="rd"><small>Λ</small><b id="bL"></b></div></div><div class="verdict" id="bVer"></div></div>`; }
+function bindBearing() { const r = $('#bB'); if (!r) return; const up = () => { const B = +r.value, b = CALC.bearing(B); $('#bBo').textContent = `${fmt(B, 1)} m`; $('#bVd').textContent = `${fmt(b.Vd, 0)} kN`; $('#bRd').textContent = `${fmt(b.Rd, 0)} kN`; $('#bL').textContent = fmt(b.L, 2); const v = $('#bVer'); const ok = b.L <= 1; v.className = 'verdict ' + (ok ? 'ok' : 'bad'); v.textContent = ok ? 'Λ ≤ 1 – bearing resistance OK' : 'Λ > 1 – bearing resistance not OK'; }; r.addEventListener('input', up); up(); }
+
+/* ---------- 5. állomás: feszültség-mélység ábra és táblázat ---------- */
+function stressHTML() { return `<div class="chart" id="stressChart"></div>`; }
+function drawStress(showM0) {
+  const el = $('#stressChart'); if (!el) return; const W = 520, H = 340, L = 50, R = 16, T = 26, Bm = 34, zMax = 7, sMax = 260;
+  const X = (s) => L + s / sMax * (W - L - R), Y = (z) => T + z / zMax * (H - T - Bm);
+  let g = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Additional stress and 20 % of the geostatic stress versus depth">`;
+  for (let z = 0; z <= zMax + 1e-9; z += 0.5) g += `<line x1="${L}" x2="${W - R}" y1="${Y(z)}" y2="${Y(z)}" stroke="currentColor" opacity="${z % 1 ? 0.08 : 0.18}"/><text x="${L - 6}" y="${Y(z) + 4}" text-anchor="end" font-size="11" fill="currentColor" opacity=".75" font-family="monospace">${z % 1 ? '' : fmt(z, 0)}</text>`;
+  for (let s = 0; s <= sMax; s += 50) g += `<line y1="${T}" y2="${H - Bm}" x1="${X(s)}" x2="${X(s)}" stroke="currentColor" opacity=".12"/><text x="${X(s)}" y="${T - 8}" text-anchor="middle" font-size="11" fill="currentColor" opacity=".75" font-family="monospace">${s}</text>`;
+  const p1 = [], p2 = []; for (let z = 0; z <= zMax + 1e-9; z += 0.05) { p1.push(`${X(CALC.dsig(MID.q0, 2, z)).toFixed(1)},${Y(z).toFixed(1)}`); p2.push(`${X(0.2 * CALC.sv(CALC.D + z)).toFixed(1)},${Y(z).toFixed(1)}`); }
+  g += `<polyline points="${p1.join(' ')}" fill="none" stroke="#e8952a" stroke-width="3"/><polyline points="${p2.join(' ')}" fill="none" stroke="#3d9ad6" stroke-width="3"/>`;
+  if (showM0) g += `<line x1="${L}" x2="${W - R}" y1="${Y(MID.m0)}" y2="${Y(MID.m0)}" stroke="#d4483a" stroke-width="2" stroke-dasharray="6 4"/><text x="${W - R - 4}" y="${Y(MID.m0) - 6}" text-anchor="end" font-size="12" fill="#d4483a" font-family="monospace" font-weight="700">m₀ = ${fmt(MID.m0, 2)} m</text>`;
+  g += `<text x="${L}" y="${H - 10}" font-size="11.5" fill="currentColor" font-family="monospace">kPa ↑ · depth below foundation level, m ↓</text>`;
+  g += `<text x="${X(150)}" y="${Y(0.9)}" font-size="12" fill="#e8952a" font-family="monospace" font-weight="700">Δσ<tspan font-size="9" dy="3">z</tspan></text><text x="${X(36)}" y="${Y(6.6)}" font-size="12" fill="#3d9ad6" font-family="monospace" font-weight="700">0.2 · σ′<tspan font-size="9" dy="3">z0</tspan></text>`;
+  el.innerHTML = g + '</svg>';
+}
+function tableHTML(showAll) { const rows = MID.rows; return `<div class="tbl"><table><thead><tr><th>z<sub>1</sub>–z<sub>2</sub> (m)</th><th>Δσ<sub>1</sub> (kPa)</th><th>Δσ<sub>2</sub> (kPa)</th><th>E<sub>oed</sub> (MPa)</th><th>Δs (mm)</th></tr></thead><tbody>${rows.map((r) => `<tr><td>${fmt(r.z1, 2)}–${fmt(r.z2, 2)}</td><td>${fmt(r.d1, 1)}</td><td>${fmt(r.d2, 1)}</td><td>${fmt(r.E / 1000, 0)}</td><td>${showAll ? fmt(r.ds, 2) : '?'}</td></tr>`).join('')}${showAll ? `<tr class="tot"><td colspan="4">total</td><td>${fmt(MID.s, 1)}</td></tr>` : ''}</tbody></table></div>`; }
+
+/* ---------- napló, tippek, befejezés ---------- */
+function renderJournal() {
+  $('#jgrid').innerHTML = S.map((s) => { const d = isDone(s.n); const p = s.tasks.reduce((a, t) => a + ((ST.t[t.id] || {}).pts || 0), 0), mx = s.tasks.reduce((a, t) => a + (t.type.startsWith('tip') ? 1 : 3), 0);
+    return `<div class="jcell${d ? '' : ' empty'}" style="--sc:var(--c${s.c})"><div class="h"><i>${s.n}</i><span>${s.t}</span><span class="p">${d ? `${p}/${mx} pts` : ''}</span></div><div class="b">${d ? s.log(ST) : unlocked(s.n) ? 'In progress.' : 'Not open yet.'}</div></div>`; }).join('');
+  const tS = ST.tips.tipS, tB = ST.tips.tipB;
+  $('#tips').innerHTML = `<div class="tipcmp"><h3>Guess and calculation: settlement of Building A</h3><div class="vs"><div><small>guess</small><b>${tS != null ? tS + ' mm' : '–'}</b></div><div><small>calculation</small><b>${isDone(5) ? fmt(MID.s, 1) + ' mm' : 'Station 5'}</b></div></div></div><div class="tipcmp"><h3>Guess and decision: foundation of Building B</h3><div class="vs"><div><small>guess</small><b>${tB ? esc(tB) : '–'}</b></div><div><small>decision</small><b>${isDone(6) ? 'Pile foundation' : 'Station 6'}</b></div></div></div>`;
+}
+function finalHTML() {
+  const p = points(); const all = ST.done.length === 9; const tS = ST.tips.tipS; const diff = tS != null ? Math.abs(tS - MID.s) : null;
+  return `<div class="st-head"><div class="st-kick"><span class="n">✓</span><span>End of the semester</span></div><h2>${all ? 'Both buildings are standing' : 'Not everything has been built yet'}</h2></div>
+  <div class="card sit"><h3>Summary</h3><p>${all ? `Across nine stations you have got from the grey, unknown ground to two finished buildings. Building A stands on pad footings in the sand at a depth of 1.8 m, with a settlement of about ${fmt(MID.s, 0)} mm per column. Because of the peat lens, Building B stands on CFA piles, and its two basement levels were built in an excavation supported by an anchored diaphragm wall.` : 'The finished site can be seen once all nine stations have been approved. Until then you can walk around what has been built so far.'}</p>${tS != null ? `<p>Your guess for the settlement of Building A was ${tS} mm, the calculation gave ${fmt(MID.s, 1)} mm – ${diff <= 5 ? 'spot on, by engineering standards.' : diff <= 15 ? 'the right order of magnitude.' : 'that is why we calculate.'}</p>` : ''}</div>
+  <div class="card data"><h3>Result</h3><dl><dt>approved stations</dt><dd>${ST.done.length} / 9</dd><dt>score</dt><dd>${p} / ${MAXP}</dd></dl></div>
+  <div class="learn"><span class="lbl">Next</span><a class="btn" href="${U('bme-alapozas.vercel.app/en')}" target="_blank" rel="noopener">The course home page ${ARROW}</a><a class="btn" href="#naplo">Design log</a></div>`;
+}
+$('#resetBtn').addEventListener('click', () => $('#reset').classList.add('asking'));
+$('#resetNo').addEventListener('click', () => $('#reset').classList.remove('asking'));
+$('#resetYes').addEventListener('click', () => { ST = blank(); save(); $('#reset').classList.remove('asking'); SC.setDone([]); renderAll(); $('#work').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+
+function renderAll() { viewN = ST.cur; renderRail(); renderPanel(ST.cur); SC.setView(ST.cur, true); renderScore(); renderJournal(); }
+renderAll();
+window.__telek = { tasks: TASKS };
+
+
+/* ===== formázás: a nyitóoldal őre (sorkizárás, nem törő egységek, elválasztás) ===== */
+/* nyelvváltó: a választás megmarad (alap-lang), a másik nyelvű oldal ugyanott nyílik meg (alap-pos) */
+(() => {
+  const sw = $('#langSw'), KEY = 'alap-pos'; const hh = () => { const t = $('.top'); return t ? t.offsetHeight : 0; };
+  if (sw) sw.addEventListener('click', () => {
+    try { localStorage.setItem('alap-lang', EN ? 'hu' : 'en'); } catch (e) {}
+    const H0 = hh(); let best = null; document.querySelectorAll('main [id]').forEach((n) => { if (n.closest('svg')) return; const r = n.getBoundingClientRect(); if (r.height && r.top <= H0 + 1 && r.bottom > H0) best = n; });
+    try { sessionStorage.setItem(KEY, JSON.stringify({ id: best ? best.id : '', off: best ? H0 - best.getBoundingClientRect().top : 0, y: scrollY, t: Date.now() })); } catch (e) {}
+    sw.setAttribute('href', (EN ? './' : 'en') + (location.hash || ''));
+  });
+  let p = null; try { p = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
+  if (p && Date.now() - p.t < 20000) { if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    const go = () => { const n = p.id && document.getElementById(p.id); const y = n ? n.getBoundingClientRect().top + scrollY - hh() + p.off : p.y; scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
+    requestAnimationFrame(go); addEventListener('load', () => { go(); setTimeout(go, 600); }, { once: true }); }
+})();
+
+const GUARD = (() => {
+  const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
+  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead, .lead, main .opt .t, main .jcell .b, main dt';
+  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead, .lead';
+  const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
+  const TERMS = ['soil and structure', 'bearing stratum', 'groundwater conditions', 'differential settlement', 'differential settlements', 'overall stability', 'ultimate limit state', 'serviceability limit state', 'soft lens', 'organic soil', 'organic clay', 'collapsible loess', 'expansive clay', 'caisson foundations', 'piled raft', 'deepened shallow foundation', 'design project', 'Tower of Pisa'];
+  const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
+  const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
+  const NUMW = EN ? /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]ourteen|[Ff]irst|[Ss]econd|[Tt]hird|[Ff]ourth|[Bb]oth|[Aa]ll|[Ss]everal|[Aa] few))(?=\s\S)\s/g : /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  function textPass(s) {
+    if (!/[ \-–·]/.test(s)) return s;
+    s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
+    s = s.replace(/ ([=≤≥≈→←×±<>⇒↔]) /g, NB + '$1' + NB);
+    s = s.replace(/([\p{N}\p{L})\]′″°²³]) ([+−]) (?=[\p{N}\p{L}(])/gu, '$1' + NB + '$2' + NB);
+    s = s.replace(/(^|[(\[„])([=≤≥≈<>±~]) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/ · (?=(\S+))/g, (m, nxt) => { const w = nxt.replace(/^[(„"]/, ''); if (/^\p{L}{3,}/u.test(w) && !MULT_SYM.test(w)) return m; return NB + '·' + NB; });
+    s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
+    s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
+    s = s.replace(/(\S) ([–—]) /g, '$1' + NB + '$2 ');   // a gondolatjel nem kezdhet sort
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.|e\.g\.|i\.e\.|approx\.|cf\.|No\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“‘])(a|an|the|A|An|The|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(NUMW, '$1$2' + NB);
+    s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
+    return s;
+  }
+  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|the|A|An|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[,.]\\d+)?\\.?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
+    if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
+    const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
+    const me = / ([=≤≥≈→←×±<>⇒+−/]) $/.exec(a.nodeValue); if (me && /^\S/.test(b.nodeValue)) a.nodeValue = a.nodeValue.slice(0, -3) + NB + me[1] + NB; } }
+  function bindPositions(full, cpl = 70) {
+    const bind = new Set(); const segMax = Math.max(14, Math.min(38, 0.42 * cpl)), parMax = Math.max(10, Math.min(24, 0.30 * cpl));
+    const mark = (a, b) => { for (let i = a; i < b; i++) if (full[i] === ' ') bind.add(i); };
+    const sepRx = / · |; | – /g; let last = 0, m, lastSep = ''; const segs = [];
+    while ((m = sepRx.exec(full))) { segs.push([last, m.index, lastSep, m[0]]); last = m.index + m[0].length; lastSep = m[0]; } segs.push([last, full.length, lastSep, '']);
+    if (segs.length > 1) for (const [a, b, before, after] of segs) { const t = full.slice(a, b).replace(/[\u2060\u00AD]/g, '').trim(); const dashOnly = (before === ' – ' || before === '') && (after === ' – ' || after === '') && (before || after); const lim = dashOnly ? Math.min(22, segMax) : segMax; if (t.length > 0 && t.length < lim) mark(a, b); }
+    const pr = /\(([^()]{1,30})\)/g; while ((m = pr.exec(full))) { if (m[0].replace(/[\u2060\u00AD]/g, '').length <= parMax) mark(m.index, m.index + m[0].length); }
+    termRx.lastIndex = 0; while ((m = termRx.exec(full))) mark(m.index, m.index + m[0].length);
+    return bind;
+  }
+  function textNodes(root) { const out = []; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) { let p = n.parentNode; while (p && p !== root) { if (SKIP.has(p.nodeName)) return NodeFilter.FILTER_REJECT; p = p.parentNode; } return NodeFilter.FILTER_ACCEPT; } }); let n; while ((n = w.nextNode())) out.push(n); return out; }
+  let hyph = null; const done = new WeakMap();
+  function processBlock(el) {
+    if (!el.isConnected) return; if (el.closest('svg')) return; const cur = el.textContent; if (done.get(el) === cur) return;
+    const nodes = textNodes(el); for (const n of nodes) { const v = textPass(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; } crossPass(nodes);
+    const full = nodes.map(n => n.nodeValue).join(''); const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const cpl = el.clientWidth > 40 ? el.clientWidth / (fs * 0.52) : 70;
+    const bind = bindPositions(full, cpl);
+    if (bind.size) { let off = 0; for (const n of nodes) { const v = n.nodeValue; let o = '', ch = false; for (let i = 0; i < v.length; i++) { if (v[i] === ' ' && bind.has(off + i)) { o += NB + WJ; ch = true; } else o += v[i]; } off += v.length; if (ch) n.nodeValue = o; } }
+    if (hyph && el.matches(HYPH)) { for (const n of textNodes(el)) { if (n.parentElement && n.parentElement.closest(NOHY) && n.parentElement.closest(NOHY) !== el) continue; const parts = n.nodeValue.split(/( )/); let ch = false;
+      for (let i = 0; i < parts.length; i += 2) { const t = parts[i]; if (!t || !/\p{L}{6,}/u.test(t)) continue; const clean = t.replace(/[\u00AD\u200B]/g, ''); let hh;
+        if (t.includes(WJ)) { const vis = clean.replace(/[\u2060]/g, ''); if (vis.length <= 16 || /^\(.*\)[.,;:!?]*$/.test(vis)) continue; const k = Math.max(clean.lastIndexOf('\u00A0'), clean.lastIndexOf(WJ)); const tail = clean.slice(k + 1); if (!/\p{L}{6,}/u.test(tail)) continue; hh = clean.slice(0, k + 1) + hyph(tail); } else hh = hyph(clean);
+        hh = hh.replace(/\u200B/g, ''); if (hh !== t) { parts[i] = hh; ch = true; } } if (ch) n.nodeValue = parts.join(''); } }
+    done.set(el, el.textContent);
+  }
+  let obs = null, pend = new Set(), sched = false;
+  function observe() { obs.observe(document.body, { childList: true, subtree: true, characterData: true }); }
+  function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
+  function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
+  function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
+    const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+  return { start, run };
+})();
+
+/* RAG3 – lyukas sorkizárt blokk tartaléka (formázás skill): (1) ha a szép tördelés (text-wrap: pretty) lyukas,
+   előbb sima tördeléssel (text-wrap: wrap, .twr) próbálja – a blokk sorkizárt marad; (2) csak ha így is lyukas,
+   balra zárt lesz (.rag). Az összetartozó egységek (NBSP/U+2060 kötések) érintetlenek maradnak.
+   Idempotens: a döntést szélesség + szöveg szerint megjegyzi, ismételt futáskor nem mér újra. */
+const RAG3 = (() => {
+  try { const st = document.createElement('style'); st.textContent = '.twr{text-wrap:wrap!important}'; document.head.appendChild(st); } catch (e) {}
+  const memo = new WeakMap();
+  const sig = (el) => el.textContent;   // a teljes szöveg (az elválasztás után is újramér)
+  function bad(el, strict) {
+    const fs = parseFloat(getComputedStyle(el).fontSize) || 16; const all = document.createRange(); all.selectNodeContents(el); const rs = all.getClientRects(); if (rs.length < 2) return false;
+    let lastTop = -1e9; for (const r of rs) if (r.width && r.top > lastTop) lastTop = r.top; let big = 0, mid = 0;
+    // sima tördelésnél (strict): egy nem utolsó, nagyon rövid sor (pl. hosszú, nem törhető képlet előtt) is rossz – a sorokat
+    // függőleges átfedés szerint vonjuk össze, így az alsó/felső index nem számít külön sornak; <br>-es blokknál nem vizsgáljuk
+    if (strict && !el.querySelector('br')) { const L = []; for (const r of rs) { if (!r.width || !r.height) continue; let l = L.find((q) => Math.min(q.b, r.bottom) - Math.max(q.t, r.top) > 0.5 * Math.min(q.b - q.t, r.height));
+      if (!l) L.push({ t: r.top, b: r.bottom, l: r.left, r: r.right }); else { l.t = Math.min(l.t, r.top); l.b = Math.max(l.b, r.bottom); l.l = Math.min(l.l, r.left); l.r = Math.max(l.r, r.right); } }
+      L.sort((a, b) => a.t - b.t); for (let i = 0; i < L.length - 1; i++) if (L[i].r - L[i].l < el.clientWidth * 0.35) return true; }
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const t = n.nodeValue; for (let i = 0; i < t.length; i++) { const c = t[i]; if (c !== ' ' && c !== '\u00A0') continue; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getBoundingClientRect(); if (!b.width || b.top >= lastTop - 2) continue; if (b.width > fs * 1.15) big++; else if (b.width > fs * 0.9) mid++; } }
+    return big > 0 || mid >= 2;
+  }
+  function check(el) {
+    if (!el || !el.isConnected || !el.offsetParent) return;
+    const w = el.clientWidth, s = sig(el), m = memo.get(el);
+    if (m && m.w === w && m.s === s) { el.classList.toggle('twr', m.res === 'twr'); el.classList.toggle('rag', m.res === 'rag'); return; }
+    el.classList.remove('rag', 'twr'); let res = 'ok';
+    if (getComputedStyle(el).textAlign === 'justify' && bad(el)) { el.classList.add('twr'); res = 'twr'; if (bad(el, true)) { el.classList.remove('twr'); el.classList.add('rag'); res = 'rag'; } }
+    memo.set(el, { w, s, res });
+  }
+  return { check };
+})();
+
+const RAG = (() => {
+  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead, .lead';
+  const check = (el) => RAG3.check(el);
+  const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
+  let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
+  document.addEventListener('click', () => { clearTimeout(tm); tm = setTimeout(run, 120); });
+  return { run };
+})();
+GUARD.start();
+setTimeout(() => RAG.run(), 400);
+{ const iv = setInterval(() => { if (window.__fmtHyphReady) { clearInterval(iv); requestAnimationFrame(() => { RAG.run(); window.__ragDone = true; }); } }, 100); setTimeout(() => clearInterval(iv), 8000); }
+
+</script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-"""A három átfogó extra (/helyszinelok, /tippelj, /vizsga) angol változata: <app>/index.html → <app>/en.html (Vercel cleanUrls → /<app>/en).
+"""Az átfogó extrák (/helyszinelok, /tippelj, /vizsga, /telek, /ar-labor) angol változata: <app>/index.html → <app>/en.html (Vercel cleanUrls → /<app>/en).
 
 Használat:  cd _src/sub_i18n && npm install && cd .. && python3 build_sub.py
             python3 build_sub.py catalog   → a fordítandó szövegek munkalapja (sub_i18n/ws_<app>.tsv)
@@ -13,12 +13,13 @@ A magyar oldal a forrás (egyfájlos, kézzel írt HTML). Az angol változat:
 """
 import os, re, sys, glob, shutil, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); I18N = os.path.join(HERE, 'sub_i18n')
-APPS = ['helyszinelok', 'tippelj', 'vizsga']
+APPS = ['helyszinelok', 'tippelj', 'vizsga', 'telek', 'ar-labor']
 if os.environ.get('ONLY'): APPS = os.environ['ONLY'].split(',')   # csak a megadott app(ok) – fordítás közben
 # az angolul is elérhető tananyagok (a többi magyar marad, „(in Hungarian)” jelzéssel)
 EN_SITES = ['bme-alapozas.vercel.app', 'talajfelderites.vercel.app', 'sikalapoktervezese.vercel.app', 'sikalapok-teherbirasszamitasa.vercel.app',
             'sikalapokallekonysagvizsgalata.vercel.app', 'kedvezotlen-altalaj.vercel.app', 'sikalapok-sullyedesszamitasa.vercel.app', 'vedekezesakarossullyedesekellen.vercel.app',
-            'sikalapokaterohatasok.vercel.app', 'melyalapozasok.vercel.app']
+            'sikalapokaterohatasok.vercel.app', 'melyalapozasok.vercel.app', 'munkaterhatarolasok.vercel.app',
+            'bme-alapozas.vercel.app/telek', 'bme-alapozas.vercel.app/helyszinelok', 'bme-alapozas.vercel.app/tippelj', 'bme-alapozas.vercel.app/vizsga', 'bme-alapozas.vercel.app/ar-labor']
 
 # a még csak magyar tananyagra mutató link után: „(in Hungarian)”
 HUNOTE = "${{{0}}}${{/\\/en$/.test({1}) ? '' : ' (in Hungarian)'}}"
@@ -29,6 +30,14 @@ PRE = {
     ('<span>${cr + 1}. homlokzat a 6-ból</span>', '<span>Façade ${cr + 1} of 6</span>'),
   ],
   'tippelj': [],
+  'telek': [
+    ('aria-label="${s.n}. állomás: ${s.t}', 'aria-label="Station ${s.n}: ${s.t}'),
+    ('aria-label="${k} rétegsora"', 'aria-label="Borehole log ${k}"'),
+    ('aria-label="Többletfeszültség és a geosztatikus feszültség 20 %-a a mélység függvényében"', 'aria-label="Additional stress and 20 % of the geostatic stress versus depth"'),
+  ],
+  'ar-labor': [
+    ("m.lec + '. előadás'", "'Lecture ' + m.lec"),
+  ],
   'vizsga': [
     ('<span class="lec">${d.i + 1}. kártya a ${CARDS.length}-ből · ${c[0]}. előadás</span>', '<span class="lec">Card ${d.i + 1} of ${CARDS.length} · Lecture ${c[0]}</span>'),
   ],
@@ -53,6 +62,14 @@ POST = {
   'vizsga': [
     ('aria-label="A támfal vázlata"', 'aria-label="Sketch of the retaining wall"'),
   ],
+  'telek': [
+    ("`+${x.pts} pts`", "`+${x.pts} pt${x.pts === 1 ? '' : 's'}`"),
+    ('rel="noopener">${t} ${ARROW}</a>', 'rel="noopener">' + HUNOTE.format('t', 'u') + ' ${ARROW}</a>'),
+  ],
+  'ar-labor': [
+    ("$('#lbl').checked ? '-feliratok' : ''", "$('#lbl').checked ? '-feliratok-en' : ''"),   # angol feliratos modellek (models/*-feliratok-en.glb/.usdz)
+    ("ln.innerHTML = m.link[0] + ' ' + ARROW;", "ln.innerHTML = m.link[0] + (/\\/en$/.test(m.link[1]) ? '' : ' (in Hungarian)') + ' ' + ARROW;"),
+  ],
 }
 
 def rep(t, a, b, what):
@@ -68,14 +85,16 @@ def pre():
         os.makedirs(os.path.join(d, a)); open(os.path.join(d, a, 'index.html'), 'w', encoding='utf-8').write(t)
     return d
 
-SCRIPT = re.compile(r'(<script>)(.*?)(</script>)', re.S)
+SCRIPT = re.compile(r'(<script(?: type="module")?>)(.*?)(</script>)', re.S)
 def numfix_html(t, tmp):
     # 1. inline szkriptek: acornnal, csak a karakterlánc-literálokban és sablonrészekben
     parts = []; out = []; last = 0
     for k, m in enumerate(SCRIPT.finditer(t)):
         p = os.path.join(tmp, f's{k}.js'); open(p, 'w', encoding='utf-8').write(m.group(2)); parts.append((m, p))
-    if parts:
-        r = subprocess.run(['node', os.path.join(I18N, 'numfix_js.mjs'), *[p for _, p in parts]], capture_output=True, text=True)
+    for mod in (False, True):   # a modulszkriptek (telek: three.js) modulként elemezve
+        ps = [p for m, p in parts if ('module' in m.group(1)) == mod]
+        if not ps: continue
+        r = subprocess.run(['node', os.path.join(I18N, 'numfix_js.mjs'), *ps], capture_output=True, text=True, env={**os.environ, **({'MODULE': '1'} if mod else {})})
         if r.returncode: sys.exit(r.stderr)
     for m, p in parts:
         js = open(p, encoding='utf-8').read()

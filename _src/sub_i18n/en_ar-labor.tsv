@@ -1,0 +1,76 @@
+# Alapozás AR labor → Foundation Engineering AR lab
+deac28d	Foundation Engineering AR lab
+4739e45	The 3D models of the Foundation Engineering course in augmented reality: on a phone you can place them on a table or the floor and walk around them.
+dfa8d9e	<span>BME Foundation Engineering</span><span class="tag">augmented reality</span>⏎    <a class="langbtn" id="langSw" href="en" hreflang="en" lang="en" aria-label="Magyar változat"><span>HU</span><b>EN</b></a>
+6164b36	Foundation Engineering <em>AR lab</em>
+fd439d1	The 3D models of the course in one place. Choose a model, rotate it, zoom in, then on a phone use the “View in your space” button to place it on a table or the floor and walk around it. The labels can be switched on with the “Labels on the model” toggle; they then also appear in the AR view.
+2f6f2b5	Models
+be60268	View in your space
+ecb424c	animated
+7e30f62	Viewpoints
+353c8a0	Labels on the model
+cb086fc	<span class="dot"></span><span id="statusText">Checking AR support…</span>
+6ffb634	QR code to open the page on a phone
+f1d7f64	How to place the model
+0f916dc	Tap the button
+d7ed3b8	The “View in your space” button below the model opens the camera. The first time, the phone asks for permission.
+45d787d	Scan the surface
+a34ee31	Move the phone slowly over the floor or the table until it recognises the horizontal surface. It is quicker on a well-lit, patterned surface.
+8307010	Place it and walk around it
+5e5f2bd	You can make the model smaller or larger with two fingers and walk around it. If you switch the labels on beforehand, you can read them too by leaning in close.
+39c57a2	If AR does not start
+8b9621f	On Android
+d2b2efd	You need a phone that runs Google Play Services for AR. The model opens in Google Scene Viewer; animated models move there too.
+e2910d7	On iPhone and iPad
+0acddd6	The model appears in Apple AR Quick Look. Here the models are still images; the animation is only visible in the browser.
+8579a52	On a computer
+87a79d7	A desktop computer has no camera AR; the model can be rotated with the mouse and zoomed with the scroll wheel. For the AR view, scan the QR code with your phone.
+6a09739	BME Department of Engineering Geology and Geotechnics · Foundation Engineering · The models are schematic sketches.
+1ed1a87	Bearing failure below a strip footing
+eccf32c	Final state of general shear failure below a strip footing in sand. The footing has settled together with the active wedge and tilted towards the side of the failure. The radial shear zone has slipped along the logarithmic spiral, and the passive wedge has been pushed upwards and outwards along the slip surface, so the ground surface has heaved; on the opposite side a crack has opened. The zones are visible on both cut faces, and the heave runs along the whole strip footing.
+053c083	φ′ in the sand
+11a12e2	extent of the heave
+4546252	Lecture 3: Design of shallow foundations
+a1f43c6	Section from the front
+2d2f08e	The heave
+73829e0	Pressure bulb
+f370392	Below the pad footing the additional stress decreases rapidly with depth. The coloured shells lie at 80, 60, 40, 20 and 10 % of the net contact pressure. The inner shells stick out furthest from the cut-away quarter, so all of them are visible, and the two cut faces show the whole bulb. The shells were computed with Boussinesq, below a uniformly loaded circle of the same area as the 2 × 2 m footing.
+73f1f41	bottom of the 40 % shell
+16a209f	bottom of the 20 % shell
+85c68e8	bottom of the 10 % shell
+9b1b9d2	Lecture 5: Settlement of shallow foundations
+568704b	The cut-away corner
+c66c320	From the front
+3e6f27e	The Leaning Tower of Pisa
+3ae9297	Below the tower there is a variable silty-sandy layer about 10 m thick (horizon A), below it soft, sensitive marine clay down to 40 m (horizon B, its upper part the Pancone clay), and dense sand at the bottom (horizon C). The groundwater is 1–2 m deep. The tower has settled about 3 m on average, and the top of the Pancone has been bent down below it into a dish shape. To the south horizon A is more clayey and the upper sand thinner, so the settlement is larger there. In 1990 the tilt was 5.5°; between 1999 and 2001 soil was extracted from below the north side, which reduced it by about 0.5°.
+39a436c	tilt today
+ea3c461	mean settlement
+e700495	mass of the tower
+f2e177d	Geotechnical CSI: the Pisa case
+3cdbc31	The sections
+ebce32e	From the south
+f7a2e8f	CFA pile during drilling
+748bba2	The auger is 10 m deep, and its flights are full of soil: this soil supports the borehole wall, which is why a CFA pile needs no casing or slurry. The concrete is brought by a hose to the rotary head, and from there it runs down the hollow stem of the auger to the base. The rig is controlled by the operator sitting in the cab.
+64ac905	pile diameter
+e56f991	drilling depth
+412ea3a	auger length
+b587a41	The full CFA animation
+fb46db3	Drill head close up
+1efb5b5	Excavation with an anchored diaphragm wall
+3f862ea	For two basement levels, an 8 m deep excavation in sand and sandy gravel, below the groundwater. The 16 m deep diaphragm wall is keyed into the impermeable clay, so dewatering the excavation does not draw down the groundwater of the surroundings. The wall is held by two rows of ground anchors: the upper row is fixed in the sand, the lower one in the sandy gravel. The two rows diverge and run at least 2.8 m apart everywhere, even below the neighbouring building.
+92a79e8	2 rows
+f857786	Lecture 9: Excavation support
+9c16c71	In the excavation
+95ca37b	The finished site of the “One site, one semester” case study. Building A stands on pad footings in the sand; because of the peat lens, Building B stands on CFA piles, and its two basement levels were built in an excavation supported by an anchored diaphragm wall. The whole course on a single table.
+295a2cc	buildings
+67a3c81	stations
+3f75bcb	groundwater
+eb02192	the whole course
+c0daebc	Overview
+c9af337	<button type="button" data-i="rot" aria-pressed="false">Auto-rotate</button>
+8b0aae5	This device supports AR. Choose a model and tap “View in your space”.
+3357cd1	This device has no camera AR. Scan the code with your phone and open the page there.
+6a40784	This is a preview: the models can be rotated and zoomed. For camera AR, the page has to be opened at its own web address on the phone.
+4e272cf	This device has no camera AR. Open this page on your phone, and the “View in your space” button will appear there.
+1545aac	AR did not start on this device. Try it in Chrome (Android) or Safari (iPhone).
+7171f0f	ground anchors

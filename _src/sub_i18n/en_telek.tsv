@@ -1,0 +1,307 @@
+# Egy telek, egy félév → One site, one semester
+a064554	One site, one semester
+5ef749e	The nine stations of the Foundation Engineering course on a single site: you are the geotechnical engineer, and with every task you solve, the two buildings grow further.
+dd1872e	One site, one semester – back to top
+d281bcd	<b>One site, one semester</b><span>Foundation Engineering · design project</span>
+889962d	<b id="sDone">0</b>/9<span class="lb"> stations</span>
+512f47a	<b id="sPts">0</b> pts
+69b3ef9	<span>BME Foundation Engineering</span><span class="tag">9 stations · 2 buildings · 1 site</span>
+f0e301e	One site, <em>one semester</em>
+9ffd529	You are the geotechnical engineer. Two buildings are going up on an imaginary site in Budapest: a three-storey residential building and an eight-storey office building with two basement levels. Each of the nine lectures of the course is a station, and at each one you have to solve a real design question. With every approved station the model grows too, from getting to know the ground to the last floor slab.
+1f54df3	Start at station 1
+1684613	Design log
+84e97e7	Drawing title block
+0b75db6	<small>Project</small><b>Budapest, imaginary site · Foundations of Building A and Building B</b>
+b4ac9c3	<small>Client</small><b>Plot Ltd.</b>
+df6d124	<small>Geotechnical designer</small><b>you</b>
+7edecd9	<small>Standard</small><b>MSZ EN 1997‑1, DA‑2*</b>
+910e84e	<small>Groundwater</small><b>−3.0 m</b>
+8d30c8c	<small>Approved stations</small><b id="tbDone">0 / 9</b>
+559721a	<small>Score</small><b id="tbPts">0</b>
+e548b16	Stations
+0e4bdcd	Workspace
+fe77e49	<span class="tag" id="hudTag">Section through the site · drag to rotate</span>
+6b969f4	Approved
+f3ebf3a	⟲ View
+19abcd0	The whole site
+e1e15a6	After every approved station, what you decided and what you calculated is recorded here. By the end of the semester it adds up to the geotechnical design of the two buildings. Your progress is saved in this browser.
+30c7648	Start again from the beginning
+2d1db6f	Are you sure you want to delete your progress?
+3c42ae5	Yes, delete it
+9691310	Cancel
+e5bc8b9	BME Department of Engineering Geology and Geotechnics · Foundation Engineering · The calculations are illustrative exercises and must not be used for real design.
+44f7bf7	Building A
+bbdccb3	Building B
+a7391b0	groundwater −3.0 m
+a9d3a1e	foundation level −1.8 m
+713c30f	wind load
+5aa20db	slip surface?
+e111788	water pressure from below: 46 kPa
+6740652	influence depth m<sub>0</sub> ≈ 5.0 m
+eaffaea	pressure bulb
+b876309	~35 cm settlement on a shallow foundation
+9dc7412	frost line −0.8 m
+3ca7ff3	vibration
+deaac28	bicycle shelter
+b2c62a0	CFA piles
+cc5fd84	CFA rig
+88b3df9	Why do you need to understand the ground?
+01813dd	The course path – home page
+dc53a08	A developer has bought this site in Budapest and wants to put up two buildings on it. On the left, near the slope, there will be a three-storey residential building (Building A); on the right, an eight-storey office building with two basement levels (Building B). The positions of the buildings have already been set out.
+a953cc6	You are the geotechnical designer. We know nothing about the ground yet: the section is still grey. Before we find anything out, take a guess! We will compare your guesses with the results at the end of the semester.
+556f5a4	How much will the foundation under one of the columns of Building A settle?
+b5f9966	And Building B? What kind of foundation do you expect?
+cbca032	Pad and strip footings
+ad05def	Impossible to say yet
+59e93cd	What mainly decides whether a shallow or a deep foundation is needed?
+7857f09	The height of the building
+a378fff	The depth of the bearing stratum and the allowable settlement
+852ec23	The season of construction
+173bc9e	The load of the structure matters, but on its own it does not decide: the same building can stand on a shallow foundation on dense gravel, but only on piles on thick soft clay. That is why you have to get to know the ground first.
+a807573	Setting out done. Guesses: <b>${st.tips.tipS ?? '–'} mm</b> settlement under a column of Building A; foundation of Building B: <b>${esc(st.tips.tipB ?? '–').toLowerCase()}</b>.
+cd0e60b	What is beneath us?
+838894a	Three boreholes (F1, F2, F3) and a cone penetration test (CPT) have been made, each reaching below the bearing stratum. The groundwater table is at −3.0 m. You can view the borehole logs on the section and here too.
+82a689f	At what depth does the bearing sandy gravel start?
+fb7aa6c	It starts at the same level in all three boreholes. Depth is measured from ground level.
+721483f	The top of the sandy gravel is at −9.0 m.
+3f27cf3	Which borehole went through organic soil (peat)?
+99eebcf	None of them
+3a8f5ea	F3 went through peat between 2.8 and 5.8 m. This is right below the footprint of Building B – one of the most important findings of the semester.
+687bb93	The CPT cone resistance is q<sub>c</sub> ≈ 0.9 MPa between 1.2 and 7.1 m, and q<sub>c</sub> ≈ 11 MPa between 7.1 and 9.0 m. What are these two layers?
+93bb71f	Soft clay above, sand below
+622ca83	Sand above, soft clay below
+5fdd131	Both are sand, only their water content differs
+ca99591	Peat above, sandy gravel below
+be6df18	The low cone resistance points to a soft cohesive soil, the ten times greater value to a denser granular layer. The CPT stands near the boundary between the sand and the clay, so here the sand starts deeper than at F1.
+ee5360f	Soil profile: fill 0–1.2 m; sand on the left and soft clay on the right down to 9.0 m; a peat lens below Building B between 2.8 and 5.8 m; sandy gravel 9.0–18.0 m; hard clay below. Groundwater −3.0 m.
+61b1c47	What foundation is needed, and how deep?
+be3f5d5	Bearing resistance
+49409d4	Building A has a reinforced concrete frame with columns 8 m apart. The central column carries a permanent load of G<sub>k</sub> = 750 kN and a variable load of Q<sub>k</sub> = 220 kN. We design a square pad footing in the sand, with a 0.6 m thick reinforced concrete base.
+9fbb015	fill: thickness · γ
+e6b4821	sand: γ · γ<sub>sat</sub>
+5562dd2	sand: φ′<sub>k</sub> · c′<sub>k</sub>
+6964291	reinforced concrete · backfill
+93669cf	partial factors (DA‑2*)
+4a249de	What determines the depth of the foundation level?
+5550d91	The frost line (0.8 m)
+543d1bc	The bottom of the fill (1.2 m): the foundation must sit in the bearing sand
+d6630c8	The groundwater table (3.0 m)
+a6b9eac	The top of the sandy gravel (9.0 m)
+65361c8	We do not found on fill. Below the 1.2 m thick fill the footing is embedded further into the sand, so the foundation level is −1.8 m. This is below the frost line and above the groundwater.
+f75ecd6	What is the effective vertical stress (q′) at foundation level, beside the footing?
+a634972	q′ = Σ γ·h from ground level down to foundation level. The groundwater is deeper than the foundation level.
+3dcc37a	What is the design bearing resistance (R<sub>d</sub>) of the B = L = 2.0 m footing?
+a2458be	R<sub>k</sub>/A′ = 0.5 · B′ · γ′ · N<sub>γ</sub> · s<sub>γ</sub> + q′ · N<sub>q</sub> · s<sub>q</sub>. For φ′ = 32°, N<sub>q</sub> = 23.18 and N<sub>γ</sub> = 27.72; for a square footing s<sub>q</sub> = 1 + sin φ′ and s<sub>γ</sub> = 0.7. The groundwater is 1.2 m below the foundation level, which falls between 0.5 · B′ and 1.5 · B′, so γ′ has to be interpolated linearly between 10 and 18 kN/m³. Finally R<sub>d</sub> = R<sub>k</sub> / 1.4.
+309bd32	γ‑term = 0.5 · 2.0 · ${fmt(B2.ge, 1)} · 27.72 · 0.7 = ${fmt(B2.tg, 1)} kPa
+edfcd5a	q‑term = 31.2 · 23.18 · 1.530 = ${fmt(B2.tq, 1)} kPa
+27f9929	G<sub>k</sub> = 750 + 60 + 86.4 = 896.4 kN (column, footing, backfill)
+4e6658f	Λ = ${fmt(B2.Vd, 0)} / ${fmt(B2.Rd, 0)} = ${fmt(B2.L, 2)} – OK
+75c83c0	Use the calculator to find the smallest footing width, rounded to 10 cm, for which the bearing resistance is still sufficient.
+f418e31	Drag the slider and watch the utilisation: Λ ≤ 1 is required.
+9e04b26	B = ${fmt(BMIN, 1)} m: Λ = ${fmt(CALC.bearing(BMIN).L, 2)} – OK
+823c554	B = ${fmt(BMIN - 0.1, 1)} m: Λ = ${fmt(CALC.bearing(BMIN - 0.1).L, 2)} – not OK
+2766e14	The bearing resistance is more than enough even for the 2.0 m footing: its size is decided by settlement (station 5).
+9637409	Foundation level −1.8 m (below the fill, in the sand). Central pad footing 2.0 × 2.0 m: R<sub>d</sub> = ${fmt(B2.Rd, 0)} kN, V<sub>d</sub> = ${fmt(B2.Vd, 0)} kN, Λ = ${fmt(B2.L, 2)}. For bearing resistance alone, ${fmt(BMIN, 1)} m would already be enough.
+562e49c	Stability
+bdde057	Will it slide or overturn?
+ed750e8	Wind applies a horizontal force to the pad footing, and the deep basement of Building B will reach into the groundwater. On the left edge of the site there is a 5 m high slope with a gradient of 1 : 1.5.
+7ffcf57	Sliding: what is the design sliding resistance (R<sub>d</sub>) at the base of the 2.0 m footing if the wind load is H<sub>k</sub> = 40 kN?
+4f34305	In drained conditions R<sub>d</sub> = V′<sub>k</sub> · tan δ<sub>k</sub> / γ<sub>R;h</sub>. V′<sub>k</sub> is only the permanent load (896.4 kN); for cast-in-place concrete δ<sub>k</sub> = φ′<sub>k</sub> = 32°, γ<sub>R;h</sub> = 1.1.
+baf1d0f	H<sub>d</sub> = 1.5 · 40 = 60 kN ≤ ${fmt(RD_SL, 0)} kN – OK (Λ = ${fmt(60 / RD_SL, 2)})
+caec31f	Uplift: the underside of the base slab of Building B will be at −7.6 m. What is the water pressure there?
+15b037e	u = γ<sub>w</sub> · h<sub>w</sub>, where h<sub>w</sub> is the water column above the underside of the slab. The groundwater is at −3.0 m.
+c89fdbb	During construction the basement structure (base slab and two floor slabs) has a self-weight of 40 kPa. How many kPa of permanent load are missing for safety against uplift, as a characteristic value?
+8c804e3	UPL: γ<sub>G;stb</sub> · G<sub>k</sub> ≥ γ<sub>G;dst</sub> · U, where γ<sub>G;stb</sub> = 0.9 and γ<sub>G;dst</sub> = 1.0.
+4cd9053	required G<sub>k</sub> = 46 / 0.9 = 51.1 kPa
+7ec6f64	shortfall = 51.1 − 40 = 11.1 kPa
+3a31681	Until at least two more storeys have been built on top, dewatering must not be switched off – or the piles must also be designed for tension.
+da72c3c	Which design approach do we use to verify the overall stability of the slope and Building A?
+2062caa	No verification needed, because the building is 10 m from the slope
+bca689f	According to the Hungarian National Annex, overall stability is verified with DA-3: the shear strength parameters are divided by partial factors. For a building near the crest of a slope this cannot be omitted.
+cb2a560	Sliding: H<sub>d</sub> = 60 kN ≤ R<sub>d</sub> = ${fmt(RD_SL, 0)} kN. Uplift of Building B: u = 46 kPa below the slab at −7.6 m; during construction 11.1 kPa of permanent load is missing, so dewatering continues until the second storey is complete. Overall stability: DA‑3.
+02158f1	How much, and how unevenly, will it settle?
+56f20af	Now we find out how much the 2.0 × 2.0 m central pad footing settles. Settlement is calculated with the characteristic load (G<sub>k</sub> + Q<sub>k</sub>). The stress distribution below the centre of the footing is taken with Steinbrenner’s method; the influence depth is where the additional stress drops to 20 % of the effective geostatic stress.
+dbef5a2	G<sub>k</sub> (column + footing + backfill)
+11888e0	q′ at foundation level
+832528f	sand: E<sub>oed</sub>
+4d151e6	sandy gravel: E<sub>oed</sub>
+8e30f68	What is the net contact pressure (σ<sub>0</sub>)?
+a84a3cf	σ<sub>base</sub> = (G<sub>k</sub> + Q<sub>k</sub>) / A, then σ<sub>0</sub> = σ<sub>base</sub> − q′.
+5c44eda	σ<sub>base</sub> = (896.4 + 220) / 4.0 = ${fmt(MID.st, 1)} kPa
+a6d8248	σ<sub>0</sub> = ${fmt(MID.st, 1)} − 31.2 = ${fmt(MID.q0, 1)} kPa
+b592b6a	Read the influence depth (m<sub>0</sub>) off the graph, measured downwards from the foundation level!
+25db872	Where the orange curve (additional stress) crosses the blue curve (20 % of the geostatic stress).
+be83a16	m<sub>0</sub> ≈ ${fmt(MID.m0, 1)} m below the foundation level, i.e. about ${fmt(1.8 + MID.m0, 1)} m below ground level – still in the sand.
+da2a84b	Layer summation: what is the settlement of the pad footing?
+2f311c3	s = Σ Δh · Δσ<sub>mean</sub> / E<sub>oed</sub>. The table gives the stresses row by row; each row is 0.5 m thick (the last one less).
+6769f55	The edge column (G<sub>k</sub> = 450 kN, Q<sub>k</sub> = 130 kN, also on a 2.0 m footing) settles ${fmt(EDGE.s, 1)} mm; the two columns are 8 m apart. What is the angular distortion: β = 1/…?
+e1163c4	β = Δs / L, where Δs is the difference between the two settlements and L is the distance between the columns. Enter the denominator.
+23ed23b	This is smaller than the 1/500 limit: it does the frame no harm.
+0cd4464	σ<sub>0</sub> = ${fmt(MID.q0, 1)} kPa; m<sub>0</sub> ≈ ${fmt(MID.m0, 1)} m; settlement of the central column ${fmt(MID.s, 1)} mm, of the edge column ${fmt(EDGE.s, 1)} mm; β = 1/${fmt(BETA, 0)} – OK. Your guess was ${st.tips.tipS ?? '–'} mm.
+506196f	Unfavourable ground
+0772f0f	What if the ground is your biggest opponent?
+52fa90f	Below the footprint of Building B there is a peat lens between 2.8 and 5.8 m, surrounded by soft clay. What if Building B were also put on a shallow foundation, a raft at 1.5 m depth? Below the wide raft the additional stress is about 90 kPa even at the level of the lens.
+445b76b	peat: thickness at the centre of the lens
+b010bcb	peat: E<sub>oed</sub>
+27ee63e	additional stress in the lens
+832a253	How much would the peat lens alone be compressed?
+0d34927	s = Δσ · h / E<sub>oed</sub>. Mind the units: 0.8 MPa = 800 kPa.
+b90c267	This is seven times the allowable 50 mm – and the peat then goes on creeping for years.
+2cf0d06	The lens lies below only part of the building. What is the greatest danger?
+9b2df29	Large differential settlement: the building tilts and cracks
+2e8ba30	The groundwater floods the basement
+2023fa3	The peat dries out and hardens
+2614a70	Nothing, because the raft evens out the difference
+4c54b13	The stiffness of the raft cannot bridge such a large differential settlement. The building tilts towards the lens and the structure cracks.
+55ef5aa	What is the right solution for Building B?
+c5ee13e	Soil replacement in place of the peat
+bc139d2	Preloading, then a shallow foundation six months later
+884461d	Piled foundation down to the sandy gravel starting at −9 m
+2d44dfb	A wider raft
+a875892	Soil replacement would mean excavating to 5.8 m, 2.8 m below the groundwater, and the peat keeps creeping even after preloading. The piles carry the load through the peat and the soft clay into the bearing gravel.
+e5b180d	Under a shallow foundation the peat lens would be compressed by about 35 cm, unevenly. Decision: Building B goes on piles reaching down to the sandy gravel. Your guess: ${esc(st.tips.tipB ?? '–').toLowerCase()}.
+1426c59	External effects
+906e11f	What else acts on the foundation?
+5577794	The excavation and the piles of Building B will be 15–20 m from Building A, which will already be standing. An unheated bicycle shelter will also be built next to Building B, on a light strip footing on soft clay.
+78f211c	How deep must the foundation level of the bicycle shelter be?
+86affd4	0.3 m, because the building is light
+cd61d63	0.5 m
+f89ac3c	At least 0.8 m, below the frost line
+4ae824b	1.8 m, as for Building A
+071fce5	Clay is frost-susceptible: a foundation above the frost line is lifted by frost and dropped back in spring. In Budapest, foundations in cohesive soil must be at least 0.8 m deep – being light does not protect the building; in fact it heaves more.
+64b9ba5	Which pair of techniques spares the neighbouring Building A most from vibration?
+e6bfb83	Driven steel sheet piles and driven precast piles
+090e2b1	Vibrated sheet piles and Franki piles
+6320155	Diaphragm wall and CFA piles
+59af43d	Soldier pile wall and driven steel piles
+0f75fbd	The diaphragm wall is excavated with a grab and the CFA pile is drilled, both without vibration. The vibration from driving and vibrating can densify the sand and cause settlement below the neighbour’s foundations.
+f69aa36	Bicycle shelter: foundation level at least 0.8 m, below the frost line. Building B is built with vibration-free techniques (diaphragm wall, CFA piles), so that Building A is not damaged.
+02e61b4	Deep foundations
+7b0e2dd	When is a shallow foundation not enough?
+a1fcff0	CFA pile in 3D
+93f7299	CFA pile in space (AR)
+c341e80	Building B will stand on CFA piles 80 cm in diameter. The piles run from the basement base slab (−7.6 m) down to −17.0 m: 1.4 m in soft clay and 8.0 m in sandy gravel. For the calculation we use the illustrative unit values of the simulator in the Deep foundations module – you will learn the real design of piles in a later course.
+7c822aa	gravel: shaft resistance q<sub>s</sub>
+6e1d03d	gravel: base resistance q<sub>b</sub>
+d42dff3	clay: shaft resistance q<sub>s</sub>
+12a1bb4	depth below ground level, m
+f0350f0	What is the base resistance (R<sub>b</sub>)?
+e96e6ad	At z = 17 m, q<sub>b</sub> = 5000 + 50 · 17 = 5850 kPa; R<sub>b</sub> = q<sub>b</sub> · π · D² / 4.
+9da58c7	What is the shaft resistance in the sandy gravel (R<sub>s</sub>)?
+647c5ba	q<sub>s</sub> is 69 kPa at 9 m and 77 kPa at 17 m, with a mean of 73 kPa; R<sub>s</sub> = q<sub>s,mean</sub> · π · D · L.
+45cf122	The section in the clay adds another 15 · π · 0.8 · 1.4 = ${fmt(PILE.Rc, 0)} kN.
+1c37dfc	Which part provides the greater share of the pile resistance?
+ef150ea	The base
+39b0ff7	The shaft
+b7db22c	The two are roughly equal
+9d22ba7	The section in the clay
+5154e9b	R<sub>b</sub> ≈ ${fmt(PILE.Rb, 0)} kN, R<sub>s</sub> ≈ ${fmt(PILE.Rs + PILE.Rc, 0)} kN: roughly two thirds of the load is transferred to the gravel by the base.
+b8867d6	CFA piles: D = 80 cm, between −7.6 and −17.0 m. Illustrative resistance: R<sub>b</sub> ≈ ${fmt(PILE.Rb, 0)} kN, R<sub>s</sub> ≈ ${fmt(PILE.Rs + PILE.Rc, 0)} kN; the load is transferred to the gravel mainly by the base.
+2d323f9	Excavation
+e31a1b6	How do we get down safely?
+deb5b60	The two basement levels of Building B need a 7.6 m deep excavation, 4.6 m below the groundwater table, in soft clay, close to the site boundary and to Building A.
+f646aac	Which excavation support do you choose?
+cc45ab7	Anchored diaphragm wall
+b6fef31	There is no room for a slope, and the groundwater would not allow one either. A soldier pile wall is not watertight, and a cantilever sheet pile wall is not enough for an excavation deeper than 4–6 m. The diaphragm wall is watertight and stiff, is built without vibration and can form part of the permanent basement wall.
+920095b	Put the construction steps in order! Tap them in the right sequence.
+1279f31	Building the guide walls and the diaphragm wall
+528b068	Excavation to below the first anchor row
+b898821	Drilling and stressing the first anchor row
+12bf0e2	Excavation to final level, with dewatering
+71242c9	Casting the base slab on the pile heads
+755ea39	First the wall is completed, then excavation and anchoring follow each other level by level. Digging may only continue below an anchor row once the row above is stressed and holding.
+7a54230	Where should the fixed (grouted) length of the ground anchors go?
+ecf9bde	Directly behind the wall, in the soft clay
+e25ee52	Beyond the potential slip surface, in the sandy gravel
+9705ed7	Into the peat lens, because it is easy to drill
+5231c66	Into the fill, near the surface
+52c5e79	The fixed length has to lie outside the sliding soil wedge, in a bearing stratum: here, the sandy gravel. That is why the anchors are long and inclined, and why permission is needed for them to extend below the neighbouring plot.
+7910ce0	Anchored diaphragm wall, two anchor rows, fixed lengths in the sandy gravel. Sequence: diaphragm wall → excavation and anchoring level by level → dewatering → base slab on the pile heads. Then Building B goes up.
+d34ebd3	, approved
+157858a	, still locked
+5e3fba1	The finished site
+b47a117	Continue: station ${ST.cur}
+6c318e8	Station ${n} opens once station ${n - 1} has been approved. The site is built in order too.
+24cff77	The finished site
+2718b0d	Station ${s.n} · ${s.t}
+178d198	<div class="st-head"><div class="st-kick"><span class="n">${s.n}</span><span>Station ${s.n} · ${s.t}</span></div><h2>${s.q}</h2></div>
+4687fe9	<div class="card sit"><h3>Situation</h3>
+05287b3	<div class="card data"><h3>Data sheet</h3><dl>
+91b1a09	<div class="learn"><span class="lbl">Learn it here</span>${apps}</div>
+418e33b	<button class="btn pri" type="button" data-go="${s.n + 1}">On to station ${s.n + 1}</button>
+0cf6409	<button class="btn pri" type="button" data-go="10">The finished site</button>
+17611f3	<div class="done-card" id="doneCard"><span class="stmp">Approved</span><h3>Station ${s.n} approved</h3><p>${s.log(ST)}</p><div>${nxt}</div></div>
+b1c832f	GUESS
+d043b65	+${x.pts} pts
+b671540	<p class="fb bad" style="background:var(--paper)">Solve the previous task first.</p></div>
+f6f99e8	Guess recorded – change it
+09fab68	Record my guess
+103439b	" aria-label="Answer"
+7c7f8a8	>Check</button></div>
+33e6f25	<button type="button" data-hint="${t.id}">Hint</button>
+5af6b2c	<button type="button" data-sol="${t.id}">Show the solution</button>
+6076a1d	<p class="fb ok"><b>Correct.</b> ${t.e}</p>
+303d1e2	<p class="fb bad"><b>Not this one.</b> Think it over again and choose another.</p>
+1bc04f7	<p class="fb ok"><b>Correct order.</b> ${t.e}</p>
+c2644dc	<p class="fb ok"><b>Correct.</b> The exact value is ${fmtAns(t)}.</p>
+ade248a	<p class="fb ok" style="background:var(--paper)">The solution steps are below. This task earns no points this time.</p>
+55765a0	<p class="fb bad"><b>Not right yet.</b> ${x.lastMsg || ''}</p>
+e776250	<p class="fb bad">Enter a number, e.g. 31.2.</p>
+3079b22	An order of magnitude too large – check the units.
+7afb5e2	An order of magnitude too small – check the units.
+1b8b55f	A little larger than the correct value.
+949de37	A little smaller than the correct value.
+5c7600d	<div class="order"><div class="lbl">Your order</div><div class="seq">
+f5a23c2	<div class="it" style="justify-content:center; color:var(--muted)">Tap the first step below</div>
+a5c2ae7	<div class="lbl" style="margin-top:12px">The steps</div><div class="pool">
+b6f6dc8	<button class="btn pri" type="button" data-ord="check">Check</button>
+e78d7a5	<button class="btn" type="button" data-ord="clear">Start over</button>
+f175d7b	<p class="fb bad"><b>Not right yet.</b> The steps marked in red are not in the right place.</p>
+e129d18	sand, medium dense
+9dbc112	q<sub>c</sub> ≈ 2.4 MPa – fill
+c73b4b4	<div class="card logs"><h3>Borehole logs</h3><div class="tabs" role="group" aria-label="Choose an investigation point">
+cc32f46	<li><i style="background:#3d9ad6"></i><span>groundwater (standing level)</span><span>−3.0 m</span></li>
+e711840	Λ ≤ 1 – bearing resistance OK
+3d85dcc	Λ > 1 – bearing resistance not OK
+3efe008	<text x="${L}" y="${H - 10}" font-size="11.5" fill="currentColor" font-family="monospace">kPa ↑ · depth below foundation level, m ↓</text>
+179dbd5	<tr class="tot"><td colspan="4">total</td><td>${fmt(MID.s, 1)}</td></tr>
+85022ad	In progress.
+f759ab5	Not open yet.
+66a9e52	<div class="tipcmp"><h3>Guess and calculation: settlement of Building A</h3><div class="vs"><div><small>guess</small><b>${tS != null ? tS + ' mm' : '–'}</b></div><div><small>calculation</small><b>${isDone(5) ? fmt(MID.s, 1) + ' mm' : '5. állomás'}</b></div></div></div><div class="tipcmp"><h3>Guess and decision: foundation of Building B</h3><div class="vs"><div><small>guess</small><b>${tB ? esc(tB) : '–'}</b></div><div><small>decision</small><b>${isDone(6) ? 'Cölöpalap' : '6. állomás'}</b></div></div></div>
+622408c	Station 5
+0d83775	Station 6
+ecb2dc3	<div class="st-head"><div class="st-kick"><span class="n">✓</span><span>End of the semester</span></div><h2>
+46e47e8	Both buildings are standing
+81c1b90	Not everything has been built yet
+d71b943	</h2></div>⏎  <div class="card sit"><h3>Summary</h3><p>
+c365b77	Across nine stations you have got from the grey, unknown ground to two finished buildings. Building A stands on pad footings in the sand at a depth of 1.8 m, with a settlement of about ${fmt(MID.s, 0)} mm per column. Because of the peat lens, Building B stands on CFA piles, and its two basement levels were built in an excavation supported by an anchored diaphragm wall.
+b0a2611	The finished site can be seen once all nine stations have been approved. Until then you can walk around what has been built so far.
+d266654	<p>Your guess for the settlement of Building A was ${tS} mm, the calculation gave ${fmt(MID.s, 1)} mm – ${diff <= 5 ? 'mérnöki szemmel telitalálat.' : diff <= 15 ? 'jó nagyságrend.' : 'ezért kell számolni.'}</p>
+9f7a7b0	spot on, by engineering standards.
+9e4edf1	the right order of magnitude.
+94bf4e6	that is why we calculate.
+c7763a0	</div>⏎  <div class="card data"><h3>Result</h3><dl><dt>approved stations</dt><dd>
+0679a88	 / 9</dd><dt>score</dt><dd>
+60d4243	</dd></dl></div>⏎  <div class="learn"><span class="lbl">Next</span><a class="btn" href="
+e4aa8f9	" target="_blank" rel="noopener">The course home page 
+bd5ab13	</a><a class="btn" href="#naplo">Design log</a></div>
+3d524e6	bearing failure
+1cca150	Soldier pile wall
+ef38f08	ultimate limit state
+6adf3d4	serviceability limit state
+# a korábbi tananyagokból (azonos magyar szöveg)
+75ab37c	fill
+230e044	sandy gravel
+2949639	hard clay
+862cedb	peat
+eeebd45	diaphragm wall
+749a61d	two basement levels
+d1fa6f2	Raft foundation
+99e5757	Pile foundation
+9ab4913	The concrete grade of the footing
+69788b2	Shallow foundation
+77ccacb	Protection against harmful settlement
+f83139f	Sloped excavation
+6cec373	Cantilever sheet pile wall
+669d944!	TASK ${i}
+9e6503d!	${p}/${mx} pts
