@@ -124,10 +124,10 @@ HTML = [
     ('A vasbeton lemezalap be tud hajlani, de a merevsége miatt simán, törés nélkül görbül: egyenletes talajon is a közepe süllyed a legtöbbet, a szélein pedig nagyobb a talpfeszültség. A <b>süllyedéskülönbség</b> (Δs) a legnagyobb és a legkisebb süllyedés különbsége. A <b>szögtorzulás</b> (β) két szomszédos fal vagy pillér (itt 3,5 m-enként) süllyedéskülönbsége (δs) osztva a távolságukkal (ℓ), az egész épület dőlését levonva – az ábrán a színes szakasz mutatja, hol a legnagyobb. A falak repedését ez okozza, nem az átlagos süllyedés.',
      'The reinforced concrete raft can bend, but its stiffness makes it curve smoothly, without breaking: even on uniform ground its centre settles most, and the contact pressure is higher at its edges. The <b>differential settlement</b> (Δs) is the difference between the largest and the smallest settlement. The <b>angular distortion</b> (β) is the differential settlement (δs) of two adjacent walls or columns (here every 3.5 m) divided by their spacing (ℓ), after removing the tilt of the whole building – the coloured segment in the figure shows where it is largest. This, not the average settlement, is what cracks the walls.'),
     ('<h3>Miért más a talaj, mint a többi építőanyag?</h3>', '<h3>Why is soil different from other construction materials?</h3>'),
-    ('Az acélt, a (vas)betont és a fát a tervező választja ki. A talajt készen kapjuk: meg kell ismerni, és ahhoz kell igazodni.',
-     'Steel, (reinforced) concrete and timber are chosen by the designer. The ground comes as it is: we have to get to know it and adapt to it.'),
+    ('Az acélt és a (vas)betont a tervező választja ki. A talajt készen kapjuk: meg kell ismerni, és ahhoz kell igazodni.',
+     'Steel and (reinforced) concrete are chosen by the designer. The ground comes as it is: we have to get to know it and adapt to it.'),
     ('<div class="vh">Szempont</div>', '<div class="vh">Aspect</div>'),
-    ('</svg>Acél, (vas)beton, fa</div>', '</svg>Steel, (reinforced) concrete, timber</div>'),
+    ('</svg>Acél, (vas)beton</div>', '</svg>Steel, (reinforced) concrete</div>'),
     ('</svg>Talaj</div>', '</svg>Soil</div>'),
     ('<div class="vq">Ki választja ki?</div>', '<div class="vq">Who chooses it?</div>'),
     ('<b>A tervező.</b> Előírja a típusát és a minőségét.', '<b>The designer.</b> They specify its type and grade.'),
@@ -209,7 +209,7 @@ HTML = [
 
 # ---------------------------------------------------------------- CSS (style.css)
 CSS = [
-    (".vs .vs-s::before{content:'Acél, (vas)beton, fa'}", ".vs .vs-s::before{content:'Steel, (reinforced) concrete, timber'}"),
+    (".vs .vs-s::before{content:'Acél, (vas)beton'}", ".vs .vs-s::before{content:'Steel, (reinforced) concrete'}"),
     (".vs .vs-t::before{content:'Talaj';", ".vs .vs-t::before{content:'Soil';"),
 ]
 
