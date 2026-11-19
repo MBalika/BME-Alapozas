@@ -124,7 +124,7 @@ model-viewer{width:100%; height:100%; min-height:580px; display:block; --poster-
 .status.no .dot{background:var(--accent)}
 #qr{display:none; margin-top:12px; background:#fff; padding:10px; border-radius:12px; width:max-content}
 #qr.on{display:block}
-#qr img, #qr canvas{display:block; width:148px; height:148px}
+#qr img, #qr canvas, #qr svg{display:block; width:148px; height:148px}
 
 main{padding-block:clamp(34px, 5vw, 56px) 30px}
 .sec + .sec{margin-top:clamp(30px, 5vw, 52px)}
@@ -159,6 +159,38 @@ footer p{margin:0}
 .langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
 @media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
 .kick .langbtn{margin-left:auto; text-transform:none}
+
+/* ===== LÁTVÁNY (2026-11): mozgó háttér, fénylő néző, vezérlősáv, kiemelt mondat ===== */
+header.lab{position:relative; overflow:hidden; isolation:isolate}
+header.lab::before{content:""; position:absolute; inset:-30% -10% auto; height:130%; z-index:-1; background:radial-gradient(45% 40% at 15% 20%, rgba(95,227,255,.20), transparent 70%), radial-gradient(40% 40% at 88% 12%, rgba(232,149,42,.18), transparent 70%), radial-gradient(45% 45% at 60% 95%, rgba(178,58,147,.16), transparent 70%)}
+header.lab::after{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; background-image:linear-gradient(rgba(95,227,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(95,227,255,.05) 1px, transparent 1px); background-size:44px 44px; -webkit-mask-image:radial-gradient(70% 60% at 50% 20%, #000, transparent 80%); mask-image:radial-gradient(70% 60% at 50% 20%, #000, transparent 80%)}
+.viewer{--lc:var(--holo); box-shadow:0 0 0 1px color-mix(in srgb, var(--lc) 45%, transparent), 0 30px 80px -30px color-mix(in srgb, var(--lc) 70%, transparent); transition:box-shadow .5s}
+.viewer.sw model-viewer{animation:mvin .7s cubic-bezier(.2,.7,.2,1)}
+.mcard{transition:transform .2s, box-shadow .25s, border-color .25s}
+.mcard:hover{transform:translateY(-4px)}
+.mcard[aria-pressed="true"]{box-shadow:0 0 0 2px var(--lc), 0 16px 40px -14px var(--lc)}
+.mcard img{transition:transform .5s}
+.mcard:hover img{transform:scale(1.06)}
+.hook{font:700 clamp(17px, 1.5vw, 20px)/1.3 var(--fd, inherit); margin:10px 0 0; text-align:left !important; hyphens:none !important; text-wrap:balance; color:#fff}
+.ctl{position:absolute; left:12px; right:12px; bottom:12px; display:flex; align-items:center; gap:10px; padding:7px 12px 7px 7px; border-radius:999px; background:rgba(9,14,19,.78); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:3}
+.ctl[hidden]{display:none}
+.ctl button{width:36px; height:36px; flex:none; border-radius:50%; border:0; background:var(--lc, var(--holo)); color:#0b1218; display:grid; place-items:center; cursor:pointer}
+.ctl button svg{width:20px; height:20px}
+.ctl input{flex:1; min-width:0; accent-color:var(--lc, var(--holo)); height:26px}
+.ctl span{font-size:11.5px; color:#cfd6dc; white-space:nowrap}
+.viewer:has(.ctl:not([hidden])) .arbtn{bottom:66px}
+.fact{transition:transform .2s, border-color .2s}
+.fact:hover{transform:translateY(-2px)}
+.steps li, .trouble > div{transition:transform .25s, box-shadow .25s}
+.steps li:hover, .trouble > div:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion: no-preference){ header.lab::before{animation:labaur 22s ease-in-out infinite alternate} header.lab h1 em{background:linear-gradient(100deg, var(--holo) 0%, var(--holo) 40%, #fff 50%, var(--holo) 60%, var(--holo) 100%) 100% 0 / 280% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:labshim 7s ease-in-out 1.2s infinite} }
+@keyframes labaur{to{transform:translate3d(4%, 3%, 0) scale(1.12) rotate(4deg)}}
+@keyframes labshim{0%, 60%{background-position:100% 0} 90%, 100%{background-position:0 0}}
+@keyframes mvin{from{opacity:0; transform:scale(.96)}}
+/* dobozcímek középen (formázás) */
+.info > div:first-child{text-align:center} .info .lec{justify-content:center} .hook{text-align:center !important}
+.steps li > b{display:block; text-align:center} .steps li::before{margin-inline:auto}
+.trouble h3{text-align:center} .mcard .t{text-align:center}
 </style>
 <script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
 <script>Hyphenopoly.config({ require: { "hu": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
@@ -171,7 +203,7 @@ footer p{margin:0}
     <a class="langbtn" id="langSw" href="en" hreflang="en" lang="en" aria-label="English version"><b>HU</b><span>EN</span></a></div>
     <div class="head">
       <h1>Alapozás <em>AR labor</em></h1>
-      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A feliratokat a „Feliratok a modellen” kapcsolóval lehet bekapcsolni; ilyenkor a térbeli nézetben is látszanak.</p>
+      <p class="lead">A tárgy 3D-modelljei egy helyen. Válassz egy modellt, forgasd, nagyítsd, majd telefonon a „Nézd meg a térben” gombbal tedd le az asztalra vagy a padlóra, és járd körbe. A modellek mozognak: megállíthatók, és az idővonalon bármelyik pillanatuk megnézhető. A feliratokat a „Feliratok a modellen” kapcsolóval lehet bekapcsolni; ilyenkor a térbeli nézetben is látszanak.</p>
     </div>
     <nav class="shelf" id="shelf" aria-label="Modellek"></nav>
     <div class="grid">
@@ -181,10 +213,12 @@ footer p{margin:0}
         </model-viewer>
         <div class="scale mono" id="scaleTag"></div>
         <div class="anim mono" id="animTag" hidden>animált</div>
+        <div class="ctl" id="ctl" hidden><button type="button" id="ppBtn" aria-label="Lejátszás vagy szünet"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="ppIco" d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button><input type="range" id="tl" min="0" max="1000" value="0" aria-label="Idővonal"><span class="mono" id="tlT">0:00</span></div>
       </div>
       <div class="panel">
         <div class="box info">
           <div><div class="lec" id="lec"></div><h2 id="mname"></h2></div>
+          <p class="hook" id="mhook"></p>
           <p id="minfo"></p>
           <div class="views" id="views" role="group" aria-label="Nézőpontok"></div>
           <label class="switch" for="lbl"><input type="checkbox" id="lbl">Feliratok a modellen</label>
@@ -232,35 +266,41 @@ const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke
 const SB = 'https://';
 // hotspot: [felirat, [x, y, z] méterben a modell saját koordinátáiban, normál, 0 jobbra / 1 balra / 2 középre, szín]
 const M = [
-  { id: 'tores', f: 'talajtores', name: 'Talajtörés a sávalap alatt', lec: '3', lc: 'var(--c3)', k: 1 / 25, scale: 'auto', tag: 'M 1 : 25', orbit: '22deg 70deg auto',
-    info: 'Általános nyírási törés végállapota sávalap alatt, homokban. Az alap az aktív ékkel együtt lesüllyedt, és a törés oldala felé megdőlt. A radiális nyírási zóna a logaritmikus spirál mentén elcsúszott, a passzív ék a csúszólapon felfelé-kifelé tolódott ki, ezért a felszín felpúposodott; a túloldalon repedés nyílt. A zónák mindkét metszetlapon látszanak, a felpúposodás végig a sávalap mentén.',
-    facts: [['30°', 'φ′ a homokban'], ['2,0 m', 'alapszélesség'], ['≈ 10 m', 'a felpúposodás kifutása']], link: ['3. előadás: Síkalapok tervezése', 'sikalapoktervezese.vercel.app'],
-    views: [['Metszet szemből', '0deg 90deg auto', 'auto auto auto'], ['A felpúposodás', '55deg 58deg 0.75m', '0.22m 0m -0.16m']],
+  { id: 'tores', f: 'talajtores', name: 'Talajtörés a sávalap alatt', lec: '3', lc: 'var(--c3)', k: 1 / 40, scale: 'auto', tag: 'M 1 : 40', anim: true, lt: 9.5, orbit: '24deg 70deg auto',
+    hook: 'Nő a teher – és egyszer csak megindul a talaj.',
+    info: 'A falra egyre nagyobb teher jut. Amikor a talaj nyírószilárdsága kimerül, kirajzolódik a csúszólap: az alap az aktív ékkel együtt lesüllyed és megdől, a radiális nyírási zóna a logaritmikus spirál mentén elfordul, a passzív zóna a csúszólapon felfelé-kifelé tolódik, a felszín pedig felpúposodik. Általános nyírási törés homokban; a mozgások torzítva látszanak.',
+    facts: [['30°', 'φ′ a homokban'], ['2,0 m', 'alapszélesség'], ['≈ 10 m', 'a csúszólap kifutása']], link: ['3. előadás: Síkalapok tervezése', 'sikalapoktervezese.vercel.app'],
+    views: [['Metszet szemből', '0deg 88deg auto', 'auto auto auto'], ['A felpúposodás', '55deg 62deg auto', 'auto auto auto']],
     hs: [] },
-  { id: 'hagyma', f: 'feszultseghagyma', name: 'Feszültséghagyma', lec: '5', lc: 'var(--c5)', k: 1 / 10, scale: 'auto', tag: 'M 1 : 10', orbit: '45deg 66deg auto',
-    info: 'A pillér alap alatt a többletfeszültség a mélységgel gyorsan csökken. A színes héjak a nettó talpfeszültség 80, 60, 40, 20 és 10 %-ánál húzódnak. A belső héjak nyúlnak ki legjobban a kivágott negyedből, így mindegyik látszik, a két metszetlapon pedig a teljes hagyma. A héjak Boussinesq szerint készültek, a 2 × 2 m-es alappal azonos területű, egyenletesen terhelt kör alatt.',
+  { id: 'hagyma', f: 'feszultseghagyma', name: 'Feszültséghagyma', lec: '5', lc: 'var(--c5)', k: 1 / 25, scale: 'auto', tag: 'M 1 : 25', anim: true, lt: 11, orbit: '45deg 66deg auto',
+    hook: 'A teher nem áll meg az alap alatt: szétterjed és elhal.',
+    info: 'A pillérre teher kerül, és az alap alatt megjelenik a többletfeszültség: a színes héjak a talpfeszültség 80, 60, 40, 20 és 10 %-ánál húzódnak, belülről kifelé. A nyitott negyedben a héjak lépcsősen visszavágva látszanak, így mindegyik megfigyelhető. Boussinesq szerint készültek, a 2 × 2 m-es alappal azonos területű, egyenletesen terhelt kör alatt.',
     facts: [['1,8 m', 'a 40 %-os héj alja'], ['2,8 m', 'a 20 %-os héj alja'], ['4,2 m', 'a 10 %-os héj alja']], link: ['5. előadás: Síkalapok süllyedésszámítása', 'sikalapok-sullyedesszamitasa.vercel.app'],
-    views: [['A kivágott sarok', '45deg 64deg 1.4m', '0m -0.27m 0m'], ['Szemből', '15deg 84deg 1.5m', '0m -0.25m 0m']],
+    views: [['A kivágott sarok', '45deg 72deg auto', 'auto auto auto'], ['Felülről', '45deg 34deg auto', 'auto auto auto']],
     hs: [] },
-  { id: 'pisa', f: 'pisa-makett', name: 'A pisai ferde torony', lec: '5', lc: 'var(--c5)', k: 1 / 100, scale: 'auto', tag: 'M 1 : 100', orbit: '40deg 76deg auto',
-    info: 'A torony alatt kb. 10 m vastag, változékony iszapos-homokos réteg (A horizont) van, alatta 40 m mélységig puha, érzékeny tengeri agyag (B horizont, felső része a Pancone agyag), legalul tömör homok (C horizont). A talajvíz 1–2 m mélyen van. A torony átlagosan kb. 3 m-t süllyedt, a Pancone teteje alatta tál alakban hajlott le. Délen az A horizont agyagosabb, a felső homok vékonyabb, ott nagyobb a süllyedés. 1990-ben a dőlés 5,5° volt; 1999 és 2001 között az északi oldal alól talajt termeltek ki, így kb. 0,5°-kal csökkent.',
-    facts: [['≈ 5°', 'dőlés ma'], ['≈ 3 m', 'átlagos süllyedés'], ['14 500 t', 'a torony tömege']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'],
-    views: [['A metszetek', '30deg 84deg 1.2m', '0.04m -0.2m 0m'], ['Délről', '90deg 80deg auto', 'auto auto auto']],
+  { id: 'pisa', f: 'pisa-makett', name: 'A pisai ferde torony', lec: '5', lc: 'var(--c5)', k: 1 / 130, scale: 'auto', tag: 'M 1 : 130', anim: true, lt: 15.5, orbit: '22deg 78deg auto',
+    hook: 'Kétszáz évig épült – és közben végig dőlt.',
+    info: 'A torony 1173 és 1372 között, három szakaszban épült fel, és már a harmadik szintnél megdőlt. A talaj felül kb. 3 m feltöltés, alatta homokos iszap és homok, amely dél felé elvékonyodik; ez alatt puha agyag van, amely a déli oldalon vastagabb – ott nagyobb a süllyedés, arra dől a torony. 1990-re a dőlés elérte az 5,5°-ot; az északi oldal alóli óvatos talajkiemeléssel kb. 3,97°-ra csökkentették. A piros pálca az eredeti függőlegest mutatja.',
+    facts: [['3,97°', 'dőlés ma'], ['5,5°', 'dőlés 1990-ben'], ['14 500 t', 'a torony tömege']], link: ['Geotechnikai helyszínelők: a pisai ügy', 'bme-alapozas.vercel.app/helyszinelok'],
+    views: [['A rétegek szemből', '0deg 86deg auto', 'auto auto auto'], ['Délről', '90deg 80deg auto', 'auto auto auto']],
     hs: [] },
   { id: 'cfa', f: 'cfa-makett', name: 'CFA-cölöp fúrás közben', lec: '8', lc: 'var(--c8)', k: 1 / 60, scale: 'auto', tag: 'M 1 : 60', anim: true, orbit: '28deg 74deg auto',
+    hook: 'A spirál egy menetben fúr le – a talaj tartja a furatot.',
     info: 'A spirál 10 m mélyen jár, a menetei tele vannak talajjal: ez a talaj támasztja meg a furat falát, ezért a CFA-cölöpnél nem kell béléscső vagy zagy. A betont tömlő hozza a forgatófejig, onnan a spirál üreges szárán jut le a talpig. A gépet a fülkében ülő gépkezelő irányítja.',
     facts: [['80 cm', 'cölöpátmérő'], ['10 m', 'fúrásmélység'], ['20 m', 'spirálhossz']], link: ['A teljes CFA-animáció', 'cfa-colop-3d.vercel.app'],
     views: [['Metszet szemből', '0deg 88deg 0.95m', '0m 0.04m 0m'], ['Fúrófej közelről', '6deg 86deg 0.2m', '0m -0.158m 0m']],
     hs: [] },
-  { id: 'godor', f: 'munkagodor', name: 'Horgonyzott résfalas munkagödör', lec: '9', lc: 'var(--c9)', k: 1 / 50, scale: 'auto', tag: 'M 1 : 50', orbit: '18deg 78deg auto',
-    info: 'Két pinceszinthez 8 m mély gödör homokban és homokos kavicsban, a talajvíz alatt. A 16 m mély résfal a vízzáró agyagba köt, így a gödör víztelenítése nem szívja le a környék talajvizét. A falat két sor talajhorgony tartja: a felső sor a homokban, az alsó a homokos kavicsban van befogva. A két sor széttart, egymástól mindenhol legalább 2,8 m-re fut, a szomszéd ház alatt is.',
-    facts: [['8 m', 'gödörmélység'], ['16 m', 'résfal'], ['2 sor', 'talajhorgony']], link: ['9. előadás: Munkatérhatárolások', 'munkaterhatarolasok.vercel.app'],
-    views: [['Metszet szemből', '0deg 88deg auto', 'auto auto auto'], ['A gödörben', '20deg 70deg 0.45m', '0m -0.12m -0.12m']],
+  { id: 'godor', f: 'munkagodor', name: 'Horgonyzott résfalas munkagödör', lec: '9', lc: 'var(--c9)', k: 1 / 80, scale: 'auto', tag: 'M 1 : 80', anim: true, lt: 16, orbit: '16deg 74deg auto',
+    hook: 'Lefelé csak lépésenként: kiemelés, horgony, kiemelés.',
+    info: 'A 15 m mély résfal a vízzáró agyagba köt be, így a víztelenítés nem szívja le a környék talajvizét. A 9 m mély gödröt három lépcsőben emelik ki: az első kiemelés után beépül az első horgonysor a hevederrel, a második után a második sor, végül elkészül az alaplemez. A két horgonysor párhuzamos, egymástól 3,3 m-re fut; a felső sor a homokban, az alsó a homokos kavicsban van befogva.',
+    facts: [['9 m', 'gödörmélység'], ['15 m', 'résfal'], ['2 sor', 'talajhorgony']], link: ['9. előadás: Munkatérhatárolások', 'munkaterhatarolasok.vercel.app'],
+    views: [['Metszet szemből', '0deg 86deg auto', 'auto auto auto'], ['A gödörbe nézve', '30deg 55deg auto', 'auto auto auto']],
     hs: [] },
-  { id: 'telek', f: 'egy-telek', name: 'Egy telek, egy félév', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', orbit: '18deg 74deg auto',
-    info: 'Az „Egy telek, egy félév” esettanulmány kész telke. Az A ház pillér alapokon áll a homokban; a B ház a tőzeglencse miatt CFA-cölöpökön, két pinceszintje horgonyzott résfalas gödörben épült. Az egész tárgy egyetlen asztalon.',
+  { id: 'telek', f: 'egy-telek', name: 'Egy telek, egy félév', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', anim: true, lt: 18.5, orbit: '14deg 73deg auto',
+    hook: 'Az egész félév egyetlen telken.',
+    info: 'Az „Egy telek, egy félév” esettanulmány telke felépül. Az A ház pilléralapokon áll a homokban; a B ház alatt puha agyag van, ezért résfalas, horgonyzott munkagödörben, CFA-cölöpökön épül, amelyek a homokos kavicsig érnek. A tömb elöl el van metszve, így az alapok, a pince és a cölöpök is látszanak.',
     facts: [['2', 'ház'], ['9', 'állomás'], ['−3,0 m', 'talajvíz']], link: ['Egy telek, egy félév', 'bme-alapozas.vercel.app/telek'],
-    views: [['Metszet szemből', '0deg 86deg auto', 'auto auto auto']],
+    views: [['Metszet szemből', '0deg 84deg auto', 'auto auto auto'], ['Felülről', '20deg 42deg auto', 'auto auto auto']],
     hs: [] },
 ];
 let cur = M[0];
@@ -280,7 +320,7 @@ function select(id, push) {
   mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.removeAttribute('field-of-view'); setSrc(m);
   $('#scaleTag').textContent = m.tag; $('#animTag').hidden = !m.anim;
   $('#lec').innerHTML = `<i style="background:${m.lc}">${m.lec}</i><span>${m.lec.includes('–') ? 'az egész tárgy' : m.lec + '. előadás'}</span>`;
-  $('#mname').textContent = m.name; $('#minfo').textContent = m.info;
+  $('#mname').textContent = m.name; $('#mhook').textContent = m.hook || ''; $('#minfo').textContent = m.info; $('#viewer').style.setProperty('--lc', m.lc); $('#viewer').classList.remove('sw'); void $('#viewer').offsetWidth; $('#viewer').classList.add('sw');
   $('#facts').innerHTML = m.facts.map(([v, l]) => `<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('');
   $('#views').innerHTML = [['Áttekintés', m.orbit, 'auto auto auto'], ...m.views].map(([t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${t}</button>`).join('') + '<button type="button" data-i="rot" aria-pressed="false">Körbeforgatás</button>';
   const ln = $('#mlink'); ln.href = SB + m.link[1]; ln.innerHTML = m.link[0] + ' ' + ARROW;
@@ -295,6 +335,15 @@ mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-inte
 $('#lbl').addEventListener('change', () => { // a nézőpont megmarad
   try { const o = mv.getCameraOrbit(), t = mv.getCameraTarget(); mv.setAttribute('camera-orbit', `${o.theta}rad ${o.phi}rad ${o.radius}m`); mv.setAttribute('camera-target', `${t.x}m ${t.y}m ${t.z}m`); mv.setAttribute('field-of-view', mv.getFieldOfView() + 'deg'); } catch (e) {}
   setSrc(cur); });
+// lejátszás / szünet, idővonal; bekapcsolt feliratoknál a modell a magyarázó pillanatban megáll
+{ const pp = $('#ppBtn'), tl = $('#tl'), tt = $('#tlT'), ico = $('#ppIco'), PLAY = 'M8 5v14l11-7z', PAUSE = 'M7 5h4v14H7zM13 5h4v14h-4z'; let drag = false, lastT = '';
+  const fmtT = (v) => Math.floor(v / 60) + ':' + String(Math.floor(v % 60)).padStart(2, '0');
+  const sync = () => { const d = mv.duration || 0; if (ico.getAttribute('d') !== (mv.paused ? PLAY : PAUSE)) ico.setAttribute('d', mv.paused ? PLAY : PAUSE); if (d && !drag) { const v = String(Math.round(mv.currentTime / d * 1000)); if (tl.value !== v) tl.value = v; } const s = fmtT(mv.currentTime || 0) + ' / ' + fmtT(d); if (s !== lastT) { lastT = s; tt.textContent = s; } };
+  mv.addEventListener('load', () => { const has = (mv.availableAnimations || []).length > 0 && mv.duration > 0; $('#ctl').hidden = !has; if (!has) return;
+    if ($('#lbl').checked && cur.lt != null) { mv.pause(); mv.currentTime = cur.lt; } else mv.play(); sync(); });
+  pp.addEventListener('click', () => { if (mv.paused) mv.play(); else mv.pause(); sync(); });
+  tl.addEventListener('input', () => { drag = true; mv.pause(); mv.currentTime = (mv.duration || 0) * tl.value / 1000; sync(); }); tl.addEventListener('change', () => { drag = false; });
+  setInterval(() => { if (!$('#ctl').hidden && !document.hidden) sync(); }, 200); }
 addEventListener('hashchange', () => { const id = location.hash.slice(1); if (M.some(m => m.id === id) && id !== cur.id) select(id, false); });
 { let id = location.hash.slice(1); if (!M.some(m => m.id === id)) { try { id = localStorage.getItem('ar-labor-model') || ''; } catch (e) { id = ''; } } select(M.some(m => m.id === id) ? id : M[0].id, false); }
 
@@ -304,8 +353,8 @@ function arStatus() {
   if (mv.canActivateAR) { setStatus('status ok', 'Ez az eszköz tudja az AR-t. Válassz modellt, és koppints a „Nézd meg a térben” gombra.'); return; }
   const standalone = (() => { try { return window.top === window.self; } catch (e) { return false; } })();
   if (standalone) { setStatus('status no', 'Ezen az eszközön nincs kamerás AR. Olvasd be a kódot a telefonoddal, és ott nyisd meg az oldalt.'); if (qrDone) return; qrDone = true;
-    const q = $('#qr'); q.classList.add('on'); const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-    s.onload = () => { try { new QRCode(q, { text: location.href.split('#')[0], width: 296, height: 296, correctLevel: QRCode.CorrectLevel.M }); } catch (e) { q.classList.remove('on'); } }; s.onerror = () => q.classList.remove('on'); document.head.appendChild(s); }
+    const q = $('#qr'); q.classList.add('on'); const s = document.createElement('script'); s.src = 'vendor/qrcode.js';
+    s.onload = () => { try { const c = qrcode(0, 'M'); c.addData(location.href.split('#')[0]); c.make(); q.innerHTML = c.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); } catch (e) { q.classList.remove('on'); } }; s.onerror = () => q.classList.remove('on'); document.head.appendChild(s); }
   else if (EMB) setStatus('status no', 'Ez az előnézet: a modellek forgathatók és nagyíthatók. A kamerás AR-hoz az oldalt önálló webcímen kell megnyitni a telefonon.');
   else setStatus('status no', 'Ezen az eszközön nincs kamerás AR. Nyisd meg ezt az oldalt a telefonodon, ott megjelenik a „Nézd meg a térben” gomb.');
 }

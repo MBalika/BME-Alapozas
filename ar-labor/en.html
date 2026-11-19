@@ -123,7 +123,7 @@ model-viewer{width:100%; height:100%; min-height:580px; display:block; --poster-
 .status.no .dot{background:var(--accent)}
 #qr{display:none; margin-top:12px; background:#fff; padding:10px; border-radius:12px; width:max-content}
 #qr.on{display:block}
-#qr img, #qr canvas{display:block; width:148px; height:148px}
+#qr img, #qr canvas, #qr svg{display:block; width:148px; height:148px}
 
 main{padding-block:clamp(34px, 5vw, 56px) 30px}
 .sec + .sec{margin-top:clamp(30px, 5vw, 52px)}
@@ -158,6 +158,38 @@ footer p{margin:0}
 .langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
 @media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
 .kick .langbtn{margin-left:auto; text-transform:none}
+
+/* ===== LÁTVÁNY (2026-11): mozgó háttér, fénylő néző, vezérlősáv, kiemelt mondat ===== */
+header.lab{position:relative; overflow:hidden; isolation:isolate}
+header.lab::before{content:""; position:absolute; inset:-30% -10% auto; height:130%; z-index:-1; background:radial-gradient(45% 40% at 15% 20%, rgba(95,227,255,.20), transparent 70%), radial-gradient(40% 40% at 88% 12%, rgba(232,149,42,.18), transparent 70%), radial-gradient(45% 45% at 60% 95%, rgba(178,58,147,.16), transparent 70%)}
+header.lab::after{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; background-image:linear-gradient(rgba(95,227,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(95,227,255,.05) 1px, transparent 1px); background-size:44px 44px; -webkit-mask-image:radial-gradient(70% 60% at 50% 20%, #000, transparent 80%); mask-image:radial-gradient(70% 60% at 50% 20%, #000, transparent 80%)}
+.viewer{--lc:var(--holo); box-shadow:0 0 0 1px color-mix(in srgb, var(--lc) 45%, transparent), 0 30px 80px -30px color-mix(in srgb, var(--lc) 70%, transparent); transition:box-shadow .5s}
+.viewer.sw model-viewer{animation:mvin .7s cubic-bezier(.2,.7,.2,1)}
+.mcard{transition:transform .2s, box-shadow .25s, border-color .25s}
+.mcard:hover{transform:translateY(-4px)}
+.mcard[aria-pressed="true"]{box-shadow:0 0 0 2px var(--lc), 0 16px 40px -14px var(--lc)}
+.mcard img{transition:transform .5s}
+.mcard:hover img{transform:scale(1.06)}
+.hook{font:700 clamp(17px, 1.5vw, 20px)/1.3 var(--fd, inherit); margin:10px 0 0; text-align:left !important; hyphens:none !important; text-wrap:balance; color:#fff}
+.ctl{position:absolute; left:12px; right:12px; bottom:12px; display:flex; align-items:center; gap:10px; padding:7px 12px 7px 7px; border-radius:999px; background:rgba(9,14,19,.78); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:3}
+.ctl[hidden]{display:none}
+.ctl button{width:36px; height:36px; flex:none; border-radius:50%; border:0; background:var(--lc, var(--holo)); color:#0b1218; display:grid; place-items:center; cursor:pointer}
+.ctl button svg{width:20px; height:20px}
+.ctl input{flex:1; min-width:0; accent-color:var(--lc, var(--holo)); height:26px}
+.ctl span{font-size:11.5px; color:#cfd6dc; white-space:nowrap}
+.viewer:has(.ctl:not([hidden])) .arbtn{bottom:66px}
+.fact{transition:transform .2s, border-color .2s}
+.fact:hover{transform:translateY(-2px)}
+.steps li, .trouble > div{transition:transform .25s, box-shadow .25s}
+.steps li:hover, .trouble > div:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion: no-preference){ header.lab::before{animation:labaur 22s ease-in-out infinite alternate} header.lab h1 em{background:linear-gradient(100deg, var(--holo) 0%, var(--holo) 40%, #fff 50%, var(--holo) 60%, var(--holo) 100%) 100% 0 / 280% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:labshim 7s ease-in-out 1.2s infinite} }
+@keyframes labaur{to{transform:translate3d(4%, 3%, 0) scale(1.12) rotate(4deg)}}
+@keyframes labshim{0%, 60%{background-position:100% 0} 90%, 100%{background-position:0 0}}
+@keyframes mvin{from{opacity:0; transform:scale(.96)}}
+/* dobozcímek középen (formázás) */
+.info > div:first-child{text-align:center} .info .lec{justify-content:center} .hook{text-align:center !important}
+.steps li > b{display:block; text-align:center} .steps li::before{margin-inline:auto}
+.trouble h3{text-align:center} .mcard .t{text-align:center}
 </style>
 <script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
 <script>Hyphenopoly.config({ require: { "en-gb": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
@@ -170,7 +202,7 @@ footer p{margin:0}
     <a class="langbtn" id="langSw" href="./" hreflang="hu" lang="hu" aria-label="Magyar változat"><span>HU</span><b>EN</b></a></div>
     <div class="head">
       <h1>Foundation Engineering <em>AR lab</em></h1>
-      <p class="lead">The 3D models of the course in one place. Choose a model, rotate it, zoom in, then on a phone use the “View in your space” button to place it on a table or the floor and walk around it. The labels can be switched on with the “Labels on the model” toggle; they then also appear in the AR view.</p>
+      <p class="lead">The 3D models of the course in one place. Choose a model, rotate it, zoom in, then on a phone use the “View in your space” button to place it on a table or the floor and walk around it. The models move: you can pause them and view any moment on the timeline. The labels can be switched on with the “Labels on the model” toggle; they then also appear in the AR view.</p>
     </div>
     <nav class="shelf" id="shelf" aria-label="Models"></nav>
     <div class="grid">
@@ -180,10 +212,12 @@ footer p{margin:0}
         </model-viewer>
         <div class="scale mono" id="scaleTag"></div>
         <div class="anim mono" id="animTag" hidden>animated</div>
+        <div class="ctl" id="ctl" hidden><button type="button" id="ppBtn" aria-label="Play or pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="ppIco" d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button><input type="range" id="tl" min="0" max="1000" value="0" aria-label="Timeline"><span class="mono" id="tlT">0:00</span></div>
       </div>
       <div class="panel">
         <div class="box info">
           <div><div class="lec" id="lec"></div><h2 id="mname"></h2></div>
+          <p class="hook" id="mhook"></p>
           <p id="minfo"></p>
           <div class="views" id="views" role="group" aria-label="Viewpoints"></div>
           <label class="switch" for="lbl"><input type="checkbox" id="lbl">Labels on the model</label>
@@ -231,35 +265,41 @@ const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke
 const SB = 'https://';
 // hotspot: [felirat, [x, y, z] méterben a modell saját koordinátáiban, normál, 0 jobbra / 1 balra / 2 középre, szín]
 const M = [
-  { id: 'tores', f: 'talajtores', name: 'Bearing failure below a strip footing', lec: '3', lc: 'var(--c3)', k: 1 / 25, scale: 'auto', tag: 'M 1 : 25', orbit: '22deg 70deg auto',
-    info: 'Final state of general shear failure below a strip footing in sand. The footing has settled together with the active wedge and tilted towards the side of the failure. The radial shear zone has slipped along the logarithmic spiral, and the passive wedge has been pushed upwards and outwards along the slip surface, so the ground surface has heaved; on the opposite side a crack has opened. The zones are visible on both cut faces, and the heave runs along the whole strip footing.',
-    facts: [['30°', 'φ′ in the sand'], ['2.0 m', 'footing width'], ['≈ 10 m', 'extent of the heave']], link: ['Lecture 3: Design of shallow foundations', 'sikalapoktervezese.vercel.app/en'],
-    views: [['Section from the front', '0deg 90deg auto', 'auto auto auto'], ['The heave', '55deg 58deg 0.75m', '0.22m 0m -0.16m']],
+  { id: 'tores', f: 'talajtores', name: 'Bearing failure below a strip footing', lec: '3', lc: 'var(--c3)', k: 1 / 40, scale: 'auto', tag: 'M 1 : 40', anim: true, lt: 9.5, orbit: '24deg 70deg auto',
+    hook: 'The load grows – and suddenly the ground gives way.',
+    info: 'More and more load comes onto the wall. When the shear strength of the ground is exhausted, the slip surface appears: the footing sinks and tilts together with the active wedge, the radial shear zone rotates along the logarithmic spiral, the passive zone is pushed upwards and outwards along the slip surface, and the ground surface heaves. General shear failure in sand; the movements are exaggerated.',
+    facts: [['30°', 'φ′ in the sand'], ['2.0 m', 'footing width'], ['≈ 10 m', 'extent of the slip surface']], link: ['Lecture 3: Design of shallow foundations', 'sikalapoktervezese.vercel.app/en'],
+    views: [['Section from the front', '0deg 88deg auto', 'auto auto auto'], ['The heave', '55deg 62deg auto', 'auto auto auto']],
     hs: [] },
-  { id: 'hagyma', f: 'feszultseghagyma', name: 'Pressure bulb', lec: '5', lc: 'var(--c5)', k: 1 / 10, scale: 'auto', tag: 'M 1 : 10', orbit: '45deg 66deg auto',
-    info: 'Below the pad footing the additional stress decreases rapidly with depth. The coloured shells lie at 80, 60, 40, 20 and 10 % of the net contact pressure. The inner shells stick out furthest from the cut-away quarter, so all of them are visible, and the two cut faces show the whole bulb. The shells were computed with Boussinesq, below a uniformly loaded circle of the same area as the 2 × 2 m footing.',
+  { id: 'hagyma', f: 'feszultseghagyma', name: 'Pressure bulb', lec: '5', lc: 'var(--c5)', k: 1 / 25, scale: 'auto', tag: 'M 1 : 25', anim: true, lt: 11, orbit: '45deg 66deg auto',
+    hook: 'The load does not stop below the footing: it spreads and fades.',
+    info: 'Load is applied to the column, and the additional stress appears below the footing: the coloured shells lie at 80, 60, 40, 20 and 10 % of the contact pressure, from the inside outwards. In the open quarter the shells are cut back in steps, so each of them can be seen. They are computed after Boussinesq, beneath a uniformly loaded circle with the same area as the 2 × 2 m footing.',
     facts: [['1.8 m', 'bottom of the 40 % shell'], ['2.8 m', 'bottom of the 20 % shell'], ['4.2 m', 'bottom of the 10 % shell']], link: ['Lecture 5: Settlement of shallow foundations', 'sikalapok-sullyedesszamitasa.vercel.app/en'],
-    views: [['The cut-away corner', '45deg 64deg 1.4m', '0m -0.27m 0m'], ['From the front', '15deg 84deg 1.5m', '0m -0.25m 0m']],
+    views: [['The cut-away corner', '45deg 72deg auto', 'auto auto auto'], ['From above', '45deg 34deg auto', 'auto auto auto']],
     hs: [] },
-  { id: 'pisa', f: 'pisa-makett', name: 'The Leaning Tower of Pisa', lec: '5', lc: 'var(--c5)', k: 1 / 100, scale: 'auto', tag: 'M 1 : 100', orbit: '40deg 76deg auto',
-    info: 'Below the tower there is a variable silty-sandy layer about 10 m thick (horizon A), below it soft, sensitive marine clay down to 40 m (horizon B, its upper part the Pancone clay), and dense sand at the bottom (horizon C). The groundwater is 1–2 m deep. The tower has settled about 3 m on average, and the top of the Pancone has been bent down below it into a dish shape. To the south horizon A is more clayey and the upper sand thinner, so the settlement is larger there. In 1990 the tilt was 5.5°; between 1999 and 2001 soil was extracted from below the north side, which reduced it by about 0.5°.',
-    facts: [['≈ 5°', 'tilt today'], ['≈ 3 m', 'mean settlement'], ['14 500 t', 'mass of the tower']], link: ['Geotechnical CSI: the Pisa case', 'bme-alapozas.vercel.app/helyszinelok/en'],
-    views: [['The sections', '30deg 84deg 1.2m', '0.04m -0.2m 0m'], ['From the south', '90deg 80deg auto', 'auto auto auto']],
+  { id: 'pisa', f: 'pisa-makett', name: 'The Leaning Tower of Pisa', lec: '5', lc: 'var(--c5)', k: 1 / 130, scale: 'auto', tag: 'M 1 : 130', anim: true, lt: 15.5, orbit: '22deg 78deg auto',
+    hook: 'Two hundred years in the making – and leaning all the while.',
+    info: 'The tower was built between 1173 and 1372, in three stages, and it was already leaning by the third storey. The ground consists of about 3 m of made ground at the top, then sandy silt and sand that thin out towards the south; below these lies soft clay that is thicker on the south side – settlement is larger there, and that is the way the tower leans. By 1990 the tilt had reached 5.5°; careful soil extraction from beneath the north side reduced it to about 3.97°. The red rod shows the original vertical.',
+    facts: [['3.97°', 'tilt today'], ['5.5°', 'tilt in 1990'], ['14 500 t', 'mass of the tower']], link: ['Geotechnical CSI: the Pisa case', 'bme-alapozas.vercel.app/helyszinelok/en'],
+    views: [['The layers from the front', '0deg 86deg auto', 'auto auto auto'], ['From the south', '90deg 80deg auto', 'auto auto auto']],
     hs: [] },
   { id: 'cfa', f: 'cfa-makett', name: 'CFA pile during drilling', lec: '8', lc: 'var(--c8)', k: 1 / 60, scale: 'auto', tag: 'M 1 : 60', anim: true, orbit: '28deg 74deg auto',
+    hook: 'The auger drills down in one pass – the soil supports the bore.',
     info: 'The auger is 10 m deep, and its flights are full of soil: this soil supports the borehole wall, which is why a CFA pile needs no casing or slurry. The concrete is brought by a hose to the rotary head, and from there it runs down the hollow stem of the auger to the base. The rig is controlled by the operator sitting in the cab.',
     facts: [['80 cm', 'pile diameter'], ['10 m', 'drilling depth'], ['20 m', 'auger length']], link: ['The full CFA animation', 'cfa-colop-3d.vercel.app/en'],
     views: [['Section from the front', '0deg 88deg 0.95m', '0m 0.04m 0m'], ['Drill head close up', '6deg 86deg 0.2m', '0m -0.158m 0m']],
     hs: [] },
-  { id: 'godor', f: 'munkagodor', name: 'Excavation with an anchored diaphragm wall', lec: '9', lc: 'var(--c9)', k: 1 / 50, scale: 'auto', tag: 'M 1 : 50', orbit: '18deg 78deg auto',
-    info: 'For two basement levels, an 8 m deep excavation in sand and sandy gravel, below the groundwater. The 16 m deep diaphragm wall is keyed into the impermeable clay, so dewatering the excavation does not draw down the groundwater of the surroundings. The wall is held by two rows of ground anchors: the upper row is fixed in the sand, the lower one in the sandy gravel. The two rows diverge and run at least 2.8 m apart everywhere, even below the neighbouring building.',
-    facts: [['8 m', 'excavation depth'], ['16 m', 'diaphragm wall'], ['2 rows', 'ground anchors']], link: ['Lecture 9: Excavation support', 'munkaterhatarolasok.vercel.app/en'],
-    views: [['Section from the front', '0deg 88deg auto', 'auto auto auto'], ['In the excavation', '20deg 70deg 0.45m', '0m -0.12m -0.12m']],
+  { id: 'godor', f: 'munkagodor', name: 'Excavation with an anchored diaphragm wall', lec: '9', lc: 'var(--c9)', k: 1 / 80, scale: 'auto', tag: 'M 1 : 80', anim: true, lt: 16, orbit: '16deg 74deg auto',
+    hook: 'Going down step by step: dig, anchor, dig.',
+    info: 'The 15 m deep diaphragm wall is embedded in the low-permeability clay, so dewatering does not draw down the groundwater around the site. The 9 m deep excavation is dug in three stages: after the first stage the first anchor row and its waler are installed, after the second stage the second row, and finally the base slab is cast. The two anchor rows are parallel and run 3.3 m apart; the upper row is fixed in the sand, the lower one in the sandy gravel.',
+    facts: [['9 m', 'excavation depth'], ['15 m', 'diaphragm wall'], ['2 rows', 'ground anchors']], link: ['Lecture 9: Excavation support', 'munkaterhatarolasok.vercel.app/en'],
+    views: [['Section from the front', '0deg 86deg auto', 'auto auto auto'], ['Looking into the excavation', '30deg 55deg auto', 'auto auto auto']],
     hs: [] },
-  { id: 'telek', f: 'egy-telek', name: 'One site, one semester', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', orbit: '18deg 74deg auto',
-    info: 'The finished site of the “One site, one semester” case study. Building A stands on pad footings in the sand; because of the peat lens, Building B stands on CFA piles, and its two basement levels were built in an excavation supported by an anchored diaphragm wall. The whole course on a single table.',
+  { id: 'telek', f: 'egy-telek', name: 'One site, one semester', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', anim: true, lt: 18.5, orbit: '14deg 73deg auto',
+    hook: 'The whole semester on a single site.',
+    info: 'The site of the “One site, one semester” case study is built up. Building A stands on pad footings in the sand; below Building B there is soft clay, so it is built in an anchored diaphragm-wall excavation, on CFA piles that reach the sandy gravel. The block is cut open at the front, so the foundations, the basement and the piles are visible too.',
     facts: [['2', 'buildings'], ['9', 'stations'], ['−3.0 m', 'groundwater']], link: ['One site, one semester', 'bme-alapozas.vercel.app/telek/en'],
-    views: [['Section from the front', '0deg 86deg auto', 'auto auto auto']],
+    views: [['Section from the front', '0deg 84deg auto', 'auto auto auto'], ['From above', '20deg 42deg auto', 'auto auto auto']],
     hs: [] },
 ];
 let cur = M[0];
@@ -279,7 +319,7 @@ function select(id, push) {
   mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.removeAttribute('field-of-view'); setSrc(m);
   $('#scaleTag').textContent = m.tag; $('#animTag').hidden = !m.anim;
   $('#lec').innerHTML = `<i style="background:${m.lc}">${m.lec}</i><span>${m.lec.includes('–') ? 'the whole course' : 'Lecture ' + m.lec}</span>`;
-  $('#mname').textContent = m.name; $('#minfo').textContent = m.info;
+  $('#mname').textContent = m.name; $('#mhook').textContent = m.hook || ''; $('#minfo').textContent = m.info; $('#viewer').style.setProperty('--lc', m.lc); $('#viewer').classList.remove('sw'); void $('#viewer').offsetWidth; $('#viewer').classList.add('sw');
   $('#facts').innerHTML = m.facts.map(([v, l]) => `<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('');
   $('#views').innerHTML = [['Overview', m.orbit, 'auto auto auto'], ...m.views].map(([t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${t}</button>`).join('') + '<button type="button" data-i="rot" aria-pressed="false">Auto-rotate</button>';
   const ln = $('#mlink'); ln.href = SB + m.link[1]; ln.innerHTML = m.link[0] + (/\/en$/.test(m.link[1]) ? '' : ' (in Hungarian)') + ' ' + ARROW;
@@ -294,6 +334,15 @@ mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-inte
 $('#lbl').addEventListener('change', () => { // a nézőpont megmarad
   try { const o = mv.getCameraOrbit(), t = mv.getCameraTarget(); mv.setAttribute('camera-orbit', `${o.theta}rad ${o.phi}rad ${o.radius}m`); mv.setAttribute('camera-target', `${t.x}m ${t.y}m ${t.z}m`); mv.setAttribute('field-of-view', mv.getFieldOfView() + 'deg'); } catch (e) {}
   setSrc(cur); });
+// lejátszás / szünet, idővonal; bekapcsolt feliratoknál a modell a magyarázó pillanatban megáll
+{ const pp = $('#ppBtn'), tl = $('#tl'), tt = $('#tlT'), ico = $('#ppIco'), PLAY = 'M8 5v14l11-7z', PAUSE = 'M7 5h4v14H7zM13 5h4v14h-4z'; let drag = false, lastT = '';
+  const fmtT = (v) => Math.floor(v / 60) + ':' + String(Math.floor(v % 60)).padStart(2, '0');
+  const sync = () => { const d = mv.duration || 0; if (ico.getAttribute('d') !== (mv.paused ? PLAY : PAUSE)) ico.setAttribute('d', mv.paused ? PLAY : PAUSE); if (d && !drag) { const v = String(Math.round(mv.currentTime / d * 1000)); if (tl.value !== v) tl.value = v; } const s = fmtT(mv.currentTime || 0) + ' / ' + fmtT(d); if (s !== lastT) { lastT = s; tt.textContent = s; } };
+  mv.addEventListener('load', () => { const has = (mv.availableAnimations || []).length > 0 && mv.duration > 0; $('#ctl').hidden = !has; if (!has) return;
+    if ($('#lbl').checked && cur.lt != null) { mv.pause(); mv.currentTime = cur.lt; } else mv.play(); sync(); });
+  pp.addEventListener('click', () => { if (mv.paused) mv.play(); else mv.pause(); sync(); });
+  tl.addEventListener('input', () => { drag = true; mv.pause(); mv.currentTime = (mv.duration || 0) * tl.value / 1000; sync(); }); tl.addEventListener('change', () => { drag = false; });
+  setInterval(() => { if (!$('#ctl').hidden && !document.hidden) sync(); }, 200); }
 addEventListener('hashchange', () => { const id = location.hash.slice(1); if (M.some(m => m.id === id) && id !== cur.id) select(id, false); });
 { let id = location.hash.slice(1); if (!M.some(m => m.id === id)) { try { id = localStorage.getItem('ar-labor-model') || ''; } catch (e) { id = ''; } } select(M.some(m => m.id === id) ? id : M[0].id, false); }
 
@@ -303,8 +352,8 @@ function arStatus() {
   if (mv.canActivateAR) { setStatus('status ok', 'This device supports AR. Choose a model and tap “View in your space”.'); return; }
   const standalone = (() => { try { return window.top === window.self; } catch (e) { return false; } })();
   if (standalone) { setStatus('status no', 'This device has no camera AR. Scan the code with your phone and open the page there.'); if (qrDone) return; qrDone = true;
-    const q = $('#qr'); q.classList.add('on'); const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-    s.onload = () => { try { new QRCode(q, { text: location.href.split('#')[0], width: 296, height: 296, correctLevel: QRCode.CorrectLevel.M }); } catch (e) { q.classList.remove('on'); } }; s.onerror = () => q.classList.remove('on'); document.head.appendChild(s); }
+    const q = $('#qr'); q.classList.add('on'); const s = document.createElement('script'); s.src = 'vendor/qrcode.js';
+    s.onload = () => { try { const c = qrcode(0, 'M'); c.addData(location.href.split('#')[0]); c.make(); q.innerHTML = c.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); } catch (e) { q.classList.remove('on'); } }; s.onerror = () => q.classList.remove('on'); document.head.appendChild(s); }
   else if (EMB) setStatus('status no', 'This is a preview: the models can be rotated and zoomed. For camera AR, the page has to be opened at its own web address on the phone.');
   else setStatus('status no', 'This device has no camera AR. Open this page on your phone, and the “View in your space” button will appear there.');
 }

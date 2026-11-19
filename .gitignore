@@ -1,3 +1,5 @@
 # az előnézeti build (_src/build.py) kimenete – szándékosan nincs a repóban
 artifact.html
 __pycache__/
+_src/ar/node_modules
+_src/ar/out
