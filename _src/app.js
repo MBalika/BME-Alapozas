@@ -141,12 +141,17 @@ $('#themeBtn').addEventListener('click', toggleTheme);
     svg.innerHTML = '';
     const defs = h('defs', {}, svg); const pat = h('pattern', { id: 'kshDots', width: 9, height: 9, patternUnits: 'userSpaceOnUse' }, defs); h('circle', { cx: 2, cy: 2, r: 1.1, fill: 'rgba(60,40,20,.35)' }, pat);
     const pat2 = h('pattern', { id: 'kshLen', width: 12, height: 6, patternUnits: 'userSpaceOnUse' }, defs); h('path', { d: 'M0 3 q3 -3 6 0 t6 0', stroke: 'rgba(240,210,160,.55)', fill: 'none', 'stroke-width': 1.3 }, pat2);
-    const sky = h('linearGradient', { id: 'kshSky', x1: 0, y1: 0, x2: 0, y2: 1 }, defs); h('stop', { offset: 0, 'stop-color': '#cfe3f0' }, sky); h('stop', { offset: 1, 'stop-color': '#eef3f0' }, sky);
+    const sky = h('linearGradient', { id: 'kshSky', x1: 0, y1: 0, x2: 0, y2: 1 }, defs); h('stop', { offset: 0, 'stop-color': '#b5d3ec' }, sky); h('stop', { offset: .45, 'stop-color': '#e6eef1' }, sky); h('stop', { offset: 1, 'stop-color': '#eef3f0' }, sky);
+    const lg = (id, st, a) => { const g = h('linearGradient', { id, ...a }, defs); st.forEach(([o, c, op = 1]) => h('stop', { offset: o, 'stop-color': c, 'stop-opacity': op }, g)); };
+    lg('kshGD', [[0, '#000', .22], [.12, '#000', 0], [1, '#000', .3]], { x1: 0, y1: GY, x2: 0, y2: 330, gradientUnits: 'userSpaceOnUse' }); lg('kshGB', [[0, '#f8f1e0'], [.7, '#efe6d2'], [1, '#d6ccb5']], { x1: 0, y1: 0, x2: 1, y2: 0 }); lg('kshGG', [[0, '#9dbfd9'], [1, '#48637b']], { x1: 0, y1: 0, x2: 0, y2: 1 }); lg('kshGC', [[0, '#d9d4ca'], [1, '#a9a397']], { x1: 0, y1: 0, x2: 0, y2: 1 });
     const cp = h('clipPath', { id: 'kshClip' }, defs);
     h('rect', { x: 0, y: 0, width: W, height: 330, fill: 'url(#kshSky)' }, svg);
+    for (const [x, y] of [[44, 36], [470, 52]]) h('path', { d: `M${x} ${y}c2-9 15-11 20-4 6-5 17-1 16 7 7 1 7 10 0 10h-36c-8 0-8-12 0-13z`, fill: '#fff', opacity: .8 }, svg);
+    for (const [x, r] of [[40, 11], [66, 8], [498, 12], [528, 8]]) { const yb = Y(x); h('rect', { x: x - 1.5, y: yb - r - 8, width: 3, height: r + 8, fill: '#6b5136' }, svg); h('circle', { cx: x, cy: yb - r - 12, r, fill: '#5f8f45' }, svg); h('circle', { cx: x - r * .3, cy: yb - r - 15, r: r * .55, fill: '#7fb05e' }, svg); }
     // talaj: a felszín a süllyedési teknő szerint
     let d = `M0 ${Y(0)}`; for (let x = 5; x <= W; x += 5) d += ` L${x} ${Y(x).toFixed(1)}`; d += ` L${W} 330 L0 330 Z`;
-    h('path', { d, fill: soil === 1 ? '#8b8274' : '#c9a46b' }, svg); h('path', { d, fill: 'url(#kshDots)' }, svg); h('path', { d }, cp);
+    h('path', { d, fill: soil === 1 ? '#8b8274' : '#c9a46b' }, svg); h('path', { d, fill: 'url(#kshDots)' }, svg); h('path', { d, fill: 'url(#kshGD)' }, svg); h('path', { d }, cp);
+    { let gd = `M0 ${Y(0)}`; for (let x = 5; x <= W; x += 5) gd += ` L${x} ${Y(x).toFixed(1)}`; h('path', { d: gd, fill: 'none', stroke: '#6f9a4c', 'stroke-width': 3.5 }, svg); }
     if (soil === 2) { const ex = X(LENS.x), ez = GY + LENS.z * PX; h('ellipse', { cx: ex, cy: ez, rx: LENS.rx * PX, ry: LENS.rz * PX, fill: '#4a3626' }, svg); h('ellipse', { cx: ex, cy: ez, rx: LENS.rx * PX, ry: LENS.rz * PX, fill: 'url(#kshLen)' }, svg); h('text', { x: ex, y: ez + 4, 'text-anchor': 'middle', fill: '#f3e3c8', 'font-size': 12, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'puha lencse' }, svg); }
     // izobárok (σz = 0,8 · 0,5 · 0,3 p)
     const ig = h('g', { 'clip-path': 'url(#kshClip)' }, svg);
@@ -156,14 +161,14 @@ $('#themeBtn').addEventListener('click', toggleTheme);
     h('line', { x1: 0, y1: GY, x2: W, y2: GY, stroke: 'rgba(20,20,20,.45)', 'stroke-dasharray': '7 6', 'stroke-width': 1.3 }, svg);
     // hajlékony lemezalap (a talajjal együtt hajlik)
     const RT = 9; let rd = `M${BX0 - 6} ${Y(BX0 - 6)}`; for (let x = BX0 - 6; x <= BX1 + 6; x += 4) rd += ` L${x} ${Y(x).toFixed(1)}`; rd += ` L${BX1 + 6} ${(Y(BX1 + 6) + RT).toFixed(1)}`; for (let x = BX1 + 6; x >= BX0 - 6; x -= 4) rd += ` L${x} ${(Y(x) + RT).toFixed(1)}`; rd += ' Z';
-    h('path', { d: rd, fill: '#b9b4aa', stroke: '#6f6a62', 'stroke-width': 1 }, svg);
+    h('path', { d: rd, fill: 'url(#kshGC)', stroke: '#6f6a62', 'stroke-width': 1 }, svg);
     { const tc = soil === 1 ? 'rgba(255,245,230,.95)' : 'rgba(40,30,20,.88)', ly = GY + 58; h('line', { x1: 112, y1: ly - 4, x2: BX0 - 4, y2: Y(BX0) + RT / 2, stroke: tc, 'stroke-width': 1 }, svg); h('text', { x: 108, y: ly - 8, 'text-anchor': 'end', 'font-size': 10.5, 'font-family': 'var(--fm)', fill: tc, text: 'vb. lemezalap' }, svg); h('text', { x: 108, y: ly + 5, 'text-anchor': 'end', 'font-size': 10.5, 'font-family': 'var(--fm)', fill: tc, text: '50 cm' }, svg); }
     // épület – a homlokzat együtt hajlik a lemezzel
     const fh = Math.min(17, (GY - 46) / n), wh = Math.min(9, fh - 5), H = n * fh + 8, top = (x) => Y(x) - H;
     let fd = `M${BX0} ${Y(BX0)}`; for (let x = BX0; x <= BX1; x += 4) fd += ` L${x} ${Y(x).toFixed(1)}`; fd += ` L${BX1} ${Y(BX1)}`; for (let x = BX1; x >= BX0; x -= 4) fd += ` L${x} ${top(x).toFixed(1)}`; fd += ' Z';
-    h('path', { d: fd, fill: '#efe6d2', stroke: '#8d8576', 'stroke-width': 1.2 }, svg);
+    h('path', { d: fd, fill: 'url(#kshGB)', stroke: '#8d8576', 'stroke-width': 1.2 }, svg);
     for (let i = 1; i < n; i++) { let ld = ''; for (let x = BX0; x <= BX1; x += 6) ld += (x === BX0 ? 'M' : ' L') + x + ' ' + (Y(x) - 8 - i * fh).toFixed(1); h('path', { d: ld, fill: 'none', stroke: 'rgba(0,0,0,.09)' }, svg); }
-    for (let i = 0; i < n; i++) for (let j = 0; j < 8; j++) { const x = BX0 + 10 + j * 26.5; h('rect', { x, y: (Y(x + 7) - 8 - (i + 1) * fh + (fh - wh) / 2).toFixed(1), width: 14, height: wh.toFixed(1), fill: '#5b7286', rx: 1 }, svg); }
+    for (let i = 0; i < n; i++) for (let j = 0; j < 8; j++) { const x = BX0 + 10 + j * 26.5; h('rect', { x, y: (Y(x + 7) - 8 - (i + 1) * fh + (fh - wh) / 2).toFixed(1), width: 14, height: wh.toFixed(1), fill: (i * 8 + j) % 7 === 2 ? '#ffd98a' : 'url(#kshGG)', stroke: 'rgba(60,55,45,.5)', 'stroke-width': .6, rx: 1 }, svg); }
     let rf = ''; for (let x = BX0 - 3; x <= BX1 + 3; x += 4) rf += (x === BX0 - 3 ? 'M' : ' L') + x + ' ' + (top(x) - 2.5).toFixed(1); h('path', { d: rf, fill: 'none', stroke: '#7c8086', 'stroke-width': 6 }, svg);
     // falak / pillérek helye (3,5 m-enként)
     PTS.forEach(m => { const x = X(m); h('line', { x1: x, y1: Y(x), x2: x, y2: top(x), stroke: 'rgba(80,70,55,.18)', 'stroke-width': 1.2 }, svg); });
@@ -209,26 +214,38 @@ $('#themeBtn').addEventListener('click', toggleTheme);
   const GO = [[3, 4, 5], [8], [8]];
   function draw(t) {
     svg.innerHTML = ''; const GY = 92;
+    const defs = h('defs', {}, svg);
+    const grad = (id, stops, x2 = 0, y2 = 1) => { const g = h('linearGradient', { id, x1: 0, y1: 0, x2, y2 }, defs); stops.forEach(([o, c, a = 1]) => h('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, g)); };
+    grad('ftSky', [[0, '#b5d3ec'], [.75, '#e2edf2'], [1, '#f1eee2']]); grad('ftL1', [[0, '#978d7c'], [1, '#7f7769']]); grad('ftL2', [[0, '#d5b67c'], [1, '#b9985d']]);
+    grad('ftC', [[0, '#aaa497'], [.3, '#e6e1d7'], [1, '#a29c8f']], 1, 0); grad('ftCs', [[0, '#e2ddd3'], [1, '#b7b1a5']]); grad('ftB', [[0, '#f8f1e0'], [.7, '#efe6d2'], [1, '#d6ccb5']], 1, 0);
+    grad('ftSh', [[0, '#000', .32], [1, '#000', 0]]); grad('ftGl', [[0, '#9dbfd9'], [1, '#48637b']]);
+    const dots = h('pattern', { id: 'ftD', width: 9, height: 9, patternUnits: 'userSpaceOnUse' }, defs); h('circle', { cx: 2, cy: 2, r: 1, fill: 'rgba(60,40,20,.3)' }, dots);
     h('rect', { x: 0, y: 0, width: 560, height: GY, fill: 'url(#ftSky)' }, svg);
-    const defs = h('defs', {}, svg); const sk = h('linearGradient', { id: 'ftSky', x1: 0, y1: 0, x2: 0, y2: 1 }, defs); h('stop', { offset: 0, 'stop-color': '#d6e6f1' }, sk); h('stop', { offset: 1, 'stop-color': '#eef3f1' }, sk);
-    const dots = h('pattern', { id: 'ftD', width: 9, height: 9, patternUnits: 'userSpaceOnUse' }, defs); h('circle', { cx: 2, cy: 2, r: 1, fill: 'rgba(60,40,20,.35)' }, dots);
-    h('rect', { x: 0, y: GY, width: 560, height: 120, fill: '#8f8676' }, svg); h('rect', { x: 0, y: GY, width: 560, height: 120, fill: 'url(#ftD)' }, svg);
-    h('rect', { x: 0, y: GY + 120, width: 560, height: 90, fill: '#c9a96f' }, svg); h('rect', { x: 0, y: GY + 120, width: 560, height: 90, fill: 'url(#ftD)' }, svg);
+    for (const [x, y] of [[56, 34], [452, 26]]) h('path', { d: `M${x} ${y}c2-9 15-11 20-4 6-5 17-1 16 7 7 1 7 10 0 10h-36c-8 0-8-12 0-13z`, fill: '#fff', opacity: .8 }, svg);
+    for (const [x, r] of [[118, 11], [146, 8], [424, 9], [452, 12], [506, 9]]) { h('rect', { x: x - 1.5, y: GY - r - 8, width: 3, height: r + 8, fill: '#6b5136' }, svg); h('circle', { cx: x, cy: GY - r - 12, r, fill: '#5f8f45' }, svg); h('circle', { cx: x - r * .3, cy: GY - r - 15, r: r * .55, fill: '#7fb05e' }, svg); }
+    h('rect', { x: 0, y: GY, width: 560, height: 120, fill: 'url(#ftL1)' }, svg); h('rect', { x: 0, y: GY, width: 560, height: 120, fill: 'url(#ftD)' }, svg);
+    h('rect', { x: 0, y: GY + 120, width: 560, height: 90, fill: 'url(#ftL2)' }, svg); h('rect', { x: 0, y: GY + 120, width: 560, height: 90, fill: 'url(#ftD)' }, svg);
+    let sd = 11; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;   // szemcsék: véletlenszerű, de mindig ugyanaz
+    for (let i = 0; i < 96; i++) { const low = i >= 48, x = rnd() * 560, y = low ? GY + 127 + rnd() * 78 : GY + 9 + rnd() * 104, r = low ? 1.6 + rnd() * 2.6 : 1 + rnd() * 1.7, c = rnd() < .5;
+      h('ellipse', { cx: x.toFixed(1), cy: y.toFixed(1), rx: (r * 1.35).toFixed(1), ry: r.toFixed(1), fill: low ? (c ? 'rgba(255,240,200,.4)' : 'rgba(90,60,20,.25)') : (c ? 'rgba(255,255,255,.13)' : 'rgba(30,25,20,.22)') }, svg); }
+    h('path', { d: `M0 ${GY + 120}q70 -5 140 0t140 0 140 0 140 0`, fill: 'none', stroke: 'rgba(40,30,15,.4)', 'stroke-width': 1.2 }, svg);
+    h('rect', { x: 0, y: GY, width: 560, height: 18, fill: 'url(#ftSh)' }, svg); h('rect', { x: 0, y: GY - 3, width: 560, height: 4, fill: '#6f9a4c' }, svg);
     h('text', { x: 14, y: GY + 22, fill: '#f1ece2', 'font-size': 12.5, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'gyengébb réteg' }, svg);
     h('text', { x: 14, y: GY + 142, fill: '#3b2d18', 'font-size': 12.5, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'teherbíró réteg' }, svg);
-    const conc = '#cfcac0', cs = '#7d776d';
-    const up = (x, y, len, col) => { h('path', { d: `M${x} ${y} v${-len + 7}`, stroke: col, 'stroke-width': 2.6 }, svg); h('path', { d: `M${x - 4.5} ${y - len + 8} l4.5 -8 l4.5 8z`, fill: col }, svg); };
+    const conc = 'url(#ftC)', concS = 'url(#ftCs)', cs = '#7d776d';
+    const up = (x, y, len, col) => { const g = h('g', { class: 'ft-a', style: `--fd0:${(-(x % 47) / 47 * 1.5).toFixed(2)}s` }, svg); h('path', { d: `M${x} ${y} v${-len + 7}`, stroke: col, 'stroke-width': 2.6 }, g); h('path', { d: `M${x - 4.5} ${y - len + 8} l4.5 -8 l4.5 8z`, fill: col }, g); };
     const lab = (x, y, txt, col, anchor = 'start') => h('text', { x, y, fill: col, 'font-size': 13, 'font-weight': 700, 'font-family': 'var(--fm)', 'text-anchor': anchor, text: txt }, svg);
     // épület
-    const bx0 = 190, bx1 = 370; h('rect', { x: bx0, y: 18, width: bx1 - bx0, height: GY - 18, fill: '#efe6d2', stroke: '#8d8576' }, svg);
-    for (let r = 0; r < 2; r++) for (let j = 0; j < 6; j++) h('rect', { x: bx0 + 14 + j * 28, y: 30 + r * 28, width: 14, height: 12, fill: '#5b7286' }, svg);
-    for (const x of [205, 280, 355]) { h('path', { d: `M${x} 4 v14`, stroke: '#e8952a', 'stroke-width': 3 }, svg); h('path', { d: `M${x - 5} 16 l5 7 l5 -7z`, fill: '#e8952a' }, svg); }
-    if (t === 0) { h('rect', { x: bx0 - 18, y: GY, width: bx1 - bx0 + 36, height: 26, fill: conc, stroke: cs }, svg); h('line', { x1: 120, y1: GY + 26, x2: 440, y2: GY + 26, stroke: '#1b1d20', 'stroke-dasharray': '6 5' }, svg); lab(446, GY + 30, 'alapsík', '#1b1d20');
+    const bx0 = 190, bx1 = 370; h('rect', { x: bx0, y: 18, width: bx1 - bx0, height: GY - 18, fill: 'url(#ftB)', stroke: '#8d8576' }, svg);
+    h('rect', { x: bx0 - 4, y: 14, width: bx1 - bx0 + 8, height: 6, rx: 1.5, fill: '#b9ae97', stroke: '#8d8576', 'stroke-width': .8 }, svg);
+    for (let r = 0; r < 2; r++) for (let j = 0; j < 6; j++) { const wx = bx0 + 14 + j * 28, wy = 30 + r * 28; h('rect', { x: wx, y: wy, width: 14, height: 12, rx: 1, fill: (r * 6 + j) % 5 === 1 ? '#ffd98a' : 'url(#ftGl)', stroke: '#6f6a5e', 'stroke-width': .7 }, svg); h('path', { d: `M${wx + 7} ${wy}v12`, stroke: 'rgba(255,255,255,.55)', 'stroke-width': .8 }, svg); }
+    for (const x of [205, 280, 355]) { const g = h('g', { class: 'ft-a dn', style: `--fd0:${(-x / 300).toFixed(2)}s` }, svg); h('path', { d: `M${x} 1 v13`, stroke: '#e8952a', 'stroke-width': 3 }, g); h('path', { d: `M${x - 5} 12 l5 7 l5 -7z`, fill: '#e8952a' }, g); }
+    if (t === 0) { h('rect', { x: bx0 - 18, y: GY, width: bx1 - bx0 + 36, height: 26, rx: 1.5, fill: concS, stroke: cs }, svg); h('line', { x1: 120, y1: GY + 26, x2: 440, y2: GY + 26, stroke: '#1b1d20', 'stroke-dasharray': '6 5' }, svg); lab(446, GY + 30, 'alapsík', '#1b1d20');
       for (let i = 0; i <= 10; i++) up(bx0 - 14 + i * ((bx1 - bx0 + 28) / 10), GY + 52, 24, '#2f9d62'); lab(280, GY + 72, 'talpfeszültség', '#1d5c39', 'middle'); }
-    if (t === 1) { h('rect', { x: bx0 + 10, y: GY - 2, width: bx1 - bx0 - 20, height: 22, fill: conc, stroke: cs }, svg);
+    if (t === 1) { h('rect', { x: bx0 + 10, y: GY - 2, width: bx1 - bx0 - 20, height: 22, rx: 1.5, fill: concS, stroke: cs }, svg);
       for (const x of [222, 338]) { h('rect', { x: x - 9, y: GY + 20, width: 18, height: 150, fill: conc, stroke: cs }, svg); for (let k = 0; k < 6; k++) { up(x - 16, GY + 52 + k * 20, 14, '#2f9d62'); up(x + 16, GY + 52 + k * 20, 14, '#2f9d62'); } up(x, GY + 198, 24, '#e8952a'); }
       lab(160, GY + 92, 'palást', '#e6f4ec', 'end'); lab(338 + 26, GY + 196, 'talp', '#4a2c05'); }
-    if (t === 2) { h('rect', { x: bx0 - 30, y: GY, width: bx1 - bx0 + 60, height: 20, fill: conc, stroke: cs }, svg);
+    if (t === 2) { h('rect', { x: bx0 - 30, y: GY, width: bx1 - bx0 + 60, height: 20, rx: 1.5, fill: concS, stroke: cs }, svg);
       for (let i = 0; i <= 12; i++) up(bx0 - 26 + i * ((bx1 - bx0 + 52) / 12), GY + 42, 18, '#2f9d62');
       for (const x of [205, 255, 305, 355]) { h('rect', { x: x - 7, y: GY + 20, width: 14, height: 118, fill: conc, stroke: cs }, svg); for (let k = 0; k < 4; k++) up(x + 13, GY + 66 + k * 20, 12, '#2f9d62'); up(x, GY + 160, 18, '#e8952a'); }
       lab(bx1 + 44, GY + 58, 'lemez +', '#f1ece2'); lab(bx1 + 44, GY + 76, 'cölöpök', '#f1ece2'); }
@@ -264,7 +281,7 @@ $('#themeBtn').addEventListener('click', toggleTheme);
     items.forEach(([k, n, st]) => el('a', { cls: 'lsi', href: '#st' + st }, g, `${ic(k)}<span><b>${n}</b><span>→ ${st}. állomás · ${S[st - 1].rail.replace('\u00AD', '')}</span></span>`)); }); }
 
 /* ================= 1 · PISA ================= */
-{ const svg = $('#pisaSvg'); const H = 56, PX = 5.1, CX = 210, GY = 384; let ang = 0, target = 0, ghost = null, raf = 0;
+{ const svg = $('#pisaSvg'); const H = 56, PX = 4.6, CX = 210, GY = 358; let ang = 0, target = 0, ghost = null, raf = 0;
   const TL = [['1173', 'alapozás', 0.0, 'Augusztusban lerakják az alapokat. A torony mindössze kb. 3 m mély, kör alakú síkalapon áll – puha, egyenlőtlen vastagságú agyagrétegek fölött.', 1],
     ['1178', '2. emelet', 0.25, 'A második emelet elkészülte után a torony süllyedni kezd, és megjelenik a dőlés. Az építés közel száz évre leáll – a szünetben a talaj konszolidálódik, és ez valószínűleg megmentette a tornyot.', 3],
     ['1372', 'kész', 1.6, 'Elkészül a harangház. A dőlés az építés alatt végig nőtt; a felső emeleteket az építők már a dőlés ellensúlyozására építették, ezért a torony ma kissé ívelt.', 8],
@@ -276,18 +293,36 @@ $('#themeBtn').addEventListener('click', toggleTheme);
     const w = 15.5 * PX * 0.95, tierH = (H * PX - 22) / 8;
     for (let i = 0; i < tiersN; i++) { const y0 = -i * tierH; const ww = i === 7 ? w * 0.72 : w;
       h('rect', { x: -ww / 2, y: y0 - tierH, width: ww, height: tierH, fill: dashed ? 'none' : (i % 2 ? '#efe9dc' : '#f6f1e6'), stroke: dashed ? '#e8952a' : '#a79f90', 'stroke-width': dashed ? 1.6 : 1, 'stroke-dasharray': dashed ? '5 4' : '' }, g);
-      if (!dashed) for (let k = 0; k < 6; k++) h('path', { d: `M${-ww / 2 + 6 + k * (ww - 12) / 6} ${y0 - 4} v${-tierH * 0.55} a${(ww - 12) / 14} ${(ww - 12) / 14} 0 0 1 ${(ww - 12) / 7} 0 v${tierH * 0.55}`, fill: '#ddd4c2', stroke: '#b8ae9c', 'stroke-width': .8 }, g); }
-    if (!dashed) h('rect', { x: -w / 2 - 6, y: -4, width: w + 12, height: 8, fill: '#bfb6a5' }, g);
+      if (!dashed) { for (let k = 0; k < 6; k++) h('path', { d: `M${-ww / 2 + 6 + k * (ww - 12) / 6} ${y0 - 4} v${-tierH * 0.55} a${(ww - 12) / 14} ${(ww - 12) / 14} 0 0 1 ${(ww - 12) / 7} 0 v${tierH * 0.55}`, fill: '#cfc5b1', stroke: '#b8ae9c', 'stroke-width': .8 }, g);
+        h('rect', { x: -ww / 2 - 2, y: y0 - tierH - 1.5, width: ww + 4, height: 3, rx: 1.2, fill: '#d8cfbd', stroke: '#a79f90', 'stroke-width': .6 }, g);
+        h('rect', { x: -ww / 2, y: y0 - tierH, width: ww, height: tierH, fill: 'url(#pTw)' }, g); } }
+    if (!dashed) { h('rect', { x: -w / 2 - 6, y: -4, width: w + 12, height: 8, rx: 1.5, fill: '#bfb6a5', stroke: '#9c9484', 'stroke-width': .7 }, g);
+      if (tiersN === 8) { const yt = -8 * tierH; h('path', { d: `M0 ${yt} v-20`, stroke: '#5a5348', 'stroke-width': 1.4 }, g); h('path', { d: `M0 ${yt - 20} l13 4 l-13 4z`, fill: '#d4483a' }, g); } }
   }
   function draw() {
     svg.innerHTML = ''; const defs = h('defs', {}, svg); const d = h('pattern', { id: 'pD', width: 8, height: 8, patternUnits: 'userSpaceOnUse' }, defs); h('circle', { cx: 2, cy: 2, r: 1, fill: 'rgba(50,40,30,.3)' }, d);
-    h('rect', { x: 0, y: GY, width: 420, height: 40, fill: '#9c8f78' }, svg); h('rect', { x: 0, y: GY, width: 420, height: 40, fill: 'url(#pD)' }, svg);
+    const grad = (id, stops, x2 = 0, y2 = 1) => { const g = h('linearGradient', { id, x1: 0, y1: 0, x2, y2 }, defs); stops.forEach(([o, c, a = 1]) => h('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, g)); };
+    grad('pSky', [[0, '#a5cdee'], [.72, '#dcebf2'], [1, '#f3efe3']]); grad('pTw', [[0, '#000', .22], [.28, '#fff', .2], [.55, '#000', 0], [1, '#000', .3]], 1, 0);
+    grad('pS1', [[0, '#bda77c'], [1, '#a8936c']]); grad('pS2', [[0, '#8b9197'], [1, '#6f757c']]); grad('pSh', [[0, '#000', .3], [1, '#000', 0]]);
+    h('rect', { x: 0, y: 0, width: 420, height: GY, fill: 'url(#pSky)' }, svg);
+    h('circle', { cx: 62, cy: 128, r: 34, fill: '#fff3c9', opacity: .5 }, svg); h('circle', { cx: 62, cy: 128, r: 17, fill: '#ffe08a' }, svg);
+    for (const [x, y] of [[282, 150], [20, 208], [330, 232]]) h('path', { d: `M${x} ${y}c2-9 15-11 20-4 6-5 17-1 16 7 7 1 7 10 0 10h-36c-8 0-8-12 0-13z`, fill: '#fff', opacity: .82 }, svg);
+    h('path', { d: `M0 ${GY}v-16q46-22 92-6t84-4 74 6 96-8 74 12v20z`, fill: '#a9c59a', opacity: .75 }, svg);   // távoli dombok
+    for (const [x, hh] of [[26, 46], [48, 34], [356, 40], [384, 54], [402, 32]]) { h('rect', { x: x - 1, y: GY - 8, width: 2, height: 8, fill: '#5d4a34' }, svg); h('ellipse', { cx: x, cy: GY - 6 - hh / 2, rx: 5.5, ry: hh / 2, fill: '#3f6b3c' }, svg); h('ellipse', { cx: x - 1.6, cy: GY - 8 - hh / 2, rx: 2.4, ry: hh / 2.6, fill: '#55864c' }, svg); }
+    // rétegek: felül iszapos homok, alatta puha agyag, amelynek a felszíne a torony alatt teknőszerűen lesüllyedt, a dőlés oldalán mélyebben
+    h('rect', { x: 0, y: GY, width: 420, height: 62, fill: 'url(#pS2)' }, svg);
+    h('path', { d: `M0 ${GY}H420V${GY + 26}C340 ${GY + 27} 300 ${GY + 44} 246 ${GY + 46}C200 ${GY + 47} 170 ${GY + 34} 120 ${GY + 30}C80 ${GY + 27} 40 ${GY + 26} 0 ${GY + 26}Z`, fill: 'url(#pS1)' }, svg);
+    h('path', { d: `M0 ${GY}H420V${GY + 26}C340 ${GY + 27} 300 ${GY + 44} 246 ${GY + 46}C200 ${GY + 47} 170 ${GY + 34} 120 ${GY + 30}C80 ${GY + 27} 40 ${GY + 26} 0 ${GY + 26}Z`, fill: 'url(#pD)' }, svg);
+    for (let i = 0; i < 9; i++) h('path', { d: `M${6 + i * 48} ${GY + 50 + (i % 3) * 3}h${22 + (i % 2) * 10}`, stroke: 'rgba(255,255,255,.22)', 'stroke-width': 1.2, 'stroke-linecap': 'round' }, svg);
+    h('rect', { x: 0, y: GY, width: 420, height: 12, fill: 'url(#pSh)' }, svg); h('rect', { x: 0, y: GY - 3, width: 420, height: 4, fill: '#6f9a4c' }, svg);
     h('line', { x1: CX, y1: GY - H * PX - 30, x2: CX, y2: GY, stroke: '#1d2a33', 'stroke-dasharray': '6 5', 'stroke-width': 1.4 }, svg);
     if (ghost !== null) { const ga = Math.asin(clamp(ghost / H, 0, 0.2)) * 180 / Math.PI; const gg = h('g', { transform: `translate(${CX} ${GY}) rotate(${ga})` }, svg); tower(gg, 8, true); }
+    h('ellipse', { cx: CX + 12 + ang * 3, cy: GY + 1, rx: 52, ry: 4.5, fill: 'rgba(0,0,0,.2)' }, svg);
     const g = h('g', { transform: `translate(${CX} ${GY}) rotate(${ang})` }, svg); tower(g, tiers);
     const top = H * PX * (tiers / 8); const dx = Math.sin(ang * Math.PI / 180) * top, ty = GY - Math.cos(ang * Math.PI / 180) * top;
-    if (tiers === 8 && ang > 0.5) { h('line', { x1: CX, y1: ty - 12, x2: CX + dx, y2: ty - 12, stroke: '#d4483a', 'stroke-width': 2.4 }, svg); h('text', { x: CX + dx / 2, y: ty - 20, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 800, fill: '#d4483a', 'font-family': 'var(--fd)', text: fmt(Math.sin(ang * Math.PI / 180) * H * 0.975, 1) + ' m' }, svg); }
-    h('text', { x: 12, y: GY + 26, fill: '#fff', 'font-size': 12, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'puha, egyenlőtlen agyagrétegek' }, svg);
+    if (tiers === 8 && ang > 0.5) { h('line', { x1: CX, y1: ty - 12, x2: CX + dx, y2: ty - 12, stroke: '#d4483a', 'stroke-width': 2.4 }, svg); h('text', { x: CX + dx / 2, y: ty - 20, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 800, fill: '#d4483a', 'font-family': 'var(--fd)', text: fmt(Math.sin(ang * Math.PI / 180) * H * 1.005, 1) + ' m' }, svg); }
+    h('text', { x: 34, y: GY + 20, fill: '#3a2e18', 'font-size': 11.5, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'homokos, agyagos iszap' }, svg);
+    h('text', { x: 34, y: GY + 46, fill: '#fff', 'font-size': 12, 'font-weight': 700, 'font-family': 'var(--fm)', text: 'puha, egyenlőtlen agyagrétegek' }, svg);
   }
   function animTo(a) { target = a; cancelAnimationFrame(raf); if (reduce) { ang = a; draw(); return; } const a0 = ang, t0 = performance.now(); const step = (now) => { const u = clamp((now - t0) / 900); ang = lerp(a0, target, 1 - Math.pow(1 - u, 3)); draw(); if (u < 1) raf = requestAnimationFrame(step); }; raf = requestAnimationFrame(step); }
   const pg = $('#pg'), pgO = $('#pgO'); pg.addEventListener('input', () => { pgO.textContent = fmt(+pg.value, 1); ghost = +pg.value; draw(); });
@@ -540,7 +575,7 @@ const XS = (() => {
 
 /* ================= GYŰJTŐRÁCS, LÁBLÉC ================= */
 { const box = $('#gridApps'), fl = $('#footList');
-  S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><p class="acd">A tárgy felépítése, a kilenc állomás és az összes tananyag egy helyen – innen indul az út.</p><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
+  S.forEach(s => s.apps.forEach(a => { if (a.here) { el('a', { cls: 'ac here', href: '#top', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/bevezetes.jpg?v=3" alt="Bevezetés – nyitókép" loading="lazy" width="960" height="600"><i>1</i></span><span class="tx"><b>Bevezetés – ez az oldal</b><span>bme-alapozas.vercel.app</span><p class="acd">A tárgy felépítése, a kilenc állomás és az összes tananyag egy helyen – innen indul az út.</p><em>Itt vagy most ↑</em></span>`); return; } const lab = a.sub ? (a.sub === 'extra' ? s.n + '+' : a.sub) : String(s.n);
     el('a', { cls: 'ac' + (a.sub === 'extra' ? ' x' : ''), href: AU(a), target: '_blank', rel: 'noopener', style: `--c:${cv(s.n)}` }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${lab}</i></span><span class="tx"><b>${a.t}</b><span>${AT(a)}</span><em>${'Megnyitás'} ↗</em></span>`);
     el('li', {}, fl, `<i>${lab}</i><a href="${AU(a)}" target="_blank" rel="noopener">${a.t}</a>${EN && !a.en ? ' <span class="inhu">HU</span>' : ''}`); }));
   // az egész félévet átfogó tananyagok: széles kártyák a rács végén
@@ -552,16 +587,67 @@ const XS = (() => {
     { t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor', lab: '1–9', d: 'Hat 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma, a pisai torony a rétegsorával, CFA-cölöp, horgonyzott munkagödör és a kész telek. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },
   ];
   X.forEach(a => { el('a', { cls: 'ac wide', href: AU(a), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${AT(a)}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
-    el('li', {}, fl, `<i>${a.lab}</i><a href="${AU(a)}" target="_blank" rel="noopener">${a.t}</a>${EN && !a.en ? ' <span class="inhu">HU</span>' : ''}`); }); }
+    el('li', {}, fl, `<i>${a.lab}</i><a href="${AU(a)}" target="_blank" rel="noopener">${a.t}</a>${EN && !a.en ? ' <span class="inhu">HU</span>' : ''}`); });
+  el('a', { cls: 'ac wide acv', href: '#video', 'data-video': '', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/poster-alt.jpg?v=2" alt="A bevezető animáció nyitóképe" loading="lazy" width="1600" height="900"><i>▶ 3:10</i></span><span class="tx"><b>A tárgy felépítése – bevezető animáció</b><span>animációs videó · saját zene</span><p class="acd">Három perc alatt az egész félév: egy kitalált telken a talaj feltárásától a síkalapon álló házon át a cölöpökön és résfalas munkagödörben épülő toronyig.</p><em>Lejátszás ▶</em></span>`); }
 
 /* ================= VIDEÓ ================= */
 { const m = $('#vmodal'), f = $('#vmFrame'); let last = null;
-  const open = () => { last = document.activeElement; f.src = EN ? 'video/bevezeto-en.html?v=1#autoplay' : 'video/bevezeto.html?v=4#autoplay'; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => f.focus(), 300); };
+  const open = () => { last = document.activeElement; f.src = EN ? 'video/bevezeto-en.html?v=2#autoplay' : 'video/bevezeto.html?v=5#autoplay'; m.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => f.focus(), 300); };
   const close = () => { m.hidden = true; f.src = 'about:blank'; document.body.style.overflow = ''; if (last) last.focus(); };
-  $$('[data-video]').forEach(b => b.addEventListener('click', open)); $('#vmClose').addEventListener('click', close);
+  $$('[data-video]').forEach(b => b.addEventListener('click', (e) => { e.preventDefault(); open(); })); $('#vmClose').addEventListener('click', close);
   m.addEventListener('click', (e) => { if (e.target === m) close(); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && !m.hidden) close(); });
   addEventListener('message', (e) => { if (e.data === 'vclose' && !m.hidden) close(); }); }
+
+/* ================= LÁTVÁNY: élő hős, előzetes, görgetési sáv, megjelenés görgetésre ================= */
+{ const hero = $('.hero'), fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // csillagok és a talajból felszálló szemcsék a hős hátterében (30 kép/mp, csak amíg a hős látszik)
+  const cv2 = $('#heroFx');
+  if (cv2 && !reduce && cv2.getContext) { const ctx = cv2.getContext('2d'); let W = 0, HH = 0, vis = true, raf = 0, last = 0, sd = 7;
+    const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+    const stars = Array.from({ length: 70 }, () => ({ x: rnd(), y: rnd() * .5, r: .4 + rnd() * .8, p: rnd() * 6.28, s: .5 + rnd() * 1.4 }));
+    const COL = ['242,165,49', '207,174,116', '242,179,84', '138,127,110', '95,227,255'];
+    const mk = (first) => ({ x: rnd(), y: first ? .3 + rnd() * .75 : 1.03, r: 2.5 + rnd() * 5, v: .012 + rnd() * .03, w: rnd() * 6.28, a: .16 + rnd() * .3, c: COL[Math.floor(rnd() * (rnd() < .12 ? 5 : 4))] });
+    const grains = Array.from({ length: 38 }, () => mk(true));
+    const size = () => { const r = hero.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); W = r.width; HH = r.height; cv2.width = Math.round(W * d); cv2.height = Math.round(HH * d); ctx.setTransform(d, 0, 0, d, 0, 0); };
+    const frame = (now) => { raf = requestAnimationFrame(frame); if (now - last < 32) return; const dt = Math.min(.1, (now - last) / 1000); last = now; ctx.clearRect(0, 0, W, HH); const t = now / 1000;
+      for (const st of stars) { ctx.globalAlpha = .12 + .5 * (.5 + .5 * Math.sin(t * st.s + st.p)); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(st.x * W, st.y * HH, st.r, 0, 6.28); ctx.fill(); }
+      for (let i = 0; i < grains.length; i++) { const g = grains[i]; g.y -= g.v * dt; g.w += dt * .8; if (g.y < .22) grains[i] = mk(false);
+        const fade = Math.min(1, (1.03 - g.y) * 9) * Math.min(1, (g.y - .22) * 4); const gx = (g.x + Math.sin(g.w) * .012) * W, gy = g.y * HH, gr = ctx.createRadialGradient(gx, gy, 0, gx, gy, g.r); gr.addColorStop(0, `rgba(${g.c},${Math.max(0, g.a * fade).toFixed(3)})`); gr.addColorStop(1, `rgba(${g.c},0)`); ctx.globalAlpha = 1; ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(gx, gy, g.r, 0, 6.28); ctx.fill(); }
+      ctx.globalAlpha = 1; };
+    const run = () => { cancelAnimationFrame(raf); if (vis && !document.hidden) raf = requestAnimationFrame(frame); };
+    size(); new ResizeObserver(size).observe(hero); new IntersectionObserver((es) => { vis = es[0].isIntersecting; run(); }).observe(hero); document.addEventListener('visibilitychange', run); }
+  // a videókártya az egér felé dől (csak egérrel)
+  const card = $('#heroCard');
+  if (card && fine && !reduce) { card.addEventListener('pointermove', (e) => { const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; card.style.transform = `perspective(1100px) rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg) scale(1.015)`; });
+    card.addEventListener('pointerleave', () => { card.style.transform = ''; }); }
+  // néma, rövid előzetes a hős kártyájában: betöltés után indul, és csak akkor megy, ha a kártya látszik
+  const pv = $('#heroPrev'), conn = navigator.connection || {}, can = (t) => !!(pv && pv.canPlayType && pv.canPlayType(t));
+  const pvSrc = can('video/mp4; codecs="avc1.42E01E"') ? 'video/elozetes.mp4?v=1' : (can('video/webm; codecs="vp9"') ? 'video/elozetes.webm?v=1' : '');
+  if (pv && !reduce && !conn.saveData && pvSrc) { let want = false;
+    const sync = () => { if (want && !document.hidden && $('#vmodal').hidden) { const p = pv.play(); if (p && p.catch) p.catch(() => {}); } else pv.pause(); };
+    pv.addEventListener('playing', () => pv.classList.add('on'), { once: true });
+    const arm = () => setTimeout(() => { pv.src = pvSrc; new IntersectionObserver((es) => { want = es[0].isIntersecting; sync(); }, { threshold: .35 }).observe(pv); document.addEventListener('visibilitychange', sync);
+      new MutationObserver(sync).observe($('#vmodal'), { attributes: true, attributeFilter: ['hidden'] }); }, 900);
+    if (document.readyState === 'complete') arm(); else addEventListener('load', arm, { once: true }); }
+  // görgetési sáv a fejléc alján
+  { const bar = el('div', { cls: 'sprog', 'aria-hidden': 'true' }, $('.top'), '<i></i>').firstChild; let tk = false;
+    const upd = () => { tk = false; const m = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${m > 0 ? clamp(scrollY / m) : 0})`; };
+    addEventListener('scroll', () => { if (!tk) { tk = true; requestAnimationFrame(upd); } }, { passive: true }); addEventListener('resize', upd); upd(); }
+  // a számok felpörögnek, amikor a hős megjelenik
+  if (!reduce) $$('.stat b').forEach((b, i) => { const m = /^(\d+)(.*)$/.exec(b.textContent.trim()); if (!m) return; const end = +m[1], suf = m[2], t0 = performance.now() + 700 + i * 110, dur = 1100; b.textContent = '0' + suf;
+    const step = (now) => { const u = clamp((now - t0) / dur); b.textContent = Math.round(end * (1 - Math.pow(1 - u, 3))) + suf; if (u < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); });
+  // megjelenés görgetésre: a blokkok alulról úsznak be, a rácsok elemei egymás után
+  const heads = $$('.shead');
+  if (reduce || !('IntersectionObserver' in window)) heads.forEach(e => e.classList.add('seen'));
+  else { const SEL = '.route-h, .rail, .arb, .xr-h, .xt, .shead, .blk > .bh, .blk > .lead, .blk > .prose, .blk > .wg, .vs, .duo > *, .tile, .lsg, .why .card, .harder > *, .q, #temakorok .lead, .ac, .vgrid > *, footer .fg > *';
+    const vh = innerHeight, items = $$(SEL).filter(e => e.getBoundingClientRect().top > vh * .92);   // ami betöltéskor már látszik, az marad
+    heads.forEach(e => { if (!items.includes(e)) e.classList.add('seen'); });
+    const io = new IntersectionObserver((es) => { const now = es.filter(e => e.isIntersecting).map(e => e.target); if (!now.length) return;
+      const rows = new Map(); now.forEach(e => { const k = Math.round(e.getBoundingClientRect().top / 40); if (!rows.has(k)) rows.set(k, []); rows.get(k).push(e); });
+      rows.forEach(list => list.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left).forEach((e, i) => { io.unobserve(e); e.style.setProperty('--rd', Math.min(i, 8) * 70 + 'ms'); e.classList.add('in', 'seen');
+        setTimeout(() => { e.classList.remove('rise', 'in'); e.style.removeProperty('--rd'); }, 900 + Math.min(i, 8) * 70); })); }, { rootMargin: '0px 0px -7% 0px', threshold: .08 });
+    items.forEach(e => { e.classList.add('rise'); io.observe(e); }); } }
 
 /* ================= FORMÁZÁS: nem törő egységek + magyar elválasztás ================= */
 const GUARD = (() => {
