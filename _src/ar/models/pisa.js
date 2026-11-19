@@ -51,10 +51,10 @@ export function build({ lang }) {
   const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', zf = Z + 0.1, zl = Z + 5, o = { h: 0.038 };
     label(G, hu ? 'feltöltés' : 'made ground', [-22, -1.5, zf], [-33, 4, zl], cMG, K, o);
     label(G, hu ? 'homokos iszap, homok' : 'sandy silt, sand', [-16, -6.5, zf], [-37, -9, zl], cUP, K, o);
-    label(G, hu ? 'puha, egyenlőtlen vastagságú agyagréteg' : 'soft clay layer of uneven thickness', [6, -14, zf], [-30, -36, zl], cCL, K, o);
-    label(G, hu ? 'merevebb agyag, homok, agyag' : 'stiffer clay, sand, clay', [20, -26.5, zf], [14, -36, zl + 2], cSA, K, o);
+    label(G, hu ? 'puha, egyenlőtlen vastagságú agyagréteg' : 'soft clay layer of uneven thickness', [6, -14, zf], [-30, -37.5, zl], cCL, K, o);
+    label(G, hu ? 'merevebb agyag, homok, agyag' : 'stiffer clay, sand, clay', [20, -26.5, zf], [-12, -45.5, zl], cSA, K, o);
     label(G, hu ? 'talajvíz' : 'groundwater', [22, -1.6, zf], [26, 6, zl], C.water, K, o);
-    label(G, hu ? 'É' : 'N', null, [-X + 2, 1.2, zl - 3], '#f2f4f6', K, o); label(G, hu ? 'D' : 'S', null, [X - 5, 1.2, zl - 3], '#f2f4f6', K, o);
+    label(G, hu ? 'É' : 'N', null, [-X + 1, 8.5, zl - 3], '#f2f4f6', K, o); label(G, hu ? 'D' : 'S', null, [X - 6, 1.2, zl - 3], '#f2f4f6', K, o);
     label(G, hu ? 'ma kb. 3,97° · a csúcs 3,9 m-rel tér el' : 'today approx. 3.97° · top 3.9 m off', [2.2, 55, 0], [14, 62, 0], '#d4372a', K, o);
     label(G, hu ? 'az eredeti függőleges' : 'the original vertical', [-9.2, 40, 0], [-36, 46, 0], '#d4372a', K, o);
     return G; };
