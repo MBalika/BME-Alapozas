@@ -218,6 +218,10 @@ footer p{margin:0}
 <script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
 <script>Hyphenopoly.config({ require: { "hu": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
 
+<style id="boxtext-css">
+/* Szövegdobozok: a cím és a szöveg középen (a felhasználó kérése, 2026-11-20). Balra zárt marad: táblázat, felsorolás, űrlap. */
+.badge, .badge *, .rule { text-align:center !important; text-align-last:center } .badge .row { justify-content:center } .badge .nums, .badge [class*="stat"] { justify-content:center }
+</style>
 </head>
 <body>
 <header class="top">

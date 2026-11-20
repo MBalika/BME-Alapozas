@@ -194,6 +194,11 @@ header.lab::after{content:""; position:absolute; inset:0; z-index:-1; pointer-ev
 <script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
 <script>Hyphenopoly.config({ require: { "en-gb": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
 
+<style id="boxtext-css">
+/* Szövegdobozok: a cím és a szöveg középen (a felhasználó kérése, 2026-11-20). Balra zárt marad: táblázat, felsorolás, űrlap. */
+.steps li, .steps li p, .steps li h3, .steps li b { text-align:center !important; text-align-last:center } .steps li { align-items:center } .plat, .plat p, [class*="howto"] div, [class*="howto"] p { text-align:center !important; text-align-last:center }
+ .trouble > div, .trouble > div p, .trouble > div h3 { text-align:center !important; text-align-last:center }
+</style>
 </head>
 <body>
 <header class="lab">

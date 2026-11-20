@@ -726,6 +726,17 @@ a.lsi:hover{padding-left:6px}
 @media (max-width: 640px){ .wg-h:not(:has(button)){justify-content:center} .wg-h:not(:has(button)) > b{flex:1 0 100%} }
 @media (max-width: 880px){ footer .fb{max-width:none} }
 
+/* Szövegdobozok: a cím és a szöveg középen (a felhasználó kérése, 2026-11-20). Balra zárt marad: táblázat (acél–talaj
+   összevetés), határállapot-lista, pontokkal szedett felsorolás, űrlapmező. */
+main .duo-p p, main .tile p, main .why .card p, main .harder .card, main .harder .card p, main .q p, main .card p, main .verdict, .rd, .quote p, .quote .kick, .tile, .card, .q { text-align:center; text-align-last:center }
+.tile .go, .q .opts, .chips { justify-content:center }
+.tile svg, .why .card svg { margin-inline:auto }
+.harder .hh { justify-content:center; text-align:center }
+.q { align-items:center }
+.app > div, .app > span:not(:first-child) { text-align:center }
+.verdict { text-align:center !important }
+.ksh-side .seg button, .seg button { text-align:center }
+
 </style>
 </head>
 <body>
