@@ -516,7 +516,7 @@ $('#actBtn').addEventListener('click', () => { const k = $('#actBtn').dataset.ki
 /* mozgás: teljes 3D-s makettek körbeforognak, a metszetes makettek (sec) csak ide-oda lengenek a nézet körül */
 let rotating = true, lastUser = 0; const swing = { on: false, t0: 0, th0: 0, phi: 75, r: '100%', hold: false };
 function anchorSwing(delay = 0) { try { const o = mv.getCameraOrbit(); swing.th0 = o.theta * 180 / Math.PI; swing.phi = o.phi * 180 / Math.PI; swing.r = o.radius + 'm'; } catch (e) {} swing.t0 = performance.now() + delay; }
-function applyMotion(delay = 0) { const sec = cur && cur.sec; mv.toggleAttribute('auto-rotate', rotating && !sec); swing.on = rotating && !!sec; if (swing.on) { swing.hold = true; setTimeout(() => { anchorSwing(); swing.hold = false; }, delay); } $('#rotBtn').setAttribute('aria-pressed', String(rotating)); }
+function applyMotion(delay = 0) { const sec = cur && cur.sec, mov = rotating && !labels; /* feliratokkal a modell áll: a táblák a fő nézőpont felé néznek, forgás közben élükről látszanának */ mv.toggleAttribute('auto-rotate', mov && !sec); swing.on = mov && !!sec; if (swing.on) { swing.hold = true; setTimeout(() => { anchorSwing(); swing.hold = false; }, delay); } $('#rotBtn').setAttribute('aria-pressed', String(rotating)); }
 mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-interaction') { lastUser = performance.now(); swing.hold = true; } });
 $('#rotBtn').addEventListener('click', () => { rotating = !rotating; applyMotion(); });
 const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
