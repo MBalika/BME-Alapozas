@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/ar-labor/">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<meta name="theme-color" content="#0b0e12">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:image" content="img/munkagodor.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0e12'/%3E%3Cpath d='M32 10 52 22v20L32 54 12 42V22z' fill='none' stroke='%23ffb23e' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M12 22l20 12 20-12M32 34v20' fill='none' stroke='%23ffb23e' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preload" href="../fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+{{hyph}}
+<style>
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:700;src:url(../fonts/barlow-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:700;src:url(../fonts/barlow-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:800;src:url(../fonts/barlow-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:800;src:url(../fonts/barlow-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-display:swap;font-weight:400;src:url(../fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-display:swap;font-weight:400;src:url(../fonts/inter-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-display:swap;font-weight:600;src:url(../fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-display:swap;font-weight:600;src:url(../fonts/inter-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --bg:#0b0e12; --bg2:#11161c; --card:#151b22; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.18);
+  --ink:#eef1ea; --muted:#a2aab3; --lime:#ffb23e;
+  --fh:'BarlowC','Barlow Condensed','Arial Narrow',sans-serif; --fb:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --pad:40px; --max:1320px; --sc:#ffb23e; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--ink); font:400 17px/1.62 var(--fb); -webkit-font-smoothing:antialiased; overflow-x:hidden}
+a{color:inherit}
+button{font:inherit; color:inherit}
+img{display:block; max-width:100%; height:auto}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
+main p{text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty}
+.nw{white-space:nowrap; hyphens:none}
+.rag{text-align:left!important}
+.twr{text-wrap:wrap!important}
+/* fejléc */
+.top{position:sticky; top:0; z-index:30; background:rgba(11,14,18,.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; height:62px; gap:16px; max-width:none}
+.brand{display:flex; align-items:center; gap:12px; font:800 20px/1 var(--fh); letter-spacing:.04em; text-transform:uppercase; text-decoration:none; white-space:nowrap}
+.brand i{width:14px; height:22px; background:var(--lime); border-radius:3px; box-shadow:0 0 18px rgba(255,178,62,.55)}
+.brand span{color:var(--muted); font-weight:700}
+.top nav{display:flex; align-items:center; gap:22px; font:700 15px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase}
+.top nav a, .top nav button{text-decoration:none; color:var(--muted); background:none; border:0; padding:0; cursor:pointer; font:inherit; letter-spacing:inherit; text-transform:inherit}
+.top nav a:hover, .top nav button:hover{color:var(--ink)}
+.top nav .aula-btn{color:var(--bg); background:var(--lime); border-radius:999px; padding:9px 14px; box-shadow:0 0 24px rgba(255,178,62,.35)}
+.top nav .aula-btn:hover{color:var(--bg); filter:brightness(1.08)}
+.lang{display:inline-flex; border:1px solid var(--line2); border-radius:999px; overflow:hidden}
+.lang a, .lang span{padding:6px 10px; font:800 13px/1 var(--fh); letter-spacing:.1em}
+.lang span{background:var(--ink); color:var(--bg)}
+.top nav .lang a{padding:6px 10px; font:800 13px/1 var(--fh); letter-spacing:.1em; color:var(--muted)} .top nav .lang a:hover{color:var(--ink)}
+/* színpad */
+.stage{position:relative; height:calc(100svh - 62px); min-height:600px; max-height:1100px; overflow:hidden; background:var(--bg); isolation:isolate}
+.stage::before{content:""; position:absolute; inset:0; z-index:-2; background:radial-gradient(48% 62% at 64% 48%, color-mix(in srgb, var(--sc) 34%, transparent), transparent 72%), radial-gradient(40% 50% at 10% 95%, color-mix(in srgb, var(--sc) 14%, transparent), transparent 70%); transition:background .8s}
+.floor{position:absolute; left:-40%; right:-40%; bottom:-6%; height:58%; z-index:-1; pointer-events:none;
+  background-image:linear-gradient(color-mix(in srgb, var(--sc) 55%, transparent) 1.5px, transparent 1.5px), linear-gradient(90deg, color-mix(in srgb, var(--sc) 55%, transparent) 1.5px, transparent 1.5px);
+  background-size:72px 72px; transform:perspective(520px) rotateX(66deg); transform-origin:50% 100%;
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,.9), transparent 85%); mask-image:linear-gradient(to top, rgba(0,0,0,.9), transparent 85%); animation:floor 3.2s linear infinite; opacity:.8}
+@keyframes floor{to{background-position:0 72px, 0 0}}
+#mv{position:absolute; inset:0; width:100%; height:100%; background:transparent; --poster-color:transparent; --progress-bar-color:transparent; outline:none}
+#mv::part(default-ar-button){display:none}
+.loader{position:absolute; left:0; top:0; height:3px; width:0; background:var(--sc); box-shadow:0 0 14px var(--sc); z-index:8; transition:width .2s, opacity .4s}
+.loader.done{opacity:0}
+/* HUD */
+.hud{position:absolute; left:var(--pad); bottom:96px; width:min(560px, 44%); z-index:5; pointer-events:none}
+.hud > *{pointer-events:auto}
+.kicker{display:block; font:800 15px/1.25 var(--fh); letter-spacing:.14em; text-transform:uppercase; color:var(--sc); transition:color .6s}
+.kicker i{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--sc); box-shadow:0 0 14px var(--sc); margin-right:10px; vertical-align:.08em}
+.kicker span{color:var(--muted); letter-spacing:.1em; margin-left:8px; white-space:nowrap}
+#mname{text-shadow:0 2px 28px rgba(0,0,0,.55); font:800 clamp(52px, 6.4vw, 112px)/.9 var(--fh); text-transform:uppercase; letter-spacing:-.005em; margin:14px 0 0; text-wrap:balance}
+#mname.long{font-size:clamp(46px, 5vw, 88px)} #mname.xlong{font-size:clamp(40px, 4.1vw, 72px)}
+body.aula #mname.long{font-size:clamp(60px, 5.8vw, 136px)} body.aula #mname.xlong{font-size:clamp(52px, 4.8vw, 112px)}
+#mname .w{display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.04em; margin-bottom:-.04em}
+#mname .w > span{display:inline-block}
+.hook{text-shadow:0 1px 14px rgba(0,0,0,.7); font:600 clamp(17px, 1.45vw, 23px)/1.38 var(--fb); color:#d7dcd2; margin:16px 0 0; max-width:30em; text-align:left!important; text-wrap:pretty}
+.facts{display:flex; gap:clamp(18px, 2.4vw, 40px); margin-top:24px; flex-wrap:wrap}
+.fact b{text-shadow:0 2px 18px rgba(0,0,0,.5); display:block; font:800 clamp(34px, 3.4vw, 58px)/1 var(--fh); color:var(--sc); white-space:nowrap; transition:color .6s; font-variant-numeric:tabular-nums}
+.fact span{display:block; font:600 13px/1.3 var(--fb); color:var(--muted); margin-top:6px; max-width:11em; text-transform:none}
+.hud.in .kicker, .hud.in .hook, .hud.in .fact{animation:fadeUp .7s cubic-bezier(.2,.8,.2,1) both}
+.hud.in .hook{animation-delay:.32s} .hud.in .fact{animation-delay:calc(.42s + var(--i) * .09s)}
+.hud.in #mname .w > span{animation:wordUp .75s cubic-bezier(.2,.85,.2,1) both; animation-delay:calc(.08s + var(--i) * .07s)}
+@keyframes fadeUp{from{opacity:0; transform:translateY(18px)}to{opacity:1; transform:none}}
+@keyframes wordUp{from{transform:translateY(105%) skewY(6deg)}to{transform:none}}
+/* számláló és nyilak */
+.count{position:absolute; right:var(--pad); top:26px; z-index:5; font:800 clamp(38px, 4vw, 64px)/1 var(--fh); color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,.28); letter-spacing:.02em; pointer-events:none}
+.count b{color:var(--sc); -webkit-text-stroke:0; transition:color .6s}
+.nav-arrow{position:absolute; top:50%; z-index:6; width:58px; height:58px; margin-top:-29px; border-radius:50%; border:1px solid var(--line2); background:rgba(11,14,18,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:grid; place-items:center; cursor:pointer; transition:transform .2s, border-color .2s, background .2s}
+.nav-arrow:hover{transform:scale(1.08); border-color:var(--sc); background:rgba(11,14,18,.8)}
+.nav-arrow svg{width:24px; height:24px}
+.nav-arrow.prev{left:16px} .nav-arrow.next{right:16px}
+@media (min-width:761px){ .nav-arrow{top:104px; margin-top:0; width:52px; height:52px} .nav-arrow.prev{left:auto; right:calc(var(--pad) + 62px)} .nav-arrow.next{right:var(--pad)} .count{top:22px} }
+/* vezérlők */
+.ctrl{position:absolute; right:var(--pad); bottom:32px; z-index:6; display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end; max-width:60%}
+.btn{display:inline-flex; align-items:center; gap:9px; height:48px; padding:0 18px; border-radius:999px; border:1px solid var(--line2); background:rgba(11,14,18,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); font:800 16px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; cursor:pointer; white-space:nowrap; transition:border-color .2s, background .2s, transform .15s}
+.btn:hover{border-color:rgba(255,255,255,.4)}
+.btn:active{transform:scale(.97)}
+.btn svg{width:18px; height:18px; flex:none}
+.btn.ic{width:48px; padding:0; justify-content:center}
+.btn[hidden]{display:none}
+.btn[aria-pressed="true"]{border-color:var(--sc); color:var(--sc)}
+.btn.act{background:var(--sc); color:#0b0e12; border-color:transparent; box-shadow:0 0 30px color-mix(in srgb, var(--sc) 55%, transparent); animation:pulse 2.4s ease-in-out infinite}
+.btn.act:hover{filter:brightness(1.08)}
+@keyframes pulse{0%,100%{box-shadow:0 0 18px color-mix(in srgb, var(--sc) 40%, transparent)}50%{box-shadow:0 0 38px color-mix(in srgb, var(--sc) 75%, transparent)}}
+.prog{position:absolute; left:0; right:0; bottom:0; height:4px; z-index:6; background:rgba(255,255,255,.06); cursor:pointer}
+.prog i{position:absolute; left:0; top:0; bottom:0; width:0; background:var(--sc); box-shadow:0 0 12px var(--sc)}
+.prog[hidden]{display:none}
+.hint{position:absolute; left:50%; top:22px; transform:translateX(-50%); z-index:6; font:700 14px/1 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); background:rgba(11,14,18,.6); border:1px solid var(--line); padding:9px 14px; border-radius:999px; white-space:nowrap; pointer-events:none; transition:opacity .5s}
+.hint.off{opacity:0}
+/* átmenet: szakirányszínű csík söpör át */
+.wipe{position:absolute; inset:0; z-index:7; pointer-events:none; overflow:hidden}
+.wipe::before, .wipe::after{content:""; position:absolute; top:-20%; bottom:-20%; left:0; width:130%; transform:translateX(-140%) skewX(-12deg)}
+.wipe::before{background:var(--sc)}
+.wipe::after{background:#0b0e12; width:118%}
+.stage.wiping .wipe::before{animation:wipe .95s cubic-bezier(.75,0,.25,1) both}
+.stage.wiping .wipe::after{animation:wipe .95s cubic-bezier(.75,0,.25,1) .07s both}
+@keyframes wipe{from{transform:translateX(-140%) skewX(-12deg)}to{transform:translateX(140%) skewX(-12deg)}}
+/* polc */
+section{padding:72px 0}
+.sec-h{display:flex; align-items:end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:26px}
+h2{font:800 clamp(40px, 4.4vw, 68px)/.95 var(--fh); text-transform:uppercase; margin:0}
+h2 em{font-style:normal; color:var(--lime)}
+.chips{display:flex; gap:8px; flex-wrap:wrap}
+.chip{display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 14px; border-radius:999px; border:1px solid var(--line2); background:transparent; cursor:pointer; font:800 14px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
+.chip i{width:9px; height:9px; border-radius:50%; background:var(--c, var(--ink))}
+.chip[aria-pressed="true"]{color:var(--ink); border-color:var(--c, var(--ink)); background:color-mix(in srgb, var(--c, #fff) 14%, transparent)}
+.cards{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:18px}
+.card{position:relative; text-align:left; border:1px solid var(--line); background:var(--card); border-radius:16px; overflow:hidden; cursor:pointer; padding:0; transition:transform .2s, border-color .2s, box-shadow .2s}
+.card::before{content:""; position:absolute; left:0; right:0; top:0; height:4px; background:var(--c); z-index:1}
+.card:hover{transform:translateY(-4px); border-color:color-mix(in srgb, var(--c) 60%, transparent); box-shadow:0 14px 40px -12px color-mix(in srgb, var(--c) 45%, transparent)}
+.card[aria-pressed="true"]{border-color:var(--c); box-shadow:0 0 0 1px var(--c), 0 14px 40px -12px color-mix(in srgb, var(--c) 55%, transparent)}
+.card img{width:100%; aspect-ratio:16/10; object-fit:cover; background:#e8eef2}
+.card .t{display:block; padding:14px 16px 16px}
+.card .t small{display:block; font:800 13px/1.15 var(--fh); letter-spacing:.1em; text-transform:uppercase; color:var(--c)}
+.card .t b{display:block; font:800 26px/1.02 var(--fh); text-transform:uppercase; margin-top:6px}
+.card .t span{display:block; font:400 14px/1.4 var(--fb); color:var(--muted); margin-top:6px}
+.card[hidden]{display:none}
+/* részletek */
+.detail{display:grid; grid-template-columns:1.25fr .75fr; gap:48px; align-items:start}
+.detail h3{font:800 clamp(30px, 2.6vw, 40px)/1 var(--fh); text-transform:uppercase; margin:0 0 14px}
+.detail p{margin:0 0 14px; color:#d4d9d0}
+.where{display:flex; gap:14px; align-items:center; margin-top:18px; padding:16px 18px; border-radius:14px; border:1px solid var(--line); background:var(--bg2)}
+.where i{width:12px; height:44px; border-radius:6px; background:var(--sc); flex:none; box-shadow:0 0 18px var(--sc)}
+.where b{display:block; font:800 22px/1.05 var(--fh); text-transform:uppercase}
+.where span{display:block; color:var(--muted); font-size:14px; margin-top:4px}
+.qrbox{border:1px solid var(--line); background:var(--bg2); border-radius:18px; padding:22px; text-align:center}
+.qrbox .q{background:#fff; border-radius:12px; padding:14px; width:220px; margin:0 auto}
+.qrbox .q svg{display:block; width:100%; height:auto}
+.qrbox b{display:block; font:800 24px/1.05 var(--fh); text-transform:uppercase; margin-top:16px}
+.qrbox span{display:block; color:var(--muted); font-size:14px; margin-top:6px}
+/* szakirányok */
+.bsc{margin-top:8px}
+.bsc + .bsc{margin-top:34px}
+.bsc-h{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:14px}
+.bsc-h b{font:800 30px/1 var(--fh); text-transform:uppercase}
+.bsc-h span{color:var(--muted); font:700 15px/1 var(--fh); letter-spacing:.1em; text-transform:uppercase}
+.specs{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px}
+.spec{border:1px solid var(--line); border-radius:16px; padding:18px; background:linear-gradient(160deg, color-mix(in srgb, var(--c) 16%, transparent), transparent 55%), var(--card); position:relative; overflow:hidden}
+.spec b{display:block; font:800 24px/1.02 var(--fh); text-transform:uppercase; color:var(--c)}
+.spec p{font-size:15px; line-height:1.5; margin:10px 0 12px; color:#d4d9d0}
+.spec .ms{display:flex; gap:6px; flex-wrap:wrap}
+.spec .ms button{border:1px solid color-mix(in srgb, var(--c) 55%, transparent); background:transparent; color:var(--ink); border-radius:999px; padding:6px 10px; font:700 13px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase; cursor:pointer}
+.spec .ms button:hover{background:color-mix(in srgb, var(--c) 20%, transparent)}
+.spec .ms em{font:700 13px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-style:normal; padding:6px 0}
+footer{border-top:1px solid var(--line); padding:28px 0 40px; color:var(--muted); font-size:14px}
+footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+footer a{color:var(--ink)}
+/* AULA mód: teljes képernyő, nagy betűk, magától léptet */
+.aula-only{display:none}
+body.aula{overflow:hidden; cursor:default}
+body.aula.idle, body.aula.idle *{cursor:none!important}
+body.aula .top, body.aula main > section, body.aula footer{display:none}
+body.aula .stage{height:100vh; max-height:none; min-height:0}
+body.aula .aula-only{display:block}
+body.aula .hud{left:64px; bottom:120px; width:min(900px, 52%)}
+body.aula #mname{font-size:clamp(72px, 7.2vw, 170px)}
+body.aula .hint{display:none}
+body.aula .kicker{font-size:clamp(18px, 1.4vw, 28px)}
+body.aula .hook{font-size:clamp(22px, 1.8vw, 36px)}
+body.aula .fact b{font-size:clamp(48px, 4.6vw, 96px)}
+body.aula .fact span{font-size:clamp(14px, 1vw, 20px)}
+body.aula .nav-arrow, body.aula .ctrl .opt{display:none}
+body.aula .ctrl{right:auto; left:64px; bottom:40px}
+body.aula .count{top:40px; right:64px}
+.abrand{position:absolute; left:64px; top:40px; z-index:6; font:800 clamp(20px, 1.6vw, 30px)/1 var(--fh); letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.abrand b{color:var(--lime)}
+.aqr{display:none; position:absolute; right:var(--pad); top:170px; z-index:6; width:200px; text-align:center; border-radius:20px; padding:14px; background:rgba(11,14,18,.74); border:1px solid var(--line2); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+@media (hover:hover) and (pointer:fine) and (min-width:1101px){ .aqr{display:block} .viewer{right:250px!important} body.aula .viewer{right:calc(clamp(230px, 15vw, 320px) + 96px)!important} }
+body.aula .aqr{display:block; top:auto; right:64px; bottom:56px; width:clamp(230px, 15vw, 320px); padding:18px}
+.aqr .q{background:#fff; border-radius:14px; padding:12px}
+.aqr .q svg{display:block; width:100%; height:auto}
+.aqr b{display:block; font:800 22px/1 var(--fh); text-transform:uppercase; margin-top:12px; color:var(--lime)}
+.aqr span{display:block; font:600 13px/1.3 var(--fb); color:var(--muted); margin-top:6px}
+body.aula .aqr b{font-size:clamp(22px, 1.6vw, 32px); margin-top:14px} body.aula .aqr span{font-size:clamp(13px, .85vw, 17px)}
+.ticker{position:absolute; left:64px; right:calc(64px + clamp(230px, 15vw, 320px) + 24px); bottom:0; height:4px; z-index:6; display:flex; gap:6px}
+.ticker i{flex:1; background:rgba(255,255,255,.12); position:relative; overflow:hidden; border-radius:2px}
+.ticker i b{position:absolute; inset:0; width:0; background:var(--lime)}
+.ticker i.done b{width:100%; background:rgba(255,178,62,.45)}
+.manual{position:absolute; left:50%; top:40px; transform:translateX(-50%); z-index:7; font:800 clamp(16px, 1.1vw, 22px)/1 var(--fh); letter-spacing:.12em; text-transform:uppercase; background:var(--lime); color:#0b0e12; padding:12px 20px; border-radius:999px; opacity:0; transition:opacity .3s; pointer-events:none}
+.manual.on{opacity:1}
+.aexit{position:absolute; right:16px; top:16px; z-index:8; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); background:rgba(11,14,18,.5); color:var(--muted); cursor:pointer; opacity:.25; transition:opacity .2s}
+.aexit:hover{opacity:1}
+/* AR: nagy gomb telefonon, indító lap, AR-nézet felülete */
+.arfab{position:absolute; left:50%; bottom:18px; transform:translateX(-50%); z-index:7; display:inline-flex; align-items:center; gap:11px; height:58px; padding:0 28px; border-radius:999px; border:0; background:var(--lime); color:#0b0e12; font:800 21px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; cursor:pointer; box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 34px rgba(255,178,62,.45); animation:fabPulse 2.4s ease-in-out infinite}
+.arfab svg{width:26px; height:26px; flex:none}
+.arfab[hidden]{display:none}
+.arfab.off{background:rgba(11,14,18,.8); color:var(--ink); border:1px solid var(--line2); box-shadow:0 8px 24px rgba(0,0,0,.4); animation:none}
+@keyframes fabPulse{0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 18px rgba(255,178,62,.35)}50%{box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 42px rgba(255,178,62,.7)}}
+.arsheet{position:fixed; inset:0; z-index:50; display:flex; align-items:flex-end; justify-content:center; background:rgba(5,7,9,.62); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px)}
+.arsheet[hidden]{display:none}
+.arsheet-in{position:relative; width:min(560px, 100%); max-height:100%; overflow:auto; background:var(--bg2); border:1px solid var(--line2); border-radius:22px 22px 0 0; padding:26px 22px calc(22px + env(safe-area-inset-bottom)); animation:sheetUp .32s cubic-bezier(.2,.8,.2,1)}
+@media (min-width:761px){ .arsheet{align-items:center} .arsheet-in{border-radius:22px} }
+@keyframes sheetUp{from{transform:translateY(40px); opacity:0}to{transform:none; opacity:1}}
+.ars-x{position:absolute; right:14px; top:14px; width:42px; height:42px; border-radius:50%; border:1px solid var(--line2); background:transparent; color:var(--muted); cursor:pointer; font:600 18px/1 var(--fb)}
+.arsheet small{display:block; font:800 14px/1.2 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--sc); padding-right:48px}
+.arsheet h3{font:800 36px/1 var(--fh); text-transform:uppercase; margin:6px 0 18px}
+.arsheet ol{list-style:none; padding:0; margin:0 0 22px; counter-reset:s}
+.arsheet li{counter-increment:s; display:flex; gap:14px; align-items:flex-start; margin:0 0 14px; font:600 16px/1.42 var(--fb); color:#dfe4dc}
+.arsheet li::before{content:counter(s); flex:none; width:32px; height:32px; border-radius:50%; background:var(--lime); color:#0b0e12; display:grid; place-items:center; font:800 19px/1 var(--fh)}
+.arsheet p.ars-no{font:600 16px/1.45 var(--fb); color:#dfe4dc; margin:0 0 20px; text-align:left}
+.ars-go{width:100%; height:58px; border-radius:999px; border:0; background:var(--lime); color:#0b0e12; font:800 21px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px}
+.ars-go svg{width:24px; height:24px}
+.xrui{display:none; position:fixed; inset:0; z-index:60; color:#fff; font-family:var(--fb); touch-action:none; user-select:none; -webkit-user-select:none}
+.xrui.on{display:block}
+.xrui > *{opacity:0; transition:opacity .3s}
+.xrui.live > *{opacity:1}
+.xr-top{position:absolute; left:0; right:0; top:0; display:flex; align-items:center; gap:10px; padding:calc(14px + env(safe-area-inset-top)) 14px 0}
+.xr-x{flex:none; width:50px; height:50px; border-radius:50%; border:0; background:rgba(11,14,18,.75); color:#fff; font:600 22px/1 var(--fb)}
+.xr-title{min-width:0; font:800 18px/1.1 var(--fh); letter-spacing:.06em; text-transform:uppercase; background:rgba(11,14,18,.62); padding:11px 16px; border-radius:999px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.xr-msg{position:absolute; left:50%; bottom:calc(118px + env(safe-area-inset-bottom)); transform:translateX(-50%); width:max-content; max-width:90vw; display:flex; align-items:center; gap:12px; background:rgba(11,14,18,.8); border:1px solid rgba(255,178,62,.55); padding:13px 18px; border-radius:16px; font:600 17px/1.35 var(--fb); transition:opacity .4s}
+.xrui.live > .xr-msg.off{opacity:0}
+.xr-msg svg{flex:none; width:34px; height:34px; display:none}
+.xr-msg[data-k="scan"] .i-scan, .xr-msg[data-k="load"] .i-scan, .xr-msg[data-k="aim"] .i-tap, .xr-msg[data-k="placed"] .i-pinch{display:block}
+.i-scan{animation:sweep 1.6s ease-in-out infinite alternate}
+@keyframes sweep{from{transform:translateX(-5px) rotate(-8deg)}to{transform:translateX(5px) rotate(8deg)}}
+.xr-size{position:absolute; left:50%; top:40%; transform:translate(-50%, -50%); font:800 38px/1 var(--fh); background:rgba(11,14,18,.62); padding:10px 18px; border-radius:14px; pointer-events:none}
+.xrui.live > .xr-size{opacity:0} .xrui.live > .xr-size.on{opacity:1}
+.xr-bot{position:absolute; left:0; right:0; bottom:0; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:0 10px calc(18px + env(safe-area-inset-bottom))}
+.xr-bot[hidden]{display:none}
+.xr-b{height:50px; padding:0 16px; border-radius:999px; border:1px solid rgba(255,255,255,.32); background:rgba(11,14,18,.75); color:#fff; font:800 15px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px}
+.xr-b svg{width:18px; height:18px}
+.xr-b.act{background:var(--lime); color:#0b0e12; border-color:transparent}
+.xr-b[aria-pressed="true"]{border-color:var(--lime); color:var(--lime)}
+.xr-b[hidden]{display:none}
+.xr-canvas{position:fixed!important; left:0; top:0; width:1px!important; height:1px!important; opacity:0; pointer-events:none}
+/* reszponzív */
+@media (max-width:1100px){
+  :root{--pad:28px}
+  .detail{grid-template-columns:1fr}
+  .qrbox{display:none}
+  .hud{width:min(560px, 58%)}
+}
+@media (max-width:760px){
+  :root{--pad:18px}
+  body{font-size:16px}
+  .top .wrap{height:56px}
+  .top nav .hide-s, .top nav .aula-btn{display:none}
+  .brand span{display:none}
+  .stage{height:auto; min-height:0; max-height:none; display:flex; flex-direction:column}
+  .viewer{position:relative; height:62svh; min-height:380px}
+  .hud{position:relative; left:auto; bottom:auto; width:auto; padding:6px var(--pad) 0}
+  #mname{font-size:clamp(44px, 13vw, 64px)} #mname.long{font-size:clamp(38px, 11vw, 56px)} #mname.xlong{font-size:clamp(34px, 9.4vw, 48px)}
+  .facts{gap:16px 22px}
+  .fact b{font-size:clamp(30px, 9vw, 40px)}
+  .ctrl{position:relative; right:auto; bottom:auto; max-width:none; justify-content:flex-start; padding:18px var(--pad) 26px}
+  .btn{height:44px; padding:0 14px; font-size:15px}
+  .btn.ic{width:44px}
+  .count{top:14px; right:var(--pad); font-size:36px}
+  .nav-arrow{width:44px; height:44px; margin-top:-22px; top:31svh}
+  .nav-arrow.prev{left:8px} .nav-arrow.next{right:8px}
+  .hint{display:none}
+  .viewer .prog{bottom:0}
+  section{padding:52px 0}
+}
+@media (min-width:761px){ .viewer{position:absolute; inset:0} .shade{position:absolute; left:0; top:0; bottom:0; width:58%; z-index:4; pointer-events:none; background:linear-gradient(90deg, rgba(11,14,18,.86), rgba(11,14,18,.5) 55%, transparent)} }
+@media (min-width:1101px){ .viewer{left:30%} body.aula .viewer{left:40%; right:-2%} }
+@media (prefers-reduced-motion:reduce){
+  .floor{animation:none} .btn.act{animation:none}
+  .hud.in .kicker, .hud.in .hook, .hud.in .fact, .hud.in #mname .w > span{animation:none}
+  .stage.wiping .wipe::before, .stage.wiping .wipe::after{animation:none}
+}
+
+/* fejléc: a menüpontok nem törnek; 1000 px alatt csak a márka, a nyelvváltó és a vetítő mód marad */
+.top nav{white-space:nowrap}
+@media (max-width:1000px){ .top nav .hide-s{display:none} }
+/* álló táblagép (761–1100 px): a modell a színpad felső részén, a cím és a számok alatta – nem takarják egymást */
+@media (min-width:761px) and (max-width:1100px){ .viewer #mv{height:calc(100% - 300px)} .stage.lbl .viewer #mv{height:calc(100% - 110px)} }
+/* telefonon nincs teljes képernyő gomb (iPhone-on nem is működik), így a gombok egy sorban maradnak */
+@media (max-width:760px){ #fsBtn{display:none} }
+/* modellkártyák: a kép mindig felül, a szöveg alatta középen; a magyarázó blokk két oszlopa egyforma magas, a tananyag-hivatkozás az aljára kerül */
+.card{display:flex; flex-direction:column; justify-content:flex-start} .card .t{flex:1; display:flex; flex-direction:column; justify-content:center}
+@media (min-width:1101px){ .detail{align-items:stretch} .detail > div:first-child{display:flex; flex-direction:column} .detail .wheres{margin-top:auto; padding-top:18px} .qrbox{display:flex; flex-direction:column; justify-content:center} }
+/* feliratos nézet: a modell kapja a teret – a cím kicsire vált, a mondat és a számok eltűnnek, a bal oldali sötétítés megszűnik (a feliratok olvashatók maradnak) */
+.shade{transition:opacity .4s}
+@media (min-width:761px){ .stage.lbl .shade{opacity:0} .stage.lbl .hook, .stage.lbl .facts{display:none} .stage.lbl #mname{font-size:clamp(28px, 2.5vw, 44px)!important; max-width:10em} body.aula .stage.lbl #mname{font-size:clamp(40px, 3.2vw, 72px)!important} }
+/* ---- Alapozás AR labor: dobozcím és dobozszöveg középen; előadás-kártyák; hivatkozások ---- */
+.card{text-align:center}
+/* tíz kártya: 5 × 2, keskenyebb nézetben 2 × 5, telefonon egy oszlop – mindig teli sorok */
+.cards{grid-template-columns:repeat(5, 1fr)} .card .t b{font-size:23px}
+@media (max-width:1180px){ .cards{grid-template-columns:repeat(2, 1fr)} .card .t b{font-size:26px} }
+@media (max-width:560px){ .cards{grid-template-columns:1fr} }
+.spec{text-align:center; display:flex; flex-direction:column}
+.spec small{display:block; font:800 13px/1.15 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px}
+main .spec p{text-align:center; text-align-last:center; flex:1}
+.spec .ms{justify-content:center}
+.spec .app{display:inline-flex; align-self:center; align-items:center; gap:6px; margin-top:14px; padding:9px 14px; border-radius:999px; background:var(--c); color:#0b0e12; text-decoration:none; font:800 14px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap}
+.spec .app:hover{filter:brightness(1.1)}
+.specs{grid-template-columns:repeat(3, 1fr)}
+@media (max-width:1100px){ .specs{grid-template-columns:repeat(2, 1fr)} }
+@media (max-width:760px){ .specs{grid-template-columns:1fr} }
+.wheres{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px}
+.wheres .where{margin-top:0; text-decoration:none; transition:border-color .2s, transform .2s}
+.wheres .where:hover{border-color:var(--sc); transform:translateY(-2px)}
+.where[hidden]{display:none}
+.where > div{flex:1; min-width:0}
+.where em{font:800 24px/1 var(--fh); font-style:normal; color:var(--sc)}
+.where.alt i{background:var(--ink); box-shadow:none; opacity:.55}
+.where.alt em{color:var(--ink)}
+.wheres:has(.where[hidden]){grid-template-columns:1fr}
+@media (max-width:760px){ .wheres{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="{{home}}"><i></i>{{brand}} <span>{{brand2}}</span></a>
+  <nav>
+    <button type="button" class="hide-s" data-go="modellek">{{nav_models}}</button>
+    <button type="button" class="hide-s" data-go="szakiranyok">{{nav_specs}}</button>
+    <a class="hide-s" href="{{home}}">{{nav_back}}</a>
+    {{langsw}}
+    <button type="button" class="aula-btn" id="aulaBtn">{{nav_aula}}</button>
+  </nav>
+</div></header>
+<main>
+<div class="stage" id="stage">
+  <div class="floor" aria-hidden="true"></div>
+  <div class="viewer">
+    <model-viewer id="mv" alt="" ar ar-modes="scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls touch-action="pan-y" shadow-intensity="1.1" shadow-softness="0.9" exposure="1.08" environment-image="neutral" tone-mapping="neutral" interaction-prompt="auto" interaction-prompt-threshold="4000" auto-rotate auto-rotate-delay="2500" rotation-per-second="14deg" interpolation-decay="140" loading="eager" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 96deg auto"></model-viewer>
+    <div class="loader" id="loader"></div>
+    <div class="count" id="count" aria-hidden="true"></div>
+    <div class="hint" id="hint">{{hint}}</div>
+    <div class="prog" id="prog" hidden><i></i></div>
+    <button type="button" class="arfab" id="arFab" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg><span>{{ar}}</span></button>
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <button type="button" class="nav-arrow prev" id="prev" aria-label="{{prev}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" class="nav-arrow next" id="next" aria-label="{{next}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  <div class="hud" id="hud" aria-live="polite">
+    <div class="kicker" id="kicker"></div>
+    <h1 id="mname"></h1>
+    <div class="hook" id="mhook"></div>
+    <div class="facts" id="facts"></div>
+  </div>
+  <div class="ctrl" id="ctrl">
+    <button type="button" class="btn act" id="actBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><span></span></button>
+    <button type="button" class="btn ic" id="playBtn" aria-label="{{pause}}"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+    <button type="button" class="btn opt" id="lblBtn" aria-pressed="false">{{labels}}</button>
+    <button type="button" class="btn ic opt" id="rotBtn" aria-pressed="true" aria-label="{{rotate}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg></button>
+    <button type="button" class="btn ic opt" id="fsBtn" aria-label="{{fullscreen}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+  <div class="abrand aula-only">{{abrand}}</div>
+  <div class="aqr"><div class="q" id="aqr"></div><b>{{aqr_t}}</b><span>{{aqr_s}}</span></div>
+  <div class="ticker aula-only" id="ticker"></div>
+  <div class="manual aula-only" id="manual"></div>
+  <button type="button" class="aexit aula-only" id="aexit" aria-label="{{aula_exit}}">✕</button>
+  <div class="wipe" aria-hidden="true"></div>
+</div>
+
+<section id="modellek"><div class="wrap">
+  <div class="sec-h"><h2>{{models_h}}</h2><div class="chips" id="chips"></div></div>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<section id="reszletek" style="padding-top:0"><div class="wrap detail">
+  <div>
+    <h3 id="dname"></h3>
+    <p id="minfo" class="hyphenate"></p>
+    <div class="wheres"><a class="where" id="dwhere" target="_blank" rel="noopener"><i></i><div><b id="dspec"></b><span id="dbsc"></span></div><em aria-hidden="true">↗</em></a><a class="where alt" id="dlink" target="_blank" rel="noopener" hidden><i></i><div><b id="dlinkT"></b><span id="dlinkS"></span></div><em aria-hidden="true">↗</em></a></div>
+  </div>
+  <div class="qrbox"><div class="q" id="qr"></div><b>{{qr_t}}</b><span>{{qr_s}}</span></div>
+</div></section>
+
+<section id="szakiranyok" style="background:var(--bg2)"><div class="wrap">
+  <div class="sec-h"><h2>{{specs_h}}</h2></div>
+  <div id="bscs"></div>
+</div></section>
+</main>
+<div class="arsheet" id="arSheet" hidden role="dialog" aria-modal="true" aria-labelledby="arsT"><div class="arsheet-in">
+  <button type="button" class="ars-x" id="arsX" aria-label="{{close}}">✕</button>
+  <small id="arsM"></small><h3 id="arsT">{{ars_t}}</h3>
+  <ol id="arsSteps"></ol><p class="ars-no" id="arsNo" hidden></p>
+  <button type="button" class="ars-go" id="arsGo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg><span></span></button>
+</div></div>
+<div class="xrui" id="xrui">
+  <div class="xr-top"><button type="button" class="xr-x" id="xrExit" aria-label="{{xr_exit}}">✕</button><div class="xr-title" id="xrTitle"></div></div>
+  <div class="xr-size" id="xrSize"></div>
+  <div class="xr-msg" id="xrMsg"><svg class="i-scan" viewBox="0 0 34 34" fill="none" stroke="#ffb23e" stroke-width="2.2" stroke-linejoin="round"><rect x="11" y="4" width="12" height="22" rx="2.5"/><path d="M15 22h4M4 30h26"/></svg><svg class="i-tap" viewBox="0 0 34 34" fill="none" stroke="#ffb23e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="11" r="6"/><path d="M15 11v14l-3-3M15 25h7a4 4 0 0 0 4-4v-5l-6-2"/></svg><svg class="i-pinch" viewBox="0 0 34 34" fill="none" stroke="#ffb23e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l7 7M28 28l-7-7M6 6h6M6 6v6M28 28h-6M28 28v-6"/></svg><span></span></div>
+  <div class="xr-bot" id="xrBot" hidden>
+    <button type="button" class="xr-b" id="xrMove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>{{xr_move}}</button>
+    <button type="button" class="xr-b" id="xrReset">{{xr_reset}}</button>
+    <button type="button" class="xr-b act" id="xrAct"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><span></span></button>
+    <button type="button" class="xr-b" id="xrLbl" aria-pressed="false">{{xr_lbl}}</button>
+  </div>
+</div>
+<footer><div class="wrap"><p class="rag">{{foot}}</p><p class="rag"><a href="{{home}}">{{foot_link}}</a></p></div></footer>
+
+<script type="importmap">{"imports":{"three":"/ar-labor/vendor/three.module.min.js"}}</script>
+<script>self.ModelViewerElement = { meshoptDecoderLocation: new URL('vendor/meshopt_decoder.js', document.baseURI).href };</script>
+<script type="module" src="vendor/model-viewer.min.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const D = /*DATA*/null;
+const { SPECS, BSC, M, T } = D;
+const mv = $('#mv'), stage = $('#stage'), hud = $('#hud');
+const abs = (u) => new URL(u, document.baseURI).href; // az AR-nézők teljes címet kérnek
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params = new URLSearchParams(location.search);
+let cur = null, labels = false, userPaused = false, aula = false;
+
+/* ---------- polc, szűrők, szakirányok ---------- */
+const order = Object.keys(SPECS);
+const shelf = [...M].sort((a, b) => order.indexOf(a.sp) - order.indexOf(b.sp));
+$('#cards').innerHTML = shelf.map(m => { const s = SPECS[m.sp]; return `<button type="button" class="card" data-id="${m.id}" data-sp="${m.sp}" style="--c:${s.c}" aria-pressed="false"><img src="img/${m.img || m.f || m.id}.jpg" alt="" width="800" height="500" loading="lazy"><span class="t"><small>${s.short}</small><b>${m.name}</b><span>${m.hook}</span></span></button>`; }).join('');
+const present = order.filter(k => M.some(m => m.sp === k));
+$('#chips').innerHTML = `<button type="button" class="chip" data-sp="" aria-pressed="true">${T.all}</button>` + present.map(k => `<button type="button" class="chip" data-sp="${k}" style="--c:${SPECS[k].c}" aria-pressed="false"><i></i>${SPECS[k].short}</button>`).join('');
+$('#chips').addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (!b) return; const sp = b.dataset.sp;
+  $$('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b))); $$('.card').forEach(c => c.hidden = !!sp && c.dataset.sp !== sp); });
+$('#cards').addEventListener('click', (e) => { const b = e.target.closest('.card'); if (b) { select(b.dataset.id); stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); } });
+$('#bscs').innerHTML = Object.entries(BSC).map(([bk, b]) => `<div class="bsc"><div class="bsc-h"><b>${b.n}</b><span>${b.d}</span></div><div class="specs">` +
+  order.filter(k => SPECS[k].b === bk).map(k => { const s = SPECS[k], ms = M.filter(m => m.sp === k);
+    return `<div class="spec" style="--c:${s.c}"><small>${s.k}</small><b>${s.n}</b><p class="hyphenate">${s.d}</p><div class="ms">${ms.length ? ms.map(m => `<button type="button" data-id="${m.id}">${m.name}</button>`).join('') : `<em>${T.soon}</em>`}</div><a class="app" href="${s.url}" target="_blank" rel="noopener">${T.open} <span aria-hidden="true">↗</span></a></div>`; }).join('') + '</div></div>').join('');
+$('#bscs').addEventListener('click', (e) => { const b = e.target.closest('button[data-id]'); if (b) { select(b.dataset.id); stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); } });
+$$('[data-go]').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.go).scrollIntoView({ behavior: RM ? 'auto' : 'smooth' })));
+
+/* ---------- QR ---------- */
+const linkOf = (m) => location.origin + location.pathname + '?m=' + m.id + '&ar=1'; // a telefonon rögtön az AR-indító nyílik meg
+function qrSvg(text) { try { const q = qrcode(0, 'M'); q.addData(text); q.make(); return q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); } catch (e) { return ''; } }
+
+/* ---------- számláló (count-up) ---------- */
+function countUp(el, txt, delay) {
+  const EN = D.lang === 'en'; const m = EN ? txt.match(/^(\D*?)(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(.*)$/) : txt.match(/^(\D*?)(\d{1,3}(?:[ \u00a0\u202f]\d{3})+|\d+(?:,\d+)?)(.*)$/);
+  if (!m || RM) { el.textContent = txt; return; }
+  const [, pre, num, post] = m; const sep = EN ? (num.includes(',') ? ',' : '') : (num.match(/[ \u00a0\u202f]/) || [''])[0], dec = EN ? (num.includes('.') ? '.' : '') : (num.includes(',') ? ',' : '');
+  const v = parseFloat(EN ? num.replace(/,/g, '') : num.replace(/[ \u00a0\u202f]/g, '').replace(',', '.')), nd = dec ? num.split(dec)[1].length : 0;
+  const fmt = (x) => { let s = x.toFixed(nd); if (dec) s = s.replace('.', dec); if (sep) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, sep); return pre + s + post; };
+  el.textContent = fmt(0); const t0 = performance.now() + delay, dur = 1100;
+  const tick = (t) => { const k = Math.min(1, Math.max(0, (t - t0) / dur)); el.textContent = fmt(v * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); else el.textContent = txt; };
+  requestAnimationFrame(tick);
+}
+
+/* ---------- modell kiválasztása ---------- */
+const EN = D.lang === 'en'; const fileOf = (m) => (m.f || m.id) + (labels ? (EN ? '-feliratok-en' : '-feliratok') : (EN && m.en ? '-en' : '')); // m.en: a névtábla miatt a felirat nélküli modellnek is van angol változata
+function setSrc(m) { const f = fileOf(m); mv.setAttribute('ios-src', abs('models/' + f + '.usdz')); mv.setAttribute('src', abs('models/' + f + '.glb')); }
+function paintHud(m) {
+  const s = SPECS[m.sp]; document.documentElement.style.setProperty('--sc', s.c);
+  $('#kicker').innerHTML = `<i></i>${s.k}<span>· ${s.n}</span>`;
+  $('#mname').className = m.name.length > 32 ? 'xlong' : m.name.length > 22 ? 'long' : ''; // hosszú név: kisebb betű, hogy ne takarja a modellt
+  $('#mname').innerHTML = m.name.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${w}</span></span>`).join(' ');
+  $('#mhook').textContent = m.hook;
+  $('#facts').innerHTML = m.facts.map(([v, l], i) => `<div class="fact" style="--i:${i}"><b></b><span>${l}</span></div>`).join('');
+  $$('#facts .fact b').forEach((b, i) => countUp(b, m.facts[i][0], RM ? 0 : 450 + i * 90));
+  $('#actBtn span').textContent = m.act; $('#actBtn').dataset.kind = m.kind;
+  const i = M.indexOf(m); $('#count').innerHTML = `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(M.length).padStart(2, '0')}`;
+  hud.classList.remove('in'); void hud.offsetWidth; hud.classList.add('in');
+  $('#dname').textContent = m.name; $('#minfo').textContent = m.info; $('#dspec').textContent = s.n; $('#dbsc').textContent = s.k + ' · ' + T.learn; $('#dwhere').href = s.url;
+  { const a = $('#dlink'); a.hidden = !m.link; if (m.link) { a.href = m.link[2]; $('#dlinkT').textContent = m.link[0]; $('#dlinkS').textContent = m.link[1]; } }
+  $$('.card').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === m.id)));
+  const svg = qrSvg(linkOf(m)); $('#qr').innerHTML = svg; $('#aqr').innerHTML = svg;
+  $$('#ticker i').forEach((t, j) => { t.classList.toggle('done', j < i); const b = t.querySelector('b'); b.style.transition = 'none'; b.style.width = '0'; });
+}
+function select(id, opt = {}) {
+  const m = M.find(x => x.id === id) || M[0]; if (cur === m && !opt.force) return; const first = !cur; cur = m;
+  try { const u = new URL(location.href); u.searchParams.set('m', m.id); history.replaceState(null, '', u); } catch (e) {}
+  { const ll = $('#langLink'); if (ll) ll.href = (D.lang === 'en' ? '/ar-labor' : '/ar-labor/en') + '?m=' + m.id; }
+  const swap = () => { paintHud(m); loading(m); setSrc(m); };
+  if (first || RM) { swap(); return; }
+  stage.classList.remove('wiping'); void stage.offsetWidth; stage.classList.add('wiping');
+  setTimeout(swap, 430); setTimeout(() => stage.classList.remove('wiping'), 1100);
+}
+function loading(m) {
+  const [th, ph] = m.orbit.split(' '); mv.setAttribute('camera-target', 'auto auto auto'); mv.setAttribute('camera-orbit', `${parseFloat(th) - 38}deg ${parseFloat(ph) - 12}deg 220%`); mv.jumpCameraToGoal && mv.jumpCameraToGoal();
+  mv.setAttribute('alt', m.name); const L = $('#loader'); L.classList.remove('done'); L.style.width = '8%';
+  $('#prog').hidden = !m.anim; $('#lblBtn').setAttribute('aria-pressed', String(labels));
+}
+mv.addEventListener('progress', (e) => { $('#loader').style.width = (8 + 92 * e.detail.totalProgress) + '%'; if (e.detail.totalProgress >= 1) $('#loader').classList.add('done'); });
+mv.addEventListener('load', () => {
+  const m = cur; $('#loader').classList.add('done');
+  mv.setAttribute('camera-orbit', m.orbit); // berepülés a kamerával
+  if (m.anim) { if (labels && m.labelT != null) { mv.pause(); mv.currentTime = m.labelT; } else if (!userPaused) { mv.currentTime = 0; mv.play(); } }
+  syncPlay(); applyMotion(1600); if (aula) tourArm(); preloadNext();
+});
+function preloadNext() { const n = M[(M.indexOf(cur) + 1) % M.length]; try { fetch(abs('models/' + fileOf(n) + '.glb')).catch(() => {}); } catch (e) {} }
+const go = (d) => { const i = M.indexOf(cur); select(M[(i + d + M.length) % M.length].id); };
+$('#prev').addEventListener('click', () => go(-1)); $('#next').addEventListener('click', () => go(1));
+
+/* ---------- animáció, feliratok, forgatás ---------- */
+const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>', PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+function syncPlay() { const b = $('#playBtn'); const on = cur && cur.anim && !mv.paused; b.hidden = !(cur && cur.anim); b.innerHTML = on ? PAUSE : PLAY; b.setAttribute('aria-label', on ? T.pause : T.play); }
+$('#playBtn').addEventListener('click', () => { if (!cur.anim) return; if (mv.paused) { if (labels) setLabels(false); userPaused = false; mv.play(); } else { userPaused = true; mv.pause(); } syncPlay(); });
+function setLabels(on) { labels = on; $('#lblBtn').setAttribute('aria-pressed', String(on)); stage.classList.toggle('lbl', on);
+  /* feliratokkal a modell a saját nézőpontjából látszik (a táblák szembe néznek), és úgy, hogy minden felirat beférjen; kikapcsoláskor vissza az alapnézet */
+  const keep = cur.orbit; if (on) { const [th, ph] = keep.split(' '); cur.orbit = `${th} ${ph} 104%`; } mv.setAttribute('camera-target', 'auto auto auto');
+  setSrc(cur); mv.addEventListener('load', () => { cur.orbit = keep; }, { once: true }); }
+$('#lblBtn').addEventListener('click', () => setLabels(!labels));
+$('#actBtn').addEventListener('click', () => { const k = $('#actBtn').dataset.kind;
+  if (k === 'labels') { setLabels(!labels); return; }
+  if (labels) { setLabels(false); userPaused = false; return; }
+  userPaused = false; mv.currentTime = 0; mv.play(); syncPlay(); });
+/* mozgás: teljes 3D-s makettek körbeforognak, a metszetes makettek (sec) csak ide-oda lengenek a nézet körül */
+let rotating = true, lastUser = 0; const swing = { on: false, t0: 0, th0: 0, phi: 75, r: '100%', hold: false };
+function anchorSwing(delay = 0) { try { const o = mv.getCameraOrbit(); swing.th0 = o.theta * 180 / Math.PI; swing.phi = o.phi * 180 / Math.PI; swing.r = o.radius + 'm'; } catch (e) {} swing.t0 = performance.now() + delay; }
+function applyMotion(delay = 0) { const sec = cur && cur.sec; mv.toggleAttribute('auto-rotate', rotating && !sec); swing.on = rotating && !!sec; if (swing.on) { swing.hold = true; setTimeout(() => { anchorSwing(); swing.hold = false; }, delay); } $('#rotBtn').setAttribute('aria-pressed', String(rotating)); }
+mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-interaction') { lastUser = performance.now(); swing.hold = true; } });
+$('#rotBtn').addEventListener('click', () => { rotating = !rotating; applyMotion(); });
+const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+function toggleFS(el = stage) { if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; } const r = el.requestFullscreen || el.webkitRequestFullscreen; if (r) try { const p = r.call(el); if (p && p.catch) p.catch(() => {}); } catch (e) {} }
+$('#fsBtn').addEventListener('click', () => toggleFS());
+$('#prog').addEventListener('click', (e) => { if (!cur.anim || !mv.duration) return; const r = e.currentTarget.getBoundingClientRect(); if (labels) setLabels(false); mv.currentTime = (e.clientX - r.left) / r.width * mv.duration; if (mv.paused && !userPaused) mv.play(); });
+(function loop(now) { if (cur && cur.anim && mv.duration) $('#prog i').style.width = (100 * (mv.currentTime % mv.duration) / mv.duration).toFixed(2) + '%';
+  if (swing.on && mv.loaded) { if (swing.hold && lastUser && now - lastUser > 2500) { lastUser = 0; anchorSwing(); swing.hold = false; }
+    if (!swing.hold && now > swing.t0) { const th = swing.th0 + 34 * Math.sin(2 * Math.PI * (now - swing.t0) / 18000); mv.cameraOrbit = `${th.toFixed(2)}deg ${swing.phi.toFixed(2)}deg ${swing.r}`; } }
+  requestAnimationFrame(loop); })(performance.now());
+mv.addEventListener('play', syncPlay); mv.addEventListener('pause', syncPlay);
+setTimeout(() => $('#hint').classList.add('off'), 7000);
+
+/* ---------- AR ---------- */
+/* telefonon nagy gomb → rövid útmutató → indítás. Android (Chrome + ARCore): saját WebXR-nézet (xr.js): keret mutatja, hová kerül a modell,
+   koppintásra lekerül és a helyén marad. iPhone: Quick Look, más Androidon Scene Viewer (model-viewer). Gépen és kivetítőn QR-kód (.aqr). */
+const UA = navigator.userAgent, IOS = /iPhone|iPad|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const MOBILE = IOS || /Android|Mobile/i.test(UA);
+const IN_APP = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|Line\/|; wv\)|TikTok|musical_ly|BytedanceWebview|Snapchat|GSA\//i.test(UA); // beépített böngészők: ott nem indul az AR
+let arMode = null, XRP = null, sheetAuto = MOBILE && params.has('ar');
+function syncAR() { if (arMode !== 'xr') arMode = (!IN_APP && customElements.get('model-viewer') && mv.canActivateAR) ? (IOS ? 'ql' : 'sv') : 'none';
+  $('#arFab').hidden = !MOBILE; $('#arFab').classList.toggle('off', arMode === 'none'); }
+(async () => { try { if (navigator.xr && await navigator.xr.isSessionSupported('immersive-ar')) { arMode = 'xr'; XRP = import('./xr.js'); XRP.catch(() => {}); } } catch (e) {} syncAR(); })();
+customElements.whenDefined('model-viewer').then(() => { mv.addEventListener('load', () => { syncAR(); if (sheetAuto) { sheetAuto = false; openSheet(); } }); setTimeout(syncAR, 1200); });
+function openSheet() { syncAR(); const none = arMode === 'none';
+  $('#arsM').textContent = cur.name; $('#arsSteps').innerHTML = none ? '' : T.arSteps[arMode === 'xr' ? 'xr' : 'ql'].map(t => `<li>${t}</li>`).join('');
+  $('#arsSteps').hidden = none; $('#arsNo').hidden = !none; $('#arsNo').textContent = T.arNo; $('#arsGo span').textContent = none ? T.arCopy : T.arGo;
+  $('#arSheet').hidden = false; setTimeout(() => $('#arsGo').focus(), 50);
+  try { const u = new URL(location.href); if (u.searchParams.has('ar')) { u.searchParams.delete('ar'); history.replaceState(null, '', u); } } catch (e) {} }
+const closeSheet = () => { $('#arSheet').hidden = true; };
+$('#arFab').addEventListener('click', openSheet);
+$('#arsX').addEventListener('click', closeSheet);
+$('#arSheet').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeSheet(); });
+$('#arsGo').addEventListener('click', () => { if (arMode === 'none') { const l = location.origin + location.pathname + '?m=' + cur.id + '&ar=1';
+    (navigator.clipboard ? navigator.clipboard.writeText(l) : Promise.reject()).then(() => { $('#arsGo span').textContent = T.arCopied; }).catch(() => { prompt('', l); }); return; }
+  closeSheet(); startAR(); });
+function startAR() {
+  if (arMode === 'xr') { const ui = $('#xrui'), base = cur.f || cur.id, lab = D.lang === 'en' ? '-feliratok-en' : '-feliratok'; ui.classList.add('on'); $('#xrAct span').textContent = cur.act;
+    let sp; try { sp = navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'], optionalFeatures: ['dom-overlay', 'anchors', 'local-floor'], domOverlay: { root: ui } }); } catch (e) { sp = Promise.reject(e); }
+    const was = !mv.paused; mv.pause();
+    Promise.all([sp, XRP]).then(([s, X]) => { ui.classList.add('live');
+      return X.run(s, { ui, T: T.xr, title: cur.name, labels, url: abs('models/' + base + (D.lang === 'en' && cur.en ? '-en' : '') + '.glb'), urlLabels: abs('models/' + base + lab + '.glb'),
+        onEnd: () => { ui.classList.remove('on', 'live'); if (was && !userPaused) mv.play(); } }).catch((e) => { try { s.end(); } catch (x) {} throw e; }); })
+      .catch((e) => { console.warn('WebXR', e); ui.classList.remove('on', 'live'); if (was) mv.play(); if (mv.canActivateAR) try { mv.activateAR(); } catch (x) {} });
+    return; }
+  try { mv.activateAR(); } catch (e) {}
+}
+
+/* ---------- AULA mód: magától léptet, ha hozzányúlnak, átadja az irányítást ---------- */
+$('#ticker').innerHTML = M.map(() => '<i><b></b></i>').join('');
+let tourT = 0, manualT = 0, manualLeft = 0, idleT = 0;
+function dwell() { const d = cur.anim && mv.duration ? mv.duration + 3 : 18; return Math.max(18, Math.min(34, d)) * 1000; }
+function tourArm() { clearTimeout(tourT); if (!aula || manualLeft > 0) return; const ms = dwell(); const t = $$('#ticker i')[M.indexOf(cur)]; if (t) { const b = t.querySelector('b'); b.style.transition = 'none'; b.style.width = '0'; void b.offsetWidth; b.style.transition = `width ${ms}ms linear`; b.style.width = '100%'; }
+  tourT = setTimeout(() => go(1), ms); }
+function manual() { if (!aula) return; clearTimeout(tourT); manualLeft = 40; const b = $$('#ticker i')[M.indexOf(cur)]; if (b) { const x = b.querySelector('b'); x.style.transition = 'none'; x.style.width = '0'; }
+  const show = () => { $('#manual').textContent = T.manual.replace('{s}', manualLeft); $('#manual').classList.add('on'); };
+  show(); clearInterval(manualT); manualT = setInterval(() => { manualLeft--; if (manualLeft <= 0) { clearInterval(manualT); $('#manual').classList.remove('on'); if (labels) setLabels(false); rotating = true; applyMotion(); go(1); } else show(); }, 1000); }
+function setAula(on) { aula = on; document.body.classList.toggle('aula', on); clearTimeout(tourT); clearInterval(manualT); manualLeft = 0; $('#manual').classList.remove('on');
+  try { const u = new URL(location.href); on ? u.searchParams.set('aula', '1') : u.searchParams.delete('aula'); history.replaceState(null, '', u); } catch (e) {}
+  if (on) { rotating = true; applyMotion(); mv.setAttribute('rotation-per-second', '10deg'); userPaused = false; if (labels) setLabels(false); tourArm();
+    setTimeout(() => { if (!fsEl() && manualLeft <= 0) { $('#manual').textContent = T.fsHint; $('#manual').classList.add('on'); setTimeout(() => { if (manualLeft <= 0) $('#manual').classList.remove('on'); }, 6000); } }, 900); }
+  else { mv.setAttribute('rotation-per-second', '14deg'); if (fsEl()) toggleFS(); } }
+$('#aulaBtn').addEventListener('click', () => { setAula(true); toggleFS(document.documentElement); });
+$('#aexit').addEventListener('click', () => setAula(false));
+['pointerdown', 'wheel'].forEach(ev => stage.addEventListener(ev, (e) => { if (aula && !e.target.closest('.aexit')) manual(); }, { passive: true }));
+addEventListener('pointermove', () => { if (!aula) return; document.body.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => document.body.classList.add('idle'), 2500); });
+addEventListener('keydown', (e) => { if (e.target.closest && e.target.closest('input, textarea')) return; const k = e.key.toLowerCase();
+  if (k === 'arrowright') { go(1); manual(); } else if (k === 'arrowleft') { go(-1); manual(); }
+  else if (k === ' ' && aula) { e.preventDefault(); $('#playBtn').click(); manual(); }
+  else if (k === 'l') { setLabels(!labels); manual(); } else if (k === 'r') $('#rotBtn').click();
+  else if (k === 'f') toggleFS(aula ? document.documentElement : stage);
+  else if (k === 'a') setAula(!aula); else if (k === 'escape' && !$('#arSheet').hidden) closeSheet(); else if (k === 'escape' && aula && !fsEl()) setAula(false); });
+
+/* ---------- indulás ---------- */
+{ const h = decodeURIComponent(location.hash.slice(1)), q = params.get('m'); select(q && M.some(m => m.id === q) ? q : (h && M.some(m => m.id === h) ? h : M[0].id)); if (h) try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+if (params.has('aula')) setAula(true);
+window.__arl = { M, select, setAula };
+/*GUARD*/
+})();
+</script>
+</body>
+</html>

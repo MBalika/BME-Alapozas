@@ -1,396 +1,610 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Foundation Engineering AR lab</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="The 3D models of the Foundation Engineering course in augmented reality: on a phone you can place them on a table or the floor and walk around them.">
-<link rel="alternate" hreflang="hu" href="https://bme-alapozas.vercel.app/ar-labor">
-<link rel="alternate" hreflang="en" href="https://bme-alapozas.vercel.app/ar-labor/en">
-<link rel="alternate" hreflang="x-default" href="https://bme-alapozas.vercel.app/ar-labor">
 <base href="/ar-labor/">
+<title>Foundation Engineering AR lab – moving 3D models for the lectures | BME</title>
+<meta name="description" content="Rotate, zoom and view them in AR on your phone: bearing failure, the pressure bulb, the Leaning Tower of Pisa, piles and excavations – moving 3D models for the lectures of the Foundation Engineering course.">
+<meta name="theme-color" content="#0b0e12">
+<meta property="og:title" content="Foundation Engineering AR lab – moving 3D models for the lectures | BME">
+<meta property="og:description" content="Rotate, zoom and view them in AR on your phone: bearing failure, the pressure bulb, the Leaning Tower of Pisa, piles and excavations – moving 3D models for the lectures of the Foundation Engineering course.">
+<meta property="og:image" content="img/munkagodor.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0e12'/%3E%3Cpath d='M32 10 52 22v20L32 54 12 42V22z' fill='none' stroke='%23ffb23e' stroke-width='5' stroke-linejoin='round'/%3E%3Cpath d='M12 22l20 12 20-12M32 34v20' fill='none' stroke='%23ffb23e' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preload" href="../fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
 <style>
-@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/unbounded-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/unbounded-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/unbounded-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/unbounded-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Unbounded';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/unbounded-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/manrope-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/manrope-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/manrope-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/manrope-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/manrope-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Manrope';font-style:normal;font-display:swap;font-weight:800;src:url(fonts/manrope-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/jetbrains-mono-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'JBMono';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/jetbrains-mono-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF}
-</style>
-<style>
-/* elrendezés: sötét labor-sáv – fent a modellpolc, alatta a nagy nézőablak és az oldalpanel; világos rész: használati útmutató */
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:700;src:url(../fonts/barlow-condensed-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:700;src:url(../fonts/barlow-condensed-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:800;src:url(../fonts/barlow-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'BarlowC';font-display:swap;font-weight:800;src:url(../fonts/barlow-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-display:swap;font-weight:400;src:url(../fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-display:swap;font-weight:400;src:url(../fonts/inter-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-display:swap;font-weight:600;src:url(../fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-display:swap;font-weight:600;src:url(../fonts/inter-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 :root{
-  --paper:#f4f0e6; --card:#fffdf7; --ink:#15181c; --ink2:#363c44; --muted:#5f666e; --line:rgba(21,24,28,.13); --line2:rgba(21,24,28,.22);
-  --night:#0c1015; --night2:#121820; --night3:#19212b; --nink:#eeeae1; --nmuted:#a6adb5; --nline:rgba(255,255,255,.11);
-  --accent:#e8952a; --accent-2:#f2b354; --accent-ink:#8a4f08; --holo:#5fe3ff; --water:#3d9ad6;
-  --c1:#f2a531; --c3:#e4553f; --c5:#b23a93; --c8:#4b8fe0; --c9:#22a9b8;
-  --r:16px; --w:1240px; --pad:28px;
-  --fd:'Unbounded', 'Arial Black', system-ui, sans-serif; --fb:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif; --fm:'JBMono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  --shadow:0 1px 2px rgba(0,0,0,.06), 0 8px 28px rgba(18,20,24,.08);
-  color-scheme: light;
+  --bg:#0b0e12; --bg2:#11161c; --card:#151b22; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.18);
+  --ink:#eef1ea; --muted:#a2aab3; --lime:#ffb23e;
+  --fh:'BarlowC','Barlow Condensed','Arial Narrow',sans-serif; --fb:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --pad:40px; --max:1320px; --sc:#ffb23e; color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#10151b; --card:#18202a; --ink:#ebe7de; --ink2:#cdc8be; --muted:#9aa2aa; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
-  --accent-ink:#f5c06e; --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); color-scheme: dark; } }
-:root[data-theme="dark"]{
-  --paper:#10151b; --card:#18202a; --ink:#ebe7de; --ink2:#cdc8be; --muted:#9aa2aa; --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.2);
-  --accent-ink:#f5c06e; --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); color-scheme: dark; }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-:root{padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
-body{margin:0; background:var(--paper); color:var(--ink); font:400 17px/1.62 var(--fb); overflow-x:hidden}
-body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:var(--night)}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--ink); font:400 17px/1.62 var(--fb); -webkit-font-smoothing:antialiased; overflow-x:hidden}
 a{color:inherit}
 button{font:inherit; color:inherit}
-.wrap{max-width:var(--w); margin:0 auto; padding-block:0; padding-left:max(var(--pad), env(safe-area-inset-left, 0px)); padding-right:max(var(--pad), env(safe-area-inset-right, 0px))}
+img{display:block; max-width:100%; height:auto}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
+main p{text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty}
 .nw{white-space:nowrap; hyphens:none}
-sub, sup{font-size:.72em; line-height:0}
-:focus-visible{outline:3px solid var(--accent); outline-offset:2px; border-radius:6px}
-main p, main li, footer p, .lead, .info p{ text-align:justify; text-justify:inter-word; hyphens:manual; -webkit-hyphens:manual; text-wrap:pretty }
-h1,h2,h3,button,label,.kick,.mono{hyphens:none; -webkit-hyphens:none}
-main .rag, footer .rag, .lead.rag, .info p.rag{text-align:left!important}
-
-.lab{background:radial-gradient(120% 90% at 75% 0%, #1b2633 0%, var(--night) 62%); color:var(--nink); padding-block:clamp(22px, 4vw, 42px) clamp(26px, 4vw, 46px)}
-.kick{display:flex; flex-wrap:wrap; align-items:center; gap:10px; font:600 12.5px/1.3 var(--fm); letter-spacing:.06em; text-transform:uppercase; color:var(--nmuted)}
-.kick .tag{border:1px solid var(--nline); border-radius:999px; padding:3px 10px; color:var(--holo)}
-.head{display:grid; grid-template-columns:minmax(0, 1.25fr) minmax(0, 1fr); gap:clamp(16px, 3vw, 40px); align-items:end}
-h1{font:800 clamp(34px, 6vw, 70px)/.98 var(--fd); letter-spacing:-.025em; margin:12px 0 0; text-transform:uppercase; text-wrap:balance}
-h1 em{font-style:normal; color:var(--holo)}
-.lead{color:var(--nink); opacity:.9; font-size:clamp(16px, 1.6vw, 18px); margin:0}
-
-.shelf{display:grid; grid-template-columns:repeat(6, minmax(0, 1fr)); gap:12px; margin-top:24px}
-.mcard{position:relative; display:flex; flex-direction:column; text-align:left; border:1px solid var(--nline); border-radius:14px; overflow:hidden; background:var(--night2); cursor:pointer; padding:0; min-width:0}
-.mcard img{display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; background:#e9eef2; max-width:100%}
-.mcard .t{padding:8px 10px 10px; display:flex; flex-direction:column; gap:3px}
-.mcard b{font:700 13.5px/1.25 var(--fb); color:var(--nink)}
-.mcard span{font:500 11px/1.2 var(--fm); color:var(--nmuted)}
-.mcard i{position:absolute; left:8px; top:8px; min-width:26px; height:24px; padding:0 7px; border-radius:999px; display:grid; place-items:center; font:800 11.5px/1 var(--fd); font-style:normal; color:#fff; background:var(--lc, var(--accent)); box-shadow:0 2px 8px rgba(0,0,0,.35)}
-.mcard:hover{border-color:rgba(95,227,255,.5)}
-.mcard[aria-pressed="true"]{border-color:var(--holo); box-shadow:0 0 0 2px var(--holo) inset}
-
-.grid{display:grid; grid-template-columns:minmax(0, 1.55fr) minmax(0, 1fr); gap:20px; margin-top:20px; align-items:stretch}
-.viewer{position:relative; border-radius:22px; overflow:hidden; border:1px solid var(--nline); background:radial-gradient(90% 80% at 50% 35%, #233142 0%, #121a23 70%, #0e141b 100%); min-height:580px}
-model-viewer{width:100%; height:100%; min-height:580px; display:block; --poster-color:transparent; --progress-bar-color:var(--holo); background:transparent}
-.hs{position:relative; width:0; height:0; padding:0; border:0; background:none; pointer-events:none; transition:opacity .2s}
-.hs .p{position:absolute; left:0; top:0; display:block; white-space:nowrap; padding:4px 9px 4px 20px; border-radius:999px; background:rgba(12,16,21,.8); color:#f3efe6; font:600 12px/1.2 var(--fb); box-shadow:0 2px 10px rgba(0,0,0,.3); transform:translate(-8px, -50%)}
-.hs .p::before{content:""; position:absolute; left:4px; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:var(--dot, var(--accent)); box-shadow:0 0 0 2px rgba(255,255,255,.85)}
-.hs.l .p{padding:4px 20px 4px 9px; transform:translate(calc(-100% + 8px), -50%)}
-.hs.l .p::before{left:auto; right:4px}
-.hs.c .p{padding:3px 9px; background:rgba(12,16,21,.62); transform:translate(-50%, -50%)}
-.hs.c .p::before{display:none}
-.hs:not([data-visible]){opacity:0}
-.nolabels .hs{opacity:0!important}
-.arbtn{position:absolute; left:50%; bottom:max(18px, env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); display:flex; align-items:center; gap:10px; border:0; border-radius:999px; padding:14px 22px; background:var(--holo); color:#03222a; font:700 16px/1 var(--fb); box-shadow:0 8px 30px rgba(95,227,255,.35); cursor:pointer; white-space:nowrap}
-.arbtn svg{width:22px; height:22px}
-.scale{position:absolute; left:14px; top:14px; font:600 12px/1 var(--fm); color:var(--nmuted); background:rgba(12,16,21,.6); border:1px solid var(--nline); border-radius:8px; padding:6px 8px}
-.anim{position:absolute; right:14px; top:14px; font:600 12px/1 var(--fm); color:var(--accent-2); background:rgba(12,16,21,.6); border:1px solid var(--nline); border-radius:8px; padding:6px 8px}
-.panel{display:flex; flex-direction:column; gap:14px; min-width:0}
-.box{background:var(--night2); border:1px solid var(--nline); border-radius:var(--r); padding:18px}
-.box h2{font:800 20px/1.2 var(--fd); margin:0; letter-spacing:-.01em}
-.box .lec{display:inline-flex; gap:8px; align-items:center; font:600 12px/1.2 var(--fm); color:var(--nmuted); margin-bottom:8px}
-.box .lec i{display:grid; place-items:center; min-width:24px; height:22px; padding:0 6px; border-radius:999px; font:800 11px/1 var(--fd); font-style:normal; color:#fff; background:var(--lc, var(--accent))}
-.info{flex:1; display:flex; flex-direction:column; gap:12px}
-.info p{margin:0; color:var(--nink); opacity:.92; font-size:15.5px}
-.views{display:flex; flex-wrap:wrap; gap:8px}
-.views button{border:1px solid var(--nline); background:var(--night); color:var(--nink); border-radius:999px; padding:8px 12px; font:600 13.5px/1 var(--fb); cursor:pointer}
-.views button:hover{border-color:var(--holo)}
-.views button[aria-pressed="true"]{background:var(--holo); color:#03222a; border-color:var(--holo)}
-.switch{display:flex; align-items:center; gap:10px; cursor:pointer; color:var(--nink); font:600 14.5px/1.2 var(--fb)}
-.switch input{appearance:none; -webkit-appearance:none; width:42px; height:24px; border-radius:999px; background:var(--night3); border:1px solid var(--nline); position:relative; cursor:pointer; margin:0; flex:none}
-.switch input::after{content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:var(--nmuted); transition:transform .2s}
-.switch input:checked{background:var(--holo)}
-.switch input:checked::after{transform:translateX(18px); background:#fff}
-.facts{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; margin-top:auto}
-.fact{background:var(--night); border:1px solid var(--nline); border-radius:12px; padding:10px}
-.fact b{display:block; font:700 17px/1.1 var(--fd); color:var(--nink); font-variant-numeric:tabular-nums; white-space:nowrap}
-.fact span{display:block; font:500 11.5px/1.3 var(--fb); color:var(--nmuted); margin-top:4px}
-.link{display:inline-flex; align-items:center; gap:8px; color:var(--holo); font:600 14px/1.2 var(--fb); text-decoration:none}
-.link svg{width:13px; height:13px}
-.status{display:flex; gap:12px; align-items:flex-start; font-size:14.5px; line-height:1.5; color:var(--nink)}
-.status .dot{width:10px; height:10px; border-radius:50%; background:var(--nmuted); margin-top:6px; flex:none}
-.status.ok .dot{background:#41c07c; box-shadow:0 0 0 4px rgba(65,192,124,.18)}
-.status.no .dot{background:var(--accent)}
-#qr{display:none; margin-top:12px; background:#fff; padding:10px; border-radius:12px; width:max-content}
-#qr.on{display:block}
-#qr img, #qr canvas, #qr svg{display:block; width:148px; height:148px}
-
-main{padding-block:clamp(34px, 5vw, 56px) 30px}
-.sec + .sec{margin-top:clamp(30px, 5vw, 52px)}
-.sec h2{font:800 clamp(21px, 2.6vw, 28px)/1.15 var(--fd); letter-spacing:-.01em; margin:0 0 14px; text-wrap:balance}
-.steps{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px; counter-reset:s}
-.steps li{counter-increment:s; background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px; min-width:0}
-.steps li::before{content:counter(s); display:grid; place-items:center; width:34px; height:34px; border-radius:10px; background:var(--holo); color:#03222a; font:800 16px/1 var(--fd)}
-.steps li b{display:block; font:700 16.5px/1.3 var(--fb); text-align:left}
-.steps li p{margin:0; color:var(--ink2); font-size:15.5px}
-.trouble{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px}
-.trouble div{border:1px solid var(--line2); border-radius:var(--r); padding:16px 18px; min-width:0}
-.trouble h3{margin:0 0 6px; font:700 15.5px/1.3 var(--fb)}
-.trouble p{margin:0; color:var(--ink2); font-size:15px}
-footer.wrap{border-top:1px solid var(--line); margin-top:30px; padding-block:18px 26px; color:var(--muted); font-size:14px}
-footer p{margin:0}
-@media (max-width: 1100px){ .shelf{grid-template-columns:repeat(3, minmax(0, 1fr))} }
-@media (max-width: 880px){
-  .head, .grid{grid-template-columns:1fr}
-  .viewer, model-viewer{min-height:min(118vw, 600px)}
-  .steps, .trouble{grid-template-columns:1fr}
-  .shelf{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; gap:8px}
-  .mcard{flex:0 0 150px; scroll-snap-align:start}
+.rag{text-align:left!important}
+.twr{text-wrap:wrap!important}
+/* fejléc */
+.top{position:sticky; top:0; z-index:30; background:rgba(11,14,18,.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; height:62px; gap:16px; max-width:none}
+.brand{display:flex; align-items:center; gap:12px; font:800 20px/1 var(--fh); letter-spacing:.04em; text-transform:uppercase; text-decoration:none; white-space:nowrap}
+.brand i{width:14px; height:22px; background:var(--lime); border-radius:3px; box-shadow:0 0 18px rgba(255,178,62,.55)}
+.brand span{color:var(--muted); font-weight:700}
+.top nav{display:flex; align-items:center; gap:22px; font:700 15px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase}
+.top nav a, .top nav button{text-decoration:none; color:var(--muted); background:none; border:0; padding:0; cursor:pointer; font:inherit; letter-spacing:inherit; text-transform:inherit}
+.top nav a:hover, .top nav button:hover{color:var(--ink)}
+.top nav .aula-btn{color:var(--bg); background:var(--lime); border-radius:999px; padding:9px 14px; box-shadow:0 0 24px rgba(255,178,62,.35)}
+.top nav .aula-btn:hover{color:var(--bg); filter:brightness(1.08)}
+.lang{display:inline-flex; border:1px solid var(--line2); border-radius:999px; overflow:hidden}
+.lang a, .lang span{padding:6px 10px; font:800 13px/1 var(--fh); letter-spacing:.1em}
+.lang span{background:var(--ink); color:var(--bg)}
+.top nav .lang a{padding:6px 10px; font:800 13px/1 var(--fh); letter-spacing:.1em; color:var(--muted)} .top nav .lang a:hover{color:var(--ink)}
+/* színpad */
+.stage{position:relative; height:calc(100svh - 62px); min-height:600px; max-height:1100px; overflow:hidden; background:var(--bg); isolation:isolate}
+.stage::before{content:""; position:absolute; inset:0; z-index:-2; background:radial-gradient(48% 62% at 64% 48%, color-mix(in srgb, var(--sc) 34%, transparent), transparent 72%), radial-gradient(40% 50% at 10% 95%, color-mix(in srgb, var(--sc) 14%, transparent), transparent 70%); transition:background .8s}
+.floor{position:absolute; left:-40%; right:-40%; bottom:-6%; height:58%; z-index:-1; pointer-events:none;
+  background-image:linear-gradient(color-mix(in srgb, var(--sc) 55%, transparent) 1.5px, transparent 1.5px), linear-gradient(90deg, color-mix(in srgb, var(--sc) 55%, transparent) 1.5px, transparent 1.5px);
+  background-size:72px 72px; transform:perspective(520px) rotateX(66deg); transform-origin:50% 100%;
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,.9), transparent 85%); mask-image:linear-gradient(to top, rgba(0,0,0,.9), transparent 85%); animation:floor 3.2s linear infinite; opacity:.8}
+@keyframes floor{to{background-position:0 72px, 0 0}}
+#mv{position:absolute; inset:0; width:100%; height:100%; background:transparent; --poster-color:transparent; --progress-bar-color:transparent; outline:none}
+#mv::part(default-ar-button){display:none}
+.loader{position:absolute; left:0; top:0; height:3px; width:0; background:var(--sc); box-shadow:0 0 14px var(--sc); z-index:8; transition:width .2s, opacity .4s}
+.loader.done{opacity:0}
+/* HUD */
+.hud{position:absolute; left:var(--pad); bottom:96px; width:min(560px, 44%); z-index:5; pointer-events:none}
+.hud > *{pointer-events:auto}
+.kicker{display:block; font:800 15px/1.25 var(--fh); letter-spacing:.14em; text-transform:uppercase; color:var(--sc); transition:color .6s}
+.kicker i{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--sc); box-shadow:0 0 14px var(--sc); margin-right:10px; vertical-align:.08em}
+.kicker span{color:var(--muted); letter-spacing:.1em; margin-left:8px; white-space:nowrap}
+#mname{text-shadow:0 2px 28px rgba(0,0,0,.55); font:800 clamp(52px, 6.4vw, 112px)/.9 var(--fh); text-transform:uppercase; letter-spacing:-.005em; margin:14px 0 0; text-wrap:balance}
+#mname.long{font-size:clamp(46px, 5vw, 88px)} #mname.xlong{font-size:clamp(40px, 4.1vw, 72px)}
+body.aula #mname.long{font-size:clamp(60px, 5.8vw, 136px)} body.aula #mname.xlong{font-size:clamp(52px, 4.8vw, 112px)}
+#mname .w{display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.04em; margin-bottom:-.04em}
+#mname .w > span{display:inline-block}
+.hook{text-shadow:0 1px 14px rgba(0,0,0,.7); font:600 clamp(17px, 1.45vw, 23px)/1.38 var(--fb); color:#d7dcd2; margin:16px 0 0; max-width:30em; text-align:left!important; text-wrap:pretty}
+.facts{display:flex; gap:clamp(18px, 2.4vw, 40px); margin-top:24px; flex-wrap:wrap}
+.fact b{text-shadow:0 2px 18px rgba(0,0,0,.5); display:block; font:800 clamp(34px, 3.4vw, 58px)/1 var(--fh); color:var(--sc); white-space:nowrap; transition:color .6s; font-variant-numeric:tabular-nums}
+.fact span{display:block; font:600 13px/1.3 var(--fb); color:var(--muted); margin-top:6px; max-width:11em; text-transform:none}
+.hud.in .kicker, .hud.in .hook, .hud.in .fact{animation:fadeUp .7s cubic-bezier(.2,.8,.2,1) both}
+.hud.in .hook{animation-delay:.32s} .hud.in .fact{animation-delay:calc(.42s + var(--i) * .09s)}
+.hud.in #mname .w > span{animation:wordUp .75s cubic-bezier(.2,.85,.2,1) both; animation-delay:calc(.08s + var(--i) * .07s)}
+@keyframes fadeUp{from{opacity:0; transform:translateY(18px)}to{opacity:1; transform:none}}
+@keyframes wordUp{from{transform:translateY(105%) skewY(6deg)}to{transform:none}}
+/* számláló és nyilak */
+.count{position:absolute; right:var(--pad); top:26px; z-index:5; font:800 clamp(38px, 4vw, 64px)/1 var(--fh); color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,.28); letter-spacing:.02em; pointer-events:none}
+.count b{color:var(--sc); -webkit-text-stroke:0; transition:color .6s}
+.nav-arrow{position:absolute; top:50%; z-index:6; width:58px; height:58px; margin-top:-29px; border-radius:50%; border:1px solid var(--line2); background:rgba(11,14,18,.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:grid; place-items:center; cursor:pointer; transition:transform .2s, border-color .2s, background .2s}
+.nav-arrow:hover{transform:scale(1.08); border-color:var(--sc); background:rgba(11,14,18,.8)}
+.nav-arrow svg{width:24px; height:24px}
+.nav-arrow.prev{left:16px} .nav-arrow.next{right:16px}
+@media (min-width:761px){ .nav-arrow{top:104px; margin-top:0; width:52px; height:52px} .nav-arrow.prev{left:auto; right:calc(var(--pad) + 62px)} .nav-arrow.next{right:var(--pad)} .count{top:22px} }
+/* vezérlők */
+.ctrl{position:absolute; right:var(--pad); bottom:32px; z-index:6; display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end; max-width:60%}
+.btn{display:inline-flex; align-items:center; gap:9px; height:48px; padding:0 18px; border-radius:999px; border:1px solid var(--line2); background:rgba(11,14,18,.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); font:800 16px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; cursor:pointer; white-space:nowrap; transition:border-color .2s, background .2s, transform .15s}
+.btn:hover{border-color:rgba(255,255,255,.4)}
+.btn:active{transform:scale(.97)}
+.btn svg{width:18px; height:18px; flex:none}
+.btn.ic{width:48px; padding:0; justify-content:center}
+.btn[hidden]{display:none}
+.btn[aria-pressed="true"]{border-color:var(--sc); color:var(--sc)}
+.btn.act{background:var(--sc); color:#0b0e12; border-color:transparent; box-shadow:0 0 30px color-mix(in srgb, var(--sc) 55%, transparent); animation:pulse 2.4s ease-in-out infinite}
+.btn.act:hover{filter:brightness(1.08)}
+@keyframes pulse{0%,100%{box-shadow:0 0 18px color-mix(in srgb, var(--sc) 40%, transparent)}50%{box-shadow:0 0 38px color-mix(in srgb, var(--sc) 75%, transparent)}}
+.prog{position:absolute; left:0; right:0; bottom:0; height:4px; z-index:6; background:rgba(255,255,255,.06); cursor:pointer}
+.prog i{position:absolute; left:0; top:0; bottom:0; width:0; background:var(--sc); box-shadow:0 0 12px var(--sc)}
+.prog[hidden]{display:none}
+.hint{position:absolute; left:50%; top:22px; transform:translateX(-50%); z-index:6; font:700 14px/1 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); background:rgba(11,14,18,.6); border:1px solid var(--line); padding:9px 14px; border-radius:999px; white-space:nowrap; pointer-events:none; transition:opacity .5s}
+.hint.off{opacity:0}
+/* átmenet: szakirányszínű csík söpör át */
+.wipe{position:absolute; inset:0; z-index:7; pointer-events:none; overflow:hidden}
+.wipe::before, .wipe::after{content:""; position:absolute; top:-20%; bottom:-20%; left:0; width:130%; transform:translateX(-140%) skewX(-12deg)}
+.wipe::before{background:var(--sc)}
+.wipe::after{background:#0b0e12; width:118%}
+.stage.wiping .wipe::before{animation:wipe .95s cubic-bezier(.75,0,.25,1) both}
+.stage.wiping .wipe::after{animation:wipe .95s cubic-bezier(.75,0,.25,1) .07s both}
+@keyframes wipe{from{transform:translateX(-140%) skewX(-12deg)}to{transform:translateX(140%) skewX(-12deg)}}
+/* polc */
+section{padding:72px 0}
+.sec-h{display:flex; align-items:end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:26px}
+h2{font:800 clamp(40px, 4.4vw, 68px)/.95 var(--fh); text-transform:uppercase; margin:0}
+h2 em{font-style:normal; color:var(--lime)}
+.chips{display:flex; gap:8px; flex-wrap:wrap}
+.chip{display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 14px; border-radius:999px; border:1px solid var(--line2); background:transparent; cursor:pointer; font:800 14px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; color:var(--muted); white-space:nowrap}
+.chip i{width:9px; height:9px; border-radius:50%; background:var(--c, var(--ink))}
+.chip[aria-pressed="true"]{color:var(--ink); border-color:var(--c, var(--ink)); background:color-mix(in srgb, var(--c, #fff) 14%, transparent)}
+.cards{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:18px}
+.card{position:relative; text-align:left; border:1px solid var(--line); background:var(--card); border-radius:16px; overflow:hidden; cursor:pointer; padding:0; transition:transform .2s, border-color .2s, box-shadow .2s}
+.card::before{content:""; position:absolute; left:0; right:0; top:0; height:4px; background:var(--c); z-index:1}
+.card:hover{transform:translateY(-4px); border-color:color-mix(in srgb, var(--c) 60%, transparent); box-shadow:0 14px 40px -12px color-mix(in srgb, var(--c) 45%, transparent)}
+.card[aria-pressed="true"]{border-color:var(--c); box-shadow:0 0 0 1px var(--c), 0 14px 40px -12px color-mix(in srgb, var(--c) 55%, transparent)}
+.card img{width:100%; aspect-ratio:16/10; object-fit:cover; background:#e8eef2}
+.card .t{display:block; padding:14px 16px 16px}
+.card .t small{display:block; font:800 13px/1.15 var(--fh); letter-spacing:.1em; text-transform:uppercase; color:var(--c)}
+.card .t b{display:block; font:800 26px/1.02 var(--fh); text-transform:uppercase; margin-top:6px}
+.card .t span{display:block; font:400 14px/1.4 var(--fb); color:var(--muted); margin-top:6px}
+.card[hidden]{display:none}
+/* részletek */
+.detail{display:grid; grid-template-columns:1.25fr .75fr; gap:48px; align-items:start}
+.detail h3{font:800 clamp(30px, 2.6vw, 40px)/1 var(--fh); text-transform:uppercase; margin:0 0 14px}
+.detail p{margin:0 0 14px; color:#d4d9d0}
+.where{display:flex; gap:14px; align-items:center; margin-top:18px; padding:16px 18px; border-radius:14px; border:1px solid var(--line); background:var(--bg2)}
+.where i{width:12px; height:44px; border-radius:6px; background:var(--sc); flex:none; box-shadow:0 0 18px var(--sc)}
+.where b{display:block; font:800 22px/1.05 var(--fh); text-transform:uppercase}
+.where span{display:block; color:var(--muted); font-size:14px; margin-top:4px}
+.qrbox{border:1px solid var(--line); background:var(--bg2); border-radius:18px; padding:22px; text-align:center}
+.qrbox .q{background:#fff; border-radius:12px; padding:14px; width:220px; margin:0 auto}
+.qrbox .q svg{display:block; width:100%; height:auto}
+.qrbox b{display:block; font:800 24px/1.05 var(--fh); text-transform:uppercase; margin-top:16px}
+.qrbox span{display:block; color:var(--muted); font-size:14px; margin-top:6px}
+/* szakirányok */
+.bsc{margin-top:8px}
+.bsc + .bsc{margin-top:34px}
+.bsc-h{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:14px}
+.bsc-h b{font:800 30px/1 var(--fh); text-transform:uppercase}
+.bsc-h span{color:var(--muted); font:700 15px/1 var(--fh); letter-spacing:.1em; text-transform:uppercase}
+.specs{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px}
+.spec{border:1px solid var(--line); border-radius:16px; padding:18px; background:linear-gradient(160deg, color-mix(in srgb, var(--c) 16%, transparent), transparent 55%), var(--card); position:relative; overflow:hidden}
+.spec b{display:block; font:800 24px/1.02 var(--fh); text-transform:uppercase; color:var(--c)}
+.spec p{font-size:15px; line-height:1.5; margin:10px 0 12px; color:#d4d9d0}
+.spec .ms{display:flex; gap:6px; flex-wrap:wrap}
+.spec .ms button{border:1px solid color-mix(in srgb, var(--c) 55%, transparent); background:transparent; color:var(--ink); border-radius:999px; padding:6px 10px; font:700 13px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase; cursor:pointer}
+.spec .ms button:hover{background:color-mix(in srgb, var(--c) 20%, transparent)}
+.spec .ms em{font:700 13px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-style:normal; padding:6px 0}
+footer{border-top:1px solid var(--line); padding:28px 0 40px; color:var(--muted); font-size:14px}
+footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+footer a{color:var(--ink)}
+/* AULA mód: teljes képernyő, nagy betűk, magától léptet */
+.aula-only{display:none}
+body.aula{overflow:hidden; cursor:default}
+body.aula.idle, body.aula.idle *{cursor:none!important}
+body.aula .top, body.aula main > section, body.aula footer{display:none}
+body.aula .stage{height:100vh; max-height:none; min-height:0}
+body.aula .aula-only{display:block}
+body.aula .hud{left:64px; bottom:120px; width:min(900px, 52%)}
+body.aula #mname{font-size:clamp(72px, 7.2vw, 170px)}
+body.aula .hint{display:none}
+body.aula .kicker{font-size:clamp(18px, 1.4vw, 28px)}
+body.aula .hook{font-size:clamp(22px, 1.8vw, 36px)}
+body.aula .fact b{font-size:clamp(48px, 4.6vw, 96px)}
+body.aula .fact span{font-size:clamp(14px, 1vw, 20px)}
+body.aula .nav-arrow, body.aula .ctrl .opt{display:none}
+body.aula .ctrl{right:auto; left:64px; bottom:40px}
+body.aula .count{top:40px; right:64px}
+.abrand{position:absolute; left:64px; top:40px; z-index:6; font:800 clamp(20px, 1.6vw, 30px)/1 var(--fh); letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.abrand b{color:var(--lime)}
+.aqr{display:none; position:absolute; right:var(--pad); top:170px; z-index:6; width:200px; text-align:center; border-radius:20px; padding:14px; background:rgba(11,14,18,.74); border:1px solid var(--line2); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+@media (hover:hover) and (pointer:fine) and (min-width:1101px){ .aqr{display:block} .viewer{right:250px!important} body.aula .viewer{right:calc(clamp(230px, 15vw, 320px) + 96px)!important} }
+body.aula .aqr{display:block; top:auto; right:64px; bottom:56px; width:clamp(230px, 15vw, 320px); padding:18px}
+.aqr .q{background:#fff; border-radius:14px; padding:12px}
+.aqr .q svg{display:block; width:100%; height:auto}
+.aqr b{display:block; font:800 22px/1 var(--fh); text-transform:uppercase; margin-top:12px; color:var(--lime)}
+.aqr span{display:block; font:600 13px/1.3 var(--fb); color:var(--muted); margin-top:6px}
+body.aula .aqr b{font-size:clamp(22px, 1.6vw, 32px); margin-top:14px} body.aula .aqr span{font-size:clamp(13px, .85vw, 17px)}
+.ticker{position:absolute; left:64px; right:calc(64px + clamp(230px, 15vw, 320px) + 24px); bottom:0; height:4px; z-index:6; display:flex; gap:6px}
+.ticker i{flex:1; background:rgba(255,255,255,.12); position:relative; overflow:hidden; border-radius:2px}
+.ticker i b{position:absolute; inset:0; width:0; background:var(--lime)}
+.ticker i.done b{width:100%; background:rgba(255,178,62,.45)}
+.manual{position:absolute; left:50%; top:40px; transform:translateX(-50%); z-index:7; font:800 clamp(16px, 1.1vw, 22px)/1 var(--fh); letter-spacing:.12em; text-transform:uppercase; background:var(--lime); color:#0b0e12; padding:12px 20px; border-radius:999px; opacity:0; transition:opacity .3s; pointer-events:none}
+.manual.on{opacity:1}
+.aexit{position:absolute; right:16px; top:16px; z-index:8; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); background:rgba(11,14,18,.5); color:var(--muted); cursor:pointer; opacity:.25; transition:opacity .2s}
+.aexit:hover{opacity:1}
+/* AR: nagy gomb telefonon, indító lap, AR-nézet felülete */
+.arfab{position:absolute; left:50%; bottom:18px; transform:translateX(-50%); z-index:7; display:inline-flex; align-items:center; gap:11px; height:58px; padding:0 28px; border-radius:999px; border:0; background:var(--lime); color:#0b0e12; font:800 21px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; cursor:pointer; box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 34px rgba(255,178,62,.45); animation:fabPulse 2.4s ease-in-out infinite}
+.arfab svg{width:26px; height:26px; flex:none}
+.arfab[hidden]{display:none}
+.arfab.off{background:rgba(11,14,18,.8); color:var(--ink); border:1px solid var(--line2); box-shadow:0 8px 24px rgba(0,0,0,.4); animation:none}
+@keyframes fabPulse{0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 18px rgba(255,178,62,.35)}50%{box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 42px rgba(255,178,62,.7)}}
+.arsheet{position:fixed; inset:0; z-index:50; display:flex; align-items:flex-end; justify-content:center; background:rgba(5,7,9,.62); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px)}
+.arsheet[hidden]{display:none}
+.arsheet-in{position:relative; width:min(560px, 100%); max-height:100%; overflow:auto; background:var(--bg2); border:1px solid var(--line2); border-radius:22px 22px 0 0; padding:26px 22px calc(22px + env(safe-area-inset-bottom)); animation:sheetUp .32s cubic-bezier(.2,.8,.2,1)}
+@media (min-width:761px){ .arsheet{align-items:center} .arsheet-in{border-radius:22px} }
+@keyframes sheetUp{from{transform:translateY(40px); opacity:0}to{transform:none; opacity:1}}
+.ars-x{position:absolute; right:14px; top:14px; width:42px; height:42px; border-radius:50%; border:1px solid var(--line2); background:transparent; color:var(--muted); cursor:pointer; font:600 18px/1 var(--fb)}
+.arsheet small{display:block; font:800 14px/1.2 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--sc); padding-right:48px}
+.arsheet h3{font:800 36px/1 var(--fh); text-transform:uppercase; margin:6px 0 18px}
+.arsheet ol{list-style:none; padding:0; margin:0 0 22px; counter-reset:s}
+.arsheet li{counter-increment:s; display:flex; gap:14px; align-items:flex-start; margin:0 0 14px; font:600 16px/1.42 var(--fb); color:#dfe4dc}
+.arsheet li::before{content:counter(s); flex:none; width:32px; height:32px; border-radius:50%; background:var(--lime); color:#0b0e12; display:grid; place-items:center; font:800 19px/1 var(--fh)}
+.arsheet p.ars-no{font:600 16px/1.45 var(--fb); color:#dfe4dc; margin:0 0 20px; text-align:left}
+.ars-go{width:100%; height:58px; border-radius:999px; border:0; background:var(--lime); color:#0b0e12; font:800 21px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px}
+.ars-go svg{width:24px; height:24px}
+.xrui{display:none; position:fixed; inset:0; z-index:60; color:#fff; font-family:var(--fb); touch-action:none; user-select:none; -webkit-user-select:none}
+.xrui.on{display:block}
+.xrui > *{opacity:0; transition:opacity .3s}
+.xrui.live > *{opacity:1}
+.xr-top{position:absolute; left:0; right:0; top:0; display:flex; align-items:center; gap:10px; padding:calc(14px + env(safe-area-inset-top)) 14px 0}
+.xr-x{flex:none; width:50px; height:50px; border-radius:50%; border:0; background:rgba(11,14,18,.75); color:#fff; font:600 22px/1 var(--fb)}
+.xr-title{min-width:0; font:800 18px/1.1 var(--fh); letter-spacing:.06em; text-transform:uppercase; background:rgba(11,14,18,.62); padding:11px 16px; border-radius:999px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.xr-msg{position:absolute; left:50%; bottom:calc(118px + env(safe-area-inset-bottom)); transform:translateX(-50%); width:max-content; max-width:90vw; display:flex; align-items:center; gap:12px; background:rgba(11,14,18,.8); border:1px solid rgba(255,178,62,.55); padding:13px 18px; border-radius:16px; font:600 17px/1.35 var(--fb); transition:opacity .4s}
+.xrui.live > .xr-msg.off{opacity:0}
+.xr-msg svg{flex:none; width:34px; height:34px; display:none}
+.xr-msg[data-k="scan"] .i-scan, .xr-msg[data-k="load"] .i-scan, .xr-msg[data-k="aim"] .i-tap, .xr-msg[data-k="placed"] .i-pinch{display:block}
+.i-scan{animation:sweep 1.6s ease-in-out infinite alternate}
+@keyframes sweep{from{transform:translateX(-5px) rotate(-8deg)}to{transform:translateX(5px) rotate(8deg)}}
+.xr-size{position:absolute; left:50%; top:40%; transform:translate(-50%, -50%); font:800 38px/1 var(--fh); background:rgba(11,14,18,.62); padding:10px 18px; border-radius:14px; pointer-events:none}
+.xrui.live > .xr-size{opacity:0} .xrui.live > .xr-size.on{opacity:1}
+.xr-bot{position:absolute; left:0; right:0; bottom:0; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:0 10px calc(18px + env(safe-area-inset-bottom))}
+.xr-bot[hidden]{display:none}
+.xr-b{height:50px; padding:0 16px; border-radius:999px; border:1px solid rgba(255,255,255,.32); background:rgba(11,14,18,.75); color:#fff; font:800 15px/1 var(--fh); letter-spacing:.06em; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px}
+.xr-b svg{width:18px; height:18px}
+.xr-b.act{background:var(--lime); color:#0b0e12; border-color:transparent}
+.xr-b[aria-pressed="true"]{border-color:var(--lime); color:var(--lime)}
+.xr-b[hidden]{display:none}
+.xr-canvas{position:fixed!important; left:0; top:0; width:1px!important; height:1px!important; opacity:0; pointer-events:none}
+/* reszponzív */
+@media (max-width:1100px){
+  :root{--pad:28px}
+  .detail{grid-template-columns:1fr}
+  .qrbox{display:none}
+  .hud{width:min(560px, 58%)}
 }
-@media (max-width: 520px){ :root{--pad:16px} .fact b{font-size:15px} }
-@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+@media (max-width:760px){
+  :root{--pad:18px}
+  body{font-size:16px}
+  .top .wrap{height:56px}
+  .top nav .hide-s, .top nav .aula-btn{display:none}
+  .brand span{display:none}
+  .stage{height:auto; min-height:0; max-height:none; display:flex; flex-direction:column}
+  .viewer{position:relative; height:62svh; min-height:380px}
+  .hud{position:relative; left:auto; bottom:auto; width:auto; padding:6px var(--pad) 0}
+  #mname{font-size:clamp(44px, 13vw, 64px)} #mname.long{font-size:clamp(38px, 11vw, 56px)} #mname.xlong{font-size:clamp(34px, 9.4vw, 48px)}
+  .facts{gap:16px 22px}
+  .fact b{font-size:clamp(30px, 9vw, 40px)}
+  .ctrl{position:relative; right:auto; bottom:auto; max-width:none; justify-content:flex-start; padding:18px var(--pad) 26px}
+  .btn{height:44px; padding:0 14px; font-size:15px}
+  .btn.ic{width:44px}
+  .count{top:14px; right:var(--pad); font-size:36px}
+  .nav-arrow{width:44px; height:44px; margin-top:-22px; top:31svh}
+  .nav-arrow.prev{left:8px} .nav-arrow.next{right:8px}
+  .hint{display:none}
+  .viewer .prog{bottom:0}
+  section{padding:52px 0}
+}
+@media (min-width:761px){ .viewer{position:absolute; inset:0} .shade{position:absolute; left:0; top:0; bottom:0; width:58%; z-index:4; pointer-events:none; background:linear-gradient(90deg, rgba(11,14,18,.86), rgba(11,14,18,.5) 55%, transparent)} }
+@media (min-width:1101px){ .viewer{left:30%} body.aula .viewer{left:40%; right:-2%} }
+@media (prefers-reduced-motion:reduce){
+  .floor{animation:none} .btn.act{animation:none}
+  .hud.in .kicker, .hud.in .hook, .hud.in .fact, .hud.in #mname .w > span{animation:none}
+  .stage.wiping .wipe::before, .stage.wiping .wipe::after{animation:none}
+}
 
-/* nyelvváltó (HU | EN): a kitöltött az aktuális nyelv; mobilon csak a másik nyelv kódja */
-.langbtn{flex:none; display:inline-flex; align-items:center; gap:2px; padding:3px; border:1px solid rgba(255,255,255,.22); border-radius:999px; text-decoration:none; color:inherit; font:500 12px/1 var(--fm); letter-spacing:.04em}
-.langbtn b, .langbtn span{display:inline-grid; place-items:center; min-width:30px; padding:5px 8px; border-radius:999px}
-.langbtn b{background:#eef1f4; color:#141a20; font-weight:600}
-.langbtn span{opacity:.75}
-.langbtn:hover span{opacity:1; background:rgba(255,255,255,.12)}
-@media (max-width: 560px){ .langbtn b{display:none} .langbtn span{min-width:0; padding:6px 9px; opacity:1} }
-.kick .langbtn{margin-left:auto; text-transform:none}
-
-/* ===== LÁTVÁNY (2026-11): mozgó háttér, fénylő néző, vezérlősáv, kiemelt mondat ===== */
-header.lab{position:relative; overflow:hidden; isolation:isolate}
-header.lab::before{content:""; position:absolute; inset:-30% -10% auto; height:130%; z-index:-1; background:radial-gradient(45% 40% at 15% 20%, rgba(95,227,255,.20), transparent 70%), radial-gradient(40% 40% at 88% 12%, rgba(232,149,42,.18), transparent 70%), radial-gradient(45% 45% at 60% 95%, rgba(178,58,147,.16), transparent 70%)}
-header.lab::after{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; background-image:linear-gradient(rgba(95,227,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(95,227,255,.05) 1px, transparent 1px); background-size:44px 44px; -webkit-mask-image:radial-gradient(70% 60% at 50% 20%, #000, transparent 80%); mask-image:radial-gradient(70% 60% at 50% 20%, #000, transparent 80%)}
-.viewer{--lc:var(--holo); box-shadow:0 0 0 1px color-mix(in srgb, var(--lc) 45%, transparent), 0 30px 80px -30px color-mix(in srgb, var(--lc) 70%, transparent); transition:box-shadow .5s}
-.viewer.sw model-viewer{animation:mvin .7s cubic-bezier(.2,.7,.2,1)}
-.mcard{transition:transform .2s, box-shadow .25s, border-color .25s}
-.mcard:hover{transform:translateY(-4px)}
-.mcard[aria-pressed="true"]{box-shadow:0 0 0 2px var(--lc), 0 16px 40px -14px var(--lc)}
-.mcard img{transition:transform .5s}
-.mcard:hover img{transform:scale(1.06)}
-.hook{font:700 clamp(17px, 1.5vw, 20px)/1.3 var(--fd, inherit); margin:10px 0 0; text-align:left !important; hyphens:none !important; text-wrap:balance; color:#fff}
-.ctl{position:absolute; left:12px; right:12px; bottom:12px; display:flex; align-items:center; gap:10px; padding:7px 12px 7px 7px; border-radius:999px; background:rgba(9,14,19,.78); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:3}
-.ctl[hidden]{display:none}
-.ctl button{width:36px; height:36px; flex:none; border-radius:50%; border:0; background:var(--lc, var(--holo)); color:#0b1218; display:grid; place-items:center; cursor:pointer}
-.ctl button svg{width:20px; height:20px}
-.ctl input{flex:1; min-width:0; accent-color:var(--lc, var(--holo)); height:26px}
-.ctl span{font-size:11.5px; color:#cfd6dc; white-space:nowrap}
-.viewer:has(.ctl:not([hidden])) .arbtn{bottom:66px}
-.fact{transition:transform .2s, border-color .2s}
-.fact:hover{transform:translateY(-2px)}
-.steps li, .trouble > div{transition:transform .25s, box-shadow .25s}
-.steps li:hover, .trouble > div:hover{transform:translateY(-3px)}
-@media (prefers-reduced-motion: no-preference){ header.lab::before{animation:labaur 22s ease-in-out infinite alternate} header.lab h1 em{background:linear-gradient(100deg, var(--holo) 0%, var(--holo) 40%, #fff 50%, var(--holo) 60%, var(--holo) 100%) 100% 0 / 280% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:labshim 7s ease-in-out 1.2s infinite} }
-@keyframes labaur{to{transform:translate3d(4%, 3%, 0) scale(1.12) rotate(4deg)}}
-@keyframes labshim{0%, 60%{background-position:100% 0} 90%, 100%{background-position:0 0}}
-@keyframes mvin{from{opacity:0; transform:scale(.96)}}
-/* dobozcímek középen (formázás) */
-.info > div:first-child{text-align:center} .info .lec{justify-content:center} .hook{text-align:center !important}
-.steps li > b{display:block; text-align:center} .steps li::before{margin-inline:auto}
-.trouble h3{text-align:center} .mcard .t{text-align:center}
-</style>
-<script src="vendor/hyphenopoly/Hyphenopoly_Loader.js"></script>
-<script>Hyphenopoly.config({ require: { "en-gb": "FORCEHYPHENOPOLY" }, setup: { hide: "none", selectors: { ".hyphenate": { minWordLength: 6, compound: "auto" } } } });</script>
-
-<style id="boxtext-css">
-/* Szövegdobozok: a cím és a szöveg középen (a felhasználó kérése, 2026-11-20). Balra zárt marad: táblázat, felsorolás, űrlap. */
-.steps li, .steps li p, .steps li h3, .steps li b { text-align:center !important; text-align-last:center } .steps li { align-items:center } .plat, .plat p, [class*="howto"] div, [class*="howto"] p { text-align:center !important; text-align-last:center }
- .trouble > div, .trouble > div p, .trouble > div h3 { text-align:center !important; text-align-last:center }
+/* fejléc: a menüpontok nem törnek; 1000 px alatt csak a márka, a nyelvváltó és a vetítő mód marad */
+.top nav{white-space:nowrap}
+@media (max-width:1000px){ .top nav .hide-s{display:none} }
+/* álló táblagép (761–1100 px): a modell a színpad felső részén, a cím és a számok alatta – nem takarják egymást */
+@media (min-width:761px) and (max-width:1100px){ .viewer #mv{height:calc(100% - 300px)} .stage.lbl .viewer #mv{height:calc(100% - 110px)} }
+/* telefonon nincs teljes képernyő gomb (iPhone-on nem is működik), így a gombok egy sorban maradnak */
+@media (max-width:760px){ #fsBtn{display:none} }
+/* modellkártyák: a kép mindig felül, a szöveg alatta középen; a magyarázó blokk két oszlopa egyforma magas, a tananyag-hivatkozás az aljára kerül */
+.card{display:flex; flex-direction:column; justify-content:flex-start} .card .t{flex:1; display:flex; flex-direction:column; justify-content:center}
+@media (min-width:1101px){ .detail{align-items:stretch} .detail > div:first-child{display:flex; flex-direction:column} .detail .wheres{margin-top:auto; padding-top:18px} .qrbox{display:flex; flex-direction:column; justify-content:center} }
+/* feliratos nézet: a modell kapja a teret – a cím kicsire vált, a mondat és a számok eltűnnek, a bal oldali sötétítés megszűnik (a feliratok olvashatók maradnak) */
+.shade{transition:opacity .4s}
+@media (min-width:761px){ .stage.lbl .shade{opacity:0} .stage.lbl .hook, .stage.lbl .facts{display:none} .stage.lbl #mname{font-size:clamp(28px, 2.5vw, 44px)!important; max-width:10em} body.aula .stage.lbl #mname{font-size:clamp(40px, 3.2vw, 72px)!important} }
+/* ---- Alapozás AR labor: dobozcím és dobozszöveg középen; előadás-kártyák; hivatkozások ---- */
+.card{text-align:center}
+/* tíz kártya: 5 × 2, keskenyebb nézetben 2 × 5, telefonon egy oszlop – mindig teli sorok */
+.cards{grid-template-columns:repeat(5, 1fr)} .card .t b{font-size:23px}
+@media (max-width:1180px){ .cards{grid-template-columns:repeat(2, 1fr)} .card .t b{font-size:26px} }
+@media (max-width:560px){ .cards{grid-template-columns:1fr} }
+.spec{text-align:center; display:flex; flex-direction:column}
+.spec small{display:block; font:800 13px/1.15 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px}
+main .spec p{text-align:center; text-align-last:center; flex:1}
+.spec .ms{justify-content:center}
+.spec .app{display:inline-flex; align-self:center; align-items:center; gap:6px; margin-top:14px; padding:9px 14px; border-radius:999px; background:var(--c); color:#0b0e12; text-decoration:none; font:800 14px/1 var(--fh); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap}
+.spec .app:hover{filter:brightness(1.1)}
+.specs{grid-template-columns:repeat(3, 1fr)}
+@media (max-width:1100px){ .specs{grid-template-columns:repeat(2, 1fr)} }
+@media (max-width:760px){ .specs{grid-template-columns:1fr} }
+.wheres{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px}
+.wheres .where{margin-top:0; text-decoration:none; transition:border-color .2s, transform .2s}
+.wheres .where:hover{border-color:var(--sc); transform:translateY(-2px)}
+.where[hidden]{display:none}
+.where > div{flex:1; min-width:0}
+.where em{font:800 24px/1 var(--fh); font-style:normal; color:var(--sc)}
+.where.alt i{background:var(--ink); box-shadow:none; opacity:.55}
+.where.alt em{color:var(--ink)}
+.wheres:has(.where[hidden]){grid-template-columns:1fr}
+@media (max-width:760px){ .wheres{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
-<header class="lab">
-  <div class="wrap">
-    <div class="kick"><span>BME Foundation Engineering</span><span class="tag">augmented reality</span>
-    <a class="langbtn" id="langSw" href="./" hreflang="hu" lang="hu" aria-label="Magyar változat"><span>HU</span><b>EN</b></a></div>
-    <div class="head">
-      <h1>Foundation Engineering <em>AR lab</em></h1>
-      <p class="lead">The 3D models of the course in one place. Choose a model, rotate it, zoom in, then on a phone use the “View in your space” button to place it on a table or the floor and walk around it. The models move: you can pause them and view any moment on the timeline. The labels can be switched on with the “Labels on the model” toggle; they then also appear in the AR view.</p>
-    </div>
-    <nav class="shelf" id="shelf" aria-label="Models"></nav>
-    <div class="grid">
-      <div class="viewer" id="viewer">
-        <model-viewer id="mv" alt="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls touch-action="pan-y" autoplay shadow-intensity="1" shadow-softness="0.8" exposure="1.05" environment-image="neutral" interaction-prompt="none" loading="eager">
-          <button slot="ar-button" class="arbtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>View in your space</button>
-        </model-viewer>
-        <div class="scale mono" id="scaleTag"></div>
-        <div class="anim mono" id="animTag" hidden>animated</div>
-        <div class="ctl" id="ctl" hidden><button type="button" id="ppBtn" aria-label="Play or pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="ppIco" d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button><input type="range" id="tl" min="0" max="1000" value="0" aria-label="Timeline"><span class="mono" id="tlT">0:00</span></div>
-      </div>
-      <div class="panel">
-        <div class="box info">
-          <div><div class="lec" id="lec"></div><h2 id="mname"></h2></div>
-          <p class="hook" id="mhook"></p>
-          <p id="minfo"></p>
-          <div class="views" id="views" role="group" aria-label="Viewpoints"></div>
-          <label class="switch" for="lbl"><input type="checkbox" id="lbl">Labels on the model</label>
-          <div class="facts" id="facts"></div>
-          <a class="link" id="mlink" href="#" target="_blank" rel="noopener"></a>
-        </div>
-        <div class="box">
-          <div class="status" id="status"><span class="dot"></span><span id="statusText">Checking AR support…</span></div>
-          <div id="qr" aria-label="QR code to open the page on a phone"></div>
-        </div>
-      </div>
-    </div>
+<header class="top"><div class="wrap">
+  <a class="brand" href="/en"><i></i>AR lab <span>Foundation Engineering</span></a>
+  <nav>
+    <button type="button" class="hide-s" data-go="modellek">Models</button>
+    <button type="button" class="hide-s" data-go="szakiranyok">Lectures</button>
+    <a class="hide-s" href="/en">Course home</a>
+    <span class="lang"><a href="/ar-labor" id="langLink" hreflang="hu">HU</a><span>EN</span></span>
+    <button type="button" class="aula-btn" id="aulaBtn">Projector mode</button>
+  </nav>
+</div></header>
+<main>
+<div class="stage" id="stage">
+  <div class="floor" aria-hidden="true"></div>
+  <div class="viewer">
+    <model-viewer id="mv" alt="" ar ar-modes="scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls touch-action="pan-y" shadow-intensity="1.1" shadow-softness="0.9" exposure="1.08" environment-image="neutral" tone-mapping="neutral" interaction-prompt="auto" interaction-prompt-threshold="4000" auto-rotate auto-rotate-delay="2500" rotation-per-second="14deg" interpolation-decay="140" loading="eager" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 96deg auto"></model-viewer>
+    <div class="loader" id="loader"></div>
+    <div class="count" id="count" aria-hidden="true"></div>
+    <div class="hint" id="hint">Rotate · zoom · try the button</div>
+    <div class="prog" id="prog" hidden><i></i></div>
+    <button type="button" class="arfab" id="arFab" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg><span>See it in AR</span></button>
   </div>
-</header>
+  <div class="shade" aria-hidden="true"></div>
+  <button type="button" class="nav-arrow prev" id="prev" aria-label="Previous model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" class="nav-arrow next" id="next" aria-label="Next model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  <div class="hud" id="hud" aria-live="polite">
+    <div class="kicker" id="kicker"></div>
+    <h1 id="mname"></h1>
+    <div class="hook" id="mhook"></div>
+    <div class="facts" id="facts"></div>
+  </div>
+  <div class="ctrl" id="ctrl">
+    <button type="button" class="btn act" id="actBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><span></span></button>
+    <button type="button" class="btn ic" id="playBtn" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
+    <button type="button" class="btn opt" id="lblBtn" aria-pressed="false">Labels</button>
+    <button type="button" class="btn ic opt" id="rotBtn" aria-pressed="true" aria-label="Auto-rotate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg></button>
+    <button type="button" class="btn ic opt" id="fsBtn" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+  <div class="abrand aula-only"><b>BME Foundation Engineering</b> · AR lab</div>
+  <div class="aqr"><div class="q" id="aqr"></div><b>See it in AR!</b><span>Scan it with your phone: the model appears in front of you on the table or the floor.</span></div>
+  <div class="ticker aula-only" id="ticker"></div>
+  <div class="manual aula-only" id="manual"></div>
+  <button type="button" class="aexit aula-only" id="aexit" aria-label="Exit projector mode">✕</button>
+  <div class="wipe" aria-hidden="true"></div>
+</div>
 
-<main class="wrap">
-  <section class="sec">
-    <h2>How to place the model</h2>
-    <ol class="steps">
-      <li><b>Tap the button</b><p>The “View in your space” button below the model opens the camera. The first time, the phone asks for permission.</p></li>
-      <li><b>Scan the surface</b><p>Move the phone slowly over the floor or the table until it recognises the horizontal surface. It is quicker on a well-lit, patterned surface.</p></li>
-      <li><b>Place it and walk around it</b><p>You can make the model smaller or larger with two fingers and walk around it. If you switch the labels on beforehand, you can read them too by leaning in close.</p></li>
-    </ol>
-  </section>
-  <section class="sec">
-    <h2>If AR does not start</h2>
-    <div class="trouble">
-      <div><h3>On Android</h3><p>You need a phone that runs Google Play Services for AR. The model opens in Google Scene Viewer; animated models move there too.</p></div>
-      <div><h3>On iPhone and iPad</h3><p>The model appears in Apple AR Quick Look. Here the models are still images; the animation is only visible in the browser.</p></div>
-      <div><h3>On a computer</h3><p>A desktop computer has no camera AR; the model can be rotated with the mouse and zoomed with the scroll wheel. For the AR view, scan the QR code with your phone.</p></div>
-    </div>
-  </section>
+<section id="modellek"><div class="wrap">
+  <div class="sec-h"><h2>Pick a <em>model!</em></h2><div class="chips" id="chips"></div></div>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<section id="reszletek" style="padding-top:0"><div class="wrap detail">
+  <div>
+    <h3 id="dname"></h3>
+    <p id="minfo" class="hyphenate"></p>
+    <div class="wheres"><a class="where" id="dwhere" target="_blank" rel="noopener"><i></i><div><b id="dspec"></b><span id="dbsc"></span></div><em aria-hidden="true">↗</em></a><a class="where alt" id="dlink" target="_blank" rel="noopener" hidden><i></i><div><b id="dlinkT"></b><span id="dlinkS"></span></div><em aria-hidden="true">↗</em></a></div>
+  </div>
+  <div class="qrbox"><div class="q" id="qr"></div><b>See it in AR</b><span>Scan it with your phone: the model appears in front of you on the table or the floor, and you can walk around it.</span></div>
+</div></section>
+
+<section id="szakiranyok" style="background:var(--bg2)"><div class="wrap">
+  <div class="sec-h"><h2>Which <em>lecture?</em></h2></div>
+  <div id="bscs"></div>
+</div></section>
 </main>
-<footer class="wrap"><p>BME Department of Engineering Geology and Geotechnics · Foundation Engineering · The models are schematic sketches.</p></footer>
+<div class="arsheet" id="arSheet" hidden role="dialog" aria-modal="true" aria-labelledby="arsT"><div class="arsheet-in">
+  <button type="button" class="ars-x" id="arsX" aria-label="Close">✕</button>
+  <small id="arsM"></small><h3 id="arsT">See it in AR</h3>
+  <ol id="arsSteps"></ol><p class="ars-no" id="arsNo" hidden></p>
+  <button type="button" class="ars-go" id="arsGo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg><span></span></button>
+</div></div>
+<div class="xrui" id="xrui">
+  <div class="xr-top"><button type="button" class="xr-x" id="xrExit" aria-label="Exit">✕</button><div class="xr-title" id="xrTitle"></div></div>
+  <div class="xr-size" id="xrSize"></div>
+  <div class="xr-msg" id="xrMsg"><svg class="i-scan" viewBox="0 0 34 34" fill="none" stroke="#ffb23e" stroke-width="2.2" stroke-linejoin="round"><rect x="11" y="4" width="12" height="22" rx="2.5"/><path d="M15 22h4M4 30h26"/></svg><svg class="i-tap" viewBox="0 0 34 34" fill="none" stroke="#ffb23e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="11" r="6"/><path d="M15 11v14l-3-3M15 25h7a4 4 0 0 0 4-4v-5l-6-2"/></svg><svg class="i-pinch" viewBox="0 0 34 34" fill="none" stroke="#ffb23e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l7 7M28 28l-7-7M6 6h6M6 6v6M28 28h-6M28 28v-6"/></svg><span></span></div>
+  <div class="xr-bot" id="xrBot" hidden>
+    <button type="button" class="xr-b" id="xrMove"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>Move</button>
+    <button type="button" class="xr-b" id="xrReset">Original size</button>
+    <button type="button" class="xr-b act" id="xrAct"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg><span></span></button>
+    <button type="button" class="xr-b" id="xrLbl" aria-pressed="false">Labels</button>
+  </div>
+</div>
+<footer><div class="wrap"><p class="rag">BME Department of Engineering Geology and Geotechnics · Foundation Engineering · AR lab. The models are simplified, for teaching purposes.</p><p class="rag"><a href="/en">Back to the course home page</a></p></div></footer>
 
+<script type="importmap">{"imports":{"three":"/ar-labor/vendor/three.module.min.js"}}</script>
+<script>self.ModelViewerElement = { meshoptDecoderLocation: new URL('vendor/meshopt_decoder.js', document.baseURI).href };</script>
 <script type="module" src="vendor/model-viewer.min.js"></script>
+<script src="vendor/qrcode.js"></script>
 <script>
 (() => {
-const EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-const mv = $('#mv');
-const EMB = window.__EMBED || null;
-const abs = (u) => new URL(u, document.baseURI).href; // az AR-nézők az oldal címéhez viszonyítanak, ezért teljes cím kell
-const ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>';
-const SB = 'https://';
-// hotspot: [felirat, [x, y, z] méterben a modell saját koordinátáiban, normál, 0 jobbra / 1 balra / 2 középre, szín]
-const M = [
-  { id: 'tores', f: 'talajtores', name: 'Bearing failure below a strip footing', lec: '3', lc: 'var(--c3)', k: 1 / 40, scale: 'auto', tag: 'M 1 : 40', anim: true, lt: 9.5, orbit: '24deg 70deg auto',
-    hook: 'The load grows – and suddenly the ground gives way.',
-    info: 'More and more load comes onto the wall. When the shear strength of the ground is exhausted, the slip surface appears: the footing sinks and tilts together with the active wedge, the radial shear zone rotates along the logarithmic spiral, the passive zone is pushed upwards and outwards along the slip surface, and the ground surface heaves. General shear failure in sand; the movements are exaggerated.',
-    facts: [['30°', 'φ′ in the sand'], ['2.0 m', 'footing width'], ['≈ 10 m', 'extent of the slip surface']], link: ['Lecture 3: Design of shallow foundations', 'sikalapoktervezese.vercel.app/en'],
-    views: [['Section from the front', '0deg 88deg auto', 'auto auto auto'], ['The heave', '55deg 62deg auto', 'auto auto auto']],
-    hs: [] },
-  { id: 'hagyma', f: 'feszultseghagyma', name: 'Pressure bulb', lec: '5', lc: 'var(--c5)', k: 1 / 25, scale: 'auto', tag: 'M 1 : 25', anim: true, lt: 11, orbit: '45deg 66deg auto',
-    hook: 'The load does not stop below the footing: it spreads and fades.',
-    info: 'Load is applied to the column, and the additional stress appears below the footing: the coloured shells lie at 80, 60, 40, 20 and 10 % of the contact pressure, from the inside outwards. In the open quarter the shells are cut back in steps, so each of them can be seen. They are computed after Boussinesq, beneath a uniformly loaded circle with the same area as the 2 × 2 m footing.',
-    facts: [['1.8 m', 'bottom of the 40 % shell'], ['2.8 m', 'bottom of the 20 % shell'], ['4.2 m', 'bottom of the 10 % shell']], link: ['Lecture 5: Settlement of shallow foundations', 'sikalapok-sullyedesszamitasa.vercel.app/en'],
-    views: [['The cut-away corner', '45deg 72deg auto', 'auto auto auto'], ['From above', '45deg 34deg auto', 'auto auto auto']],
-    hs: [] },
-  { id: 'pisa', f: 'pisa-makett', name: 'The Leaning Tower of Pisa', lec: '5', lc: 'var(--c5)', k: 1 / 130, scale: 'auto', tag: 'M 1 : 130', anim: true, lt: 15.5, orbit: '22deg 78deg auto',
-    hook: 'Two hundred years in the making – and leaning all the while.',
-    info: 'The tower was built between 1173 and 1372, in three stages, and it was already leaning by the third storey. The ground consists of about 3 m of made ground at the top, then sandy silt and sand that thin out towards the south; below these lies soft clay that is thicker on the south side – settlement is larger there, and that is the way the tower leans. By 1990 the tilt had reached 5.5°; careful soil extraction from beneath the north side reduced it to about 3.97°. The red rod shows the original vertical.',
-    facts: [['3.97°', 'tilt today'], ['5.5°', 'tilt in 1990'], ['14 500 t', 'mass of the tower']], link: ['Geotechnical CSI: the Pisa case', 'bme-alapozas.vercel.app/helyszinelok/en'],
-    views: [['The layers from the front', '0deg 86deg auto', 'auto auto auto'], ['From the south', '90deg 80deg auto', 'auto auto auto']],
-    hs: [] },
-  { id: 'cfa', f: 'cfa-makett', name: 'CFA pile during drilling', lec: '8', lc: 'var(--c8)', k: 1 / 60, scale: 'auto', tag: 'M 1 : 60', anim: true, orbit: '28deg 74deg auto',
-    hook: 'The auger drills down in one pass – the soil supports the bore.',
-    info: 'The auger is 10 m deep, and its flights are full of soil: this soil supports the borehole wall, which is why a CFA pile needs no casing or slurry. The concrete is brought by a hose to the rotary head, and from there it runs down the hollow stem of the auger to the base. The rig is controlled by the operator sitting in the cab.',
-    facts: [['80 cm', 'pile diameter'], ['10 m', 'drilling depth'], ['20 m', 'auger length']], link: ['The full CFA animation', 'cfa-colop-3d.vercel.app/en'],
-    views: [['Section from the front', '0deg 88deg 0.95m', '0m 0.04m 0m'], ['Drill head close up', '6deg 86deg 0.2m', '0m -0.158m 0m']],
-    hs: [] },
-  { id: 'godor', f: 'munkagodor', name: 'Excavation with an anchored diaphragm wall', lec: '9', lc: 'var(--c9)', k: 1 / 80, scale: 'auto', tag: 'M 1 : 80', anim: true, lt: 16, orbit: '16deg 74deg auto',
-    hook: 'Going down step by step: dig, anchor, dig.',
-    info: 'The 15 m deep diaphragm wall is embedded in the low-permeability clay, so dewatering does not draw down the groundwater around the site. The 9 m deep excavation is dug in three stages: after the first stage the first anchor row and its waler are installed, after the second stage the second row, and finally the base slab is cast. The two anchor rows are parallel and run 3.3 m apart; the upper row is fixed in the sand, the lower one in the sandy gravel.',
-    facts: [['9 m', 'excavation depth'], ['15 m', 'diaphragm wall'], ['2 rows', 'ground anchors']], link: ['Lecture 9: Excavation support', 'munkaterhatarolasok.vercel.app/en'],
-    views: [['Section from the front', '0deg 86deg auto', 'auto auto auto'], ['Looking into the excavation', '30deg 55deg auto', 'auto auto auto']],
-    hs: [] },
-  { id: 'telek', f: 'egy-telek', name: 'One site, one semester', lec: '1–9', lc: 'var(--accent)', k: 1 / 150, scale: 'auto', tag: 'M 1 : 150', anim: true, lt: 18.5, orbit: '14deg 73deg auto',
-    hook: 'The whole semester on a single site.',
-    info: 'The site of the “One site, one semester” case study is built up. Building A stands on pad footings in the sand; below Building B there is soft clay, so it is built in an anchored diaphragm-wall excavation, on CFA piles that reach the sandy gravel. The block is cut open at the front, so the foundations, the basement and the piles are visible too.',
-    facts: [['2', 'buildings'], ['9', 'stations'], ['−3.0 m', 'groundwater']], link: ['One site, one semester', 'bme-alapozas.vercel.app/telek/en'],
-    views: [['Section from the front', '0deg 84deg auto', 'auto auto auto'], ['From above', '20deg 42deg auto', 'auto auto auto']],
-    hs: [] },
-];
-let cur = M[0];
-// feliratok: a modellnek két változata van (felirat nélkül / feliratokkal), a kapcsoló a kettő között vált – az AR-nézetben is
-const fileOf = (m) => m.f + ($('#lbl').checked ? '-feliratok-en' : '');
-function setSrc(m) { const f = fileOf(m); if (EMB) mv.removeAttribute('ios-src'); else mv.setAttribute('ios-src', abs('models/' + f + '.usdz')); mv.setAttribute('src', EMB ? EMB[f] : abs('models/' + f + '.glb')); }
-$('#shelf').innerHTML = M.map(m => `<button type="button" class="mcard" data-id="${m.id}" style="--lc:${m.lc}" aria-pressed="false"><img src="img/${m.f}.jpg" alt="" width="560" height="350" loading="lazy"><i>${m.lec}</i><span class="t"><b>${m.name}</b><span>${m.tag}</span></span></button>`).join('');
-$('#shelf').addEventListener('click', (e) => { const b = e.target.closest('.mcard'); if (b) select(b.dataset.id, true); });
-function select(id, push) {
-  const m = M.find(x => x.id === id) || M[0]; cur = m;
-  $$('.mcard').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === m.id)));
-  $$('.hs', mv).forEach(e => e.remove());
-  m.hs.forEach(([t, p, side, col], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'hs' + (side === 1 ? ' l' : side === 2 ? ' c' : ''); b.slot = 'hotspot-' + m.id + '-' + i; b.tabIndex = -1;
-    b.dataset.position = p.map(v => (v * m.k).toFixed(5) + 'm').join(' '); b.dataset.normal = '0 0 1'; b.dataset.visibilityAttribute = 'visible'; if (col) b.style.setProperty('--dot', 'var(' + col + ')');
-    const sp = document.createElement('span'); sp.className = 'p'; sp.textContent = t; b.appendChild(sp); mv.appendChild(b); });
-  mv.setAttribute('ar-scale', m.scale); mv.setAttribute('alt', m.name); mv.removeAttribute('auto-rotate'); mv.setAttribute('min-camera-orbit', 'auto 5deg auto'); mv.setAttribute('max-camera-orbit', 'auto 100deg auto');
-  mv.setAttribute('camera-orbit', m.orbit); mv.setAttribute('camera-target', 'auto auto auto'); mv.removeAttribute('field-of-view'); setSrc(m);
-  $('#scaleTag').textContent = m.tag; $('#animTag').hidden = !m.anim;
-  $('#lec').innerHTML = `<i style="background:${m.lc}">${m.lec}</i><span>${m.lec.includes('–') ? 'the whole course' : 'Lecture ' + m.lec}</span>`;
-  $('#mname').textContent = m.name; $('#mhook').textContent = m.hook || ''; $('#minfo').textContent = m.info; $('#viewer').style.setProperty('--lc', m.lc); $('#viewer').classList.remove('sw'); void $('#viewer').offsetWidth; $('#viewer').classList.add('sw');
-  $('#facts').innerHTML = m.facts.map(([v, l]) => `<div class="fact"><b>${v}</b><span>${l}</span></div>`).join('');
-  $('#views').innerHTML = [['Overview', m.orbit, 'auto auto auto'], ...m.views].map(([t], i) => `<button type="button" data-i="${i}" aria-pressed="${i === 0}">${t}</button>`).join('') + '<button type="button" data-i="rot" aria-pressed="false">Auto-rotate</button>';
-  const ln = $('#mlink'); ln.href = SB + m.link[1]; ln.innerHTML = m.link[0] + (/\/en$/.test(m.link[1]) ? '' : ' (in Hungarian)') + ' ' + ARROW;
-  if (push) { try { history.replaceState(null, '', '#' + m.id); } catch (e) {} }
-  try { localStorage.setItem('ar-labor-model', m.id); } catch (e) {}
+const D = {"lang": "en", "SPECS": {"3": {"k": "Lecture 3", "n": "Design of shallow foundations", "short": "3 · Shallow foundations", "b": "ut", "d": "What kind of foundation, and how deep? Foundation types, choosing the founding level and the mechanism of bearing failure – then the bearing resistance calculation.", "url": "https://sikalapoktervezese.vercel.app/en", "c": "#ff6a4d"}, "5": {"k": "Lecture 5", "n": "Settlement of shallow foundations", "short": "5 · Settlement", "b": "ut", "d": "How much does it settle, and how unevenly? Stress distribution beneath the footing, the depth of influence and the compression of each layer.", "url": "https://sikalapok-sullyedesszamitasa.vercel.app/en", "c": "#e866c8"}, "7": {"k": "Lecture 7", "n": "External effects on shallow foundations", "short": "7 · External effects", "b": "ut", "d": "What else acts on a foundation? Vibration, earthquakes, cavities, water and frost: these have to be recognised and prevented rather than calculated.", "url": "https://sikalapokaterohatasok.vercel.app/en", "c": "#938fff"}, "8": {"k": "Lecture 8", "n": "Deep foundations", "short": "8 · Deep foundations", "b": "ut", "d": "When is a shallow foundation not enough? Piles, diaphragm walls, wells and caissons carry the load deeper, down to the bearing stratum.", "url": "https://melyalapozasok.vercel.app/en", "c": "#4f9dff"}, "9": {"k": "Lecture 9", "n": "Excavation support", "short": "9 · Excavations", "b": "ut", "d": "How do we get down safely? Bracing, sheet piles, diaphragm walls and ground anchors: the sides of the pit must be held and the water kept out.", "url": "https://munkaterhatarolasok.vercel.app/en", "c": "#2cc7d6"}, "all": {"k": "Case study", "n": "One site, one semester", "short": "One site", "b": "ut", "d": "The whole semester on a single site: from ground investigation through the choice of foundations to the excavation, with two buildings.", "url": "https://bme-alapozas.vercel.app/telek/en", "c": "#ffb23e"}}, "BSC": {"ut": {"n": "The route of the course", "d": "five lectures and the case study"}}, "M": [{"id": "tores", "f": "talajtores", "en": true, "sec": true, "sp": "3", "anim": true, "labelT": 9.5, "orbit": "24deg 70deg 118%", "kind": "restart", "name": "Bearing failure beneath a strip footing", "act": "Load it!", "hook": "The load grows – and suddenly the ground gives way.", "facts": [["30°", "φ′ of the sand"], ["2.0 m", "footing width"], ["≈ 10 m", "reach of the slip surface"]], "info": "More and more load comes onto the wall. When the shear strength of the soil is exhausted, the slip surface appears: the footing sinks and tilts together with the active wedge, the radial shear zone rotates along the logarithmic spiral, the passive zone is pushed up and outwards along the slip surface, and the ground surface heaves. General shear failure in sand; the movements are exaggerated."}, {"id": "hagyma", "f": "feszultseghagyma", "en": true, "sec": true, "sp": "5", "anim": true, "labelT": 11, "orbit": "45deg 66deg 170%", "kind": "restart", "name": "Pressure bulb", "act": "Put the load on!", "hook": "The load does not stop beneath the footing: it spreads and fades.", "facts": [["1.8 m", "base of the 40% shell"], ["2.8 m", "base of the 20% shell"], ["4.2 m", "base of the 10% shell"]], "info": "Load comes onto the column, and the stress increase appears beneath the footing: the coloured shells mark 80, 60, 40, 20 and 10% of the contact pressure, from the inside outwards. In the open quarter the shells are cut back in steps, so each of them can be seen. They follow Boussinesq’s solution for a uniformly loaded circle with the same area as the 2 × 2 m footing."}, {"id": "pisa", "f": "pisa-makett", "en": true, "sec": true, "sp": "5", "anim": true, "labelT": 15.5, "orbit": "22deg 78deg 122%", "kind": "restart", "name": "The Leaning Tower of Pisa", "act": "Build it!", "hook": "It took two hundred years to build – and it leaned all the way.", "facts": [["3.97°", "tilt today"], ["5.5°", "tilt in 1990"], ["14,500 t", "mass of the tower"]], "info": "The tower was built in three stages between 1173 and 1372, and it began to lean as early as the third storey. The ground consists of about 3 m of made ground, then sandy silt and sand that thins out towards the south; beneath it lies soft clay, which is thicker on the south side – the settlement is larger there, and that is the way the tower leans. By 1990 the tilt had reached 5.5°; careful soil extraction from beneath the north side reduced it to about 3.97°. The red rod shows the original vertical.", "link": ["Geotechnical CSI", "investigate the Pisa case", "https://bme-alapozas.vercel.app/helyszinelok/en"]}, {"id": "renges", "f": "foldrenges-razoasztal", "sp": "7", "anim": true, "labelT": 4.3, "orbit": "24deg 68deg 80%", "kind": "restart", "name": "An earthquake in the lab", "act": "Shake it!", "hook": "Two identical building models on one shake table – one of them stands on rubber bearings.", "facts": [["2", "identical building models"], ["5", "storeys"], ["rubber bearings", "base isolation"]], "info": "In the structures laboratory a hydraulic actuator shakes the table the way the ground moves in an earthquake. The storeys of the rigidly fixed model sway more and more, and the storey drift strains the structure. Under the base-isolated model on rubber bearings the table almost slides away: the building itself hardly moves. Accelerometers and cameras record the motion. The shaking reaches the building from the ground, through its foundation: that is why it matters what we found on, and how. (The hall is a generic illustrative lab and the motion is exaggerated.)"}, {"id": "mobilgat", "sec": true, "sp": "7", "anim": true, "labelT": 12.5, "orbit": "26deg 70deg 78%", "kind": "restart", "name": "Szentendre demountable flood wall", "act": "Bring on the flood!", "hook": "When the Danube rises, an aluminium wall grows on the promenade – Hungary’s first demountable flood wall.", "facts": [["333 m", "long"], ["2013", "the first flood it held back"], ["1.35 m", "above the design flood level"]], "info": "No high embankment hides the old town of Szentendre from the Danube: before a flood, workers stand aluminium posts on the permanent foundation and lift the stop logs in row by row. The wall passes the water pressure to its foundation, and a cut-off wall in the ground stops water from seeping underneath. Water is one of the most dangerous enemies of a foundation: if it finds a way beneath, it washes the soil out. The houses, the towers and the foundation in the model are schematic."}, {"id": "cfa", "f": "cfa-makett", "sec": true, "sp": "8", "anim": true, "orbit": "28deg 74deg 114%", "kind": "labels", "name": "CFA pile during drilling", "act": "Show me what’s what!", "hook": "The auger drills down in a single pass – the soil supports the borehole.", "facts": [["80 cm", "pile diameter"], ["10 m", "drilling depth"], ["20 m", "auger length"]], "info": "A CFA pile is made with a continuous flight auger. The auger is 10 m deep, and its flights are full of soil: this soil supports the borehole wall, which is why no casing or slurry is needed. The concrete is brought by a hose to the rotary head, and from there it runs down the hollow stem of the auger to the base, filling the borehole as the auger is withdrawn; the reinforcement cage is then pushed into the fresh concrete. The rig is controlled by the operator sitting in the cab.", "link": ["The full CFA animation", "making the pile, step by step", "https://cfa-colop-3d.vercel.app/en"]}, {"id": "mol-campus", "sec": true, "sp": "8", "anim": true, "labelT": 29, "orbit": "28deg 76deg 92%", "kind": "restart", "name": "MOL Campus", "act": "Build it!", "hook": "143 metres on the Danube bank – and its secret lies underground.", "facts": [["143 m", "tall including the spire"], ["135", "piles under the tower"], ["16 m", "deep excavation"]], "info": "Budapest’s tallest building stands on made ground and Danube sandy gravel, with groundwater 8 m below the surface. First the 21 m deep diaphragm wall goes in all around: it retains the soil and keeps the water out. Then comes the excavation for the four-level basement, followed by the 2.2 m thick raft, supported by 135 piles reaching down to the stiff Kiscell clay. Only then can the tower rise. A diaphragm wall, a deep excavation and a piled raft: Lectures 8 and 9 beneath a single building."}, {"id": "godor", "f": "munkagodor", "en": true, "sec": true, "sp": "9", "anim": true, "labelT": 16, "orbit": "16deg 74deg 112%", "kind": "restart", "name": "Anchored diaphragm-wall excavation", "act": "Dig the pit!", "hook": "Down only step by step: dig, anchor, dig.", "facts": [["9 m", "excavation depth"], ["15 m", "diaphragm wall"], ["2 rows", "of ground anchors"]], "info": "The 15 m deep diaphragm wall is keyed into the low-permeability clay, so dewatering does not draw down the groundwater of the surroundings. The 9 m deep pit is excavated in three stages: after the first stage the first row of anchors is installed with its waler, after the second stage the second row, and finally the base slab is cast. The two anchor rows are parallel, 3.3 m apart; the upper row is fixed in the sand, the lower one in the sandy gravel."}, {"id": "metro", "f": "metro-pajzs", "sec": true, "sp": "9", "anim": true, "labelT": 8, "orbit": "22deg 66deg 80%", "kind": "restart", "name": "Metro line M4 under the Danube – Szent Gellért tér", "act": "Start the train!", "hook": "31 metres below the surface, right beside the Danube: the deepest station of the line.", "facts": [["31 m", "below the surface"], ["87 m", "station length"], ["80 m", "platform length"]], "info": "The model shows today’s Szent Gellért Square, cut along the axis of the metro tunnel: above, Hotel Gellért, Liberty Bridge and the “CH” building of the university; below, Szent Gellért tér – Műegyetem station. Under the embankment stands a box built top-down between diaphragm walls and braced by a multi-level concrete beam grid; the platform tunnel was mined beneath the CH building; and a shield-driven tunnel lined with segmental rings leads under the Danube to Pest. A diaphragm-wall box, a mined tunnel and a shield drive: three construction methods around a single station."}, {"id": "telek", "f": "egy-telek", "en": true, "sec": true, "sp": "all", "anim": true, "labelT": 18.5, "orbit": "14deg 73deg 112%", "kind": "restart", "name": "One site, one semester", "act": "Build it!", "hook": "The whole semester on a single site.", "facts": [["2", "buildings"], ["9", "stations"], ["−3.0 m", "groundwater"]], "info": "The site of the “One site, one semester” case study is built up. Building A stands on pad footings in the sand; beneath Building B there is soft clay, so it is built in an anchored diaphragm-wall excavation, on CFA piles that reach down to the sandy gravel. The block is cut open at the front, so the footings, the basement and the piles can all be seen."}], "T": {"all": "All", "soon": "Coming soon", "learn": "the course material for this model", "open": "Open the course material", "play": "Play", "pause": "Pause", "manual": "You’re in control · moving on in {s} s", "fsHint": "F: full screen · ←/→: browse", "arGo": "Start", "arCopy": "Copy link", "arCopied": "Copied – paste it into your browser", "arNo": "This browser can’t start the AR view. Open the page in Chrome (Android) or Safari (iPhone): choose “Open in browser” in the menu, or copy the link.", "arSteps": {"xr": ["Point the phone at the floor or a table and move it slowly.", "A glowing frame appears: that is where the model goes and how big it will be. Tap when the spot is right.", "Pinch to zoom and twist to rotate, step back from it and walk around it."], "ql": ["Point the phone at the floor or a table and move it slowly.", "The model sits down on the first surface found; drag it with one finger to move it.", "Pinch to zoom and twist to rotate, step back from it and walk around it."]}, "xr": {"scan": "Move the phone slowly and look at the floor or a table", "aim": "Tap: the model goes here", "placed": "Pinch to zoom, twist to rotate · walk around it!", "loading": "Loading…", "loadErr": "The model could not be loaded", "dec": "."}}};
+const { SPECS, BSC, M, T } = D;
+const mv = $('#mv'), stage = $('#stage'), hud = $('#hud');
+const abs = (u) => new URL(u, document.baseURI).href; // az AR-nézők teljes címet kérnek
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params = new URLSearchParams(location.search);
+let cur = null, labels = false, userPaused = false, aula = false;
+
+/* ---------- polc, szűrők, szakirányok ---------- */
+const order = Object.keys(SPECS);
+const shelf = [...M].sort((a, b) => order.indexOf(a.sp) - order.indexOf(b.sp));
+$('#cards').innerHTML = shelf.map(m => { const s = SPECS[m.sp]; return `<button type="button" class="card" data-id="${m.id}" data-sp="${m.sp}" style="--c:${s.c}" aria-pressed="false"><img src="img/${m.img || m.f || m.id}.jpg" alt="" width="800" height="500" loading="lazy"><span class="t"><small>${s.short}</small><b>${m.name}</b><span>${m.hook}</span></span></button>`; }).join('');
+const present = order.filter(k => M.some(m => m.sp === k));
+$('#chips').innerHTML = `<button type="button" class="chip" data-sp="" aria-pressed="true">${T.all}</button>` + present.map(k => `<button type="button" class="chip" data-sp="${k}" style="--c:${SPECS[k].c}" aria-pressed="false"><i></i>${SPECS[k].short}</button>`).join('');
+$('#chips').addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (!b) return; const sp = b.dataset.sp;
+  $$('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b))); $$('.card').forEach(c => c.hidden = !!sp && c.dataset.sp !== sp); });
+$('#cards').addEventListener('click', (e) => { const b = e.target.closest('.card'); if (b) { select(b.dataset.id); stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); } });
+$('#bscs').innerHTML = Object.entries(BSC).map(([bk, b]) => `<div class="bsc"><div class="bsc-h"><b>${b.n}</b><span>${b.d}</span></div><div class="specs">` +
+  order.filter(k => SPECS[k].b === bk).map(k => { const s = SPECS[k], ms = M.filter(m => m.sp === k);
+    return `<div class="spec" style="--c:${s.c}"><small>${s.k}</small><b>${s.n}</b><p class="hyphenate">${s.d}</p><div class="ms">${ms.length ? ms.map(m => `<button type="button" data-id="${m.id}">${m.name}</button>`).join('') : `<em>${T.soon}</em>`}</div><a class="app" href="${s.url}" target="_blank" rel="noopener">${T.open} <span aria-hidden="true">↗</span></a></div>`; }).join('') + '</div></div>').join('');
+$('#bscs').addEventListener('click', (e) => { const b = e.target.closest('button[data-id]'); if (b) { select(b.dataset.id); stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); } });
+$$('[data-go]').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.go).scrollIntoView({ behavior: RM ? 'auto' : 'smooth' })));
+
+/* ---------- QR ---------- */
+const linkOf = (m) => location.origin + location.pathname + '?m=' + m.id + '&ar=1'; // a telefonon rögtön az AR-indító nyílik meg
+function qrSvg(text) { try { const q = qrcode(0, 'M'); q.addData(text); q.make(); return q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); } catch (e) { return ''; } }
+
+/* ---------- számláló (count-up) ---------- */
+function countUp(el, txt, delay) {
+  const EN = D.lang === 'en'; const m = EN ? txt.match(/^(\D*?)(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(.*)$/) : txt.match(/^(\D*?)(\d{1,3}(?:[ \u00a0\u202f]\d{3})+|\d+(?:,\d+)?)(.*)$/);
+  if (!m || RM) { el.textContent = txt; return; }
+  const [, pre, num, post] = m; const sep = EN ? (num.includes(',') ? ',' : '') : (num.match(/[ \u00a0\u202f]/) || [''])[0], dec = EN ? (num.includes('.') ? '.' : '') : (num.includes(',') ? ',' : '');
+  const v = parseFloat(EN ? num.replace(/,/g, '') : num.replace(/[ \u00a0\u202f]/g, '').replace(',', '.')), nd = dec ? num.split(dec)[1].length : 0;
+  const fmt = (x) => { let s = x.toFixed(nd); if (dec) s = s.replace('.', dec); if (sep) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, sep); return pre + s + post; };
+  el.textContent = fmt(0); const t0 = performance.now() + delay, dur = 1100;
+  const tick = (t) => { const k = Math.min(1, Math.max(0, (t - t0) / dur)); el.textContent = fmt(v * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); else el.textContent = txt; };
+  requestAnimationFrame(tick);
 }
-$('#views').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.i === 'rot') { const on = !mv.hasAttribute('auto-rotate'); mv.toggleAttribute('auto-rotate', on); b.setAttribute('aria-pressed', String(on)); return; }
-  const all = [['Overview', cur.orbit, 'auto auto auto'], ...cur.views]; const [, o, t] = all[+b.dataset.i]; mv.setAttribute('camera-target', t); mv.setAttribute('camera-orbit', o);
-  $$('#views button').forEach(x => { if (x.dataset.i !== 'rot') x.setAttribute('aria-pressed', String(x === b)); }); });
-mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-interaction') $$('#views button').forEach(x => { if (x.dataset.i !== 'rot' && x.getAttribute('aria-pressed') !== 'false') x.setAttribute('aria-pressed', 'false'); }); });
-$('#lbl').addEventListener('change', () => { // a nézőpont megmarad
-  try { const o = mv.getCameraOrbit(), t = mv.getCameraTarget(); mv.setAttribute('camera-orbit', `${o.theta}rad ${o.phi}rad ${o.radius}m`); mv.setAttribute('camera-target', `${t.x}m ${t.y}m ${t.z}m`); mv.setAttribute('field-of-view', mv.getFieldOfView() + 'deg'); } catch (e) {}
-  setSrc(cur); });
-// lejátszás / szünet, idővonal; bekapcsolt feliratoknál a modell a magyarázó pillanatban megáll
-{ const pp = $('#ppBtn'), tl = $('#tl'), tt = $('#tlT'), ico = $('#ppIco'), PLAY = 'M8 5v14l11-7z', PAUSE = 'M7 5h4v14H7zM13 5h4v14h-4z'; let drag = false, lastT = '';
-  const fmtT = (v) => Math.floor(v / 60) + ':' + String(Math.floor(v % 60)).padStart(2, '0');
-  const sync = () => { const d = mv.duration || 0; if (ico.getAttribute('d') !== (mv.paused ? PLAY : PAUSE)) ico.setAttribute('d', mv.paused ? PLAY : PAUSE); if (d && !drag) { const v = String(Math.round(mv.currentTime / d * 1000)); if (tl.value !== v) tl.value = v; } const s = fmtT(mv.currentTime || 0) + ' / ' + fmtT(d); if (s !== lastT) { lastT = s; tt.textContent = s; } };
-  mv.addEventListener('load', () => { const has = (mv.availableAnimations || []).length > 0 && mv.duration > 0; $('#ctl').hidden = !has; if (!has) return;
-    if ($('#lbl').checked && cur.lt != null) { mv.pause(); mv.currentTime = cur.lt; } else mv.play(); sync(); });
-  pp.addEventListener('click', () => { if (mv.paused) mv.play(); else mv.pause(); sync(); });
-  tl.addEventListener('input', () => { drag = true; mv.pause(); mv.currentTime = (mv.duration || 0) * tl.value / 1000; sync(); }); tl.addEventListener('change', () => { drag = false; });
-  setInterval(() => { if (!$('#ctl').hidden && !document.hidden) sync(); }, 200); }
-addEventListener('hashchange', () => { const id = location.hash.slice(1); if (M.some(m => m.id === id) && id !== cur.id) select(id, false); });
-{ let id = location.hash.slice(1); if (!M.some(m => m.id === id)) { try { id = localStorage.getItem('ar-labor-model') || ''; } catch (e) { id = ''; } } select(M.some(m => m.id === id) ? id : M[0].id, false); }
 
-let qrDone = false;
-const setStatus = (cls, txt) => { const st = $('#status'), tx = $('#statusText'); if (st.className !== cls) st.className = cls; if (tx.textContent !== txt) tx.textContent = txt; };
-function arStatus() {
-  if (mv.canActivateAR) { setStatus('status ok', 'This device supports AR. Choose a model and tap “View in your space”.'); return; }
-  const standalone = (() => { try { return window.top === window.self; } catch (e) { return false; } })();
-  if (standalone) { setStatus('status no', 'This device has no camera AR. Scan the code with your phone and open the page there.'); if (qrDone) return; qrDone = true;
-    const q = $('#qr'); q.classList.add('on'); const s = document.createElement('script'); s.src = 'vendor/qrcode.js';
-    s.onload = () => { try { const c = qrcode(0, 'M'); c.addData(location.href.split('#')[0]); c.make(); q.innerHTML = c.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); } catch (e) { q.classList.remove('on'); } }; s.onerror = () => q.classList.remove('on'); document.head.appendChild(s); }
-  else if (EMB) setStatus('status no', 'This is a preview: the models can be rotated and zoomed. For camera AR, the page has to be opened at its own web address on the phone.');
-  else setStatus('status no', 'This device has no camera AR. Open this page on your phone, and the “View in your space” button will appear there.');
+/* ---------- modell kiválasztása ---------- */
+const EN = D.lang === 'en'; const fileOf = (m) => (m.f || m.id) + (labels ? (EN ? '-feliratok-en' : '-feliratok') : (EN && m.en ? '-en' : '')); // m.en: a névtábla miatt a felirat nélküli modellnek is van angol változata
+function setSrc(m) { const f = fileOf(m); mv.setAttribute('ios-src', abs('models/' + f + '.usdz')); mv.setAttribute('src', abs('models/' + f + '.glb')); }
+function paintHud(m) {
+  const s = SPECS[m.sp]; document.documentElement.style.setProperty('--sc', s.c);
+  $('#kicker').innerHTML = `<i></i>${s.k}<span>· ${s.n}</span>`;
+  $('#mname').className = m.name.length > 32 ? 'xlong' : m.name.length > 22 ? 'long' : ''; // hosszú név: kisebb betű, hogy ne takarja a modellt
+  $('#mname').innerHTML = m.name.split(' ').map((w, i) => `<span class="w"><span style="--i:${i}">${w}</span></span>`).join(' ');
+  $('#mhook').textContent = m.hook;
+  $('#facts').innerHTML = m.facts.map(([v, l], i) => `<div class="fact" style="--i:${i}"><b></b><span>${l}</span></div>`).join('');
+  $$('#facts .fact b').forEach((b, i) => countUp(b, m.facts[i][0], RM ? 0 : 450 + i * 90));
+  $('#actBtn span').textContent = m.act; $('#actBtn').dataset.kind = m.kind;
+  const i = M.indexOf(m); $('#count').innerHTML = `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(M.length).padStart(2, '0')}`;
+  hud.classList.remove('in'); void hud.offsetWidth; hud.classList.add('in');
+  $('#dname').textContent = m.name; $('#minfo').textContent = m.info; $('#dspec').textContent = s.n; $('#dbsc').textContent = s.k + ' · ' + T.learn; $('#dwhere').href = s.url;
+  { const a = $('#dlink'); a.hidden = !m.link; if (m.link) { a.href = m.link[2]; $('#dlinkT').textContent = m.link[0]; $('#dlinkS').textContent = m.link[1]; } }
+  $$('.card').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === m.id)));
+  const svg = qrSvg(linkOf(m)); $('#qr').innerHTML = svg; $('#aqr').innerHTML = svg;
+  $$('#ticker i').forEach((t, j) => { t.classList.toggle('done', j < i); const b = t.querySelector('b'); b.style.transition = 'none'; b.style.width = '0'; });
 }
-customElements.whenDefined('model-viewer').then(() => { mv.addEventListener('load', arStatus, { once: true }); setTimeout(arStatus, 1500); });
-mv.addEventListener('ar-status', (e) => { if (e.detail.status === 'failed') setStatus('status no', 'AR did not start on this device. Try it in Chrome (Android) or Safari (iPhone).'); });
-window.__arlabor = { M };
+function select(id, opt = {}) {
+  const m = M.find(x => x.id === id) || M[0]; if (cur === m && !opt.force) return; const first = !cur; cur = m;
+  try { const u = new URL(location.href); u.searchParams.set('m', m.id); history.replaceState(null, '', u); } catch (e) {}
+  { const ll = $('#langLink'); if (ll) ll.href = (D.lang === 'en' ? '/ar-labor' : '/ar-labor/en') + '?m=' + m.id; }
+  const swap = () => { paintHud(m); loading(m); setSrc(m); };
+  if (first || RM) { swap(); return; }
+  stage.classList.remove('wiping'); void stage.offsetWidth; stage.classList.add('wiping');
+  setTimeout(swap, 430); setTimeout(() => stage.classList.remove('wiping'), 1100);
+}
+function loading(m) {
+  const [th, ph] = m.orbit.split(' '); mv.setAttribute('camera-target', 'auto auto auto'); mv.setAttribute('camera-orbit', `${parseFloat(th) - 38}deg ${parseFloat(ph) - 12}deg 220%`); mv.jumpCameraToGoal && mv.jumpCameraToGoal();
+  mv.setAttribute('alt', m.name); const L = $('#loader'); L.classList.remove('done'); L.style.width = '8%';
+  $('#prog').hidden = !m.anim; $('#lblBtn').setAttribute('aria-pressed', String(labels));
+}
+mv.addEventListener('progress', (e) => { $('#loader').style.width = (8 + 92 * e.detail.totalProgress) + '%'; if (e.detail.totalProgress >= 1) $('#loader').classList.add('done'); });
+mv.addEventListener('load', () => {
+  const m = cur; $('#loader').classList.add('done');
+  mv.setAttribute('camera-orbit', m.orbit); // berepülés a kamerával
+  if (m.anim) { if (labels && m.labelT != null) { mv.pause(); mv.currentTime = m.labelT; } else if (!userPaused) { mv.currentTime = 0; mv.play(); } }
+  syncPlay(); applyMotion(1600); if (aula) tourArm(); preloadNext();
+});
+function preloadNext() { const n = M[(M.indexOf(cur) + 1) % M.length]; try { fetch(abs('models/' + fileOf(n) + '.glb')).catch(() => {}); } catch (e) {} }
+const go = (d) => { const i = M.indexOf(cur); select(M[(i + d + M.length) % M.length].id); };
+$('#prev').addEventListener('click', () => go(-1)); $('#next').addEventListener('click', () => go(1));
 
-/* nyelvváltó: a választás megmarad (alap-lang), a másik nyelvű oldal ugyanott nyílik meg (alap-pos) */
-(() => {
-  const sw = $('#langSw'), KEY = 'alap-pos'; const hh = () => { const t = $('.top'); return t ? t.offsetHeight : 0; };
-  if (sw) sw.addEventListener('click', () => {
-    try { localStorage.setItem('alap-lang', EN ? 'hu' : 'en'); } catch (e) {}
-    const H0 = hh(); let best = null; document.querySelectorAll('main [id]').forEach((n) => { if (n.closest('svg')) return; const r = n.getBoundingClientRect(); if (r.height && r.top <= H0 + 1 && r.bottom > H0) best = n; });
-    try { sessionStorage.setItem(KEY, JSON.stringify({ id: best ? best.id : '', off: best ? H0 - best.getBoundingClientRect().top : 0, y: scrollY, t: Date.now() })); } catch (e) {}
-    sw.setAttribute('href', (EN ? './' : 'en') + (location.hash || ''));
-  });
-  let p = null; try { p = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
-  if (p && Date.now() - p.t < 20000) { if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
-    const go = () => { const n = p.id && document.getElementById(p.id); const y = n ? n.getBoundingClientRect().top + scrollY - hh() + p.off : p.y; scrollTo({ top: Math.max(0, y), behavior: 'instant' }); };
-    requestAnimationFrame(go); addEventListener('load', () => { go(); setTimeout(go, 600); }, { once: true }); }
-})();
+/* ---------- animáció, feliratok, forgatás ---------- */
+const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>', PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+function syncPlay() { const b = $('#playBtn'); const on = cur && cur.anim && !mv.paused; b.hidden = !(cur && cur.anim); b.innerHTML = on ? PAUSE : PLAY; b.setAttribute('aria-label', on ? T.pause : T.play); }
+$('#playBtn').addEventListener('click', () => { if (!cur.anim) return; if (mv.paused) { if (labels) setLabels(false); userPaused = false; mv.play(); } else { userPaused = true; mv.pause(); } syncPlay(); });
+function setLabels(on) { labels = on; $('#lblBtn').setAttribute('aria-pressed', String(on)); stage.classList.toggle('lbl', on);
+  /* feliratokkal a modell a saját nézőpontjából látszik (a táblák szembe néznek), és úgy, hogy minden felirat beférjen; kikapcsoláskor vissza az alapnézet */
+  const keep = cur.orbit; if (on) { const [th, ph] = keep.split(' '); cur.orbit = `${th} ${ph} 104%`; } mv.setAttribute('camera-target', 'auto auto auto');
+  setSrc(cur); mv.addEventListener('load', () => { cur.orbit = keep; }, { once: true }); }
+$('#lblBtn').addEventListener('click', () => setLabels(!labels));
+$('#actBtn').addEventListener('click', () => { const k = $('#actBtn').dataset.kind;
+  if (k === 'labels') { setLabels(!labels); return; }
+  if (labels) { setLabels(false); userPaused = false; return; }
+  userPaused = false; mv.currentTime = 0; mv.play(); syncPlay(); });
+/* mozgás: teljes 3D-s makettek körbeforognak, a metszetes makettek (sec) csak ide-oda lengenek a nézet körül */
+let rotating = true, lastUser = 0; const swing = { on: false, t0: 0, th0: 0, phi: 75, r: '100%', hold: false };
+function anchorSwing(delay = 0) { try { const o = mv.getCameraOrbit(); swing.th0 = o.theta * 180 / Math.PI; swing.phi = o.phi * 180 / Math.PI; swing.r = o.radius + 'm'; } catch (e) {} swing.t0 = performance.now() + delay; }
+function applyMotion(delay = 0) { const sec = cur && cur.sec; mv.toggleAttribute('auto-rotate', rotating && !sec); swing.on = rotating && !!sec; if (swing.on) { swing.hold = true; setTimeout(() => { anchorSwing(); swing.hold = false; }, delay); } $('#rotBtn').setAttribute('aria-pressed', String(rotating)); }
+mv.addEventListener('camera-change', (e) => { if (e.detail.source === 'user-interaction') { lastUser = performance.now(); swing.hold = true; } });
+$('#rotBtn').addEventListener('click', () => { rotating = !rotating; applyMotion(); });
+const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+function toggleFS(el = stage) { if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; } const r = el.requestFullscreen || el.webkitRequestFullscreen; if (r) try { const p = r.call(el); if (p && p.catch) p.catch(() => {}); } catch (e) {} }
+$('#fsBtn').addEventListener('click', () => toggleFS());
+$('#prog').addEventListener('click', (e) => { if (!cur.anim || !mv.duration) return; const r = e.currentTarget.getBoundingClientRect(); if (labels) setLabels(false); mv.currentTime = (e.clientX - r.left) / r.width * mv.duration; if (mv.paused && !userPaused) mv.play(); });
+(function loop(now) { if (cur && cur.anim && mv.duration) $('#prog i').style.width = (100 * (mv.currentTime % mv.duration) / mv.duration).toFixed(2) + '%';
+  if (swing.on && mv.loaded) { if (swing.hold && lastUser && now - lastUser > 2500) { lastUser = 0; anchorSwing(); swing.hold = false; }
+    if (!swing.hold && now > swing.t0) { const th = swing.th0 + 34 * Math.sin(2 * Math.PI * (now - swing.t0) / 18000); mv.cameraOrbit = `${th.toFixed(2)}deg ${swing.phi.toFixed(2)}deg ${swing.r}`; } }
+  requestAnimationFrame(loop); })(performance.now());
+mv.addEventListener('play', syncPlay); mv.addEventListener('pause', syncPlay);
+setTimeout(() => $('#hint').classList.add('off'), 7000);
 
+/* ---------- AR ---------- */
+/* telefonon nagy gomb → rövid útmutató → indítás. Android (Chrome + ARCore): saját WebXR-nézet (xr.js): keret mutatja, hová kerül a modell,
+   koppintásra lekerül és a helyén marad. iPhone: Quick Look, más Androidon Scene Viewer (model-viewer). Gépen és kivetítőn QR-kód (.aqr). */
+const UA = navigator.userAgent, IOS = /iPhone|iPad|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const MOBILE = IOS || /Android|Mobile/i.test(UA);
+const IN_APP = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|Line\/|; wv\)|TikTok|musical_ly|BytedanceWebview|Snapchat|GSA\//i.test(UA); // beépített böngészők: ott nem indul az AR
+let arMode = null, XRP = null, sheetAuto = MOBILE && params.has('ar');
+function syncAR() { if (arMode !== 'xr') arMode = (!IN_APP && customElements.get('model-viewer') && mv.canActivateAR) ? (IOS ? 'ql' : 'sv') : 'none';
+  $('#arFab').hidden = !MOBILE; $('#arFab').classList.toggle('off', arMode === 'none'); }
+(async () => { try { if (navigator.xr && await navigator.xr.isSessionSupported('immersive-ar')) { arMode = 'xr'; XRP = import('./xr.js'); XRP.catch(() => {}); } } catch (e) {} syncAR(); })();
+customElements.whenDefined('model-viewer').then(() => { mv.addEventListener('load', () => { syncAR(); if (sheetAuto) { sheetAuto = false; openSheet(); } }); setTimeout(syncAR, 1200); });
+function openSheet() { syncAR(); const none = arMode === 'none';
+  $('#arsM').textContent = cur.name; $('#arsSteps').innerHTML = none ? '' : T.arSteps[arMode === 'xr' ? 'xr' : 'ql'].map(t => `<li>${t}</li>`).join('');
+  $('#arsSteps').hidden = none; $('#arsNo').hidden = !none; $('#arsNo').textContent = T.arNo; $('#arsGo span').textContent = none ? T.arCopy : T.arGo;
+  $('#arSheet').hidden = false; setTimeout(() => $('#arsGo').focus(), 50);
+  try { const u = new URL(location.href); if (u.searchParams.has('ar')) { u.searchParams.delete('ar'); history.replaceState(null, '', u); } } catch (e) {} }
+const closeSheet = () => { $('#arSheet').hidden = true; };
+$('#arFab').addEventListener('click', openSheet);
+$('#arsX').addEventListener('click', closeSheet);
+$('#arSheet').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeSheet(); });
+$('#arsGo').addEventListener('click', () => { if (arMode === 'none') { const l = location.origin + location.pathname + '?m=' + cur.id + '&ar=1';
+    (navigator.clipboard ? navigator.clipboard.writeText(l) : Promise.reject()).then(() => { $('#arsGo span').textContent = T.arCopied; }).catch(() => { prompt('', l); }); return; }
+  closeSheet(); startAR(); });
+function startAR() {
+  if (arMode === 'xr') { const ui = $('#xrui'), base = cur.f || cur.id, lab = D.lang === 'en' ? '-feliratok-en' : '-feliratok'; ui.classList.add('on'); $('#xrAct span').textContent = cur.act;
+    let sp; try { sp = navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'], optionalFeatures: ['dom-overlay', 'anchors', 'local-floor'], domOverlay: { root: ui } }); } catch (e) { sp = Promise.reject(e); }
+    const was = !mv.paused; mv.pause();
+    Promise.all([sp, XRP]).then(([s, X]) => { ui.classList.add('live');
+      return X.run(s, { ui, T: T.xr, title: cur.name, labels, url: abs('models/' + base + (D.lang === 'en' && cur.en ? '-en' : '') + '.glb'), urlLabels: abs('models/' + base + lab + '.glb'),
+        onEnd: () => { ui.classList.remove('on', 'live'); if (was && !userPaused) mv.play(); } }).catch((e) => { try { s.end(); } catch (x) {} throw e; }); })
+      .catch((e) => { console.warn('WebXR', e); ui.classList.remove('on', 'live'); if (was) mv.play(); if (mv.canActivateAR) try { mv.activateAR(); } catch (x) {} });
+    return; }
+  try { mv.activateAR(); } catch (e) {}
+}
+
+/* ---------- AULA mód: magától léptet, ha hozzányúlnak, átadja az irányítást ---------- */
+$('#ticker').innerHTML = M.map(() => '<i><b></b></i>').join('');
+let tourT = 0, manualT = 0, manualLeft = 0, idleT = 0;
+function dwell() { const d = cur.anim && mv.duration ? mv.duration + 3 : 18; return Math.max(18, Math.min(34, d)) * 1000; }
+function tourArm() { clearTimeout(tourT); if (!aula || manualLeft > 0) return; const ms = dwell(); const t = $$('#ticker i')[M.indexOf(cur)]; if (t) { const b = t.querySelector('b'); b.style.transition = 'none'; b.style.width = '0'; void b.offsetWidth; b.style.transition = `width ${ms}ms linear`; b.style.width = '100%'; }
+  tourT = setTimeout(() => go(1), ms); }
+function manual() { if (!aula) return; clearTimeout(tourT); manualLeft = 40; const b = $$('#ticker i')[M.indexOf(cur)]; if (b) { const x = b.querySelector('b'); x.style.transition = 'none'; x.style.width = '0'; }
+  const show = () => { $('#manual').textContent = T.manual.replace('{s}', manualLeft); $('#manual').classList.add('on'); };
+  show(); clearInterval(manualT); manualT = setInterval(() => { manualLeft--; if (manualLeft <= 0) { clearInterval(manualT); $('#manual').classList.remove('on'); if (labels) setLabels(false); rotating = true; applyMotion(); go(1); } else show(); }, 1000); }
+function setAula(on) { aula = on; document.body.classList.toggle('aula', on); clearTimeout(tourT); clearInterval(manualT); manualLeft = 0; $('#manual').classList.remove('on');
+  try { const u = new URL(location.href); on ? u.searchParams.set('aula', '1') : u.searchParams.delete('aula'); history.replaceState(null, '', u); } catch (e) {}
+  if (on) { rotating = true; applyMotion(); mv.setAttribute('rotation-per-second', '10deg'); userPaused = false; if (labels) setLabels(false); tourArm();
+    setTimeout(() => { if (!fsEl() && manualLeft <= 0) { $('#manual').textContent = T.fsHint; $('#manual').classList.add('on'); setTimeout(() => { if (manualLeft <= 0) $('#manual').classList.remove('on'); }, 6000); } }, 900); }
+  else { mv.setAttribute('rotation-per-second', '14deg'); if (fsEl()) toggleFS(); } }
+$('#aulaBtn').addEventListener('click', () => { setAula(true); toggleFS(document.documentElement); });
+$('#aexit').addEventListener('click', () => setAula(false));
+['pointerdown', 'wheel'].forEach(ev => stage.addEventListener(ev, (e) => { if (aula && !e.target.closest('.aexit')) manual(); }, { passive: true }));
+addEventListener('pointermove', () => { if (!aula) return; document.body.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(() => document.body.classList.add('idle'), 2500); });
+addEventListener('keydown', (e) => { if (e.target.closest && e.target.closest('input, textarea')) return; const k = e.key.toLowerCase();
+  if (k === 'arrowright') { go(1); manual(); } else if (k === 'arrowleft') { go(-1); manual(); }
+  else if (k === ' ' && aula) { e.preventDefault(); $('#playBtn').click(); manual(); }
+  else if (k === 'l') { setLabels(!labels); manual(); } else if (k === 'r') $('#rotBtn').click();
+  else if (k === 'f') toggleFS(aula ? document.documentElement : stage);
+  else if (k === 'a') setAula(!aula); else if (k === 'escape' && !$('#arSheet').hidden) closeSheet(); else if (k === 'escape' && aula && !fsEl()) setAula(false); });
+
+/* ---------- indulás ---------- */
+{ const h = decodeURIComponent(location.hash.slice(1)), q = params.get('m'); select(q && M.some(m => m.id === q) ? q : (h && M.some(m => m.id === h) ? h : M[0].id)); if (h) try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+if (params.has('aula')) setAula(true);
+window.__arl = { M, select, setAula };
+/* ================= FORMÁZÁS: nem törő egységek + magyar elválasztás ================= */
 const GUARD = (() => {
   const NB = '\u00A0', WJ = '\u2060', NNB = '\u202F', NBH = '\u2011';
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'CODE', 'PRE', 'svg', 'SVG', 'CANVAS', 'SELECT', 'OPTION']);
-  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead, .lead, .info p';
-  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead, .lead, .info p';
+  const BLOCK = 'main p, main li, main h2, main h3, main h4, main h5, main b, main .verdict, main .vs > div, main .rv, main .tlx, main .note, main .tagline, main .stat span, main .lead, footer p, footer li, .hero-lead';
+  const HYPH = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, main .lead, footer p, .hero-lead';
   const NOHY = 'sub, sup, code, button, label, output, td, th, .nw, h1, h2, h3, h4, h5, .chip, .pill, .kick, .mono, .tag, .bdg, .d';
-  const TERMS = ['soil and structure', 'bearing stratum', 'groundwater conditions', 'differential settlement', 'differential settlements', 'overall stability', 'ultimate limit state', 'serviceability limit state', 'soft lens', 'organic soil', 'organic clay', 'collapsible loess', 'expansive clay', 'caisson foundations', 'piled raft', 'deepened shallow foundation', 'design project', 'Tower of Pisa'];
+  const TERMS = ['kiscelli agyag', 'kövér agyag', 'laza üledék', 'Pannon-tó', 'Tisza-gát', 'Fővám tér', 'Paks II', 'Jáky József', 'Építőmérnöki Kar', 'Kárpát-medence', 'talajmechanikai labor', 'első vázlat'];
   const termRx = new RegExp('(' + TERMS.sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]')).join('|') + ')', 'giu');
   const MULT_SYM = /^(tg|ctg|sin|cos|tan|exp|ln|log)\b/;
-  const NUMW = EN ? /(^|[\s(\u00A0\u2060“])((?:[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|[Ff]ourteen|[Ff]irst|[Ss]econd|[Tt]hird|[Ff]ourth|[Bb]oth|[Aa]ll|[Ss]everal|[Aa] few))(?=\s\S)\s/g : /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
+  const NUMW = /(^|[\s(\u00A0\u2060„])((?:[Kk]ét|[Hh]árom|[Nn]égy|[Öö]t|[Hh]at|[Hh]ét|[Nn]yolc|[Kk]ilenc|[Tt]íz|[Tt]izennégy|[Ee]lső|[Mm]ásodik|[Hh]armadik|[Nn]egyedik|[Mm]indkét|[Mm]indhárom|[Nn]éhány|[Ee]gyik))(?=\s\S)\s/g;
   function textPass(s) {
     if (!/[ \-–·]/.test(s)) return s;
     s = s.replace(/(^|[^\d,.])(\d{1,3}) (\d{3})(?!\d)/g, '$1$2' + NNB + '$3');
@@ -401,17 +615,16 @@ const GUARD = (() => {
     s = s.replace(/(\d)-(\d)/g, '$1' + NBH + '$2');
     s = s.replace(/\b([A-Z]{2,5})-(\d)/g, '$1' + NBH + '$2');
     s = s.replace(/([^\s\u2060])–([^\s\u2060])/g, '$1' + WJ + '–' + WJ + '$2');
-    s = s.replace(/(\S) ([–—]) /g, '$1' + NB + '$2 ');   // a gondolatjel nem kezdhet sort
-    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.|e\.g\.|i\.e\.|approx\.|cf\.|No\.) (?=\S)/g, '$1$2' + NB);
+    s = s.replace(/(^|[\s(\u00A0])(pl\.|kb\.|ill\.|ún\.|max\.|min\.|Dr\.) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
     s = s.replace(/(^|[\s(\u00A0\u2060~≈≤≥=<>−+])(\d+(?:[,.]\d+)?\.?%?) (?=\S)/g, '$1$2' + NB);
-    for (let i = 0; i < 2; i++) s = s.replace(EN ? /(^|[\s(\u00A0\u2060“‘])(a|an|the|A|An|The|&) (?=\S)/g : /(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
+    for (let i = 0; i < 2; i++) s = s.replace(/(^|[\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És) (?=\S)/g, '$1$2' + NB);
     s = s.replace(NUMW, '$1$2' + NB);
     s = s.replace(/([\d°′″%)\]\p{Lu}])-(\p{Ll}{1,6})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     s = s.replace(/(\d[\u00A0 ](?:mm|cm|m|kPa|MPa|kN|m²|m³))-(\p{Ll}{1,7})(?=$|[\s.,;:!?)”\u00A0\u2060])/gu, '$1' + NBH + '$2');
     return s;
   }
-  const SHORTEND = EN ? new RegExp('(^|[\\s(\u00A0\u2060“‘])(a|an|the|A|An|The|e\\.g\\.|i\\.e\\.|approx\\.|\\d+(?:[,.]\\d+)?\\.?%?) $') : new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
+  const SHORTEND = new RegExp('(^|[\\s(\u00A0\u2060„])(a|az|A|Az|s|e|egy|Egy|és|És|pl\\.|kb\\.|ill\\.|ún\\.|\\d+(?:[,.]\\d+)?\\.?%?) $');
   function crossPass(nodes) { for (let i = 0; i < nodes.length - 1; i++) { const a = nodes[i], b = nodes[i + 1]; const av = a.nodeValue, bv = b.nodeValue; if (!av || !bv) continue;
     if (av.endsWith(' ') && /^\S/.test(bv) && SHORTEND.test(av)) a.nodeValue = av.slice(0, -1) + NB;
     const ms = /^ ([=≤≥≈→←×±<>⇒+−/]) /.exec(b.nodeValue); if (ms && /\S$/.test(a.nodeValue)) b.nodeValue = NB + ms[1] + NB + b.nodeValue.slice(3);
@@ -445,7 +658,7 @@ const GUARD = (() => {
   function run(root = document.body) { const set = new Set(); if (root.matches && root.matches(BLOCK)) set.add(root); $$(BLOCK, root).forEach(e => set.add(e)); if (obs) obs.disconnect(); set.forEach(processBlock); if (obs) { obs.takeRecords(); observe(); } }
   function flush() { sched = false; const roots = Array.from(pend); pend.clear(); if (obs) obs.disconnect(); for (const r of roots) { if (!r.isConnected) continue; const blk = r.closest ? r.closest(BLOCK) : null; if (blk) processBlock(blk); if (r.querySelectorAll) $$(BLOCK, r).forEach(processBlock); } if (obs) { obs.takeRecords(); observe(); } }
   function start() { run(); obs = new MutationObserver(recs => { for (const r of recs) { const t = r.type === 'characterData' ? r.target.parentElement : r.target; if (t && !(t.closest && t.closest('svg'))) pend.add(t); } if (pend.size && !sched) { sched = true; requestAnimationFrame(flush); } }); observe();
-    const H = window.Hyphenopoly, HK = EN ? 'en-gb' : 'hu'; if (H && H.hyphenators && H.hyphenators[HK]) H.hyphenators[HK].then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
+    const H = window.Hyphenopoly; if (H && H.hyphenators && H.hyphenators.hu) H.hyphenators.hu.then(fn => { hyph = s => fn(s); $$(HYPH).forEach(e => done.delete(e)); run(); window.__fmtHyphReady = true; }).catch(() => {}); }
   return { start, run };
 })();
 
@@ -481,7 +694,7 @@ const RAG3 = (() => {
 })();
 
 const RAG = (() => {
-  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead, .lead, .info p';
+  const SEL = 'main p, main li, main .vs > div, main .rv, main .note, main .verdict, main .tlx, footer p, .hero-lead';
   const check = (el) => RAG3.check(el);
   const run = () => $$(SEL).forEach(e => { if (e.offsetParent || e.closest('.vmodal')) check(e); });
   let tm = 0; addEventListener('resize', () => { clearTimeout(tm); tm = setTimeout(run, 250); });
@@ -493,6 +706,5 @@ setTimeout(() => RAG.run(), 400);
 { const iv = setInterval(() => { if (window.__fmtHyphReady) { clearInterval(iv); requestAnimationFrame(() => { RAG.run(); window.__ragDone = true; }); } }, 100); setTimeout(() => clearInterval(iv), 8000); }
 })();
 </script>
-
 </body>
 </html>

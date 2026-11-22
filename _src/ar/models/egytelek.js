@@ -2,6 +2,7 @@
 // B épület (nyolcszintes irodaház két pinceszinttel, résfalas, horgonyzott munkagödörben, CFA-cölöpökön a homokos kavicsig, puha agyag fölött).
 // A tömb a z = 0 síkban el van metszve: az alapok, a pince és a cölöpök a metszeten látszanak.
 import { THREE, Batch, mat, C, label, node, person, tree, carGeom, trackPos, trackScale, poseAt } from '../lib/common.js';
+import { at, car2, dumper, pileRig, towerCrane, tree2, lamp, plaque } from '../lib/kit2.js';
 export const FILE = 'egy-telek';
 const K = 1 / 150, T = 21;
 const S0 = [0.001, 0.001, 0.001], S1 = [1, 1, 1], Sy = [1, 0.01, 1];
@@ -25,11 +26,13 @@ export function build({ lang }) {
   for (let z = ZB + 1.5; z < -1; z += 3.2) box(B, mat('#e8e4da'), 1.9, 2.1, 0.24, 0.26, z, z + 1.6);
   B.box(X1 - X0, 0.14, 0.1, mat(C.water), 0, -3, 0.06);
   B.boxB(X1 - X0 + 3, 0.8, -ZB + 3, mat(C.base), 0, YB - 0.8, ZB / 2);
-  for (const [x, z, h] of [[-28, -3, 6], [-27, -19, 7], [-23.5, -20, 6], [6.8, -20, 6], [28.2, -20, 7], [28.4, -3, 6]]) tree(B, x, z, h, 0.16);
+  for (const [x, z, h] of [[-28, -3, 6], [-27, -19, 7], [-23.5, -20, 6], [6.8, -20, 6], [28.2, -20, 7], [28.4, -3, 6], [-3.4, -19.5, 5.5], [-3.6, -9, 5]]) tree2(B, x, z, h, 0.16);
+  for (const z of [-18, -10, -2.5]) lamp(B, -2.2, z, 0.16, 5.5);
+  car2(at(B, 4.7, 0.24, -15.5, Math.PI / 2), '#f2f3f1', { lite: true }); car2(at(B, 4.7, 0.24, -6.2, Math.PI / 2), '#2f6db5', { lite: true });
   person(B, -22, -2.2, 0.4, { y: 0.16, tablet: true }); person(B, 6.6, -3, -1.2, { y: 0.16, vest: '#d8e04a' });
   B.build(root);
   // autó az utcán
-  { const car = node(root, 'auto'); const cg = carGeom('#e0523f'); cg.rotation.y = Math.PI / 2; car.add(cg); tracks.push(trackPos(car, [0, 9, 9.01, T], [[3.6, 0.24, ZB + 2], [3.6, 0.24, -2], [0.3, 0.24, -2], [0.3, 0.24, ZB + 2]])); }
+  { const car = node(root, 'auto'); const cb = new Batch('auto'); car2(at(cb, 0, 0, 0, Math.PI / 2), '#e0523f'); cb.build(car); tracks.push(trackPos(car, [0, 9, 9.01, T], [[3.6, 0.24, ZB + 2], [3.6, 0.24, -2], [0.3, 0.24, -2], [0.3, 0.24, ZB + 2]])); }
   // ---- A épület: pilléralapok (1–2 s), három szint és tető (2–5,5 s) ----
   const AX0 = -22, AX1 = -6, AZ0 = -12;
   { const n = node(root, 'A_alap', [0, -1.8, 0]); const b = new Batch('aalap'); for (const x of [AX0 + 1, (AX0 + AX1) / 2, AX1 - 1]) for (const z of [-1.2, -6.5, AZ0 + 1.2]) { box(b, mat(C.concrete), x - 1.1, x + 1.1, 0, 0.6, z - 1.1, z + 1.1); box(b, mat(C.concreteDark), x - 0.25, x + 0.25, 0.6, 1.96, z - 0.25, z + 0.25); } b.build(n); hide(n, 1, 2); }
@@ -52,6 +55,10 @@ export function build({ lang }) {
     for (let i = 0; i < 4; i++) for (const z of [-0.3, -8.5]) box(b, mat(C.concreteDark), BX0 + 3 + i * 4 - 0.25, BX0 + 3 + i * 4 + 0.25, 0.8, -PIT - 0.14, z - 0.25, z + 0.25); b.build(n); hide(n, 10.8, 12.2); }
   for (let i = 0; i < 8; i++) { const n = floor(root, 0.16 + i * 3.4, 3.4, BX0 + 0.6, BX1 - 0.6, BZ0 + 0.6, -0.6, i === 0 ? '#d9dde2' : '#c9d3dc', 12.2 + i * 0.6, 7, 'B_szint'); }
   { const n = node(root, 'B_teto', [0, 0.16 + 27.2, 0]); const b = new Batch('bteto'); box(b, mat('#9aa3ab'), BX0 + 0.3, BX1 - 0.3, 0, 0.5, BZ0 + 0.3, -0.3); box(b, mat('#6f7880'), BX0 + 5, BX0 + 9, 0.5, 2.2, -11, -7); b.build(n); hide(n, 17, 17.6); }
+  // cölöpfúró gép a cölöpözés alatt (6,5–8 s), toronydaru a B épület építése alatt (10,8–17,6 s)
+  { const n = node(root, 'colopfuro', [BX0 + 4.6, 0.16, -5.5]); const b = new Batch('colopfuro'); pileRig(at(b, 0, 0, 0, 0, 0.62), { mast: 20, toolY: -2 }); b.build(n); n.scale.set(...S0); tracks.push(trackScale(n, [0, 6.4, 6.6, 7.9, 8.1, T], [S0, S0, S1, S1, S0, S0])); }
+  { const n = node(root, 'daru', [BX1 + 2.6, 0.16, BZ0 - 2.2]); const b = new Batch('daru'); towerCrane(at(b, 0, 0, 0, Math.PI * 0.72, 0.8), { H: 42, J: 26, CJ: 9, T: 15, HY: 30, w: 1.5 }); b.build(n); n.scale.set(...S0); tracks.push(trackScale(n, [0, 10.6, 10.8, 17.6, 17.9, T], [S0, S0, S1, S1, S0, S0])); }
+  plaque(root, lang === 'hu' ? 'Egy telek, egy félév' : 'One site, one semester', X0 + 1.2, YB + 0.6, 0.12, K, { h: 0.02, color: '#ffb23e' });
   const clips = [new THREE.AnimationClip('telek', T, tracks)];
   poseAt(root, clips[0], 18.5);
   const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', zf = 0.14, zl = 6, o = { h: 0.036 };
@@ -61,7 +68,7 @@ export function build({ lang }) {
     label(G, hu ? 'talajhorgony' : 'ground anchor', [BX0 - 0.4 - 6, -2.6 - 2.2, zf], [-9, -23.5, zl], C.steelDark, K, o);
     label(G, hu ? 'homok' : 'sand', [-20, -5.5, zf], [-37, -6, zl], cS, K, o);
     label(G, hu ? 'puha agyag' : 'soft clay', [28.6, -5, zf], [33, 4, zl], cC, K, o);
-    label(G, hu ? 'homokos kavics · teherbíró réteg' : 'sandy gravel · bearing stratum', [-10, -12, zf], [-40, -17, zl], cG, K, o);
+    label(G, hu ? 'homokos kavics ·\nteherbíró réteg' : 'sandy gravel ·\nbearing stratum', [-22, -12, zf], [-41, -17.5, zl], cG, K, o);
     label(G, hu ? 'talajvíz' : 'groundwater', [-27, -3, zf], [-38, 3.5, zl], C.water, K, o);
     return G; };
   return { root, labels, clips, k: K, posterView: [14, 17], posterT: 18.5, labelT: 18.5 };

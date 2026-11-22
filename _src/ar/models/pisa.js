@@ -2,6 +2,7 @@
 // Rétegek (vázlat az irodalom – Burland, Jamiolkowski, Viggiani – alapján): kb. 3 m feltöltés; homokos iszap és homok, amely dél felé elvékonyodik;
 // alatta a puha agyag, amely a déli (dőlés felőli) oldalon vastagabb; kb. 21 m alatt merevebb agyag, homok, agyag. Észak: −x, dél: +x.
 import { THREE, Batch, mat, C, label, node, person, tree, trackQuat, trackScale, poseAt } from '../lib/common.js';
+import { at, car2, dumper, pileRig, towerCrane, tree2, lamp, plaque } from '../lib/kit2.js';
 export const FILE = 'pisa-makett';
 const K = 1 / 130, T = 17;
 const S0 = [0.001, 0.001, 0.001], S0y = [1, 0.02, 1], S1 = [1, 1, 1];
@@ -23,7 +24,8 @@ export function build({ lang }) {
   B.box(2 * X, 0.25, 2 * Z, mat(C.grass), 0, 0.125, 0); B.cyl(13, 13, 0.12, mat('#e6dfcf'), 0, 0.31, 0, [0, 0, 0], 40);
   B.box(2 * X, 0.16, 0.12, mat(C.water), 0, -1.6, Z + 0.07); // talajvíz a metszeten
   B.boxB(2 * X + 3, 0.9, 2 * Z + 3, mat(C.base), 0, YB - 0.9, 0);
-  for (const [x, z, h] of [[-25, -10, 9], [-21, -11, 7], [24, -10, 10], [26, 8, 8], [-26, 9, 8]]) tree(B, x, z, h, 0.25);
+  for (const [x, z, h] of [[-25, -10, 9], [-21, -11, 7], [24, -10, 10], [26, 8, 8], [-26, 9, 8], [18, -11.5, 7.5], [-15, -11, 8]]) tree2(B, x, z, h, 0.25, { c1: '#4f8a45', c2: '#6aa352' });
+  for (const [x, z] of [[-11, 10.5], [11, 10.5], [-18, 4], [19, 3]]) lamp(B, x, z, 0.25, 4.2);
   for (const [x, z, r] of [[-14, 9, 0.5], [-12.5, 9.6, 2.2], [15, 8, 3.6], [16.5, 9, 1.2], [3, 11.5, 0.2]]) person(B, x, z, r, { y: 0.3, vest: ['#3a6fb5', '#d85a4a', '#e0b23c', '#4d9a5c', '#8a5bb0'][Math.round(x + 20) % 5], helmet: '#5a4a3a' });
   B.build(root);
   // az eredeti függőleges tengely (piros pálca)
@@ -46,17 +48,19 @@ export function build({ lang }) {
   const d = Math.PI / 180, tk = [0, 2, 3, 4.5, 8, 9.5, 12.5, 13, 14.5, 16.4, 16.8, T], th = [0, 0, 0.25, 0.4, 1.1, 1.6, 5.5, 5.5, 3.97, 3.97, 0, 0];
   tracks.push(trackQuat(nT, tk, th.map(a => [0, 0, -a * d])));
   nT.rotation.z = -3.97 * d; tiers.forEach(g => g.scale.set(1, 1, 1)); // nyugalmi állapot (USDZ): a mai torony
+  plaque(root, lang === 'hu' ? 'A pisai ferde torony' : 'The Leaning Tower of Pisa', -X + 1.5, YB + 0.5, Z + 0.06, K, { h: 0.02, color: '#e866c8' });
   const clips = [new THREE.AnimationClip('pisa', T, tracks)];
   poseAt(root, clips[0], 15.5);
-  const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', zf = Z + 0.1, zl = Z + 5, o = { h: 0.038 };
-    label(G, hu ? 'feltöltés' : 'made ground', [-22, -1.5, zf], [-33, 4, zl], cMG, K, o);
-    label(G, hu ? 'homokos iszap, homok' : 'sandy silt, sand', [-16, -6.5, zf], [-37, -9, zl], cUP, K, o);
-    label(G, hu ? 'puha, egyenlőtlen vastagságú agyagréteg' : 'soft clay layer of uneven thickness', [6, -14, zf], [-30, -37.5, zl], cCL, K, o);
-    label(G, hu ? 'merevebb agyag, homok, agyag' : 'stiffer clay, sand, clay', [20, -26.5, zf], [-12, -45.5, zl], cSA, K, o);
-    label(G, hu ? 'talajvíz' : 'groundwater', [22, -1.6, zf], [26, 6, zl], C.water, K, o);
-    label(G, hu ? 'É' : 'N', null, [-X + 1, 8.5, zl - 3], '#f2f4f6', K, o); label(G, hu ? 'D' : 'S', null, [X - 6, 1.2, zl - 3], '#f2f4f6', K, o);
-    label(G, hu ? 'ma kb. 3,97° · a csúcs 3,9 m-rel tér el' : 'today approx. 3.97° · top 3.9 m off', [2.2, 55, 0], [14, 62, 0], '#d4372a', K, o);
-    label(G, hu ? 'az eredeti függőleges' : 'the original vertical', [-9.2, 40, 0], [-36, 46, 0], '#d4372a', K, o);
+  // feliratok: a rétegek neve a metszet jobb oldalán, egymás alatt (a bal oldal szabad marad), a hosszú nevek két sorban
+  const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', zf = Z + 0.1, zl = Z + 4, o = { h: 0.032 }, xr = X + 15;
+    label(G, hu ? 'talajvíz' : 'groundwater', [26, -1.6, zf], [xr - 3, 3.2, zl], C.water, K, o);
+    label(G, hu ? 'homokos iszap,\nhomok' : 'sandy silt,\nsand', [27.5, -4.4, zf], [xr, -5.6, zl], cUP, K, o);
+    label(G, hu ? 'puha, egyenlőtlen\nvastagságú agyagréteg' : 'soft clay layer\nof uneven thickness', [27, -13, zf], [xr + 1.5, -15.5, zl], cCL, K, o);
+    label(G, hu ? 'merevebb agyag,\nhomok, agyag' : 'stiffer clay,\nsand, clay', [27, -26.4, zf], [xr, -29, zl], cSA, K, o);
+    label(G, hu ? 'feltöltés' : 'made ground', [-25, -1.5, zf], [-39, -7, zl], cMG, K, o);
+    label(G, hu ? 'É' : 'N', null, [-X + 1, 8.5, zl - 3], '#f2f4f6', K, o); label(G, hu ? 'D' : 'S', null, [X - 5, 8.5, zl - 3], '#f2f4f6', K, o);
+    label(G, hu ? 'ma kb. 3,97°\na csúcs 3,9 m-rel tér el' : 'today approx. 3.97°\ntop 3.9 m off', [2.2, 55, 0], [21, 57, 0], '#d4372a', K, o);
+    label(G, hu ? 'az eredeti\nfüggőleges' : 'the original\nvertical', [-9.2, 40, 0], [-27, 42, 0], '#d4372a', K, o);
     return G; };
   return { root, labels, clips, k: K, posterView: [22, 12], posterT: 15.5, labelT: 15.5 };
 }

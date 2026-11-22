@@ -13,7 +13,7 @@ A magyar oldal a forrás (egyfájlos, kézzel írt HTML). Az angol változat:
 """
 import os, re, sys, glob, shutil, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); I18N = os.path.join(HERE, 'sub_i18n')
-APPS = ['helyszinelok', 'tippelj', 'vizsga', 'telek', 'ar-labor']
+APPS = ['helyszinelok', 'tippelj', 'vizsga', 'telek']   # az /ar-labor 2026-11-22 óta saját generátorból épül, mindkét nyelven: _src/ar-labor/build.py (az itteni 'ar-labor' bejegyzések és az en_ar-labor.tsv a régi oldalé)
 if os.environ.get('ONLY'): APPS = os.environ['ONLY'].split(',')   # csak a megadott app(ok) – fordítás közben
 # az angolul is elérhető tananyagok (a többi magyar marad, „(in Hungarian)” jelzéssel)
 EN_SITES = ['bme-alapozas.vercel.app', 'talajfelderites.vercel.app', 'sikalapoktervezese.vercel.app', 'sikalapok-teherbirasszamitasa.vercel.app',

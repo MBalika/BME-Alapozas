@@ -2,6 +2,7 @@
 // Az izobárok egyenletesen terhelt körlapra számítva (Boussinesq, numerikus integrálás), az egyenértékű sugár a 2 × 2 m-es alapéval egyező területű.
 // A nyitott negyedben a héjak lépcsősen visszavágva látszanak (kívül a kis, belül a nagy feszültség); a teher ráadása után belülről kifelé jelennek meg.
 import { THREE, Batch, mat, C, label, node, person, trackPos, trackScale, poseAt } from '../lib/common.js';
+import { at, car2, dumper, pileRig, towerCrane, tree2, lamp, plaque } from '../lib/kit2.js';
 export const FILE = 'feszultseghagyma';
 const K = 1 / 25, T = 13;
 const S0 = [0.001, 0.001, 0.001], S1 = [1, 1, 1];
@@ -20,7 +21,7 @@ export function build({ lang }) {
   const B = new Batch('tomb'); const SAND = '#dcc089', SANDD = '#c7a970';
   for (const [x0, x1, z0, z1] of [[-H, 0, -H, H], [0, H, -H, 0]]) { B.box(x1 - x0, DEP, z1 - z0, mat(SAND), (x0 + x1) / 2, -DEP / 2, (z0 + z1) / 2); B.box(x1 - x0, 0.14, z1 - z0, mat(C.grass), (x0 + x1) / 2, 0.07, (z0 + z1) / 2); }
   B.box(2 * H, 0.7, 2 * H, mat(SANDD), 0, -DEP - 0.35, 0); B.boxB(2 * H + 1.2, 0.35, 2 * H + 1.2, mat(C.base), 0, -DEP - 1.05, 0);
-  person(B, -2.5, 2.4, 0.6, { y: 0.14 });
+  person(B, -2.5, 2.4, 0.6, { y: 0.14 }); tree2(B, -2.6, -2.5, 2.6, 0.14); tree2(B, 2.5, -2.6, 2.1, 0.14);
   B.build(root);
   // alap + pillér + teher: a teher ráadásakor kissé megsüllyed
   const nF = node(root, 'alap'); { const b = new Batch('alap'); b.box(2, 0.6, 2, mat(C.concrete), 0, FY + 0.3, 0); b.box(0.55, 4.2, 0.55, mat('#efe9dc'), 0, FY + 0.6 + 2.1, 0); b.build(nF);
@@ -38,6 +39,7 @@ export function build({ lang }) {
       const c1 = sh(true); c1.rotateY(w + Math.PI / 2); b.add(c1, m); const c2 = sh(false); c2.rotateY(Math.PI / 2 - w - Math.PI / 2); b.add(c2, m); }
     b.build(g); g.scale.set(...S0); const t0 = 2.6 + (n - 1 - i) * 1.5; tracks.push(trackScale(g, [0, t0, t0 + 1.3, 12, 12.6, T], [S0, S0, S1, S1, S0, S0]));
     const mid = pts[Math.floor(pts.length * 0.62)]; anchors.push([mid[0], FY + mid[1]]); });
+  plaque(root, lang === 'hu' ? 'Feszültséghagyma' : 'Pressure bulb', -H + 0.3, -DEP - 0.62, H + 0.02, K, { h: 0.02, color: '#e866c8' });
   const clips = [new THREE.AnimationClip('hagyma', T, tracks)];
   poseAt(root, clips[0], 11);
   const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', o = { h: 0.034, ry: Math.PI / 4 }, dec = (v) => String(v).replace('.', hu ? ',' : '.');

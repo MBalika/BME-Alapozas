@@ -1,4 +1,4 @@
-// A 3D-modellek építése: node build.mjs [id …]  → ../../ar-labor/models/<fájl>{,-feliratok,-feliratok-en}.glb/.usdz és ../../ar-labor/img/<fájl>.jpg
+// A 3D-modellek építése: [EN=1] node build.mjs [id …]  → ../../ar-labor/models/<fájl>{,-feliratok,-feliratok-en}.glb/.usdz (EN=1: felirat nélküli angol változat is, <fájl>-en – az angol névtábla miatt) és ../../ar-labor/img/<fájl>.jpg
 // A modellek: models/<id>.js (build({lang}) → { root, labels(lang), clips, k, file }); a böngészőben (Playwright + Chromium) készülnek.
 import { createRequire } from 'module'; const require = createRequire(import.meta.url); const { chromium } = require(process.env.PW || 'playwright');
 import http from 'http'; import { execFileSync } from 'child_process'; import fs from 'fs'; import path from 'path'; import { fileURLToPath } from 'url';
@@ -16,7 +16,7 @@ const page = await browser.newPage(); const errs = []; page.on('pageerror', e =>
 await page.goto(`http://127.0.0.1:${port}/_src/ar/build.html`); await page.waitForFunction('window.ready === true', null, { timeout: 60000 });
 const sum = [];
 for (const id of list) {
-  if (ONLY !== 'poster') for (const [lang, lab, suf] of [['hu', false, ''], ['hu', true, '-feliratok'], ['en', true, '-feliratok-en']]) {
+  if (ONLY !== 'poster') for (const [lang, lab, suf] of [['hu', false, ''], ['hu', true, '-feliratok'], ['en', true, '-feliratok-en'], ...(process.env.EN ? [['en', false, '-en']] : [])]) {
     const r = await page.evaluate(([i, l, b]) => window.exportModel(i, l, b), [id, lang, lab]).catch(e => ({ err: String(e) }));
     if (r.err) { console.log(id, lang, 'HIBA', r.err); continue; }
     const file = r.file, gp = path.join(OUT, 'models', file + suf + '.glb'); fs.writeFileSync(gp, Buffer.from(r.glb, 'base64'));

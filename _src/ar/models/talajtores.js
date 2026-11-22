@@ -1,6 +1,7 @@
 // Talajtörés a sávalap alatt (3. előadás) – általános nyírási törés homokban (φ = 30°), egyoldali Prandtl-mechanizmus merev tömbökkel:
 // a teher nő → kirajzolódik a csúszólap → az alap az aktív ékkel lesüllyed és megdől, a radiális zóna elfordul, a passzív ék kitolódik, a felszín felpúposodik.
 import { THREE, Batch, mat, C, label, node, person, trackPos, trackQuat, trackScale, poseAt } from '../lib/common.js';
+import { at, car2, dumper, pileRig, towerCrane, tree2, lamp, plaque } from '../lib/kit2.js';
 export const FILE = 'talajtores';
 const K = 1 / 40, T = 13;
 const S0 = [0.001, 0.001, 0.001], S1 = [1, 1, 1];
@@ -22,6 +23,7 @@ export function build({ lang }) {
   B.add(ext([[X0, 0.12], [A[0], 0.12], [A[0], 0], [X0, 0]]), mat(C.grass)); B.add(ext([[E0[0], 0.12], [X1, 0.12], [X1, 0], [E0[0], 0]]), mat(C.grass));
   B.boxB(X1 - X0 + 1.2, 0.35, 2 * Z + 1.2, mat(C.base), (X0 + X1) / 2, YB - 0.95, 0);
   person(B, -3.4, 1.5, Math.PI / 2, { y: 0.12 }); person(B, 12.2, -1.2, -Math.PI / 2, { y: 0.12, vest: '#d8e04a' });
+  tree2(B, -4.1, -3.1, 3.4, 0.12); tree2(B, 12.3, -3.2, 3.0, 0.12); tree2(B, 11.0, 3.2, 2.4, 0.12);
   B.build(root);
   // ---- mozgó tömbök ----
   const ease = (u) => u * u * (3 - 2 * u), KEYS = [0, 5, 5.8, 6.6, 7.4, 8.2, 9, 12, 12.6, T], U = [0, 0, 0.1, 0.35, 0.65, 0.88, 1, 1, 0, 0];
@@ -50,6 +52,7 @@ export function build({ lang }) {
   const nL = node(nF, 'teher', [1, 3.4 - FY, 0]); { const b = new Batch('teher'); const m = mat('#e8952a', { r: 0.5 });
     for (const z of [-2.6, 0, 2.6]) { b.cyl(0.11, 0.11, 1.5, m, 0, 1.25, z, [0, 0, 0], 10); b.mesh(new THREE.ConeGeometry(0.3, 0.6, 14), m, [0, 0.3, z], [Math.PI, 0, 0]); }
     b.build(nL); nL.scale.set(1, 0.35, 1); tracks.push(trackScale(nL, [0, 1, 3.8, 12, 12.6, T], [[1, 0.35, 1], [1, 0.35, 1], [1, 1.5, 1], [1, 1.5, 1], [1, 0.35, 1], [1, 0.35, 1]])); }
+  plaque(root, lang === 'hu' ? 'Talajtörés a sávalap alatt' : 'Bearing failure beneath a strip footing', X0 + 0.5, YB - 0.45, Z + 0.02, K, { h: 0.02, color: '#ff6a4d' });
   const clips = [new THREE.AnimationClip('talajtores', T, tracks)];
   poseAt(root, clips[0], 9.5);
   const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', zf = Z + 0.05, zl = Z + 1.6;

@@ -1,6 +1,7 @@
 // Horgonyzott résfalas munkagödör (9. előadás) – lépcsős kiemelés: résfal → 1. kiemelés → 1. horgonysor és heveder → 2. kiemelés → 2. horgonysor → 3. kiemelés → alaplemez.
 // A két horgonysor párhuzamos (20°), egymástól 3,5 m-re (a tengelyek távolsága 3,3 m > 1,5 m). Felül feltöltés és homok, alatta homokos kavics, a résfal a vízzáró agyagba köt be.
 import { THREE, Batch, mat, C, label, node, person, trackPos, trackQuat, trackScale, poseAt } from '../lib/common.js';
+import { at, car2, dumper, pileRig, towerCrane, tree2, lamp, plaque } from '../lib/kit2.js';
 export const FILE = 'munkagodor';
 const K = 1 / 80, T = 19;
 const S0 = [0.001, 0.001, 0.001], S1 = [1, 1, 1], Sy0 = [1, 0.001, 1];
@@ -21,7 +22,11 @@ export function build({ lang }) {
     for (let f = 0; f < 3; f++) for (let j = 0; j < 4; j++) { box(B, mat(C.glassDark, { r: 0.3 }), x0 + 0.9 + j * 2.0, x0 + 2.0 + j * 2.0, 1.4 + f * 3, 2.9 + f * 3, z1, z1 + 0.06); }
     for (let f = 0; f < 3; f++) for (let j = 0; j < 3; j++) box(B, mat(C.glassDark, { r: 0.3 }), x0 - 0.06, x0, 1.4 + f * 3, 2.9 + f * 3, z0 + 1 + j * 2.5, z0 + 2.2 + j * 2.5);
     for (const x of [x0 + 0.5, x1 - 0.5]) box(B, mat(C.concreteDark), x - 0.5, x + 0.5, -1.2, 0.14, z0, z1 + 0.02); }
-  for (const [x, z, h] of [[-19, -5, 7], [-15.5, -6.5, 6], [-18, 5, 6]]) { B.cyl(0.25, 0.35, h * 0.4, mat(C.trunk), x, 0.14 + h * 0.2, z, [0, 0, 0], 6); B.mesh(new THREE.IcosahedronGeometry(h * 0.33, 0), mat(C.tree), [x, 0.14 + h * 0.62, z]); }
+  for (const [x, z, h] of [[-19.5, -5.5, 7], [-16, -6.8, 6], [-20, 5.5, 6], [20.6, 5.2, 5.5]]) tree2(B, x, z, h, 0.14);
+  // védőkorlát a fejgerendán, billencs a rakodóhelyen (a vezető a fülkében), térvilágítás
+  { const rm = mat('#e23b2c', { r: 0.6 }), pm = mat('#d9dde0', { r: 0.6 }); for (const s of [-1, 1]) { const x = s * (W + WT * 0.5); for (let z = -Z + 0.3; z <= Z - 0.2; z += 2.2) B.box(0.07, 1.1, 0.07, pm, x, 1.25, z); for (const y of [1.25, 1.75]) B.box(0.06, 0.06, 2 * Z - 0.6, rm, x, y, 0); } }
+  dumper(at(B, -14.2, 0.14, 0.2, Math.PI / 2)); person(B, -16.4, -1.4, 1.2, { y: 0.14, vest: '#ff7a1a' });
+  lamp(B, -11.2, -6.8, 0.14, 6); lamp(B, 10.6, 6.6, 0.14, 6);
   person(B, -11.5, 4, Math.PI / 2, { y: 0.14, tablet: true }); person(B, -10.6, 5.2, 2.4, { y: 0.14, vest: '#d8e04a' });
   B.build(root);
   // ---- a kiemelendő talaj három lépcsőben (a felszíne süllyed) ----
@@ -48,6 +53,7 @@ export function build({ lang }) {
   const stick = node(boom, 'szar', [4.4, 0, 0]); { const b = new Batch('szar'); b.box(0.34, 3.0, 0.34, mat('#f0b41c', { r: 0.55 }), 0, -1.4, 0); b.mesh(new THREE.CylinderGeometry(0.55, 0.55, 1.0, 10, 1, false, 0, Math.PI), mat('#2c3036'), [0.1, -3.0, 0], [Math.PI / 2, 0, 0]); b.build(stick); }
   { const tt = [], vb = [], vs = []; for (let t = 0; t <= T + 0.01; t += 1.2) { const ph = t / 1.2 % 2; tt.push(Math.min(t, T)); vb.push([0, 0, ph < 1 ? 0.5 : 0.15]); vs.push([0, 0, ph < 1 ? -0.9 : -0.2]); } tracks.push(trackQuat(boom, tt, vb)); tracks.push(trackQuat(stick, tt, vs));
     tracks.push(trackPos(ex, [0, 1.2, 3.2, 5.4, 7.2, 9.2, 11, 18.2, 18.6, T], [0, 0, -3, -3, -6.5, -6.5, PIT, PIT, 0, 0].map(y => [-1.5, y, -1]))); boom.rotation.z = 0.3; stick.rotation.z = -0.6; }
+  plaque(root, lang === 'hu' ? 'Horgonyzott résfalas munkagödör' : 'Anchored diaphragm-wall excavation', -X + 0.8, YB + 0.5, Z + 0.04, K, { h: 0.02, color: '#2cc7d6' });
   const clips = [new THREE.AnimationClip('munkagodor', T, tracks)];
   poseAt(root, clips[0], 16);
   const labels = (lg) => { const G = new THREE.Group(); G.name = 'feliratok'; const hu = lg === 'hu', zf = Z + 0.12, zl = Z + 2.5, o = { h: 0.034 }, c = Math.cos(inc), s = Math.sin(inc);
