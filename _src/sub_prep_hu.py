@@ -1,4 +1,4 @@
-# Az átfogó extrák (helyszinelok, tippelj, vizsga, telek, ar-labor) magyar forrásának előkészítése az angol változathoz:
+# Az átfogó extrák (helyszinelok, tippelj, telek, ar-labor) magyar forrásának előkészítése az angol változathoz:
 # EN jelző, nyelvfüggő tizedesjel, a sortörés-őr angol szabályai, en-gb elválasztás, HU | EN nyelvváltó, hreflang, átirányítás.
 # A magyar oldal szövege és működése nem változik. Idempotens: a már előkészített fájlt kihagyja. Ha valamelyik index.html-t
 # egy külső forrásból újragenerálják, ezzel lehet az angol változathoz szükséges kapcsokat visszatenni (utána: python3 build_sub.py).
@@ -49,7 +49,6 @@ TELEK_CSS = '@media (max-width: 420px){ .top .wrap{gap:10px} .score{gap:8px} .to
 ANCHOR = {
   'tippelj': '<button class="modebtn" type="button" id="modeBtn" aria-pressed="false">Kivetítő mód</button>',
   'helyszinelok': None,   # a .rankmini </div>-ja után
-  'vizsga': '<a href="#pakli">Igaz vagy hamis</a></nav>',
   'telek': '<span><b id="sPts">0</b> pont</span></div>',
   'ar-labor': '<span class="tag">kiterjesztett valóság</span>',
 }
@@ -60,14 +59,13 @@ EN_AT = {
 }
 DEC = {
   'tippelj': ("return f ? ii + ',' + f : ii; };", "return f ? ii + (EN ? '.' : ',') + f : ii; };"),
-  'vizsga': ("return fr ? ii + ',' + fr : ii; };", "return fr ? ii + (EN ? '.' : ',') + fr : ii; };"),
   'telek': (".toFixed(d).replace('.', ',').replace('-', '−');", ".toFixed(d).replace('.', EN ? '.' : ',').replace('-', '−');"),
 }
 
 def rep(t, a, b, n=1):
     c = t.count(a); assert c == n, (a[:70], c); return t.replace(a, b)
 
-for app in ['helyszinelok', 'tippelj', 'vizsga', 'telek', 'ar-labor']:
+for app in ['helyszinelok', 'tippelj', 'telek', 'ar-labor']:
     p = f'{REPO}/{app}/index.html'; t = open(p, encoding='utf-8').read()
     if 'id="langSw"' in t: print(app, 'már előkészítve'); continue
     # fej: hreflang + átirányítás (ha legutóbb az angolt választották; /?hu kikerüli)
@@ -80,7 +78,7 @@ for app in ['helyszinelok', 'tippelj', 'vizsga', 'telek', 'ar-labor']:
     if ANCHOR[app]: t = rep(t, ANCHOR[app], ANCHOR[app] + '\n    ' + PILL)
     else:
         m = re.search(r'<div class="rankmini"[^\n]*</div>\n', t); assert m; t = t[:m.end()] + '    ' + PILL + '\n' + t[m.end():]
-    css = CSS + ('@media (max-width: 560px){ .top .langbtn{margin-left:auto} }\n' if app == 'vizsga' else '.kick .langbtn{margin-left:auto; text-transform:none}\n' if app == 'ar-labor' else TELEK_CSS if app == 'telek' else '')
+    css = CSS + ('.kick .langbtn{margin-left:auto; text-transform:none}\n' if app == 'ar-labor' else TELEK_CSS if app == 'telek' else '')
     i = t.index('</style>\n<script src="vendor/hyphenopoly'); t = t[:i] + css + t[i:]
     # EN jelző a szkript elején
     at = EN_AT.get(app, "(() => {\n'use strict';\n")

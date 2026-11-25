@@ -1,4 +1,4 @@
-"""Az átfogó extrák (/helyszinelok, /tippelj, /vizsga, /telek, /ar-labor) angol változata: <app>/index.html → <app>/en.html (Vercel cleanUrls → /<app>/en).
+"""Az átfogó extrák (/helyszinelok, /tippelj, /telek, /ar-labor) angol változata: <app>/index.html → <app>/en.html (Vercel cleanUrls → /<app>/en).
 
 Használat:  cd _src/sub_i18n && npm install && cd .. && python3 build_sub.py
             python3 build_sub.py catalog   → a fordítandó szövegek munkalapja (sub_i18n/ws_<app>.tsv)
@@ -13,13 +13,13 @@ A magyar oldal a forrás (egyfájlos, kézzel írt HTML). Az angol változat:
 """
 import os, re, sys, glob, shutil, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); I18N = os.path.join(HERE, 'sub_i18n')
-APPS = ['helyszinelok', 'tippelj', 'vizsga', 'telek']   # az /ar-labor 2026-11-22 óta saját generátorból épül, mindkét nyelven: _src/ar-labor/build.py (az itteni 'ar-labor' bejegyzések és az en_ar-labor.tsv a régi oldalé)
+APPS = ['helyszinelok', 'tippelj', 'telek']   # az /ar-labor 2026-11-22 óta saját generátorból épül, mindkét nyelven: _src/ar-labor/build.py (az itteni 'ar-labor' bejegyzések és az en_ar-labor.tsv a régi oldalé)
 if os.environ.get('ONLY'): APPS = os.environ['ONLY'].split(',')   # csak a megadott app(ok) – fordítás közben
 # az angolul is elérhető tananyagok (a többi magyar marad, „(in Hungarian)” jelzéssel)
 EN_SITES = ['bme-alapozas.vercel.app', 'talajfelderites.vercel.app', 'sikalapoktervezese.vercel.app', 'sikalapok-teherbirasszamitasa.vercel.app',
             'sikalapokallekonysagvizsgalata.vercel.app', 'kedvezotlen-altalaj.vercel.app', 'sikalapok-sullyedesszamitasa.vercel.app', 'vedekezesakarossullyedesekellen.vercel.app',
             'sikalapokaterohatasok.vercel.app', 'melyalapozasok.vercel.app', 'munkaterhatarolasok.vercel.app',
-            'bme-alapozas.vercel.app/telek', 'bme-alapozas.vercel.app/helyszinelok', 'bme-alapozas.vercel.app/tippelj', 'bme-alapozas.vercel.app/vizsga', 'bme-alapozas.vercel.app/ar-labor', 'bme-alapozas.vercel.app/allvagydol',
+            'bme-alapozas.vercel.app/telek', 'bme-alapozas.vercel.app/helyszinelok', 'bme-alapozas.vercel.app/tippelj', 'bme-alapozas.vercel.app/ar-labor', 'bme-alapozas.vercel.app/allvagydol',
             'cfa-colop-3d.vercel.app', 'cfa-colop-3d.vercel.app/ar']
 
 # a még csak magyar tananyagra mutató link után: „(in Hungarian)”
@@ -39,9 +39,6 @@ PRE = {
   'ar-labor': [
     ("m.lec + '. előadás'", "'Lecture ' + m.lec"),
   ],
-  'vizsga': [
-    ('<span class="lec">${d.i + 1}. kártya a ${CARDS.length}-ből · ${c[0]}. előadás</span>', '<span class="lec">Card ${d.i + 1} of ${CARDS.length} · Lecture ${c[0]}</span>'),
-  ],
 }
 # POST: (részlet → csere) a fordítás után, a kész angol HTML-ben
 POST = {
@@ -59,9 +56,6 @@ POST = {
     ('aria-label="A tipped"', 'aria-label="Your guess"'),
     ('>tipp: ${fmtN(tip)}</text>', '>guess: ${fmtN(tip)}</text>'),
     ('${q.app[0]} ${ARROW}</a>', HUNOTE.format('q.app[0]', 'q.app[1]') + ' ${ARROW}</a>'),
-  ],
-  'vizsga': [
-    ('aria-label="A támfal vázlata"', 'aria-label="Sketch of the retaining wall"'),
   ],
   'telek': [
     ("`+${x.pts} pts`", "`+${x.pts} pt${x.pts === 1 ? '' : 's'}`"),
