@@ -3,6 +3,7 @@ here = os.path.dirname(os.path.abspath(__file__))
 src = open(os.path.join(here, 'index.src.html'), encoding='utf-8').read()
 css = open(os.path.join(here, 'style.css'), encoding='utf-8').read()
 js = open(os.path.join(here, 'app.js'), encoding='utf-8').read()
+assert '/*XS*/' in js; js = js.replace('/*XS*/', open(os.path.join(here, 'xs.js'), encoding='utf-8').read())   # a tárgy útja metszete külön fájlban
 def assemble(src, css, js):
     return src.replace('/*CSS*/', css).replace('/*JS*/', js.replace('</script>', '<\\/script>'))
 out = assemble(src, css, js)

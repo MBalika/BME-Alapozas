@@ -381,20 +381,26 @@ a.lsi:hover b{text-decoration:underline; text-underline-offset:3px}
 
 /* metszet-SVG elemei */
 .xs .st{transition:opacity .6s ease}
-.xs polyline, .xs path, .xs line, .xs rect, .xs ellipse, .xs polygon{vector-effect:non-scaling-stroke}
+.xs .lb{transition:transform .25s ease}
+.xs .st.off *{animation-play-state:paused}
 .xs .st.off{opacity:0}
+.xs.nar .s2{display:none}
 .xs .dim{opacity:.32}
 .xs text{font-family:var(--fm); font-weight:700}
 .xs .lbl{font-size:12px; fill:#fff}
 .xs .lbg{fill:rgba(10,13,17,.82)}
-.xs .holo{fill:rgba(95,227,255,.10); stroke:#8ff0ff; stroke-width:1.6; stroke-dasharray:6 5}
+.xs .holo{fill:rgba(95,227,255,.10); stroke:#8ff0ff; stroke-width:.5px; stroke-dasharray:3 2.5}
 .xs .pulse{animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.45}}
 .xs .flow{stroke-dasharray:6 7; animation:flow 1.2s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-26}}
 .xs .ring{animation:ring 2.4s ease-out infinite; transform-box:fill-box; transform-origin:50% 0%}
 @keyframes ring{0%{transform:scale(.2); opacity:.95}100%{transform:scale(1); opacity:0}}
-@media (prefers-reduced-motion: reduce){ .xs .pulse,.xs .flow,.xs .ring{animation:none} html{scroll-behavior:auto} }
+.xs .wv{animation:xswv 2.6s ease-out infinite; transform-box:fill-box; transform-origin:50% 50%}
+@keyframes xswv{0%{transform:scale(.12); opacity:.95}100%{transform:scale(1); opacity:0}}
+.xs .hit{animation:xshit .95s cubic-bezier(.5,0,1,.55) infinite}
+@keyframes xshit{0%, 100%{transform:translateY(-7px)} 72%, 80%{transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){ .xs .pulse,.xs .flow,.xs .ring,.xs .wv,.xs .hit{animation:none} html{scroll-behavior:auto} }
 
 /* ===== minden tananyag ===== */
 .grid-apps{display:grid; grid-template-columns:repeat(4, 1fr); gap:16px}
@@ -715,3 +721,4 @@ main .duo-p p, main .tile p, main .why .card p, main .harder .card, main .harder
 .app > div, .app > span:not(:first-child) { text-align:center }
 .verdict { text-align:center !important }
 .ksh-side .seg button, .seg button { text-align:center }
+@media (max-width: 560px){ .jhud{left:10px; top:8px; gap:6px; font-size:10.5px} .jhud i{width:21px; height:21px; font-size:10.5px} }
