@@ -298,6 +298,8 @@ body.aula .aqr b{font-size:clamp(22px, 1.6vw, 32px); margin-top:14px} body.aula 
 /* feliratos nézet: a modell kapja a teret – a cím kicsire vált, a mondat és a számok eltűnnek, a bal oldali sötétítés megszűnik (a feliratok olvashatók maradnak) */
 .shade{transition:opacity .4s}
 @media (min-width:761px){ .stage.lbl .shade{opacity:0} .stage.lbl .hook, .stage.lbl .facts{display:none} .stage.lbl #mname{font-size:clamp(28px, 2.5vw, 44px)!important; max-width:10em} body.aula .stage.lbl #mname{font-size:clamp(40px, 3.2vw, 72px)!important} }
+/* nagy kijelzőn a betű nő, ezért a cím és a számok hasábja is szélesedik – a hosszú cím két sorban marad, a három szám egy sorban */
+@media (min-width:1101px){ .hud{width:min(max(560px, 37vw), 44%)} }
 /* ---- Alapozás AR labor: dobozcím és dobozszöveg középen; előadás-kártyák; hivatkozások ---- */
 .card{text-align:center}
 /* tizenegy modell + a nyomtatható QR-lap csempéje: 4 × 3, keskenyebb nézetben 2 × 6, telefonon egy oszlop – mindig teli sorok */

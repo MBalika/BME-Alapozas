@@ -55,12 +55,12 @@ HU = {
   'M': [
     {'id': 'tores', 'f': 'talajtores', 'en': True, 'sec': True, 'sp': '3', 'anim': True, 'labelT': 10.2, 'orbit': '22deg 72deg 124%', 'kind': 'restart',
      'name': 'Talajtörés a sávalap alatt', 'act': 'Terheld meg!', 'hook': 'Nő a teher – és egyszer csak megindul a talaj.',
-     'facts': [['994 kPa', 'talajtörési ellenállás'], ['4,2 m', 'mélyre nyúlik a csúszólap'], ['22,6 m', 'széles a törési test a terepen']],
+     'facts': [['994 kPa', 'talajtörési ellenállás'], ['4,2 m', 'mély a csúszólap'], ['22,6 m', 'széles a törési test']],
      'info': 'A falra egyre nagyobb teher jut. Amikor a talaj nyírószilárdsága kimerül, kirajzolódik a csúszólap, és az alap hirtelen megsüllyed. Alatta az aktív ék az alappal együtt lefelé mozdul; a radiális nyírási zóna talaja a logaritmikus spirál mentén, az alap éle körül kifelé áramlik; a passzív ék a takarással együtt a csúszólapon felfelé-kifelé csúszik, a terep pedig az alap két oldalán felpúposodik. A modell a teherbírásszámítás mintapéldáját követi: φ = 30°, c = 10 kPa, γ = 18 kN/m³, B = 2,0 m, D = 1,0 m. A mozgások felnagyítva látszanak.',
      'link': ['Síkalapok teherbírásszámítása', 'a törési mechanizmus és a képlet három tagja', 'https://sikalapok-teherbirasszamitasa.vercel.app']},
     {'id': 'hagyma', 'f': 'feszultseghagyma', 'en': True, 'sec': True, 'sp': '5', 'anim': True, 'labelT': 13.4, 'orbit': '45deg 70deg 190%', 'kind': 'restart',
      'name': 'Feszültséghagyma és határmélység', 'act': 'Tedd rá a terhet!', 'hook': 'A teher szétterjed és elhal a talajban – a határmélység megmutatja, meddig kell számolni vele.',
-     'facts': [['292,5 kPa', 'többletfeszültség az alapsíkon'], ['3,3 m', 'határmélység'], ['19 mm', 'süllyedés']],
+     'facts': [['292,5 kPa', 'többletfeszültség'], ['3,3 m', 'határmélység'], ['19 mm', 'süllyedés']],
      'info': 'A pilléralapra teher kerül, és alatta megjelenik a többletfeszültség: a színes héjak az alapsíki érték 80, 60, 40, 20 és 10 %-ánál húzódnak, belülről kifelé. A metszeten a kék ábra a karakterisztikus pont alatti Δσ<sub>z</sub> a Kany-táblázat szerint, mellette a geosztatikus feszültség ötöde (σ<sub>g</sub>/5) fut. Ahol a kettő találkozik, ott a határmélység: ennél mélyebben a talaj összenyomódását már nem számítjuk. Fél teherrel ez 2,4 m, a teljes teherrel 3,3 m – a nagyobb teher mélyebbre hat. A modell a süllyedésszámítás mintapéldáját követi: 1,2 × 1,2 m-es pilléralap, 450 kN teher.'},
     {'id': 'pisa', 'f': 'pisa-makett', 'en': True, 'sec': True, 'sp': '5', 'anim': True, 'labelT': 15.5, 'orbit': '22deg 78deg 122%', 'kind': 'restart',
      'name': 'A pisai ferde torony', 'act': 'Építsd fel!', 'hook': 'Kétszáz évig épült – és közben végig dőlt.',
@@ -140,11 +140,11 @@ EN_U = {k: (v + '/en') for k, v in SPEC_U.items()}
 # name, act, hook, facts, info, link (label, sub)
 EN_M = {
   'tores': ('Bearing failure beneath a strip footing', 'Load it!', 'The load grows – and suddenly the ground gives way.',
-    [['994 kPa', 'bearing resistance'], ['4.2 m', 'depth reached by the slip surface'], ['22.6 m', 'width of the failure body at the surface']],
+    [['994 kPa', 'bearing resistance'], ['4.2 m', 'deep slip surface'], ['22.6 m', 'wide failure body']],
     'More and more load comes onto the wall. When the shear strength of the soil is exhausted, the slip surface appears and the footing suddenly sinks. Beneath it the active wedge moves down with the footing; the soil of the radial shear zone flows outwards around the edge of the footing along the logarithmic spiral; the passive wedge, together with the overburden, slides up and outwards along the slip surface, and the ground heaves on both sides of the footing. The model follows the worked example of the bearing resistance material: φ = 30°, c = 10 kPa, γ = 18 kN/m³, B = 2.0 m, D = 1.0 m. The movements are exaggerated.',
     ['Bearing resistance of shallow foundations', 'the failure mechanism and the three terms of the formula']),
   'hagyma': ('Pressure bulb and influence depth', 'Put the load on!', 'The load spreads and fades in the ground – the influence depth shows how far down it has to be considered.',
-    [['292.5 kPa', 'additional stress at the founding level'], ['3.3 m', 'influence depth'], ['19 mm', 'settlement']],
+    [['292.5 kPa', 'additional stress'], ['3.3 m', 'influence depth'], ['19 mm', 'settlement']],
     'Load comes onto the pad footing, and the additional stress appears beneath it: the coloured shells mark 80, 60, 40, 20 and 10% of its value at the founding level, from the inside outwards. On the section, the blue diagram is Δσ<sub>z</sub> beneath the characteristic point according to the Kany table, and next to it runs one fifth of the geostatic stress (σ<sub>g</sub>/5). Where the two meet lies the influence depth: below it, the compression of the soil is no longer calculated. With half the load it is 2.4 m, with the full load 3.3 m – a larger load reaches deeper. The model follows the worked example of the settlement material: a 1.2 × 1.2 m pad footing carrying 450 kN.', None),
   'pisa': ('The Leaning Tower of Pisa', 'Build it!', 'It took two hundred years to build – and it leaned all the way.',
     [['3.97°', 'tilt today'], ['5.5°', 'tilt in 1990'], ['14,500 t', 'mass of the tower']],
