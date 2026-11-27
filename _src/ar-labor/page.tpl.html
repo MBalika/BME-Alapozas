@@ -288,10 +288,10 @@ body.aula .aqr b{font-size:clamp(22px, 1.6vw, 32px); margin-top:14px} body.aula 
 /* fejléc: a menüpontok nem törnek; 1000 px alatt csak a márka, a nyelvváltó és a vetítő mód marad */
 .top nav{white-space:nowrap}
 @media (max-width:1000px){ .top nav .hide-s{display:none} }
-/* álló táblagép (761–1100 px): a modell a színpad felső részén, a cím és a számok alatta – nem takarják egymást */
-@media (min-width:761px) and (max-width:1100px){ .viewer #mv{height:calc(100% - 300px)} .stage.lbl .viewer #mv{height:calc(100% - 110px)} }
+/* álló táblagép (761–1100 px): a modell a színpad felső részén, a cím és a számok alatta, a gombok külön sorban legalul – nem takarják egymást */
+@media (min-width:761px) and (max-width:1100px){ .viewer #mv{height:calc(100% - 350px)} .stage.lbl .viewer #mv{height:calc(100% - 110px)} .hud{bottom:96px; width:min(700px, 88%)} .ctrl{left:var(--pad); right:auto; max-width:none; justify-content:flex-start; bottom:28px} }
 /* telefonon nincs teljes képernyő gomb (iPhone-on nem is működik), így a gombok egy sorban maradnak */
-@media (max-width:760px){ #fsBtn{display:none} }
+@media (max-width:760px){ #fsBtn{display:none} .kicker span{white-space:normal} /* a hosszú előadásnév telefonon két sorba törhet */ }
 /* modellkártyák: a kép mindig felül, a szöveg alatta középen; a magyarázó blokk két oszlopa egyforma magas, a tananyag-hivatkozás az aljára kerül */
 .card{display:flex; flex-direction:column; justify-content:flex-start} .card .t{flex:1; display:flex; flex-direction:column; justify-content:center}
 @media (min-width:1101px){ .detail{align-items:stretch} .detail > div:first-child{display:flex; flex-direction:column} .detail .wheres{margin-top:auto; padding-top:18px} .qrbox{display:flex; flex-direction:column; justify-content:center} }
@@ -300,9 +300,12 @@ body.aula .aqr b{font-size:clamp(22px, 1.6vw, 32px); margin-top:14px} body.aula 
 @media (min-width:761px){ .stage.lbl .shade{opacity:0} .stage.lbl .hook, .stage.lbl .facts{display:none} .stage.lbl #mname{font-size:clamp(28px, 2.5vw, 44px)!important; max-width:10em} body.aula .stage.lbl #mname{font-size:clamp(40px, 3.2vw, 72px)!important} }
 /* ---- Alapozás AR labor: dobozcím és dobozszöveg középen; előadás-kártyák; hivatkozások ---- */
 .card{text-align:center}
-/* tíz kártya: 5 × 2, keskenyebb nézetben 2 × 5, telefonon egy oszlop – mindig teli sorok */
-.cards{grid-template-columns:repeat(5, 1fr)} .card .t b{font-size:23px}
-@media (max-width:1180px){ .cards{grid-template-columns:repeat(2, 1fr)} .card .t b{font-size:26px} }
+/* tizenegy modell + a nyomtatható QR-lap csempéje: 4 × 3, keskenyebb nézetben 2 × 6, telefonon egy oszlop – mindig teli sorok */
+.cards{grid-template-columns:repeat(4, 1fr)}
+@media (max-width:1180px){ .cards{grid-template-columns:repeat(2, 1fr)} }
+a.card{color:inherit; text-decoration:none}
+.card .xq{display:block; position:relative; width:100%; aspect-ratio:16/10; background:radial-gradient(120% 120% at 50% 0%, #fff6e6, #e8eef2)}
+.card .xq svg{position:absolute; inset:0; margin:auto; height:78%; width:auto; display:block; border-radius:6px}
 @media (max-width:560px){ .cards{grid-template-columns:1fr} }
 .spec{text-align:center; display:flex; flex-direction:column}
 .spec small{display:block; font:800 13px/1.15 var(--fh); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px}
@@ -428,12 +431,13 @@ let cur = null, labels = false, userPaused = false, aula = false;
 /* ---------- polc, szűrők, szakirányok ---------- */
 const order = Object.keys(SPECS);
 const shelf = [...M].sort((a, b) => order.indexOf(a.sp) - order.indexOf(b.sp));
-$('#cards').innerHTML = shelf.map(m => { const s = SPECS[m.sp]; return `<button type="button" class="card" data-id="${m.id}" data-sp="${m.sp}" style="--c:${s.c}" aria-pressed="false"><img src="img/${m.img || m.f || m.id}.jpg" alt="" width="800" height="500" loading="lazy"><span class="t"><small>${s.short}</small><b>${m.name}</b><span>${m.hook}</span></span></button>`; }).join('');
+$('#cards').innerHTML = shelf.map(m => { const s = SPECS[m.sp]; return `<button type="button" class="card" data-id="${m.id}" data-sp="${m.sp}" style="--c:${s.c}" aria-pressed="false"><img src="img/${m.img || m.f || m.id}.jpg" alt="" width="800" height="500" loading="lazy"><span class="t"><small>${s.short}</small><b>${m.name}</b><span>${m.hook}</span></span></button>`; }).join('')
+  + `<a class="card xcard" href="${T.qrU}" target="_blank" rel="noopener" data-sp="" style="--c:var(--lime)"><span class="xq" aria-hidden="true">${qrSvg(location.origin + location.pathname)}</span><span class="t"><small>${T.qrK}</small><b>${T.qrT}</b><span>${T.qrS}</span></span></a>`;
 const present = order.filter(k => M.some(m => m.sp === k));
 $('#chips').innerHTML = `<button type="button" class="chip" data-sp="" aria-pressed="true">${T.all}</button>` + present.map(k => `<button type="button" class="chip" data-sp="${k}" style="--c:${SPECS[k].c}" aria-pressed="false"><i></i>${SPECS[k].short}</button>`).join('');
 $('#chips').addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (!b) return; const sp = b.dataset.sp;
   $$('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b))); $$('.card').forEach(c => c.hidden = !!sp && c.dataset.sp !== sp); });
-$('#cards').addEventListener('click', (e) => { const b = e.target.closest('.card'); if (b) { select(b.dataset.id); stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); } });
+$('#cards').addEventListener('click', (e) => { const b = e.target.closest('button.card'); if (b) { select(b.dataset.id); stage.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); } });
 $('#bscs').innerHTML = Object.entries(BSC).map(([bk, b]) => `<div class="bsc"><div class="bsc-h"><b>${b.n}</b><span>${b.d}</span></div><div class="specs">` +
   order.filter(k => SPECS[k].b === bk).map(k => { const s = SPECS[k], ms = M.filter(m => m.sp === k);
     return `<div class="spec" style="--c:${s.c}"><small>${s.k}</small><b>${s.n}</b><p class="hyphenate">${s.d}</p><div class="ms">${ms.length ? ms.map(m => `<button type="button" data-id="${m.id}">${m.name}</button>`).join('') : `<em>${T.soon}</em>`}</div><a class="app" href="${s.url}" target="_blank" rel="noopener">${T.open} <span aria-hidden="true">↗</span></a></div>`; }).join('') + '</div></div>').join('');
@@ -470,7 +474,7 @@ function paintHud(m) {
   $('#actBtn span').textContent = m.act; $('#actBtn').dataset.kind = m.kind;
   const i = M.indexOf(m); $('#count').innerHTML = `<b>${String(i + 1).padStart(2, '0')}</b> / ${String(M.length).padStart(2, '0')}`;
   hud.classList.remove('in'); void hud.offsetWidth; hud.classList.add('in');
-  $('#dname').textContent = m.name; $('#minfo').textContent = m.info; $('#dspec').textContent = s.n; $('#dbsc').textContent = s.k + ' · ' + T.learn; $('#dwhere').href = s.url;
+  $('#dname').textContent = m.name; $('#minfo').innerHTML = m.info; $('#dspec').textContent = s.n; $('#dbsc').textContent = s.k + ' · ' + T.learn; $('#dwhere').href = s.url;
   { const a = $('#dlink'); a.hidden = !m.link; if (m.link) { a.href = m.link[2]; $('#dlinkT').textContent = m.link[0]; $('#dlinkS').textContent = m.link[1]; } }
   $$('.card').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === m.id)));
   const svg = qrSvg(linkOf(m)); $('#qr').innerHTML = svg; $('#aqr').innerHTML = svg;

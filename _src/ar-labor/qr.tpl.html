@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="hu">
+<html lang="{{lang}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="/ar-labor/">
-<title>Alapozás AR labor – QR-kódok nyomtatáshoz</title>
+<title>{{title}}</title>
 <meta name="robots" content="noindex">
 <style>
 @font-face{font-family:'BarlowC';font-weight:800;src:url(../fonts/barlow-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
@@ -42,20 +42,22 @@ html,body{margin:0; background:#d9dde1; font-family:'Inter',system-ui,sans-serif
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<div class="bar">Nyomtatás: A4, álló, margó nélkül (a böngésző nyomtatási ablakában „Nincs” margó) <button type="button" onclick="print()">Nyomtatás</button></div>
+<div class="bar"><span id="barT"></span> <button type="button" onclick="print()" id="barB"></button></div>
 <div id="pages"></div>
 <script src="vendor/qrcode.js"></script>
 <script>
-const D = /*DATA*/null;
+const D = /*DATA*/null, S = D.S, n = D.M.length;
 const qr = (t, ec = 'M') => { const q = qrcode(0, ec); q.addData(t); q.make(); return q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); };
-const app = D.site + '/ar-labor';
-let h = `<section class="page cover"><div><h1>Alapozás AR labor<br><em>Nézd meg térben!</em></h1><p>${D.M.length} mozgó 3D-modell az Alapozás tárgy előadásaihoz – a telefonodon, előtted az asztalon vagy a padlón.</p></div>
+const app = D.app;
+document.getElementById('barT').textContent = S.bar; document.getElementById('barB').textContent = S.print;
+let h = `<section class="page cover"><div><h1>${S.h1a}<br><em>${S.h1b}</em></h1><p>${S.lead.replace('{n}', n)}</p></div>
   <div class="q">${qr(app, 'Q')}</div>
-  <div><ol><li>Olvasd be a kódot a telefonod kamerájával.</li><li>Válassz modellt, és koppints a „Nézd meg térben” gombra.</li><li>Nézz a padlóra vagy egy asztalra: ahol a világító keret megjelenik, koppints, és oda kerül a modell. Két ujjal nagyíthatod, és körbejárhatod.</li></ol><div class="u">${app.replace('https://', '')}</div></div></section>`;
-for (let i = 0; i < D.M.length; i += 4) {
-  h += '<section class="page">' + D.M.slice(i, i + 4).map((m, k) => `<div class="card" style="--c:${m.c}"><div class="n">${String(i + k + 1).padStart(2, '0')}</div><small>${m.sp}</small><h2>${m.name}</h2>
-    <img src="img/${m.img}.jpg" alt=""><div class="q">${qr(app + '?m=' + m.id + '&ar=1')}</div><b>Olvasd be, és nézd meg térben!</b></div>`).join('') + '</section>';
-}
+  <div><ol>${S.steps.map(t => `<li>${t}</li>`).join('')}</ol><div class="u">${app.replace('https://', '')}</div></div></section>`;
+const cards = D.M.map((m, i) => `<div class="card" style="--c:${m.c}"><div class="n">${String(i + 1).padStart(2, '0')}</div><small>${m.sp}</small><h2>${m.name}</h2>
+    <img src="img/${m.img}.jpg" alt=""><div class="q">${qr(app + '?m=' + m.id + '&ar=1')}</div><b>${S.scan}</b></div>`);
+if (cards.length % 4) cards.push(`<div class="card" style="--c:#c9791a"><div class="n">★</div><small>${S.allK}</small><h2>${S.allT.replace('{n}', n)}</h2>
+    <img src="img/munkagodor.jpg" alt=""><div class="q">${qr(app)}</div><b>${S.allB}</b></div>`);   // az utolsó lap üres helyére: az egész labor kódja
+for (let i = 0; i < cards.length; i += 4) h += '<section class="page">' + cards.slice(i, i + 4).join('') + '</section>';
 document.getElementById('pages').innerHTML = h;
 </script>
 </body>

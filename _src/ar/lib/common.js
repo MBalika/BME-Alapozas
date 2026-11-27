@@ -78,13 +78,17 @@ export async function fontsReady() { if (FONT_OK) return; await document.fonts.l
 export function label(group, text, anchor, at, color, k, o = {}) {
   const lines = String(text).split('\n'); const fs = 64, padX = 44, dot = 30, lh = 78;
   const cv = document.createElement('canvas'); const ctx = cv.getContext('2d'); ctx.font = `600 ${fs}px Inter`;
-  const tw = Math.max(...lines.map(l => ctx.measureText(l).width));
+  // alsó index: q_c, m_0, N_{20} – kisebb betűvel, a sor alá engedve (jel nélküli szövegnél a rajz változatlan)
+  const runs = (l) => { const out = [], re = /_\{([^}]*)\}|_([^\s_{}])/g; let i = 0, m; while ((m = re.exec(l))) { if (m.index > i) out.push([l.slice(i, m.index), 0]); out.push([m[1] ?? m[2], 1]); i = re.lastIndex; } if (i < l.length) out.push([l.slice(i), 0]); return out; };
+  const fnt = (c2, sub) => { c2.font = `600 ${sub ? Math.round(fs * 0.64) : fs}px Inter`; };
+  const lineW = (l) => runs(l).reduce((w, [t, sub]) => { fnt(ctx, sub); return w + ctx.measureText(t).width + (sub ? 3 : 0); }, 0);
+  const tw = Math.max(...lines.map(lineW));
   const W = Math.ceil(padX + dot + 26 + tw + padX), H = lines.length === 1 ? 128 : 128 + (lines.length - 1) * lh;
   cv.width = W; cv.height = H; const c = cv.getContext('2d');
   c.fillStyle = 'rgb(21,27,33)'; const r = 40; c.beginPath(); c.moveTo(r, 0); c.arcTo(W, 0, W, H, r); c.arcTo(W, H, 0, H, r); c.arcTo(0, H, 0, 0, r); c.arcTo(0, 0, W, 0, r); c.closePath(); c.fill();
   c.fillStyle = color; c.beginPath(); c.arc(padX + dot / 2, H / 2, dot / 2, 0, Math.PI * 2); c.fill();
   c.fillStyle = '#f2f4f6'; c.font = `600 ${fs}px Inter`; c.textBaseline = 'alphabetic';
-  lines.forEach((l, i) => c.fillText(l, padX + dot + 26, (lines.length === 1 ? H / 2 + 21.5 : 82 + i * lh)));
+  lines.forEach((l, i) => { let x = padX + dot + 26; const y = (lines.length === 1 ? H / 2 + 21.5 : 82 + i * lh); for (const [t, sub] of runs(l)) { fnt(c, sub); c.fillText(t, x, y + (sub ? 15 : 0)); x += c.measureText(t).width + (sub ? 3 : 0); } });
   const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
   const hM = (o.h ?? 0.022) / k; const wM = hM * W / 128 * (lines.length === 1 ? 1 : 128 / H * (H / 128)); // a tábla magassága a modellben ~2,2 cm
   const pw = hM * W / 128, ph = hM * H / 128;
@@ -130,4 +134,4 @@ export function person(B, x, z, rot = 0, o = {}) {
 
 // A nyugalmi állapot beállítása az animáció egy pillanatára (a USDZ – iPhone Quick Look – ezt az állóképet mutatja)
 export function poseAt(root, clip, t) { for (const tr of clip.tracks) { const i = tr.name.lastIndexOf('.'), o = root.getObjectByName(tr.name.slice(0, i)), prop = tr.name.slice(i + 1); if (!o) continue;
-    const v = tr.createInterpolant().evaluate(t); if (prop === 'quaternion') o.quaternion.fromArray(v); else o[prop].fromArray(v); } }
+    const v = tr.createInterpolant().evaluate(t); if (prop === 'quaternion') o.quaternion.fromArray(v); else if (prop === 'morphTargetInfluences') o.morphTargetInfluences = Array.from(v); else o[prop].fromArray(v); } }

@@ -35,7 +35,7 @@ HU = {
     'langsw': '<span class="lang"><span>HU</span><a href="/ar-labor/en" id="langLink" hreflang="en">EN</a></span>',
   },
   'T': {
-    'all': 'Mind', 'soon': 'Hamarosan', 'learn': 'a modellhez tartozó tananyag', 'open': 'A tananyag megnyitása', 'play': 'Lejátszás', 'pause': 'Szünet',
+    'all': 'Mind', 'qrK': 'Nyomtatható', 'qrT': 'QR-lap az órára', 'qrS': 'Minden modell kódja egy lapon: nyomtasd ki, és tedd ki a terembe.', 'qrU': 'qr', 'soon': 'Hamarosan', 'learn': 'a modellhez tartozó tananyag', 'open': 'A tananyag megnyitása', 'play': 'Lejátszás', 'pause': 'Szünet',
     'manual': 'Te irányítasz · {s} mp múlva továbblépek', 'fsHint': 'F: teljes képernyő · ←/→: léptetés',
     'arGo': 'Indítás', 'arCopy': 'Link másolása', 'arCopied': 'Kimásolva – illeszd be a böngészőbe',
     'arNo': 'Ebben a böngészőben nem indul a térbeli nézet. Nyisd meg az oldalt Chrome-ban (Android) vagy Safariban (iPhone): a menüben válaszd a „Megnyitás böngészőben” pontot, vagy másold ki a linket.',
@@ -45,7 +45,7 @@ HU = {
   },
   'BSC': {'ut': {'n': 'A tárgy útja', 'd': 'öt előadás és az esettanulmány'}},
   'SPECS': {
-    '3': {'k': '3. előadás', 'n': 'Síkalapok tervezése', 'short': '3 · Síkalapok', 'b': 'ut', 'd': 'Milyen alap kell, és milyen mélyre? Alaptípusok, az alapsík felvétele és a talajtörés mechanizmusa – majd a teherbírás számítása.'},
+    '3': {'k': '3. előadás', 'n': 'Síkalapok tervezése és teherbírás­számítása', 'short': '3 · Síkalapok', 'b': 'ut', 'd': 'Milyen alap kell, és milyen mélyre? Alaptípusok, az alapsík felvétele és a talajtörés mechanizmusa – majd a teherbírás számítása.'},
     '5': {'k': '5. előadás', 'n': 'Síkalapok süllyedés­számítása', 'short': '5 · Süllyedés', 'b': 'ut', 'd': 'Mennyit és mennyire egyenlőtlenül süllyed? Feszültségeloszlás az alap alatt, határmélység és rétegenkénti összenyomódás.'},
     '7': {'k': '7. előadás', 'n': 'Síkalapokat érő hatások', 'short': '7 · Külső hatások', 'b': 'ut', 'd': 'Mi éri még az alapot? Rezgés, földrengés, üreg, víz és fagy: ezeket nem kiszámítani, hanem felismerni és megelőzni kell.'},
     '8': {'k': '8. előadás', 'n': 'Mélyalapozások', 'short': '8 · Mélyalapozás', 'b': 'ut', 'd': 'Mikor nem elég a síkalap? Cölöpök, résfalak, kút- és szekrényalapok: a teher mélyebbre, a teherbíró rétegbe kerül.'},
@@ -53,14 +53,15 @@ HU = {
     'all': {'k': 'Esettanulmány', 'n': 'Egy telek, egy félév', 'short': 'Egy telek', 'b': 'ut', 'd': 'Az egész félév egyetlen telken: a talajfelderítéstől az alapok megválasztásán át a munkagödörig, két házzal.'},
   },
   'M': [
-    {'id': 'tores', 'f': 'talajtores', 'en': True, 'sec': True, 'sp': '3', 'anim': True, 'labelT': 9.5, 'orbit': '24deg 70deg 118%', 'kind': 'restart',
+    {'id': 'tores', 'f': 'talajtores', 'en': True, 'sec': True, 'sp': '3', 'anim': True, 'labelT': 10.2, 'orbit': '22deg 72deg 124%', 'kind': 'restart',
      'name': 'Talajtörés a sávalap alatt', 'act': 'Terheld meg!', 'hook': 'Nő a teher – és egyszer csak megindul a talaj.',
-     'facts': [['30°', 'φ′ a homokban'], ['2,0 m', 'alapszélesség'], ['≈ 10 m', 'a csúszólap kifutása']],
-     'info': 'A falra egyre nagyobb teher jut. Amikor a talaj nyírószilárdsága kimerül, kirajzolódik a csúszólap: az alap az aktív ékkel együtt lesüllyed és megdől, a radiális nyírási zóna a logaritmikus spirál mentén elfordul, a passzív zóna a csúszólapon felfelé-kifelé tolódik, a felszín pedig felpúposodik. Általános nyírási törés homokban; a mozgások torzítva látszanak.'},
-    {'id': 'hagyma', 'f': 'feszultseghagyma', 'en': True, 'sec': True, 'sp': '5', 'anim': True, 'labelT': 11, 'orbit': '45deg 66deg 170%', 'kind': 'restart',
-     'name': 'Feszültséghagyma', 'act': 'Tedd rá a terhet!', 'hook': 'A teher nem áll meg az alap alatt: szétterjed és elhal.',
-     'facts': [['1,8 m', 'a 40 %-os héj alja'], ['2,8 m', 'a 20 %-os héj alja'], ['4,2 m', 'a 10 %-os héj alja']],
-     'info': 'A pillérre teher kerül, és az alap alatt megjelenik a többletfeszültség: a színes héjak a talpfeszültség 80, 60, 40, 20 és 10 %-ánál húzódnak, belülről kifelé. A nyitott negyedben a héjak lépcsősen visszavágva látszanak, így mindegyik megfigyelhető. Boussinesq szerint készültek, a 2 × 2 m-es alappal azonos területű, egyenletesen terhelt kör alatt.'},
+     'facts': [['994 kPa', 'talajtörési ellenállás'], ['4,2 m', 'mélyre nyúlik a csúszólap'], ['22,6 m', 'széles a törési test a terepen']],
+     'info': 'A falra egyre nagyobb teher jut. Amikor a talaj nyírószilárdsága kimerül, kirajzolódik a csúszólap, és az alap hirtelen megsüllyed. Alatta az aktív ék az alappal együtt lefelé mozdul; a radiális nyírási zóna talaja a logaritmikus spirál mentén, az alap éle körül kifelé áramlik; a passzív ék a takarással együtt a csúszólapon felfelé-kifelé csúszik, a terep pedig az alap két oldalán felpúposodik. A modell a teherbírásszámítás mintapéldáját követi: φ = 30°, c = 10 kPa, γ = 18 kN/m³, B = 2,0 m, D = 1,0 m. A mozgások felnagyítva látszanak.',
+     'link': ['Síkalapok teherbírásszámítása', 'a törési mechanizmus és a képlet három tagja', 'https://sikalapok-teherbirasszamitasa.vercel.app']},
+    {'id': 'hagyma', 'f': 'feszultseghagyma', 'en': True, 'sec': True, 'sp': '5', 'anim': True, 'labelT': 13.4, 'orbit': '45deg 70deg 190%', 'kind': 'restart',
+     'name': 'Feszültséghagyma és határmélység', 'act': 'Tedd rá a terhet!', 'hook': 'A teher szétterjed és elhal a talajban – a határmélység megmutatja, meddig kell számolni vele.',
+     'facts': [['292,5 kPa', 'többletfeszültség az alapsíkon'], ['3,3 m', 'határmélység'], ['19 mm', 'süllyedés']],
+     'info': 'A pilléralapra teher kerül, és alatta megjelenik a többletfeszültség: a színes héjak az alapsíki érték 80, 60, 40, 20 és 10 %-ánál húzódnak, belülről kifelé. A metszeten a kék ábra a karakterisztikus pont alatti Δσ<sub>z</sub> a Kany-táblázat szerint, mellette a geosztatikus feszültség ötöde (σ<sub>g</sub>/5) fut. Ahol a kettő találkozik, ott a határmélység: ennél mélyebben a talaj összenyomódását már nem számítjuk. Fél teherrel ez 2,4 m, a teljes teherrel 3,3 m – a nagyobb teher mélyebbre hat. A modell a süllyedésszámítás mintapéldáját követi: 1,2 × 1,2 m-es pilléralap, 450 kN teher.'},
     {'id': 'pisa', 'f': 'pisa-makett', 'en': True, 'sec': True, 'sp': '5', 'anim': True, 'labelT': 15.5, 'orbit': '22deg 78deg 122%', 'kind': 'restart',
      'name': 'A pisai ferde torony', 'act': 'Építsd fel!', 'hook': 'Kétszáz évig épült – és közben végig dőlt.',
      'facts': [['3,97°', 'dőlés ma'], ['5,5°', 'dőlés 1990-ben'], ['14 500 t', 'a torony tömege']],
@@ -91,6 +92,10 @@ HU = {
      'name': 'M4-metró a Duna alatt – Szent Gellért tér', 'act': 'Indítsd a szerelvényt!', 'hook': '31 méterrel a felszín alatt, közvetlenül a Duna mellett: a vonal legmélyebb állomása.',
      'facts': [['31 m', 'mélyen a felszín alatt'], ['87 m', 'hosszú az állomás'], ['80 m', 'hosszú a peron']],
      'info': 'A modell a mai Szent Gellért teret mutatja a metróalagút tengelyében elmetszve: fent a Gellért Szálló, a Szabadság híd és a Műegyetem CH épülete, lent a Szent Gellért tér – Műegyetem állomás. A rakpart alatt felülről, résfalak között épült dobozszerkezet áll, amelyet többszintű vasbeton gerendarács merevít; a peronalagút bányászati módszerrel készült a CH épület alatt; a Duna alatt pajzzsal fúrt, tübbinggyűrűkkel bélelt alagút vezet Pestre. Résfalas doboz, bányászati módszer és pajzs: három építési mód egyetlen állomás körül.'},
+    {'id': 'muzeum', 'f': 'bim-epitkezes', 'sec': True, 'sp': '9', 'anim': True, 'labelT': 21, 'orbit': '24deg 68deg 100%', 'kind': 'restart',
+     'name': 'Néprajzi Múzeum', 'act': 'Építsd fel!', 'hook': 'Az épület nagyobbik része a föld alatt van – az építés a munkagödörrel indult.',
+     'facts': [['≈ 60 %', 'a föld alatt'], ['8,25 m', 'mély pinceszint'], ['5', 'építési ütem a modellen']],
+     'info': 'A városligeti Néprajzi Múzeum (2022) két ívesen emelkedő szárnya alatt az épület nagyobbik része a föld alatt húzódik. Ezért az építés a munkagödörrel indult: a gödröt az épülettől független résfal határolta, ezen belül készült el az alaplemez, majd a pinceszintek, és csak utánuk a vasbeton szerkezet, a homlokzat és a tetőkert. A modellen ez az öt ütem követi egymást, közben két toronydaru dolgozik. A méretek becsültek.'},
     {'id': 'telek', 'f': 'egy-telek', 'en': True, 'sec': True, 'sp': 'all', 'anim': True, 'labelT': 18.5, 'orbit': '14deg 73deg 112%', 'kind': 'restart',
      'name': 'Egy telek, egy félév', 'act': 'Építsd fel!', 'hook': 'Az egész félév egyetlen telken.',
      'facts': [['2', 'ház'], ['9', 'állomás'], ['−3,0 m', 'talajvíz']],
@@ -115,7 +120,7 @@ EN_S = {
     'foot_link': 'Back to the course home page',
     'langsw': '<span class="lang"><a href="/ar-labor" id="langLink" hreflang="hu">HU</a><span>EN</span></span>',
 }
-EN_T = {'all': 'All', 'soon': 'Coming soon', 'learn': 'the course material for this model', 'open': 'Open the course material', 'play': 'Play', 'pause': 'Pause',
+EN_T = {'all': 'All', 'qrK': 'Printable', 'qrT': 'QR sheet for class', 'qrS': 'The codes of all the models on one sheet: print it and put it up in the classroom.', 'qrU': 'qr-en', 'soon': 'Coming soon', 'learn': 'the course material for this model', 'open': 'Open the course material', 'play': 'Play', 'pause': 'Pause',
     'manual': 'You’re in control · moving on in {s} s', 'fsHint': 'F: full screen · ←/→: browse',
     'arGo': 'Start', 'arCopy': 'Copy link', 'arCopied': 'Copied – paste it into your browser',
     'arNo': 'This browser can’t start the AR view. Open the page in Chrome (Android) or Safari (iPhone): choose “Open in browser” in the menu, or copy the link.',
@@ -124,7 +129,7 @@ EN_T = {'all': 'All', 'soon': 'Coming soon', 'learn': 'the course material for t
     'xr': {'scan': 'Move the phone slowly and look at the floor or a table', 'aim': 'Tap: the model goes here', 'placed': 'Pinch to zoom, twist to rotate · walk around it!', 'loading': 'Loading…', 'loadErr': 'The model could not be loaded', 'dec': '.'}}
 EN_BSC = {'ut': {'n': 'The route of the course', 'd': 'five lectures and the case study'}}
 EN_SPECS = {
-    '3': {'k': 'Lecture 3', 'n': 'Design of shallow foundations', 'short': '3 · Shallow foundations', 'b': 'ut', 'd': 'What kind of foundation, and how deep? Foundation types, choosing the founding level and the mechanism of bearing failure – then the bearing resistance calculation.'},
+    '3': {'k': 'Lecture 3', 'n': 'Design and bearing resistance of shallow foundations', 'short': '3 · Shallow foundations', 'b': 'ut', 'd': 'What kind of foundation, and how deep? Foundation types, choosing the founding level and the mechanism of bearing failure – then the bearing resistance calculation.'},
     '5': {'k': 'Lecture 5', 'n': 'Settlement of shallow foundations', 'short': '5 · Settlement', 'b': 'ut', 'd': 'How much does it settle, and how unevenly? Stress distribution beneath the footing, the depth of influence and the compression of each layer.'},
     '7': {'k': 'Lecture 7', 'n': 'External effects on shallow foundations', 'short': '7 · External effects', 'b': 'ut', 'd': 'What else acts on a foundation? Vibration, earthquakes, cavities, water and frost: these have to be recognised and prevented rather than calculated.'},
     '8': {'k': 'Lecture 8', 'n': 'Deep foundations', 'short': '8 · Deep foundations', 'b': 'ut', 'd': 'When is a shallow foundation not enough? Piles, diaphragm walls, wells and caissons carry the load deeper, down to the bearing stratum.'},
@@ -135,11 +140,12 @@ EN_U = {k: (v + '/en') for k, v in SPEC_U.items()}
 # name, act, hook, facts, info, link (label, sub)
 EN_M = {
   'tores': ('Bearing failure beneath a strip footing', 'Load it!', 'The load grows – and suddenly the ground gives way.',
-    [['30°', 'φ′ of the sand'], ['2.0 m', 'footing width'], ['≈ 10 m', 'reach of the slip surface']],
-    'More and more load comes onto the wall. When the shear strength of the soil is exhausted, the slip surface appears: the footing sinks and tilts together with the active wedge, the radial shear zone rotates along the logarithmic spiral, the passive zone is pushed up and outwards along the slip surface, and the ground surface heaves. General shear failure in sand; the movements are exaggerated.', None),
-  'hagyma': ('Pressure bulb', 'Put the load on!', 'The load does not stop beneath the footing: it spreads and fades.',
-    [['1.8 m', 'base of the 40% shell'], ['2.8 m', 'base of the 20% shell'], ['4.2 m', 'base of the 10% shell']],
-    'Load comes onto the column, and the stress increase appears beneath the footing: the coloured shells mark 80, 60, 40, 20 and 10% of the contact pressure, from the inside outwards. In the open quarter the shells are cut back in steps, so each of them can be seen. They follow Boussinesq’s solution for a uniformly loaded circle with the same area as the 2 × 2 m footing.', None),
+    [['994 kPa', 'bearing resistance'], ['4.2 m', 'depth reached by the slip surface'], ['22.6 m', 'width of the failure body at the surface']],
+    'More and more load comes onto the wall. When the shear strength of the soil is exhausted, the slip surface appears and the footing suddenly sinks. Beneath it the active wedge moves down with the footing; the soil of the radial shear zone flows outwards around the edge of the footing along the logarithmic spiral; the passive wedge, together with the overburden, slides up and outwards along the slip surface, and the ground heaves on both sides of the footing. The model follows the worked example of the bearing resistance material: φ = 30°, c = 10 kPa, γ = 18 kN/m³, B = 2.0 m, D = 1.0 m. The movements are exaggerated.',
+    ['Bearing resistance of shallow foundations', 'the failure mechanism and the three terms of the formula']),
+  'hagyma': ('Pressure bulb and influence depth', 'Put the load on!', 'The load spreads and fades in the ground – the influence depth shows how far down it has to be considered.',
+    [['292.5 kPa', 'additional stress at the founding level'], ['3.3 m', 'influence depth'], ['19 mm', 'settlement']],
+    'Load comes onto the pad footing, and the additional stress appears beneath it: the coloured shells mark 80, 60, 40, 20 and 10% of its value at the founding level, from the inside outwards. On the section, the blue diagram is Δσ<sub>z</sub> beneath the characteristic point according to the Kany table, and next to it runs one fifth of the geostatic stress (σ<sub>g</sub>/5). Where the two meet lies the influence depth: below it, the compression of the soil is no longer calculated. With half the load it is 2.4 m, with the full load 3.3 m – a larger load reaches deeper. The model follows the worked example of the settlement material: a 1.2 × 1.2 m pad footing carrying 450 kN.', None),
   'pisa': ('The Leaning Tower of Pisa', 'Build it!', 'It took two hundred years to build – and it leaned all the way.',
     [['3.97°', 'tilt today'], ['5.5°', 'tilt in 1990'], ['14,500 t', 'mass of the tower']],
     'The tower was built in three stages between 1173 and 1372, and it began to lean as early as the third storey. The ground consists of about 3 m of made ground, then sandy silt and sand that thins out towards the south; beneath it lies soft clay, which is thicker on the south side – the settlement is larger there, and that is the way the tower leans. By 1990 the tilt had reached 5.5°; careful soil extraction from beneath the north side reduced it to about 3.97°. The red rod shows the original vertical.',
@@ -163,6 +169,9 @@ EN_M = {
   'metro': ('Metro line M4 under the Danube – Szent Gellért tér', 'Start the train!', '31 metres below the surface, right beside the Danube: the deepest station of the line.',
     [['31 m', 'below the surface'], ['87 m', 'station length'], ['80 m', 'platform length']],
     'The model shows today’s Szent Gellért Square, cut along the axis of the metro tunnel: above, Hotel Gellért, Liberty Bridge and the “CH” building of the university; below, Szent Gellért tér – Műegyetem station. Under the embankment stands a box built top-down between diaphragm walls and braced by a multi-level concrete beam grid; the platform tunnel was mined beneath the CH building; and a shield-driven tunnel lined with segmental rings leads under the Danube to Pest. A diaphragm-wall box, a mined tunnel and a shield drive: three construction methods around a single station.', None),
+  'muzeum': ('Museum of Ethnography, Budapest', 'Build it!', 'Most of the building lies below ground – construction began with the excavation.',
+    [['≈ 60%', 'below ground'], ['8.25 m', 'deep basement level'], ['5', 'construction stages in the model']],
+    'Beneath the two wings of the Museum of Ethnography in Budapest’s City Park (2022), which rise in an arc, most of the building lies below ground. Construction therefore began with the excavation: the pit was retained by a diaphragm wall independent of the building; inside it came the base slab, then the basement levels, and only after them the reinforced concrete structure, the façade and the roof garden. The model follows these five stages, with two tower cranes at work. The dimensions are estimates.', None),
   'telek': ('One site, one semester', 'Build it!', 'The whole semester on a single site.',
     [['2', 'buildings'], ['9', 'stations'], ['−3.0 m', 'groundwater']],
     'The site of the “One site, one semester” case study is built up. Building A stands on pad footings in the sand; beneath Building B there is soft clay, so it is built in an anchored diaphragm-wall excavation, on CFA piles that reach down to the sandy gravel. The block is cut open at the front, so the footings, the basement and the piles can all be seen.', None),
@@ -191,7 +200,20 @@ shutil.copy(here / 'xr.js', root / 'ar-labor' / 'xr.js')
 page(HU, 'index.html')
 page(EN, 'en.html')
 
-# nyomtatható QR-lap (A4): címlap az oldal kódjával, utána modellenként egy kártya (?m=…&ar=1: a telefonon rögtön az AR-indító nyílik meg)
-qd = {'site': SITE, 'M': [{'id': m['id'], 'name': m['name'], 'hook': m['hook'], 'img': m.get('img') or m.get('f') or m['id'], 'sp': HU['SPECS'][m['sp']]['short'], 'c': SPEC_C[m['sp']]} for m in HU['M']]}
+# nyomtatható QR-lap (A4), magyarul (qr.html) és angolul (qr-en.html): címlap az oldal kódjával, utána modellenként egy kártya
+# (?m=…&ar=1: a telefonon rögtön az AR-indító nyílik meg); az utolsó lap üres helyére az egész labor kódja kerül
+QS = {
+  'hu': {'lang': 'hu', 'title': 'Alapozás AR labor – QR-kódok nyomtatáshoz', 'bar': 'Nyomtatás: A4, álló, margó nélkül (a böngésző nyomtatási ablakában „Nincs” margó)', 'print': 'Nyomtatás',
+         'h1a': 'Alapozás AR labor', 'h1b': 'Nézd meg térben!', 'lead': '{n} mozgó 3D-modell az Alapozás tárgy előadásaihoz – a telefonodon, előtted az asztalon vagy a padlón.',
+         'steps': ['Olvasd be a kódot a telefonod kamerájával.', 'Válassz modellt, és koppints a „Nézd meg térben” gombra.', 'Nézz a padlóra vagy egy asztalra: ahol a világító keret megjelenik, koppints, és oda kerül a modell. Két ujjal nagyíthatod, és körbejárhatod.'],
+         'scan': 'Olvasd be, és nézd meg térben!', 'allK': 'AR labor', 'allT': 'Mind a {n} modell', 'allB': 'Olvasd be, és válassz!'},
+  'en': {'lang': 'en', 'title': 'Foundation Engineering AR lab – QR codes for printing', 'bar': 'Print: A4, portrait, no margins (choose “None” for margins in the browser’s print dialog)', 'print': 'Print',
+         'h1a': 'Foundation Engineering AR lab', 'h1b': 'See it in AR!', 'lead': '{n} moving 3D models for the lectures of the Foundation Engineering course – on your phone, in front of you on the table or the floor.',
+         'steps': ['Scan the code with your phone’s camera.', 'Choose a model and tap the “See it in AR” button.', 'Point the phone at the floor or a table: tap where the glowing frame appears, and the model is placed there. Pinch to zoom, and walk around it.'],
+         'scan': 'Scan it and see it in AR!', 'allK': 'AR lab', 'allT': 'All {n} models', 'allB': 'Scan it and choose!'},
+}
 q = (here / 'qr.tpl.html').read_text(encoding='utf-8'); assert '/*DATA*/null' in q
-(root / 'ar-labor' / 'qr.html').write_text(q.replace('/*DATA*/null', json.dumps(qd, ensure_ascii=False)), encoding='utf-8'); print('qr.html', len(qd['M']), 'modell')
+for L, out, app in [(HU, 'qr.html', SITE + '/ar-labor'), (EN, 'qr-en.html', SITE + '/ar-labor/en')]:
+    S = QS[L['lang']]
+    qd = {'app': app, 'S': S, 'M': [{'id': m['id'], 'name': m['name'], 'hook': m['hook'], 'img': m.get('img') or m.get('f') or m['id'], 'sp': L['SPECS'][m['sp']]['short'], 'c': SPEC_C[m['sp']]} for m in L['M']]}
+    (root / 'ar-labor' / out).write_text(q.replace('{{lang}}', S['lang']).replace('{{title}}', S['title']).replace('/*DATA*/null', json.dumps(qd, ensure_ascii=False)), encoding='utf-8'); print(out, len(qd['M']), 'modell')

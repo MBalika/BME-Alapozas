@@ -30,6 +30,7 @@ window.exportModel = async (id, lang, withLabels) => {
   const scene = new THREE.Scene(); scene.add(root); scene.updateMatrixWorld(true);
   const glb = await new GLTFExporter().parseAsync(scene, { binary: true, animations: r.clips || [], onlyVisible: true });
   // USDZ: animáció nélkül, a nyugalmi állapot
+  if (r.pose) { r.pose(); scene.updateMatrixWorld(true); } // morf-animációs modell: az állókép a hálóba égetve
   const usdz = await new USDZExporter().parseAsync(scene, { quickLookCompatible: true });
   const bb = new THREE.Box3().setFromObject(root); const s = bb.getSize(new THREE.Vector3());
   return { glb: b64(glb), usdz: b64(usdz), size: [s.x, s.y, s.z].map(v => +v.toFixed(3)), file: mod.FILE || id };

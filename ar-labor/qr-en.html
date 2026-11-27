@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="/ar-labor/">
+<title>Foundation Engineering AR lab – QR codes for printing</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'BarlowC';font-weight:800;src:url(../fonts/barlow-condensed-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'BarlowC';font-weight:800;src:url(../fonts/barlow-condensed-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F}
+@font-face{font-family:'Inter';font-weight:400;src:url(../fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'Inter';font-weight:400;src:url(../fonts/inter-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+1E00-1E9F}
+@font-face{font-family:'Inter';font-weight:600;src:url(../fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'Inter';font-weight:600;src:url(../fonts/inter-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+1E00-1E9F}
+@page{size:A4; margin:0}
+*{box-sizing:border-box}
+html,body{margin:0; background:#d9dde1; font-family:'Inter',system-ui,sans-serif; color:#0b0e12; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.bar{position:sticky; top:0; z-index:5; display:flex; gap:12px; align-items:center; justify-content:center; padding:12px; background:#0b0e12; color:#eef1ea; font:600 15px/1.3 'Inter'}
+.bar button{height:42px; padding:0 20px; border-radius:999px; border:0; background:#ffb23e; color:#0b0e12; font:800 18px/1 'BarlowC'; letter-spacing:.08em; text-transform:uppercase; cursor:pointer}
+.page{width:210mm; height:297mm; margin:10mm auto; background:#fff; padding:12mm; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:8mm; page-break-after:always; break-after:page; overflow:hidden}
+.page:last-child{page-break-after:auto; break-after:auto}
+.card{border:1.2mm solid var(--c); border-radius:6mm; padding:6mm; display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; overflow:hidden}
+.card .n{position:absolute; left:5mm; top:4mm; font:800 30pt/1 'BarlowC'; color:var(--c)}
+.card small{display:block; font:800 10pt/1.2 'BarlowC'; letter-spacing:.12em; text-transform:uppercase; color:var(--c); margin:1mm 0 0 14mm; align-self:stretch; text-align:left}
+.card h2{font:800 19pt/1 'BarlowC'; text-transform:uppercase; margin:2mm 0 3mm; min-height:2em; display:flex; align-items:center}
+.card img{width:100%; height:36mm; object-fit:cover; border-radius:3mm; background:#e8eef2}
+.card .q{width:50mm; height:50mm; margin:5mm 0 4mm}
+.card .q svg{width:100%; height:100%; display:block}
+.card b{font:800 15pt/1 'BarlowC'; letter-spacing:.06em; text-transform:uppercase}
+.card span{font:400 8.5pt/1.3 'Inter'; color:#4a525b; margin-top:1.5mm}
+.cover{grid-template-columns:1fr; grid-template-rows:auto 1fr auto; text-align:center; padding:18mm}
+.cover h1{font:800 54pt/.92 'BarlowC'; text-transform:uppercase; margin:0}
+.cover h1 em{font-style:normal; color:#c9791a}
+.cover p{font:600 15pt/1.4 'Inter'; margin:6mm 0 0}
+.cover .q{width:120mm; height:120mm; margin:0 auto; align-self:center}
+.cover .q svg{width:100%; height:100%}
+.cover ol{text-align:left; font:600 13pt/1.45 'Inter'; margin:0 auto; max-width:150mm; padding-left:7mm}
+.cover .u{font:800 18pt/1 'BarlowC'; letter-spacing:.04em; margin-top:5mm}
+@media print{ html,body{background:#fff} .bar{display:none} .page{margin:0} }
+</style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div class="bar"><span id="barT"></span> <button type="button" onclick="print()" id="barB"></button></div>
+<div id="pages"></div>
+<script src="vendor/qrcode.js"></script>
+<script>
+const D = {"app": "https://bme-alapozas.vercel.app/ar-labor/en", "S": {"lang": "en", "title": "Foundation Engineering AR lab – QR codes for printing", "bar": "Print: A4, portrait, no margins (choose “None” for margins in the browser’s print dialog)", "print": "Print", "h1a": "Foundation Engineering AR lab", "h1b": "See it in AR!", "lead": "{n} moving 3D models for the lectures of the Foundation Engineering course – on your phone, in front of you on the table or the floor.", "steps": ["Scan the code with your phone’s camera.", "Choose a model and tap the “See it in AR” button.", "Point the phone at the floor or a table: tap where the glowing frame appears, and the model is placed there. Pinch to zoom, and walk around it."], "scan": "Scan it and see it in AR!", "allK": "AR lab", "allT": "All {n} models", "allB": "Scan it and choose!"}, "M": [{"id": "tores", "name": "Bearing failure beneath a strip footing", "hook": "The load grows – and suddenly the ground gives way.", "img": "talajtores", "sp": "3 · Shallow foundations", "c": "#ff6a4d"}, {"id": "hagyma", "name": "Pressure bulb and influence depth", "hook": "The load spreads and fades in the ground – the influence depth shows how far down it has to be considered.", "img": "feszultseghagyma", "sp": "5 · Settlement", "c": "#e866c8"}, {"id": "pisa", "name": "The Leaning Tower of Pisa", "hook": "It took two hundred years to build – and it leaned all the way.", "img": "pisa-makett", "sp": "5 · Settlement", "c": "#e866c8"}, {"id": "renges", "name": "An earthquake in the lab", "hook": "Two identical building models on one shake table – one of them stands on rubber bearings.", "img": "foldrenges-razoasztal", "sp": "7 · External effects", "c": "#938fff"}, {"id": "mobilgat", "name": "Szentendre demountable flood wall", "hook": "When the Danube rises, an aluminium wall grows on the promenade – Hungary’s first demountable flood wall.", "img": "mobilgat", "sp": "7 · External effects", "c": "#938fff"}, {"id": "cfa", "name": "CFA pile during drilling", "hook": "The auger drills down in a single pass – the soil supports the borehole.", "img": "cfa-makett", "sp": "8 · Deep foundations", "c": "#4f9dff"}, {"id": "mol-campus", "name": "MOL Campus", "hook": "143 metres on the Danube bank – and its secret lies underground.", "img": "mol-campus", "sp": "8 · Deep foundations", "c": "#4f9dff"}, {"id": "godor", "name": "Anchored diaphragm-wall excavation", "hook": "Down only step by step: dig, anchor, dig.", "img": "munkagodor", "sp": "9 · Excavations", "c": "#2cc7d6"}, {"id": "metro", "name": "Metro line M4 under the Danube – Szent Gellért tér", "hook": "31 metres below the surface, right beside the Danube: the deepest station of the line.", "img": "metro-pajzs", "sp": "9 · Excavations", "c": "#2cc7d6"}, {"id": "muzeum", "name": "Museum of Ethnography, Budapest", "hook": "Most of the building lies below ground – construction began with the excavation.", "img": "bim-epitkezes", "sp": "9 · Excavations", "c": "#2cc7d6"}, {"id": "telek", "name": "One site, one semester", "hook": "The whole semester on a single site.", "img": "egy-telek", "sp": "One site", "c": "#ffb23e"}]}, S = D.S, n = D.M.length;
+const qr = (t, ec = 'M') => { const q = qrcode(0, ec); q.addData(t); q.make(); return q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); };
+const app = D.app;
+document.getElementById('barT').textContent = S.bar; document.getElementById('barB').textContent = S.print;
+let h = `<section class="page cover"><div><h1>${S.h1a}<br><em>${S.h1b}</em></h1><p>${S.lead.replace('{n}', n)}</p></div>
+  <div class="q">${qr(app, 'Q')}</div>
+  <div><ol>${S.steps.map(t => `<li>${t}</li>`).join('')}</ol><div class="u">${app.replace('https://', '')}</div></div></section>`;
+const cards = D.M.map((m, i) => `<div class="card" style="--c:${m.c}"><div class="n">${String(i + 1).padStart(2, '0')}</div><small>${m.sp}</small><h2>${m.name}</h2>
+    <img src="img/${m.img}.jpg" alt=""><div class="q">${qr(app + '?m=' + m.id + '&ar=1')}</div><b>${S.scan}</b></div>`);
+if (cards.length % 4) cards.push(`<div class="card" style="--c:#c9791a"><div class="n">★</div><small>${S.allK}</small><h2>${S.allT.replace('{n}', n)}</h2>
+    <img src="img/munkagodor.jpg" alt=""><div class="q">${qr(app)}</div><b>${S.allB}</b></div>`);   // az utolsó lap üres helyére: az egész labor kódja
+for (let i = 0; i < cards.length; i += 4) h += '<section class="page">' + cards.slice(i, i + 4).join('') + '</section>';
+document.getElementById('pages').innerHTML = h;
+</script>
+</body>
+</html>

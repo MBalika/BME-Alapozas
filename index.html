@@ -823,7 +823,7 @@ main .duo-p p, main .tile p, main .why .card p, main .harder .card, main .harder
       <div class="arb-t">
         <div class="kick"><span class="new">Új</span>Kiterjesztett valóság</div>
         <h2 id="arH">Alapozás AR labor</h2>
-        <p class="lead">Tíz mozgó 3D-modell a tárgyból egy helyen: talajtörés, feszültséghagyma, a pisai torony a rétegsorával, CFA-cölöp, horgonyzott munkagödör, a kész telek – és négy valós helyszín a MOL Campustól az M4-metró Szent Gellért téri állomásáig. Telefonon a „Nézd meg térben” gombbal az asztalra vagy a padlóra teheted, és körbejárhatod.</p>
+        <p class="lead">Tizenegy mozgó 3D-modell a tárgyból egy helyen: talajtörés, feszültséghagyma és határmélység, a pisai torony a rétegsorával, földrengés a rázóasztalon, CFA-cölöp, horgonyzott munkagödör, a kész telek – és négy valós helyszín a MOL Campustól a Néprajzi Múzeumig. Telefonon a „Nézd meg térben” gombbal az asztalra vagy a padlóra teheted, és körbejárhatod.</p>
         <a class="btn holo" href="https://bme-alapozas.vercel.app/ar-labor/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.4v9.2L12 21.2 4 16.6V7.4z"/><path d="M4 7.4 12 12l8-4.6M12 12v9.2"/></svg>Az AR labor megnyitása ↗</a>
       </div>
       <div class="arb-m">
@@ -1717,7 +1717,7 @@ const XS = (() => {
     { t: 'Egy telek, egy félév', u: 'bme-alapozas.vercel.app/telek', img: 'telek', lab: '1–9', d: 'Kilenc állomás egyetlen telken: te vagy a geotechnikus, és minden megoldott feladattal tovább épül a két ház 3D-makettje, a talaj megismerésétől az utolsó födémig.' },
     { t: 'Geotechnikai helyszínelők', u: 'bme-alapozas.vercel.app/helyszinelok', en: 'bme-alapozas.vercel.app/helyszinelok/en', img: 'helyszinelok', lab: '3–9', d: 'Valós és tipikus alapozási kárügyek: a nyomokból kell kideríteni, mi történt, és mi előzte volna meg. Rangokkal, pontokkal és repedésolvasó játékkal.' },
     { t: 'Tippelj, aztán számolj', u: 'bme-alapozas.vercel.app/tippelj', en: 'bme-alapozas.vercel.app/tippelj/en', img: 'tippelj', lab: '1–9', d: 'Becslős kérdések minden előadáshoz: előbb tippelsz egy logaritmikus skálán, aztán megnézed a számítást. Előadáson kivetítő módban, QR-kóddal.' },
-    { t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor2', lab: '1–9', d: 'Tíz mozgó 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma, a pisai torony, CFA-cölöp, munkagödör, a kész telek és négy valós helyszín a MOL Campustól az M4-metróig. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },
+    { t: 'Alapozás AR labor', u: 'bme-alapozas.vercel.app/ar-labor', img: 'ar-labor2', lab: '1–9', d: 'Tizenegy mozgó 3D-modell kiterjesztett valóságban – talajtörés, feszültséghagyma és határmélység, a pisai torony, rázóasztal, CFA-cölöp, munkagödör, a kész telek és négy valós helyszín a MOL Campustól a Néprajzi Múzeumig. Telefonon az asztalra vagy a padlóra tehetők, körbejárhatók.' },
   ];
   X.forEach(a => { el('a', { cls: 'ac wide', href: AU(a), target: '_blank', rel: 'noopener', style: '--c:var(--accent)' }, box, `<span class="im"><img src="img/apps/${a.img}.jpg" alt="${a.t} – nyitókép" loading="lazy" width="960" height="600"><i>${a.lab}</i></span><span class="tx"><b>${a.t}</b><span>${AT(a)}</span><p class="acd">${a.d}</p><em>Megnyitás ↗</em></span>`);
     el('li', {}, fl, `<i>${a.lab}</i><a href="${AU(a)}" target="_blank" rel="noopener">${a.t}</a>${EN && !a.en ? ' <span class="inhu">HU</span>' : ''}`); });
